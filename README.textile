@@ -1,1 +1,10 @@
-h1. AS3Commons Collections
+h2. AS3Commons Collections
+
+The AS3Commons Collections project is the most serious ActionScript collections resource in the web – providing both a sophisticated collections framework as well as a library of fast collection implementations.
+
+h3. Resources
+
+* "Examples":http://sibirjak.com/osflash/projects/as3commons-collections/examples/
+* "Project Homepage":http://sibirjak.com/osflash/projects/as3commons-collections/ (Overview, Features, Documentation, Examples)
+* "APIDoc":http://kakenbok.github.com/Jakute-Styling-Engine/apidoc/
+* "Downloads":http://code.google.com/p/as3-commons/downloads/list (ZIP, SWC)
