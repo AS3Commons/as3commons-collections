@@ -30,27 +30,17 @@ h3. Implementations provided
 
 *Collections*
 
-* ArrayList
-* SortedList
-* Set
-* LinkedSet
-* SortedSet
-* Map
-* LinkedMap
-* SortedMap
+* ArrayList, SortedList
+* Set, LinkedSet, SortedSet
+* Map, LinkedMap, SortedMap
 * LinkedList
 * Treap
 
 *Bindable Collections*
 
-* ArrayListFx
-* SortedListFx
-* SetFx
-* LinkedSetFx
-* SortedSetFx
-* MapFx
-* LinkedMapFx
-* SortedMapFx
+* ArrayListFx, SortedListFx
+* SetFx, LinkedSetFx, SortedSetFx
+* MapFx, LinkedMapFx, SortedMapFx
 
 *Special purpose iterators*
 
