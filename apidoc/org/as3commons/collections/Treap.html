@@ -1,0 +1,1460 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" href="../../../style.css" type="text/css" media="screen">
+<link rel="stylesheet" href="../../../print.css" type="text/css" media="print">
+<meta content="Treap,org.as3commons.collections.Treap,_comparator,_root,_size,first,last,size,add,add_protected,clear,equalItem,getNode,has,hasEqual,higher,higherNode,iterator,lesser,lesserNode,mostLeftNode_internal,mostRightNode_internal,nextNode_internal,previousNode_internal,remove,removeFirst,removeLast,removeNode,removeNode_internal,rotate,toArray" name="keywords">
+<title>org.as3commons.collections.Treap</title>
+</head>
+<body>
+<script type="text/javascript" language="javascript" src="../../../asdoc.js"></script><script type="text/javascript" language="javascript" src="../../../cookies.js"></script><script type="text/javascript" language="javascript">
+<!--
+				asdocTitle = 'Treap - AS3Commons Collections 1.2.0';
+				var baseRef = '../../../';
+				window.onload = configPage;
+			--></script>
+<table style="display:none" id="titleTable" cellspacing="0" cellpadding="0" class="titleTable">
+<tr>
+<td align="left" class="titleTableTitle">API Documentation</td><td align="right" class="titleTableTopNav"><a onclick="loadClassListFrame('../../../all-classes.html')" href="../../../package-summary.html">All&nbsp;Packages</a>&nbsp;|&nbsp;<a onclick="loadClassListFrame('../../../all-classes.html')" href="../../../class-summary.html">All&nbsp;Classes</a>&nbsp;|&nbsp;<a onclick="loadClassListFrame('../../../index-list.html')" href="../../../all-index-A.html">Index</a>&nbsp;|&nbsp;<a href="../../../index.html?org/as3commons/collections/Treap.html&amp;org/as3commons/collections/class-list.html" id="framesLink1">Frames</a><a onclick="parent.location=document.location" href="" style="display:none" id="noFramesLink1">No&nbsp;Frames</a></td><td rowspan="3" align="right" class="titleTableLogo"><img alt="Adobe Logo" title="Adobe Logo" class="logoImage" src="../../../images/logo.jpg"></td>
+</tr>
+<tr class="titleTableRow2">
+<td align="left" id="subTitle" class="titleTableSubTitle">Class&nbsp;Treap</td><td align="right" id="subNav" class="titleTableSubNav"><a href="#propertySummary">Properties</a>&nbsp;| <a href="#methodSummary">Methods</a></td>
+</tr>
+<tr class="titleTableRow3">
+<td colspan="2">&nbsp;</td>
+</tr>
+</table>
+<script type="text/javascript" language="javascript">
+<!--
+if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Class Treap"); titleBar_setSubNav(false,true,false,false,false,false,true,false,false,false,false,false,false,false);}
+--></script>
+<div class="MainContent">
+<table cellspacing="0" cellpadding="0" class="classHeaderTable">
+<tr>
+<td class="classHeaderTableLabel">Package</td><td><a onclick="javascript:loadClassListFrame('class-list.html')" href="package-detail.html">org.as3commons.collections</a></td>
+</tr>
+<tr>
+<td class="classHeaderTableLabel">Class</td><td class="classSignature">public class Treap</td>
+</tr>
+<tr>
+<td class="classHeaderTableLabel">Implements</td><td><a href="framework/IBinarySearchTree.html">IBinarySearchTree</a></td>
+</tr>
+</table>
+<p></p>
+  Treap data structure implementation.
+  
+  <p><strong>Description</strong></p>
+  
+  <p>A treap is a randomised binary search tree where degeneration can be minimised
+  by assigning a random priority value to each tree node. A treap is comparatively
+  easy to implement and is at the same time highly performant. <i>"To summarize, in
+  the mixed workload environment, the treap data structure outperformed the other 4
+  implementations by a rather significant margin."</i> [1] The implementation of
+  this class is taken from a Java template. [2]</p>
+  
+  <p>The differences between <code>SortedSet</code> and <code>Treap</code> are:</p>
+  
+  <ul>
+  <li>The set maintains an internal dictionary of item-node entries to enable constant
+  time item access.</li>
+  <li>The set implements a modified form of the treap which can host duplicates and
+  multiple equal items. The treap does not allow multiple equal items (and therefore
+  duplicates).</li>
+  </ul>
+  
+  <p><strong>Runtime of operations</strong></p>
+  
+  <ul>
+  <li>Getting or removing of items at start or at end - constant runtime O(1).<br />
+  <code>first, last, removeFirst(), removeLast()</code></li>
+  <li>Adding an removing of items - logarithmic runtime O(log n).<br />
+  add(), remove()</code></li>
+  <li>Inspection operations - logarithmic runtime O(log n).<br />
+  has(), lesser(), higher(), equalItems()</code></li>
+  </ul>
+  
+  <p><strong>Notes</strong></p>
+  
+  <p>The <code>iterator()</code> method accepts an item as the cursor parameter. If the given
+  item is not contained by the treap, it will be ignored.</p>
+  
+  <p>The <code>iterator()</code> method retuns an <code>ISortedSetIterator</code>.</p>
+  
+  <p><code>null</code> is allowed if the comparator allows <code>null</code>.</p>
+  
+  <p id="link_TreapExample"><strong>Treap example</strong></p>
+  
+  <p>This example shows the specific behaviour of a <code>Treap</code>.
+  The general work with collections and iterators is more detailed illustrated
+  in the <code>ArrayList</code> examples below.</p>
+  
+  <a class="exampleCollapsed" href="#link_TreapExample" onClick="toggleExample(this, 'TreapExample');">Show example</a><br /><div id="TreapExample" style='display:none'><div class='listing'><pre>package {
+    import org.as3commons.collections.Treap;
+    import org.as3commons.collections.framework.IBinarySearchTreeIterator;
+    import org.as3commons.collections.framework.ICollectionIterator;
+    import org.as3commons.collections.framework.IIterator;
+    import org.as3commons.collections.utils.NumericComparator;
+    import flash.display.Sprite;
+
+    public class TreapExample extends Sprite {
+
+        public function TreapExample() {
+            var treap : Treap = new Treap(new NumericComparator());
+            
+            // Add
+            
+            treap.add(3);
+            treap.add(4);
+            treap.add(1);
+            treap.add(5);
+            treap.add(2);
+            treap.add(3); // no effect (equal item already contained)
+            trace (treap.toArray()); // 1,2,3,4,5
+            
+            // Inspection
+            
+            trace (treap.first); // 1
+            trace (treap.last); // 5
+
+            trace (treap.hasEqual(3)); // true
+            trace (treap.hasEqual(6)); // false
+            trace (treap.equalItem(3)); // 3
+            
+            trace (treap.lesser(0)); // undefined
+            trace (treap.lesser(1)); // undefined
+            trace (treap.lesser(2)); // 1
+            trace (treap.lesser(8)); // 5
+            
+            trace (treap.higher(-5)); // 1
+            trace (treap.higher(2)); // 3
+            trace (treap.higher(5)); // undefined
+            trace (treap.higher(8)); // undefined
+            
+            // Iterator
+
+            var iterator : IIterator = treap.iterator();
+            trace (iterator is IIterator); // true
+            trace (iterator is ICollectionIterator); // true
+            trace (iterator is IBinarySearchTreeIterator); // true
+            
+            while (iterator.hasNext()) {
+                trace (iterator.next()); // 1,2,3,4,5
+            }
+
+            // Binary search tree iterator
+
+            var bsti : IBinarySearchTreeIterator = treap.iterator() as IBinarySearchTreeIterator;
+            trace (bsti.previousItem + " [" + bsti.current + "] " + bsti.nextItem);
+            while (bsti.hasNext()) {
+                bsti.next();
+                trace (bsti.previousItem + " [" + bsti.current + "] " + bsti.nextItem);
+            }
+
+            // undefined [undefined] 1
+            // 1 [1] 2
+            // 2 [2] 3
+            // 3 [3] 4
+            // 4 [4] 5
+            // 5 [5] undefined
+
+            // Remove
+
+            treap.removeFirst();
+            treap.removeLast();
+            trace (treap.toArray()); // 2,3,4
+        }
+    }
+}
+</pre></div></div>
+  
+  <p id="link_ArrayListExample"><strong>ArrayList example</strong></p>
+  
+  <a class="exampleCollapsed" href="#link_ArrayListExample" onClick="toggleExample(this, 'ArrayListExample');">Show example</a><br /><div id="ArrayListExample" style='display:none'><div class='listing'><pre>package {
+    import org.as3commons.collections.ArrayList;
+    import org.as3commons.collections.framework.ICollectionIterator;
+    import org.as3commons.collections.framework.IIterator;
+    import org.as3commons.collections.framework.IListIterator;
+    import org.as3commons.collections.framework.IOrderedListIterator;
+    import org.as3commons.collections.utils.StringComparator;
+    import flash.display.Sprite;
+
+    public class ArrayListExample extends Sprite {
+
+        public function ArrayListExample() {
+            var list : ArrayList = new ArrayList();
+            
+            // Add
+
+            list.add("a");
+            list.add("b");
+            list.addAllAt(1, ["c", "d"]);
+            trace (list.toArray()); // a,c,d,b
+
+            list.addFirst("e");
+            list.addLast("a");
+            list.addAt(3, "a");
+            trace (list.toArray()); // e,a,c,a,d,b,a
+            
+            // Replace
+
+            list.replaceAt(2, "a");
+            list.replaceAt(3, "f");
+            trace (list.toArray()); // e,a,a,f,d,b,a
+
+            // Inspection
+
+            trace (list.size); // 7
+            trace (list.has("b")); // true
+            trace (list.itemAt(3)); // f
+            trace (list.firstIndexOf("a")); // 1
+            trace (list.lastIndexOf("a")); // 6
+            trace (list.count("a")); // 3
+            
+            // Reorder
+
+            list.reverse();
+            trace (list.toArray()); // a,b,d,f,a,a,e
+
+            list.sort(new StringComparator());
+            trace (list.toArray()); // a,a,a,b,d,e,f
+            
+            // Iterator
+
+            var iterator : IIterator = list.iterator();
+            trace (iterator is IIterator); // true
+            trace (iterator is ICollectionIterator); // true
+            trace (iterator is IListIterator); // true
+            trace (iterator is IOrderedListIterator); // true
+
+            while (iterator.hasNext()) {
+                trace (iterator.next()); // a,a,a,b,d,e,f
+            }
+
+            // List iterator
+
+            var listIterator : IListIterator = list.iterator() as IListIterator;
+            while (listIterator.hasNext()) {
+                listIterator.next();
+                trace (listIterator.index + "=" + listIterator.current);
+            }
+
+            // 0=a
+            // 1=a
+            // 2=a
+            // 3=b
+            // 4=d
+            // 5=e
+            // 6=f
+
+            // Remove
+
+            list.remove("a");
+            trace (list.toArray()); // a,a,b,d,e,f
+
+            list.removeAll("a");
+            trace (list.toArray()); // b,d,e,f
+
+            list.removeAt(1);
+            list.removeFirst();
+            list.removeLast();
+            trace (list.toArray()); // e
+
+            list.clear();
+            trace (list.toArray()); // []
+        }
+    }
+}
+</pre></div></div>
+  
+  <p id="link_ArrayListIteratorExample"><strong>ArrayListIterator example</strong></p>
+  
+  <a class="exampleCollapsed" href="#link_ArrayListIteratorExample" onClick="toggleExample(this, 'ArrayListIteratorExample');">Show example</a><br /><div id="ArrayListIteratorExample" style='display:none'><div class='listing'><pre>package {
+    import org.as3commons.collections.ArrayList;
+    import org.as3commons.collections.framework.IOrderedListIterator;
+    import flash.display.Sprite;
+
+    public class ArrayListIteratorExample extends Sprite {
+
+        public function ArrayListIteratorExample() {
+            var list : ArrayList = new ArrayList();
+            var iterator : IOrderedListIterator;
+            var item : 
+            
+            // ^ = cursor, [n] = current
+            
+            // Navigation
+            
+            list.array = [1, 2, 3];
+            iterator = list.iterator() as IOrderedListIterator;
+            
+                                      //  ^  1  2  3
+            iterator.next();          // [1] ^  2  3
+            iterator.next();          //  1 [2] ^  3
+            iterator.next();          //  1  2 [3] ^
+            iterator.next();          //  1  2  3  ^
+            iterator.previous();      //  1  2  ^ [3]
+            iterator.previous();      //  1  ^ [2] 3
+            iterator.previous();      //  ^ [1] 2  3
+            iterator.previous();      //  ^  1  2  3
+
+            iterator.next();          // [1] ^  2  3
+            iterator.next();          //  1 [2] ^  3
+            iterator.start();         //  ^  1  2  3
+
+            iterator.next();          // [1] ^  2  3
+            iterator.next();          //  1 [2] ^  3
+            iterator.end();           //  1  2  3  ^
+            
+            // Current and index
+
+            iterator = list.iterator() as IOrderedListIterator;
+            
+            with (iterator) {
+                trace (index, current, previousIndex, nextIndex);
+                // -1 undefined -1 0
+
+                next();
+                trace (index, current, previousIndex, nextIndex);
+                // 0 1 0 1
+
+                next();
+                trace (index, current, previousIndex, nextIndex);
+                // 1 2 1 2
+
+                next();
+                trace (index, current, previousIndex, nextIndex);
+                // 2 3 2 -1
+
+                next();
+                trace (index, current, previousIndex, nextIndex);
+                // -1 undefined 2 -1
+            }
+            
+            // Start position
+            
+            iterator = list.iterator() as IOrderedListIterator;   //  ^  1  2  3
+            iterator = list.iterator(1) as IOrderedListIterator;  //  1  ^  2  3
+            iterator = list.iterator(2) as IOrderedListIterator;  //  1  2  ^  3
+            iterator = list.iterator(10) as IOrderedListIterator; //  1  2  3  ^
+
+            // Replace
+
+            iterator = list.iterator() as IOrderedListIterator;
+
+                                      //  ^  1  2  3
+            iterator.next();          // [1] ^  2  3
+            iterator.next();          //  1 [2] ^  3
+            iterator.replace(4);      //  1 [4] ^  3
+            iterator.next();          //  1  4 [3] ^
+            iterator.replace(5);      //  1  4 [5] ^
+            iterator.next();          //  1  4  5  ^
+            iterator.replace(6);      //  1  4  5  ^
+
+            // Remove
+
+            list.array = [1, 2, 3];
+            iterator = list.iterator() as IOrderedListIterator;
+            
+                                      //  ^  1  2  3
+            iterator.next();          // [1] ^  2  3
+            iterator.next();          //  1 [2] ^  3
+            iterator.remove();        //  1  ^  3
+            iterator.next();          //  1 [3] ^
+            iterator.remove();        //  1  ^
+            iterator.remove();        //  1  ^
+
+            // Add
+
+            list.array = [1, 2, 3];
+            iterator = list.iterator() as IOrderedListIterator;
+            
+                                      //  ^  1  2  3
+            iterator.addAfter(4);     //  ^  4  1  2  3
+            iterator.addBefore(5);    //  5  ^  4  1  2  3
+
+            iterator.next();          //  5 [4] ^  1  2  3
+            iterator.next();          //  5  4 [1] ^  2  3
+            iterator.addBefore(6);    //  5  4  1  6  ^  2  3
+            iterator.addAfter(7);     //  5  4  1  6  ^  7  2  3
+
+            iterator.next();          //  5  4  1  6 [7] ^  2  3
+            iterator.next();          //  5  4  1  6  7 [2] ^  3
+            iterator.next();          //  5  4  1  6  7  2 [3] ^
+            iterator.addBefore(8);    //  5  4  1  6  7  2  3  8  ^
+            iterator.addAfter(9);     //  5  4  1  6  7  2  3  8  ^  9
+            
+            // Add during iteration
+
+            list.array = [1, 2, 3];
+            iterator = list.iterator() as IOrderedListIterator;
+            while (iterator.hasNext()) {
+                item = iterator.next();
+                trace (item); // 1,2,5,3,7
+
+                if (item == 1) iterator.addBefore(4);   //  1  4  ^  2  3
+                if (item == 2) iterator.addAfter(5);    //  1  4  2  ^  5  3
+                if (item == 5) iterator.addBefore(6);   //  1  4  2  5  6  ^  3
+                if (item == 3) iterator.addAfter(7);    //  1  4  2  5  6  3  ^  7
+            }
+            trace (list.toArray()); // 1,4,2,5,6,3,7
+
+            // Replace during iteration
+
+            list.array = [1, 2, 3];
+            iterator = list.iterator() as IOrderedListIterator;
+            while (iterator.hasNext()) {
+                item = iterator.next();
+                trace (item); // 1,2,3
+
+                if (item == 1) iterator.replace(4);   // [4] ^  2  3
+                if (item == 2) iterator.replace(5);   //  4 [5] ^  3
+                if (item == 3) iterator.replace(6);   //  4  5 [6] ^
+            }
+            trace (list.toArray()); // 4,5,6
+
+            // Remove during iteration
+
+            list.array = [1, 2, 3, 4, 5];
+            iterator = list.iterator() as IOrderedListIterator;
+            while (iterator.hasNext()) {
+                item = iterator.next();
+                trace (item); // 1,2,3,4,5
+
+                if (item == 1) iterator.remove();   //  ^  2  3  4  5
+                if (item == 3) iterator.remove();   //  2  ^  4  5
+                if (item == 5) iterator.remove();   //  2  4  ^
+            }
+            trace (list.toArray()); // 2,4
+
+            // Reverse iteration
+
+            list.array = [1, 2, 3, 4, 5];
+            iterator = list.iterator() as IOrderedListIterator;
+            iterator.end();
+            while (iterator.hasPrevious()) {
+                trace (iterator.previous()); // 5,4,3,2,1
+            }
+        }
+    }
+}
+</pre></div></div>
+  
+  <p></p>
+<p>
+<span class="classHeaderTableLabel">See also</span>
+</p>
+<div class="seeAlso">
+<a href="framework/IBinarySearchTree.html" target="">IBinarySearchTree interface - Detailed description of the binary search tree features.</a>
+<br>
+<a href="framework/IBinarySearchTreeIterator.html" target="">IBinarySearchTreeIterator interface - Detailed description of the binary search tree iterator features.</a>
+<br>
+<a href="http://www.upgrade-cepis.org/issues/2004/5/up5-5Mosaic.pdf" target="mm_external">[1] Binary search tree performance comparision.</a>
+<br>
+<a href="http://users.cs.fiu.edu/~weiss/dsaajava/code/DataStructures/" target="mm_external">[2] The borrowed Java implementation of a treap.</a>
+</div>
+<br>
+<hr>
+</div>
+<a name="propertySummary"></a>
+<div class="summarySection">
+<div class="summaryTableTitle">Public Properties</div>
+<table id="summaryTableProperty" class="summaryTable " cellpadding="3" cellspacing="0">
+<tr>
+<th>&nbsp;</th><th colspan="2">Property</th><th class="summaryTableOwnerCol">Defined&nbsp;by</th>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#first">first</a> : *<div class="summaryTableDescription">[read-only]
+   
+   The first item or <code>undefined</code> if the collection is empty.</div>
+</td><td class="summaryTableOwnerCol">Treap</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#last">last</a> : *<div class="summaryTableDescription">[read-only]
+   
+   The last item or <code>undefined</code> if the collection is empty.</div>
+</td><td class="summaryTableOwnerCol">Treap</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#size">size</a> : uint<div class="summaryTableDescription">[read-only]
+   
+   The number of items contained by the collection.</div>
+</td><td class="summaryTableOwnerCol">Treap</td>
+</tr>
+</table>
+</div>
+<a name="protectedPropertySummary"></a>
+<div class="summarySection">
+<div class="summaryTableTitle">Protected Properties</div>
+<table id="summaryTableProtectedProperty" class="summaryTable " cellpadding="3" cellspacing="0">
+<tr>
+<th>&nbsp;</th><th colspan="2">Property</th><th class="summaryTableOwnerCol">Defined&nbsp;by</th>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#_comparator">_comparator</a> : <a href="framework/IComparator.html">IComparator</a>
+<div class="summaryTableDescription">
+   The sort criterion.</div>
+</td><td class="summaryTableOwnerCol">Treap</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#_root">_root</a> : <a href="framework/core/TreapNode.html">TreapNode</a>
+<div class="summaryTableDescription">
+   The root node.</div>
+</td><td class="summaryTableOwnerCol">Treap</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#_size">_size</a> : uint = 0<div class="summaryTableDescription">
+   The size of the treap.</div>
+</td><td class="summaryTableOwnerCol">Treap</td>
+</tr>
+</table>
+</div>
+<a name="methodSummary"></a>
+<div class="summarySection">
+<div class="summaryTableTitle">Public Methods</div>
+<table id="summaryTableMethod" class="summaryTable " cellpadding="3" cellspacing="0">
+<tr>
+<th>&nbsp;</th><th colspan="2">Method</th><th class="summaryTableOwnerCol">Defined&nbsp;by</th>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#Treap()">Treap</a>(comparator:<a href="framework/IComparator.html">IComparator</a>)</div>
+<div class="summaryTableDescription">
+   Treap constructor.</div>
+</td><td class="summaryTableOwnerCol">Treap</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#add()">add</a>(item:*):Boolean</div>
+<div class="summaryTableDescription">
+   
+   Adds an item to the tree.</div>
+</td><td class="summaryTableOwnerCol">Treap</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#clear()">clear</a>():Boolean</div>
+<div class="summaryTableDescription">
+   
+   Removes all items from the collection.</div>
+</td><td class="summaryTableOwnerCol">Treap</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#equalItem()">equalItem</a>(item:*):*</div>
+<div class="summaryTableDescription">
+   
+   Returns the item that is equal to the given one.</div>
+</td><td class="summaryTableOwnerCol">Treap</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#has()">has</a>(item:*):Boolean</div>
+<div class="summaryTableDescription">
+   
+   Tests if an item is contained by the collection.</div>
+</td><td class="summaryTableOwnerCol">Treap</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#hasEqual()">hasEqual</a>(item:*):Boolean</div>
+<div class="summaryTableDescription">
+   
+   Tests if the collection contains an item that is equal to the given item.</div>
+</td><td class="summaryTableOwnerCol">Treap</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#higher()">higher</a>(item:*):*</div>
+<div class="summaryTableDescription">
+   
+   Returns the first item that is higher than the given item.</div>
+</td><td class="summaryTableOwnerCol">Treap</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#iterator()">iterator</a>(cursor:*):<a href="framework/IIterator.html">IIterator</a>
+</div>
+<div class="summaryTableDescription">
+   
+   Returns an iterator over the iterable data structure.</div>
+</td><td class="summaryTableOwnerCol">Treap</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#lesser()">lesser</a>(item:*):*</div>
+<div class="summaryTableDescription">
+   
+   Returns the last item that is lesser than the given item.</div>
+</td><td class="summaryTableOwnerCol">Treap</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#remove()">remove</a>(item:*):Boolean</div>
+<div class="summaryTableDescription">
+   
+   Removes an item from the collection.</div>
+</td><td class="summaryTableOwnerCol">Treap</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#removeFirst()">removeFirst</a>():*</div>
+<div class="summaryTableDescription">
+   
+   Removes the first item of the ordered collection.</div>
+</td><td class="summaryTableOwnerCol">Treap</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#removeLast()">removeLast</a>():*</div>
+<div class="summaryTableDescription">
+   
+   Removes the last item of the ordered collection.</div>
+</td><td class="summaryTableOwnerCol">Treap</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#toArray()">toArray</a>():Array</div>
+<div class="summaryTableDescription">
+   
+   Returns an array of all items.</div>
+</td><td class="summaryTableOwnerCol">Treap</td>
+</tr>
+</table>
+</div>
+<a name="protectedMethodSummary"></a>
+<div class="summarySection">
+<div class="summaryTableTitle">Protected Methods</div>
+<table id="summaryTableProtectedMethod" class="summaryTable " cellpadding="3" cellspacing="0">
+<tr>
+<th>&nbsp;</th><th colspan="2">Method</th><th class="summaryTableOwnerCol">Defined&nbsp;by</th>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#add_protected()">add_protected</a>(item:*):<a href="framework/core/TreapNode.html">TreapNode</a>
+</div>
+<div class="summaryTableDescription">
+   Adds an item to the treap.</div>
+</td><td class="summaryTableOwnerCol">Treap</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#getNode()">getNode</a>(item:*):<a href="framework/core/TreapNode.html">TreapNode</a>
+</div>
+<div class="summaryTableDescription">
+   Returns the node of the given item.</div>
+</td><td class="summaryTableOwnerCol">Treap</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#higherNode()">higherNode</a>(item:*):<a href="framework/core/TreapNode.html">TreapNode</a>
+</div>
+<div class="summaryTableDescription">
+   Returns the first node whose item is higher than the given item.</div>
+</td><td class="summaryTableOwnerCol">Treap</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#lesserNode()">lesserNode</a>(item:*):<a href="framework/core/TreapNode.html">TreapNode</a>
+</div>
+<div class="summaryTableDescription">
+   Returns the last node whose item is lesser than the given item.</div>
+</td><td class="summaryTableOwnerCol">Treap</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#removeNode()">removeNode</a>(node:<a href="framework/core/TreapNode.html">TreapNode</a>):void</div>
+<div class="summaryTableDescription">
+   Removes a node from the tree.</div>
+</td><td class="summaryTableOwnerCol">Treap</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#rotate()">rotate</a>(parent:<a href="framework/core/TreapNode.html">TreapNode</a>, child:<a href="framework/core/TreapNode.html">TreapNode</a>):void</div>
+<div class="summaryTableDescription">
+   Rotates a parent with its child node.</div>
+</td><td class="summaryTableOwnerCol">Treap</td>
+</tr>
+</table>
+</div>
+<script type="text/javascript" language="javascript">
+<!--
+showHideInherited();
+--></script>
+<div class="MainContent">
+<a name="propertyDetail"></a>
+<div class="detailSectionHeader">Property detail</div>
+<a name="_comparator"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">_comparator</td><td class="detailHeaderType">property</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>protected var _comparator:<a href="framework/IComparator.html">IComparator</a></code><p>
+   The sort criterion.
+   </p></div>
+<a name="first"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">first</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>first:*</code>&nbsp;&nbsp;[read-only]<p>
+   
+   The first item or <code>undefined</code> if the collection is empty.
+   </p><span class="label">Implementation</span>
+<br>
+<code>&nbsp;&nbsp;&nbsp;&nbsp;public function get first():*</code>
+<br>
+</div>
+<a name="last"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">last</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>last:*</code>&nbsp;&nbsp;[read-only]<p>
+   
+   The last item or <code>undefined</code> if the collection is empty.
+   </p><span class="label">Implementation</span>
+<br>
+<code>&nbsp;&nbsp;&nbsp;&nbsp;public function get last():*</code>
+<br>
+</div>
+<a name="_root"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">_root</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>protected var _root:<a href="framework/core/TreapNode.html">TreapNode</a></code><p>
+   The root node.
+   </p></div>
+<a name="_size"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">_size</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>protected var _size:uint = 0</code><p>
+   The size of the treap.
+   </p></div>
+<a name="size"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">size</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>size:uint</code>&nbsp;&nbsp;[read-only]<p>
+   
+   The number of items contained by the collection.
+   </p><span class="label">Implementation</span>
+<br>
+<code>&nbsp;&nbsp;&nbsp;&nbsp;public function get size():uint</code>
+<br>
+</div>
+<a name="constructorDetail"></a>
+<div class="detailSectionHeader">Constructor detail</div>
+<a name="Treap()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">Treap</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">constructor</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public function Treap(comparator:<a href="framework/IComparator.html">IComparator</a>)</code><p>
+   Treap constructor.
+   
+   </p><span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">comparator</span>:<a href="framework/IComparator.html">IComparator</a></code> &mdash; The sort criterion.
+   </td>
+</tr>
+</table>
+</div>
+<a name="methodDetail"></a>
+<div class="detailSectionHeader">Method detail</div>
+<a name="add()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">add</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public function add(item:*):Boolean</code><p>
+   
+   Adds an item to the tree.
+   
+   </p><p>If the tree already contains an item that is equal to the given one,
+   the method abords with <code>false</code>.</p>
+   
+   <p>Hence, if the tree already contains the given item, the method abords with <code>false</code>.</p>
+   
+   <span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">item</span>:*</code> &mdash; The item to add.
+   </td>
+</tr>
+</table>
+<p></p>
+<span class="label">Returns</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20"></td><td><code>Boolean</code> &mdash; <code>true</code> if the item has been added.
+   </td>
+</tr>
+</table>
+</div>
+<a name="add_protected()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">add_protected</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>protected function add_protected(item:*):<a href="framework/core/TreapNode.html">TreapNode</a></code><p>
+   Adds an item to the treap.
+   
+   </p><p>The method creates a new treap node, inserts the node as the leaf of
+   its successor/predecessor and rotates then the node upwards until
+   the tree becomes consistent again regarding the priority constraint.</p>
+   
+   <p>If the treap is empty, the method simply creates a new root node.</p>
+   
+   <span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">item</span>:*</code> &mdash; The data to insert into the tree.
+   </td>
+</tr>
+</table>
+<p></p>
+<span class="label">Returns</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20"></td><td><code><a href="framework/core/TreapNode.html">TreapNode</a></code> &mdash; 
+                        true, if the item has been inserted, false if an equal item already exists.
+   
+                        
+                     </td>
+</tr>
+</table>
+<br>
+<span class="label">Throws</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20"></td><td><code></code> &mdash; If the item cannot be compared.
+   </td>
+</tr>
+</table>
+</div>
+<a name="clear()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">clear</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public function clear():Boolean</code><p>
+   
+   Removes all items from the collection.
+   
+   </p><p>If the collection is already empty, the method aborts with <code>false</code>.</p>
+   
+   <p></p>
+<span class="label">Returns</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20"></td><td><code>Boolean</code> &mdash; <code>true</code> if items have been removed.
+   </td>
+</tr>
+</table>
+</div>
+<a name="equalItem()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">equalItem</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public function equalItem(item:*):*</code><p>
+   
+   Returns the item that is equal to the given one.
+   
+   </p><p>Returns of course the given item, if the item is contained.</p>
+   
+   <span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">item</span>:*</code> &mdash; The item to test.
+   </td>
+</tr>
+</table>
+<p></p>
+<span class="label">Returns</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20"></td><td><code>*</code> &mdash; The equal item or <code>undefined</code> if there is no equal item.
+   </td>
+</tr>
+</table>
+</div>
+<a name="getNode()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">getNode</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>protected function getNode(item:*):<a href="framework/core/TreapNode.html">TreapNode</a></code><p>
+   Returns the node of the given item.
+   
+   </p><span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">item</span>:*</code> &mdash; The item to get the node for.
+   </td>
+</tr>
+</table>
+<p></p>
+<span class="label">Returns</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20"></td><td><code><a href="framework/core/TreapNode.html">TreapNode</a></code> &mdash; 
+                        The node or <code>null</code>, if the item is not contained.
+   
+                        
+                     </td>
+</tr>
+</table>
+</div>
+<a name="has()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">has</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public function has(item:*):Boolean</code><p>
+   
+   Tests if an item is contained by the collection.
+   
+   </p><span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">item</span>:*</code> &mdash; The item to test.
+   </td>
+</tr>
+</table>
+<p></p>
+<span class="label">Returns</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20"></td><td><code>Boolean</code> &mdash; <code>true</code> if the item is contained.
+   </td>
+</tr>
+</table>
+</div>
+<a name="hasEqual()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">hasEqual</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public function hasEqual(item:*):Boolean</code><p>
+   
+   Tests if the collection contains an item that is equal to the given item.
+   
+   </p><p>Returns of course <code>true</code> if the given item is contained.</p>
+   
+   <span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">item</span>:*</code> &mdash; The item to test.
+   </td>
+</tr>
+</table>
+<p></p>
+<span class="label">Returns</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20"></td><td><code>Boolean</code> &mdash; <code>true</code> if there is an equal item contained.
+   </td>
+</tr>
+</table>
+</div>
+<a name="higher()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">higher</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public function higher(item:*):*</code><p>
+   
+   Returns the first item that is higher than the given item.
+   
+   </p><span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">item</span>:*</code> &mdash; The item to test.
+   </td>
+</tr>
+</table>
+<p></p>
+<span class="label">Returns</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20"></td><td><code>*</code> &mdash; The next higher item or <code>undefined</code> if there is no higher item.
+   </td>
+</tr>
+</table>
+</div>
+<a name="higherNode()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">higherNode</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>protected function higherNode(item:*):<a href="framework/core/TreapNode.html">TreapNode</a></code><p>
+   Returns the first node whose item is higher than the given item.
+   
+   </p><span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">item</span>:*</code> &mdash; The item to test.
+   </td>
+</tr>
+</table>
+<p></p>
+<span class="label">Returns</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20"></td><td><code><a href="framework/core/TreapNode.html">TreapNode</a></code> &mdash; 
+                        The next higher node or <code>null</code> if there is no higher item.
+   
+                        
+                     </td>
+</tr>
+</table>
+</div>
+<a name="iterator()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">iterator</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public function iterator(cursor:*):<a href="framework/IIterator.html">IIterator</a></code><p>
+   
+   Returns an iterator over the iterable data structure.
+   
+   </p><p>The <code>cursor</code> parameter is optional and not considered by all iterable
+   data structures. E.g. the iterator of an unordered collection such as <code>Map</code>
+   or <code>Set</code> starts always with the first item found. Still passing a parameter to
+   such a data structure does not throw an error and will simply show no effect.</p>
+   
+   <p>The type of the cursor is unspecified and depends on the particular data structure.
+   E.g. lists allow to specify an index, sets to specify an item and maps to specify a key.</p>
+   
+   <p>If <code>cursor</code> is specified, the iterator returns the item that is related
+   to that cursor with the first call to <code>next()</code> (and its predecessor with
+   the first call to <code>previous()</code> if the iterator allows bidirectional
+   navigation.</p>
+   
+   <span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">cursor</span>:*</code> &mdash; The initial cursor position.
+   </td>
+</tr>
+</table>
+<p></p>
+<span class="label">Returns</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20"></td><td><code><a href="framework/IIterator.html">IIterator</a></code> &mdash; 
+                        An iterator.
+   
+                        
+                     </td>
+</tr>
+</table>
+</div>
+<a name="lesser()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">lesser</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public function lesser(item:*):*</code><p>
+   
+   Returns the last item that is lesser than the given item.
+   
+   </p><span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">item</span>:*</code> &mdash; The item to test.
+   </td>
+</tr>
+</table>
+<p></p>
+<span class="label">Returns</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20"></td><td><code>*</code> &mdash; The last lesser item or <code>undefined</code> if there is no lesser item.
+   </td>
+</tr>
+</table>
+</div>
+<a name="lesserNode()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">lesserNode</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>protected function lesserNode(item:*):<a href="framework/core/TreapNode.html">TreapNode</a></code><p>
+   Returns the last node whose item is lesser than the given item.
+   
+   </p><span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">item</span>:*</code> &mdash; The item to test.
+   </td>
+</tr>
+</table>
+<p></p>
+<span class="label">Returns</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20"></td><td><code><a href="framework/core/TreapNode.html">TreapNode</a></code> &mdash; 
+                        The last lesser node or <code>null</code> if there is no lesser item.
+   
+                        
+                     </td>
+</tr>
+</table>
+</div>
+<a name="mostLeftNode_internal()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">mostLeftNode_internal</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>as3commons_collections function mostLeftNode_internal(node:<a href="framework/core/TreapNode.html">TreapNode</a> = null):<a href="framework/core/TreapNode.html">TreapNode</a></code><p>
+   Framework internal method to retrieve the lowest node of the given subtree (node).
+   
+   </p><span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">node</span>:<a href="framework/core/TreapNode.html">TreapNode</a></code> (default = <code>null</code>)<code></code> &mdash; The root node of the subtree.
+   </td>
+</tr>
+</table>
+<p></p>
+<span class="label">Returns</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20"></td><td><code><a href="framework/core/TreapNode.html">TreapNode</a></code> &mdash; 
+                        The lowest node or <code>null</code>, if the treap is empty.
+   
+                        
+                     </td>
+</tr>
+</table>
+</div>
+<a name="mostRightNode_internal()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">mostRightNode_internal</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>as3commons_collections function mostRightNode_internal(node:<a href="framework/core/TreapNode.html">TreapNode</a> = null):<a href="framework/core/TreapNode.html">TreapNode</a></code><p>
+   Framework internal method to retrieve the highest node of the given subtree (node).
+   
+   </p><span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">node</span>:<a href="framework/core/TreapNode.html">TreapNode</a></code> (default = <code>null</code>)<code></code> &mdash; The root node of the subtree.
+   </td>
+</tr>
+</table>
+<p></p>
+<span class="label">Returns</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20"></td><td><code><a href="framework/core/TreapNode.html">TreapNode</a></code> &mdash; 
+                        The highest node or <code>null</code>, if the treap is empty.
+   
+                        
+                     </td>
+</tr>
+</table>
+</div>
+<a name="nextNode_internal()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">nextNode_internal</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>as3commons_collections function nextNode_internal(node:<a href="framework/core/TreapNode.html">TreapNode</a>):<a href="framework/core/TreapNode.html">TreapNode</a></code><p>
+   Framework internal method to retrieve the successor of a given node.
+   
+   </p><span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">node</span>:<a href="framework/core/TreapNode.html">TreapNode</a></code> &mdash; The node to get the successor.
+   </td>
+</tr>
+</table>
+<p></p>
+<span class="label">Returns</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20"></td><td><code><a href="framework/core/TreapNode.html">TreapNode</a></code> &mdash; 
+                        The next node or <code>null</code> if the node is the first item or the treap is empty.
+   
+                        
+                     </td>
+</tr>
+</table>
+</div>
+<a name="previousNode_internal()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">previousNode_internal</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>as3commons_collections function previousNode_internal(node:<a href="framework/core/TreapNode.html">TreapNode</a>):<a href="framework/core/TreapNode.html">TreapNode</a></code><p>
+   Framework internal method to retrieve the predecessor of a given node.
+   
+   </p><span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">node</span>:<a href="framework/core/TreapNode.html">TreapNode</a></code> &mdash; The node to get the predecessor.
+   </td>
+</tr>
+</table>
+<p></p>
+<span class="label">Returns</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20"></td><td><code><a href="framework/core/TreapNode.html">TreapNode</a></code> &mdash; 
+                        The previous node or <code>null</code> if the node is the last node or the treap is empty.
+   
+                        
+                     </td>
+</tr>
+</table>
+</div>
+<a name="remove()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">remove</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public function remove(item:*):Boolean</code><p>
+   
+   Removes an item from the collection.
+   
+   </p><p>Trying to remove an item which is not contained by the collection
+   leaves the collection untouched and returns <code>false</code>.</p>
+   
+   <p>If the collection contains multiple entries of the given item
+   the first occurrence of the item will be removed.</p>
+   
+   <span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">item</span>:*</code> &mdash; The item to remove.
+   </td>
+</tr>
+</table>
+<p></p>
+<span class="label">Returns</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20"></td><td><code>Boolean</code> &mdash; <code>true</code> if the item has been removed.
+   </td>
+</tr>
+</table>
+</div>
+<a name="removeFirst()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">removeFirst</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public function removeFirst():*</code><p>
+   
+   Removes the first item of the ordered collection.
+   
+   </p><p></p>
+<span class="label">Returns</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20"></td><td><code>*</code> &mdash; The formerly first item or <code>undefined</code> if the collection is empty.
+   </td>
+</tr>
+</table>
+</div>
+<a name="removeLast()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">removeLast</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public function removeLast():*</code><p>
+   
+   Removes the last item of the ordered collection.
+   
+   </p><p></p>
+<span class="label">Returns</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20"></td><td><code>*</code> &mdash; The formerly last item or <code>undefined</code> if the collection is empty.
+   </td>
+</tr>
+</table>
+</div>
+<a name="removeNode()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">removeNode</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>protected function removeNode(node:<a href="framework/core/TreapNode.html">TreapNode</a>):void</code><p>
+   Removes a node from the tree.
+   
+   </p><p>The method rotates the given node downwards until it becomes a leaf node
+   and gets removed from the tree.</p>
+   
+   <span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">node</span>:<a href="framework/core/TreapNode.html">TreapNode</a></code> &mdash; The node to remove.
+   </td>
+</tr>
+</table>
+</div>
+<a name="removeNode_internal()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">removeNode_internal</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>as3commons_collections function removeNode_internal(node:<a href="framework/core/TreapNode.html">TreapNode</a>):void</code><p>
+   Framework internal method to remove a node from the treap.
+   
+   </p><span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">node</span>:<a href="framework/core/TreapNode.html">TreapNode</a></code> &mdash; The node to remove.
+   </td>
+</tr>
+</table>
+</div>
+<a name="rotate()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">rotate</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>protected function rotate(parent:<a href="framework/core/TreapNode.html">TreapNode</a>, child:<a href="framework/core/TreapNode.html">TreapNode</a>):void</code><p>
+   Rotates a parent with its child node.
+   
+   </p><span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">parent</span>:<a href="framework/core/TreapNode.html">TreapNode</a></code> &mdash; The parent node.
+   </td>
+</tr>
+<tr>
+<td class="paramSpacer">&nbsp;</td>
+</tr>
+<tr>
+<td width="20px"></td><td><code><span class="label">child</span>:<a href="framework/core/TreapNode.html">TreapNode</a></code> &mdash; The child node.
+   </td>
+</tr>
+</table>
+</div>
+<a name="toArray()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">toArray</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public function toArray():Array</code><p>
+   
+   Returns an array of all items.
+   
+   </p><p>The order of items in the array is the same as in the particular collection.</p>
+   
+   <p>Certain collections do not have an explicit order (<code>Map</code>, <code>Set</code>).
+   The order of the items in the array is then not predictable.</p>  
+   
+   <p>If the collection maintains an array as its data source, a copy
+   of the internal array is returned rather than the original array.</p>
+   
+   <p></p>
+<span class="label">Returns</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20"></td><td><code>Array</code> &mdash; An array of the items of the collection.
+   </td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+<hr>
+<br>
+<p></p>
+<center class="copyright"> 
+</center>
+</div>
+</body>
+</html>
+<!-- -->

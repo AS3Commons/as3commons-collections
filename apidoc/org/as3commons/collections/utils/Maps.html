@@ -1,0 +1,496 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" href="../../../../style.css" type="text/css" media="screen">
+<link rel="stylesheet" href="../../../../print.css" type="text/css" media="print">
+<meta content="Maps,org.as3commons.collections.utils.Maps,clone,copy,filterKeys,fromDictionary,fromObject,itemOrAdd,itemOrError,itemOrValue" name="keywords">
+<title>org.as3commons.collections.utils.Maps</title>
+</head>
+<body>
+<script type="text/javascript" language="javascript" src="../../../../asdoc.js"></script><script type="text/javascript" language="javascript" src="../../../../cookies.js"></script><script type="text/javascript" language="javascript">
+<!--
+				asdocTitle = 'Maps - AS3Commons Collections 1.2.0';
+				var baseRef = '../../../../';
+				window.onload = configPage;
+			--></script>
+<table style="display:none" id="titleTable" cellspacing="0" cellpadding="0" class="titleTable">
+<tr>
+<td align="left" class="titleTableTitle">API Documentation</td><td align="right" class="titleTableTopNav"><a onclick="loadClassListFrame('../../../../all-classes.html')" href="../../../../package-summary.html">All&nbsp;Packages</a>&nbsp;|&nbsp;<a onclick="loadClassListFrame('../../../../all-classes.html')" href="../../../../class-summary.html">All&nbsp;Classes</a>&nbsp;|&nbsp;<a onclick="loadClassListFrame('../../../../index-list.html')" href="../../../../all-index-A.html">Index</a>&nbsp;|&nbsp;<a href="../../../../index.html?org/as3commons/collections/utils/Maps.html&amp;org/as3commons/collections/utils/class-list.html" id="framesLink1">Frames</a><a onclick="parent.location=document.location" href="" style="display:none" id="noFramesLink1">No&nbsp;Frames</a></td><td rowspan="3" align="right" class="titleTableLogo"><img alt="Adobe Logo" title="Adobe Logo" class="logoImage" src="../../../../images/logo.jpg"></td>
+</tr>
+<tr class="titleTableRow2">
+<td align="left" id="subTitle" class="titleTableSubTitle">Class&nbsp;Maps</td><td align="right" id="subNav" class="titleTableSubNav"><a href="#methodSummary">Methods</a></td>
+</tr>
+<tr class="titleTableRow3">
+<td colspan="2">&nbsp;</td>
+</tr>
+</table>
+<script type="text/javascript" language="javascript">
+<!--
+if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Class Maps"); titleBar_setSubNav(false,false,false,false,false,false,true,false,false,false,false,false,false,false);}
+--></script>
+<div class="MainContent">
+<table cellspacing="0" cellpadding="0" class="classHeaderTable">
+<tr>
+<td class="classHeaderTableLabel">Package</td><td><a onclick="javascript:loadClassListFrame('class-list.html')" href="package-detail.html">org.as3commons.collections.utils</a></td>
+</tr>
+<tr>
+<td class="classHeaderTableLabel">Class</td><td class="classSignature">public class Maps</td>
+</tr>
+</table>
+<p></p>
+  <p>A set of common utilities for working with IMap implementations.</p>
+  
+  <p></p>
+<br>
+<hr>
+</div>
+<a name="methodSummary"></a>
+<div class="summarySection">
+<div class="summaryTableTitle">Public Methods</div>
+<table id="summaryTableMethod" class="summaryTable " cellpadding="3" cellspacing="0">
+<tr>
+<th>&nbsp;</th><th colspan="2">Method</th><th class="summaryTableOwnerCol">Defined&nbsp;by</th>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#clone()">clone</a>(source:<a href="../framework/IMap.html">IMap</a>, keyFilter:Function = null, itemFilter:Function = null):<a href="../framework/IMap.html">IMap</a>
+</div>
+<div class="summaryTableDescription">[static]
+   <p>Clones the supplied IMap instance returning a new IMap of the same type.</div>
+</td><td class="summaryTableOwnerCol">Maps</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#copy()">copy</a>(source:<a href="../framework/IMap.html">IMap</a>, destination:<a href="../framework/IMap.html">IMap</a>):<a href="../framework/IMap.html">IMap</a>
+</div>
+<div class="summaryTableDescription">[static]
+   <p>Copies all the mappings from the source IMap instance into the supplied destination IMap instance.</p>
+   
+   </div>
+</td><td class="summaryTableOwnerCol">Maps</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#filterKeys()">filterKeys</a>(map:<a href="../framework/IMap.html">IMap</a>, predicate:Function):<a href="../framework/IMap.html">IMap</a>
+</div>
+<div class="summaryTableDescription">[static]
+   <p>Filters the supplied IMap instance returning a new IMap of the same type which only contains  
+   mappings where the key meets the supplied predicate.<p>
+   
+   </div>
+</td><td class="summaryTableOwnerCol">Maps</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#fromDictionary()">fromDictionary</a>(source:Dictionary):<a href="../framework/IMap.html">IMap</a>
+</div>
+<div class="summaryTableDescription">[static]
+   <p>Conveneice method which constructs a Map from the supplied Dictionary.</p>
+   
+   </div>
+</td><td class="summaryTableOwnerCol">Maps</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#fromObject()">fromObject</a>(source:Object):<a href="../framework/IMap.html">IMap</a>
+</div>
+<div class="summaryTableDescription">[static]
+   <p>Conveneice method which constructs a Map from the publicly accessible properties in the supplied Object.</p>
+   
+   </div>
+</td><td class="summaryTableOwnerCol">Maps</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#itemOrAdd()">itemOrAdd</a>(map:<a href="../framework/IMap.html">IMap</a>, key:*, item:*):*</div>
+<div class="summaryTableDescription">[static]
+   <p>Attempts to retrieve the item mapped to the supplied key.</div>
+</td><td class="summaryTableOwnerCol">Maps</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#itemOrError()">itemOrError</a>(map:<a href="../framework/IMap.html">IMap</a>, key:String, errorMessage:* = null):*</div>
+<div class="summaryTableDescription">[static]
+   <p>Attempts to retrieve the item mapped to the supplied key.</div>
+</td><td class="summaryTableOwnerCol">Maps</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#itemOrValue()">itemOrValue</a>(map:<a href="../framework/IMap.html">IMap</a>, key:*, defaultValue:*):*</div>
+<div class="summaryTableDescription">[static]
+   <p>Attempts to retrieve the item mapped to the supplied key.</div>
+</td><td class="summaryTableOwnerCol">Maps</td>
+</tr>
+</table>
+</div>
+<script type="text/javascript" language="javascript">
+<!--
+showHideInherited();
+--></script>
+<div class="MainContent">
+<a name="methodDetail"></a>
+<div class="detailSectionHeader">Method detail</div>
+<a name="clone()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">clone</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public static function clone(source:<a href="../framework/IMap.html">IMap</a>, keyFilter:Function = null, itemFilter:Function = null):<a href="../framework/IMap.html">IMap</a></code><p>
+   </p><p>Clones the supplied IMap instance returning a new IMap of the same type. If filter are specified,
+   the resulting map only contains mappings that meet the supplied predicates.<p>
+   
+   <p>The key filter function accepts the current key and returns a boolean
+   value (<code>true</code> if the key is accepted).</p>
+   
+   <div class='listing'><pre>
+  function keyFilter(key :  : Boolean {
+  var accept : Boolean = false;
+  // test the key
+  return accept;
+  }
+    
+  var iterator : IIterator = new MapFilterIterator(map, keyFilter);
+   </pre></div>
+   
+   <p>The item filter function accepts the current item and returns a boolean
+   value (<code>true</code> if the item is accepted).</p>
+   
+   <div class='listing'><pre>
+  function itemFilter(item :  : Boolean {
+  var accept : Boolean = false;
+  // test the item
+  return accept;
+  }
+    
+  var iterator : IIterator = new MapFilterIterator(map, keyFilter, itemFilter);
+   </pre></div>
+   
+   <span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">source</span>:<a href="../framework/IMap.html">IMap</a></code> &mdash; the IMap instance to operate on.
+   </td>
+</tr>
+<tr>
+<td class="paramSpacer">&nbsp;</td>
+</tr>
+<tr>
+<td width="20px"></td><td><code><span class="label">keyFilter</span>:Function</code> (default = <code>null</code>)<code></code> &mdash; Function which will be be applied to each key in the source map.
+   </td>
+</tr>
+<tr>
+<td class="paramSpacer">&nbsp;</td>
+</tr>
+<tr>
+<td width="20px"></td><td><code><span class="label">itemFilter</span>:Function</code> (default = <code>null</code>)<code></code> &mdash; Function which will be be applied to each item in the source map.
+   </td>
+</tr>
+</table>
+<p></p>
+<span class="label">Returns</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20"></td><td><code><a href="../framework/IMap.html">IMap</a></code> &mdash; 
+                        A new IMap instance.
+   
+                        
+                     </td>
+</tr>
+</table>
+</div>
+<a name="copy()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">copy</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public static function copy(source:<a href="../framework/IMap.html">IMap</a>, destination:<a href="../framework/IMap.html">IMap</a>):<a href="../framework/IMap.html">IMap</a></code><p>
+   </p><p>Copies all the mappings from the source IMap instance into the supplied destination IMap instance.</p>
+   
+   <span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">source</span>:<a href="../framework/IMap.html">IMap</a></code> &mdash; IMap instance which contains the entries you wish to copy.
+   </td>
+</tr>
+<tr>
+<td class="paramSpacer">&nbsp;</td>
+</tr>
+<tr>
+<td width="20px"></td><td><code><span class="label">destination</span>:<a href="../framework/IMap.html">IMap</a></code> &mdash; IMap instance into which all the mappings from the supplied source map will be added.
+   </td>
+</tr>
+</table>
+<p></p>
+<span class="label">Returns</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20"></td><td><code><a href="../framework/IMap.html">IMap</a></code> &mdash; 
+                        reference to the supplied destination IMap.
+   
+                        
+                     </td>
+</tr>
+</table>
+<br>
+<span class="label">Example</span>
+<br>Copies all the entries contained in the source Map into a new Map instance.
+   &lt;listing version="3.0"&gt;
+     const result : IMap = Maps.copy(source, new Map());
+   &lt;/listing&gt;
+   
+   <p></p>
+</div>
+<a name="filterKeys()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">filterKeys</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public static function filterKeys(map:<a href="../framework/IMap.html">IMap</a>, predicate:Function):<a href="../framework/IMap.html">IMap</a></code><p>
+   </p><p>Filters the supplied IMap instance returning a new IMap of the same type which only contains  
+   mappings where the key meets the supplied predicate.<p>
+   
+   <span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">map</span>:<a href="../framework/IMap.html">IMap</a></code> &mdash; the IMap instance to operate on.
+   </td>
+</tr>
+<tr>
+<td class="paramSpacer">&nbsp;</td>
+</tr>
+<tr>
+<td width="20px"></td><td><code><span class="label">predicate</span>:Function</code> &mdash; Function which will be be applied to each key in the supplied map.  This function should expect 
+   a single argument (the key) and return a Boolean value, true if the key should exist in the returned Map instance
+   or false if it should not be included in the returned Map.
+   </td>
+</tr>
+</table>
+<p></p>
+<span class="label">Returns</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20"></td><td><code><a href="../framework/IMap.html">IMap</a></code> &mdash; 
+                        a new Map instance consisting only of mappings where the key met the supplied predicate.
+   
+                        
+                     </td>
+</tr>
+</table>
+</div>
+<a name="fromDictionary()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">fromDictionary</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public static function fromDictionary(source:Dictionary):<a href="../framework/IMap.html">IMap</a></code><p>
+   </p><p>Conveneice method which constructs a Map from the supplied Dictionary.</p>
+   
+   <span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">source</span>:Dictionary</code> &mdash; Dictionary object to create the Map from
+   </td>
+</tr>
+</table>
+<p></p>
+<span class="label">Returns</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20"></td><td><code><a href="../framework/IMap.html">IMap</a></code> &mdash; 
+                        new Map instance with the values taken from the supplied source Dictionary.
+   
+                        
+                     </td>
+</tr>
+</table>
+</div>
+<a name="fromObject()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">fromObject</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public static function fromObject(source:Object):<a href="../framework/IMap.html">IMap</a></code><p>
+   </p><p>Conveneice method which constructs a Map from the publicly accessible properties in the supplied Object.</p>
+   
+   <span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">source</span>:Object</code> &mdash; Object to create the Map from.
+   </td>
+</tr>
+</table>
+<p></p>
+<span class="label">Returns</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20"></td><td><code><a href="../framework/IMap.html">IMap</a></code> &mdash; 
+                        new Map instance with the values taken from the supplied source Object.
+   
+                        
+                     </td>
+</tr>
+</table>
+</div>
+<a name="itemOrAdd()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">itemOrAdd</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public static function itemOrAdd(map:<a href="../framework/IMap.html">IMap</a>, key:*, item:*):*</code><p>
+   </p><p>Attempts to retrieve the item mapped to the supplied key.  If the supplied key is not mapped then the
+   supplied value will mapped to the key and returned.</p>
+   
+   <span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">map</span>:<a href="../framework/IMap.html">IMap</a></code> &mdash; the IMap instance to operate on.
+   </td>
+</tr>
+<tr>
+<td class="paramSpacer">&nbsp;</td>
+</tr>
+<tr>
+<td width="20px"></td><td><code><span class="label">key</span>:*</code> &mdash; the key to perform the lookup using.
+   </td>
+</tr>
+<tr>
+<td class="paramSpacer">&nbsp;</td>
+</tr>
+<tr>
+<td width="20px"></td><td><code><span class="label">item</span>:*</code> &mdash; if no mapping exists for the supplied key a new mapping will be added between the key and 
+   this value.
+   </td>
+</tr>
+</table>
+<p></p>
+<span class="label">Returns</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20"></td><td><code>*</code> &mdash; if a prior mapping exists for the supplied key then the assosiated value in the map will be 
+   returned; if no prior mapping exists the supplied value will be returned instead. 
+   </td>
+</tr>
+</table>
+</div>
+<a name="itemOrError()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">itemOrError</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public static function itemOrError(map:<a href="../framework/IMap.html">IMap</a>, key:String, errorMessage:* = null):*</code><p>
+   </p><p>Attempts to retrieve the item mapped to the supplied key.  If the supplied key is not mapped an 
+   ArgumentError will be thrown.</p>
+      <span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">map</span>:<a href="../framework/IMap.html">IMap</a></code> &mdash; the IMap instance to operate on. 
+   </td>
+</tr>
+<tr>
+<td class="paramSpacer">&nbsp;</td>
+</tr>
+<tr>
+<td width="20px"></td><td><code><span class="label">key</span>:String</code> &mdash; the key to perform the lookup using.
+   </td>
+</tr>
+<tr>
+<td class="paramSpacer">&nbsp;</td>
+</tr>
+<tr>
+<td width="20px"></td><td><code><span class="label">errorMessage</span>:*</code> (default = <code>null</code>)<code></code> &mdash; optional error message which will be used if an Error needs to be thrown.
+   </td>
+</tr>
+</table>
+<p></p>
+<span class="label">Returns</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20"></td><td><code>*</code> &mdash; the item mapped to the supplied key.
+   </td>
+</tr>
+</table>
+<br>
+<span class="label">Throws</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20"></td><td><code></code> &mdash; if no mapping exists for the supplied key.
+   </td>
+</tr>
+</table>
+</div>
+<a name="itemOrValue()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">itemOrValue</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public static function itemOrValue(map:<a href="../framework/IMap.html">IMap</a>, key:*, defaultValue:*):*</code><p>
+   </p><p>Attempts to retrieve the item mapped to the supplied key.  If the supplied key is not mapped then the
+   supplied default value will be returned instead.</p>
+   
+   <span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">map</span>:<a href="../framework/IMap.html">IMap</a></code> &mdash; the IMap instance to operate on.
+   </td>
+</tr>
+<tr>
+<td class="paramSpacer">&nbsp;</td>
+</tr>
+<tr>
+<td width="20px"></td><td><code><span class="label">key</span>:*</code> &mdash; the key to perform the lookup using.
+   </td>
+</tr>
+<tr>
+<td class="paramSpacer">&nbsp;</td>
+</tr>
+<tr>
+<td width="20px"></td><td><code><span class="label">defaultValue</span>:*</code> &mdash; the value to return if the supplied key does not exist in the supplied Map.
+   </td>
+</tr>
+</table>
+<p></p>
+<span class="label">Returns</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20"></td><td><code>*</code> &mdash; if the supplied key exists in the map then the value mapped to that key will be  returned, otherwise 
+   the supplied defaultValue will be returned instead. 
+   </td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+<hr>
+<br>
+<p></p>
+<center class="copyright"> 
+</center>
+</div>
+</body>
+</html>
+<!-- -->

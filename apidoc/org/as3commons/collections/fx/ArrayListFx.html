@@ -1,0 +1,1219 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" href="../../../../style.css" type="text/css" media="screen">
+<link rel="stylesheet" href="../../../../print.css" type="text/css" media="print">
+<meta content="ArrayListFx,org.as3commons.collections.fx.ArrayListFx,array,add,addAllAt,addAt,addEventListener,addFirst,addLast,clear,dispatchEvent,hasEventListener,itemRemoved,removeAllAt,removeAt,removeEventListener,removeFirst,removeLast,replaceAt,reverse,sort,willTrigger" name="keywords">
+<title>org.as3commons.collections.fx.ArrayListFx</title>
+</head>
+<body>
+<script type="text/javascript" language="javascript" src="../../../../asdoc.js"></script><script type="text/javascript" language="javascript" src="../../../../cookies.js"></script><script type="text/javascript" language="javascript">
+<!--
+				asdocTitle = 'ArrayListFx - AS3Commons Collections 1.2.0';
+				var baseRef = '../../../../';
+				window.onload = configPage;
+			--></script>
+<table style="display:none" id="titleTable" cellspacing="0" cellpadding="0" class="titleTable">
+<tr>
+<td align="left" class="titleTableTitle">API Documentation</td><td align="right" class="titleTableTopNav"><a onclick="loadClassListFrame('../../../../all-classes.html')" href="../../../../package-summary.html">All&nbsp;Packages</a>&nbsp;|&nbsp;<a onclick="loadClassListFrame('../../../../all-classes.html')" href="../../../../class-summary.html">All&nbsp;Classes</a>&nbsp;|&nbsp;<a onclick="loadClassListFrame('../../../../index-list.html')" href="../../../../all-index-A.html">Index</a>&nbsp;|&nbsp;<a href="../../../../index.html?org/as3commons/collections/fx/ArrayListFx.html&amp;org/as3commons/collections/fx/class-list.html" id="framesLink1">Frames</a><a onclick="parent.location=document.location" href="" style="display:none" id="noFramesLink1">No&nbsp;Frames</a></td><td rowspan="3" align="right" class="titleTableLogo"><img alt="Adobe Logo" title="Adobe Logo" class="logoImage" src="../../../../images/logo.jpg"></td>
+</tr>
+<tr class="titleTableRow2">
+<td align="left" id="subTitle" class="titleTableSubTitle">Class&nbsp;ArrayListFx</td><td align="right" id="subNav" class="titleTableSubNav"><a href="#propertySummary">Properties</a>&nbsp;| <a href="#methodSummary">Methods</a>&nbsp;| <a href="#eventSummary">Events</a></td>
+</tr>
+<tr class="titleTableRow3">
+<td colspan="2">&nbsp;</td>
+</tr>
+</table>
+<script type="text/javascript" language="javascript">
+<!--
+if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Class ArrayListFx"); titleBar_setSubNav(false,true,false,false,true,false,true,false,false,false,false,false,false,false);}
+--></script>
+<div class="MainContent">
+<table cellspacing="0" cellpadding="0" class="classHeaderTable">
+<tr>
+<td class="classHeaderTableLabel">Package</td><td><a onclick="javascript:loadClassListFrame('class-list.html')" href="package-detail.html">org.as3commons.collections.fx</a></td>
+</tr>
+<tr>
+<td class="classHeaderTableLabel">Class</td><td class="classSignature">public class ArrayListFx</td>
+</tr>
+<tr>
+<td class="classHeaderTableLabel">Inheritance</td><td class="inheritanceList">ArrayListFx <img class="inheritArrow" alt="Inheritance" title="Inheritance" src="../../../../images/inherit-arrow.gif"> <a href="../ArrayList.html">ArrayList</a> <img class="inheritArrow" alt="Inheritance" title="Inheritance" src="../../../../images/inherit-arrow.gif"> <a href="../framework/core/AbstractList.html">AbstractList</a></td>
+</tr>
+<tr>
+<td class="classHeaderTableLabel">Implements</td><td><a href="../framework/ICollectionFx.html">ICollectionFx</a></td>
+</tr>
+</table>
+<p></p>
+  Bindable version of the <code>ArrayList</code> implementation.
+  
+  <p><strong><code>ArrayListFx</code> event kinds</strong></p>
+  
+  <ul>
+  <li><code>CollectionEvent.ITEM_ADDED</code></li>
+  <li><code>CollectionEvent.ITEM_REPLACED</code></li>
+  <li><code>CollectionEvent.ITEM_REMOVED</code></li>
+  <li><code>CollectionEvent.RESET</code></li>
+  </ul>
+  
+  <p>The <code>ArrayList</code> offers two bulk methods to add or remove
+  a list of items (<code>addAllAt(), removeAllAt()</code>) in one step.
+  In response to either of those operations the event property <code>CollectionEvent.items</code>
+  is set. In all other cases of adding, removing or replacing of items the
+  event property <code>CollectionEvent.item</code> is set.</p>
+  
+  <p id="link_ArrayListFxExample"><strong>ArrayListFx example</strong></p>
+  
+  <a class="exampleCollapsed" href="#link_ArrayListFxExample" onClick="toggleExample(this, 'ArrayListFxExample');">Show example</a><br /><div id="ArrayListFxExample" style='display:none'><div class='listing'><pre>package {
+    import org.as3commons.collections.fx.ArrayListFx;
+    import org.as3commons.collections.fx.events.CollectionEvent;
+    import org.as3commons.collections.fx.events.ListEvent;
+    import org.as3commons.collections.utils.NumericComparator;
+    import flash.display.Sprite;
+
+    public class ArrayListFxExample extends Sprite {
+
+        public function ArrayListFxExample() {
+            var list : ArrayListFx = new ArrayListFx();
+            list.addEventListener(CollectionEvent.COLLECTION_CHANGED, changedHandler);
+            
+            list.add(1);
+            list.addAllAt(1, [2, 2, 4, 4, 5, 5, 6, 6, 8, 8]);
+            list.addFirst(10);
+            list.addLast(12);
+
+            list.replaceAt(3, 2); // no event (item at 3 is already 2)
+            list.replaceAt(6, 2);
+            list.replaceAt(7, 2);
+
+            list.removeFirst();
+            list.removeLast();
+            list.removeAt(2);
+            list.removeAt(12); // no event (index &gt; list.size)
+            list.removeAllAt(2, 2);
+
+            list.remove(6);
+            list.removeAll(2);
+            list.removeAll(10); // no event (10 not contained)
+
+            list.reverse();
+            list.sort(new NumericComparator());
+            list.array = [1, 2, 3, 4, 5];
+
+            list.clear();
+
+            // [1] added at 0                        [1]
+            // [2,2,4,4,5,5,6,6,8,8] added at 1      [1 2 2 4 4 5 5 6 6 8 8]
+            // [10] added at 0                       [10 1 2 2 4 4 5 5 6 6 8 8]
+            // [12] added at 12                      [10 1 2 2 4 4 5 5 6 6 8 8 12]
+            // [2] replaced at 6                     [10 1 2 2 4 4 2 5 6 6 8 8 12]
+            // [2] replaced at 7                     [10 1 2 2 4 4 2 2 6 6 8 8 12]
+            // [10] removed at 0                     [1 2 2 4 4 2 2 6 6 8 8 12]
+            // [12] removed at 11                    [1 2 2 4 4 2 2 6 6 8 8]
+            // [2] removed at 2                      [1 2 4 4 2 2 6 6 8 8]
+            // [4,4] removed at 2                    [1 2 2 2 6 6 8 8]
+            // [6] removed at 4                      [1 2 2 2 6 8 8]
+            // [2] removed at 1                      [1 2 2 6 8 8]
+            // [2] removed at 1                      [1 2 6 8 8]
+            // [2] removed at 1                      [1 6 8 8]
+            // Reset                                 [8 8 6 1]
+            // Reset                                 [1 6 8 8]
+            // Reset                                 [1 2 3 4 5]
+            // Reset                                 []
+        }
+        
+        private function changedHandler(e : ListEvent) : void {
+            var info : String = "";
+            var items : 
+            
+            switch (e.kind) {
+                case CollectionEvent.ITEM_ADDED:
+                    items = e.numItems == 1 ? e.item : e.items;
+                    info += "[" + items + "] added at " + e.index;
+                    break;
+
+                case CollectionEvent.ITEM_REMOVED:
+                    items = e.numItems == 1 ? e.item : e.items;
+                    info += "[" + items + "] removed at " + e.index;
+                    break;
+
+                case CollectionEvent.ITEM_REPLACED:
+                    info += "[" + e.item + "] replaced at " + e.index;
+                    break;
+
+                case CollectionEvent.RESET:
+                    info += ("Reset");
+                    break;
+            }
+            
+            for (var i : uint = info.length; i &lt; 38; i++) info += " ";
+            info += "[" + e.list.toArray().join(" ") + "]";
+            trace (info);
+        }
+    }
+}
+</pre></div></div>
+  
+  <p></p>
+<p>
+<span class="classHeaderTableLabel">See also</span>
+</p>
+<div class="seeAlso">
+<a href="events/ListEvent.html" target="">ListEvent - Description of the list event properties.</a>
+<br>
+<a href="../../collections/ArrayList.html" target="">ArrayList - ArrayList description and usage examples.</a>
+</div>
+<br>
+<hr>
+</div>
+<a name="propertySummary"></a>
+<div class="summarySection">
+<div class="summaryTableTitle">Public Properties</div>
+<div class="showHideLinks">
+<div class="hideInheritedProperty" id="hideInheritedProperty">
+<a onclick="javascript:setInheritedVisible(false,'Property');" href="#propertySummary" class="showHideLink"><img src="../../../../images/expanded.gif" class="showHideLinkImage"> Hide Inherited Public Properties</a>
+</div>
+<div class="showInheritedProperty" id="showInheritedProperty">
+<a onclick="javascript:setInheritedVisible(true,'Property');" href="#propertySummary" class="showHideLink"><img src="../../../../images/collapsed.gif" class="showHideLinkImage"> Show Inherited Public Properties</a>
+</div>
+</div>
+<table id="summaryTableProperty" class="summaryTable " cellpadding="3" cellspacing="0">
+<tr>
+<th>&nbsp;</th><th colspan="2">Property</th><th class="summaryTableOwnerCol">Defined&nbsp;by</th>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#array">array</a> : Array<div class="summaryTableDescription">[write-only]
+   
+   
+   Specifies an array to be maintained by the list.</div>
+</td><td class="summaryTableOwnerCol">ArrayListFx</td>
+</tr>
+<tr class="hideInheritedProperty">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol"><img class="inheritedSummaryImage" title="Inherited" alt="Inherited" src="../../../../images/inheritedSummary.gif"></td><td class="summaryTableSignatureCol"><a class="signatureLink" href="../framework/core/AbstractList.html#first">first</a> : *<div class="summaryTableDescription">
+   
+   The first item or <code>undefined</code> if the collection is empty.</div>
+</td><td class="summaryTableOwnerCol"><a href="../framework/core/AbstractList.html">AbstractList</a></td>
+</tr>
+<tr class="hideInheritedProperty">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol"><img class="inheritedSummaryImage" title="Inherited" alt="Inherited" src="../../../../images/inheritedSummary.gif"></td><td class="summaryTableSignatureCol"><a class="signatureLink" href="../framework/core/AbstractList.html#last">last</a> : *<div class="summaryTableDescription">
+   
+   The last item or <code>undefined</code> if the collection is empty.</div>
+</td><td class="summaryTableOwnerCol"><a href="../framework/core/AbstractList.html">AbstractList</a></td>
+</tr>
+<tr class="hideInheritedProperty">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol"><img class="inheritedSummaryImage" title="Inherited" alt="Inherited" src="../../../../images/inheritedSummary.gif"></td><td class="summaryTableSignatureCol"><a class="signatureLink" href="../framework/core/AbstractList.html#size">size</a> : uint<div class="summaryTableDescription">
+   
+   The number of items contained by the data provider.</div>
+</td><td class="summaryTableOwnerCol"><a href="../framework/core/AbstractList.html">AbstractList</a></td>
+</tr>
+</table>
+</div>
+<a name="protectedPropertySummary"></a>
+<div class="summarySection">
+<div class="summaryTableTitle">Protected Properties</div>
+<div class="showHideLinks">
+<div class="hideInheritedProtectedProperty" id="hideInheritedProtectedProperty">
+<a onclick="javascript:setInheritedVisible(false,'ProtectedProperty');" href="#protectedPropertySummary" class="showHideLink"><img src="../../../../images/expanded.gif" class="showHideLinkImage"> Hide Inherited Protected Properties</a>
+</div>
+<div class="showInheritedProtectedProperty" id="showInheritedProtectedProperty">
+<a onclick="javascript:setInheritedVisible(true,'ProtectedProperty');" href="#protectedPropertySummary" class="showHideLink"><img src="../../../../images/collapsed.gif" class="showHideLinkImage"> Show Inherited Protected Properties</a>
+</div>
+</div>
+<table id="summaryTableProtectedProperty" class="summaryTable hideInheritedProtectedProperty" cellpadding="3" cellspacing="0">
+<tr>
+<th>&nbsp;</th><th colspan="2">Property</th><th class="summaryTableOwnerCol">Defined&nbsp;by</th>
+</tr>
+<tr class="hideInheritedProtectedProperty">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol"><img class="inheritedSummaryImage" title="Inherited" alt="Inherited" src="../../../../images/inheritedSummary.gif"></td><td class="summaryTableSignatureCol"><a class="signatureLink" href="../framework/core/AbstractList.html#_array">_array</a> : Array<div class="summaryTableDescription">
+   The internal array.</div>
+</td><td class="summaryTableOwnerCol"><a href="../framework/core/AbstractList.html">AbstractList</a></td>
+</tr>
+</table>
+</div>
+<a name="methodSummary"></a>
+<div class="summarySection">
+<div class="summaryTableTitle">Public Methods</div>
+<div class="showHideLinks">
+<div class="hideInheritedMethod" id="hideInheritedMethod">
+<a onclick="javascript:setInheritedVisible(false,'Method');" href="#methodSummary" class="showHideLink"><img src="../../../../images/expanded.gif" class="showHideLinkImage"> Hide Inherited Public Methods</a>
+</div>
+<div class="showInheritedMethod" id="showInheritedMethod">
+<a onclick="javascript:setInheritedVisible(true,'Method');" href="#methodSummary" class="showHideLink"><img src="../../../../images/collapsed.gif" class="showHideLinkImage"> Show Inherited Public Methods</a>
+</div>
+</div>
+<table id="summaryTableMethod" class="summaryTable " cellpadding="3" cellspacing="0">
+<tr>
+<th>&nbsp;</th><th colspan="2">Method</th><th class="summaryTableOwnerCol">Defined&nbsp;by</th>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#ArrayListFx()">ArrayListFx</a>()</div>
+<div class="summaryTableDescription">
+   ArrayListFx constructor.</div>
+</td><td class="summaryTableOwnerCol">ArrayListFx</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#add()">add</a>(item:*):uint</div>
+<div class="summaryTableDescription">
+   
+   
+   Adds an item to the list.</div>
+</td><td class="summaryTableOwnerCol">ArrayListFx</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#addAllAt()">addAllAt</a>(index:uint, items:Array):Boolean</div>
+<div class="summaryTableDescription">
+   
+   
+   Adds an array of items at a specific position.</div>
+</td><td class="summaryTableOwnerCol">ArrayListFx</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#addAt()">addAt</a>(index:uint, item:*):Boolean</div>
+<div class="summaryTableDescription">
+   
+   
+   Adds an item at a specific position.</div>
+</td><td class="summaryTableOwnerCol">ArrayListFx</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#addEventListener()">addEventListener</a>(type:String, listener:Function, useCapture:Boolean = false, priority:int = 0, useWeakReference:Boolean = false):void</div>
+<div class="summaryTableDescription">
+   </div>
+</td><td class="summaryTableOwnerCol">ArrayListFx</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#addFirst()">addFirst</a>(item:*):void</div>
+<div class="summaryTableDescription">
+   
+   
+   Adds an item in front of the list.</div>
+</td><td class="summaryTableOwnerCol">ArrayListFx</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#addLast()">addLast</a>(item:*):void</div>
+<div class="summaryTableDescription">
+   
+   
+   Adds an item at the end of the list.</div>
+</td><td class="summaryTableOwnerCol">ArrayListFx</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#clear()">clear</a>():Boolean</div>
+<div class="summaryTableDescription">
+   
+   Removes all items from the collection.</div>
+</td><td class="summaryTableOwnerCol">ArrayListFx</td>
+</tr>
+<tr class="hideInheritedMethod">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol"><img class="inheritedSummaryImage" title="Inherited" alt="Inherited" src="../../../../images/inheritedSummary.gif"></td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="../framework/core/AbstractList.html#count()">count</a>(item:*):uint</div>
+<div class="summaryTableDescription">
+   
+   Returns the number of occurrences of an item.</div>
+</td><td class="summaryTableOwnerCol"><a href="../framework/core/AbstractList.html">AbstractList</a></td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#dispatchEvent()">dispatchEvent</a>(event:Event):Boolean</div>
+<div class="summaryTableDescription">
+   </div>
+</td><td class="summaryTableOwnerCol">ArrayListFx</td>
+</tr>
+<tr class="hideInheritedMethod">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol"><img class="inheritedSummaryImage" title="Inherited" alt="Inherited" src="../../../../images/inheritedSummary.gif"></td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="../framework/core/AbstractList.html#firstIndexOf()">firstIndexOf</a>(item:*):int</div>
+<div class="summaryTableDescription">
+   
+   Returns the index of the first occurrence of an item.</div>
+</td><td class="summaryTableOwnerCol"><a href="../framework/core/AbstractList.html">AbstractList</a></td>
+</tr>
+<tr class="hideInheritedMethod">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol"><img class="inheritedSummaryImage" title="Inherited" alt="Inherited" src="../../../../images/inheritedSummary.gif"></td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="../framework/core/AbstractList.html#has()">has</a>(item:*):Boolean</div>
+<div class="summaryTableDescription">
+   
+   Tests if an item is contained by the collection.</div>
+</td><td class="summaryTableOwnerCol"><a href="../framework/core/AbstractList.html">AbstractList</a></td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#hasEventListener()">hasEventListener</a>(type:String):Boolean</div>
+<div class="summaryTableDescription">
+   </div>
+</td><td class="summaryTableOwnerCol">ArrayListFx</td>
+</tr>
+<tr class="hideInheritedMethod">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol"><img class="inheritedSummaryImage" title="Inherited" alt="Inherited" src="../../../../images/inheritedSummary.gif"></td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="../framework/core/AbstractList.html#itemAt()">itemAt</a>(index:uint):*</div>
+<div class="summaryTableDescription">
+   
+   Returns the item at the specified position.</div>
+</td><td class="summaryTableOwnerCol"><a href="../framework/core/AbstractList.html">AbstractList</a></td>
+</tr>
+<tr class="hideInheritedMethod">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol"><img class="inheritedSummaryImage" title="Inherited" alt="Inherited" src="../../../../images/inheritedSummary.gif"></td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="../ArrayList.html#iterator()">iterator</a>(cursor:*):<a href="../framework/IIterator.html">IIterator</a>
+</div>
+<div class="summaryTableDescription">
+   
+   
+   Returns an iterator over the iterable data structure.</div>
+</td><td class="summaryTableOwnerCol"><a href="../ArrayList.html">ArrayList</a></td>
+</tr>
+<tr class="hideInheritedMethod">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol"><img class="inheritedSummaryImage" title="Inherited" alt="Inherited" src="../../../../images/inheritedSummary.gif"></td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="../framework/core/AbstractList.html#lastIndexOf()">lastIndexOf</a>(item:*):int</div>
+<div class="summaryTableDescription">
+   
+   Returns the index of the last occurrence of an item.</div>
+</td><td class="summaryTableOwnerCol"><a href="../framework/core/AbstractList.html">AbstractList</a></td>
+</tr>
+<tr class="hideInheritedMethod">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol"><img class="inheritedSummaryImage" title="Inherited" alt="Inherited" src="../../../../images/inheritedSummary.gif"></td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="../framework/core/AbstractList.html#remove()">remove</a>(item:*):Boolean</div>
+<div class="summaryTableDescription">
+   
+   Removes an item from the collection.</div>
+</td><td class="summaryTableOwnerCol"><a href="../framework/core/AbstractList.html">AbstractList</a></td>
+</tr>
+<tr class="hideInheritedMethod">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol"><img class="inheritedSummaryImage" title="Inherited" alt="Inherited" src="../../../../images/inheritedSummary.gif"></td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="../framework/core/AbstractList.html#removeAll()">removeAll</a>(item:*):uint</div>
+<div class="summaryTableDescription">
+   
+   Removes all occurrences of a particular item from the collection.</div>
+</td><td class="summaryTableOwnerCol"><a href="../framework/core/AbstractList.html">AbstractList</a></td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#removeAllAt()">removeAllAt</a>(index:uint, numItems:uint):Array</div>
+<div class="summaryTableDescription">
+   
+   
+   Removes a number of items starting at the specified position.</div>
+</td><td class="summaryTableOwnerCol">ArrayListFx</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#removeAt()">removeAt</a>(index:uint):*</div>
+<div class="summaryTableDescription">
+   
+   
+   Removes the item at the specified position.</div>
+</td><td class="summaryTableOwnerCol">ArrayListFx</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#removeEventListener()">removeEventListener</a>(type:String, listener:Function, useCapture:Boolean = false):void</div>
+<div class="summaryTableDescription">
+   </div>
+</td><td class="summaryTableOwnerCol">ArrayListFx</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#removeFirst()">removeFirst</a>():*</div>
+<div class="summaryTableDescription">
+   
+   
+   Removes the first item of the ordered collection.</div>
+</td><td class="summaryTableOwnerCol">ArrayListFx</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#removeLast()">removeLast</a>():*</div>
+<div class="summaryTableDescription">
+   
+   
+   Removes the last item of the ordered collection.</div>
+</td><td class="summaryTableOwnerCol">ArrayListFx</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#replaceAt()">replaceAt</a>(index:uint, item:*):Boolean</div>
+<div class="summaryTableDescription">
+   
+   
+   Replaces the item at the specified position.</div>
+</td><td class="summaryTableOwnerCol">ArrayListFx</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#reverse()">reverse</a>():Boolean</div>
+<div class="summaryTableDescription">
+   
+   
+   Reverses the collection order.</div>
+</td><td class="summaryTableOwnerCol">ArrayListFx</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#sort()">sort</a>(comparator:<a href="../framework/IComparator.html">IComparator</a>):Boolean</div>
+<div class="summaryTableDescription">
+   
+   
+   Sorts the linked collection using the given comparator.</div>
+</td><td class="summaryTableOwnerCol">ArrayListFx</td>
+</tr>
+<tr class="hideInheritedMethod">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol"><img class="inheritedSummaryImage" title="Inherited" alt="Inherited" src="../../../../images/inheritedSummary.gif"></td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="../framework/core/AbstractList.html#toArray()">toArray</a>():Array</div>
+<div class="summaryTableDescription">
+   
+   Returns an array of all items.</div>
+</td><td class="summaryTableOwnerCol"><a href="../framework/core/AbstractList.html">AbstractList</a></td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#willTrigger()">willTrigger</a>(type:String):Boolean</div>
+<div class="summaryTableDescription">
+   </div>
+</td><td class="summaryTableOwnerCol">ArrayListFx</td>
+</tr>
+</table>
+</div>
+<a name="protectedMethodSummary"></a>
+<div class="summarySection">
+<div class="summaryTableTitle">Protected Methods</div>
+<table id="summaryTableProtectedMethod" class="summaryTable " cellpadding="3" cellspacing="0">
+<tr>
+<th>&nbsp;</th><th colspan="2">Method</th><th class="summaryTableOwnerCol">Defined&nbsp;by</th>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#itemRemoved()">itemRemoved</a>(index:uint, item:*):void</div>
+<div class="summaryTableDescription">
+   
+   Template method to notify subclasses after an item has been removed.</div>
+</td><td class="summaryTableOwnerCol">ArrayListFx</td>
+</tr>
+</table>
+</div>
+<a name="eventSummary"></a>
+<div class="summarySection">
+<div class="summaryTableTitle">Events</div>
+<table id="summaryTableEvent" class="summaryTable " cellpadding="3" cellspacing="0">
+<tr>
+<th>&nbsp;</th><th colspan="2">Event</th><th>Summary</th><th class="summaryTableOwnerCol">Defined&nbsp;by</th>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#event:collectionChanged">collectionChanged</a>
+</div>
+</td><td class="summaryTableDescription summaryTableCol">
+   Event type of all collection events.</td><td class="summaryTableOwnerCol">ArrayListFx</td>
+</tr>
+</table>
+</div>
+<script type="text/javascript" language="javascript">
+<!--
+showHideInherited();
+--></script>
+<div class="MainContent">
+<a name="propertyDetail"></a>
+<div class="detailSectionHeader">Property detail</div>
+<a name="array"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">array</td><td class="detailHeaderType">property</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>array:Array</code>&nbsp;&nbsp;[write-only]<p>
+   
+   
+   Specifies an array to be maintained by the list.
+   
+   </p><p>Already contained elements will be removed beforehand.</p>
+   
+   <p>The list stores a copy of the given array not the array itself.</p>
+   
+   <span class="label">Implementation</span>
+<br>
+<code>&nbsp;&nbsp;&nbsp;&nbsp;public function set array(value:Array):void</code>
+<br>
+</div>
+<a name="constructorDetail"></a>
+<div class="detailSectionHeader">Constructor detail</div>
+<a name="ArrayListFx()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">ArrayListFx</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">constructor</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public function ArrayListFx()</code><p>
+   ArrayListFx constructor.
+   </p></div>
+<a name="methodDetail"></a>
+<div class="detailSectionHeader">Method detail</div>
+<a name="add()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">add</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public override function add(item:*):uint</code><p>
+   
+   
+   Adds an item to the list.
+   
+   </p><p>The <code>ArrayList</code> appends the item.</p>
+   
+   <p>The position of items that are added to a <code>SortedList</code>
+   depends on its sort order.</p>
+   
+   <span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">item</span>:*</code> &mdash; The item to add.
+   </td>
+</tr>
+</table>
+<p></p>
+<span class="label">Returns</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20"></td><td><code>uint</code> &mdash; The position where the item has been added.
+   </td>
+</tr>
+</table>
+</div>
+<a name="addAllAt()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">addAllAt</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public override function addAllAt(index:uint, items:Array):Boolean</code><p>
+   
+   
+   Adds an array of items at a specific position.
+   
+   </p><p>If the given position exceeds the list size, the method aborts
+   with <code>false</code>.</p>
+   
+   <span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">index</span>:uint</code> &mdash; The position of the items to add.
+   </td>
+</tr>
+<tr>
+<td class="paramSpacer">&nbsp;</td>
+</tr>
+<tr>
+<td width="20px"></td><td><code><span class="label">items</span>:Array</code> &mdash; An array of items to add.
+   </td>
+</tr>
+</table>
+<p></p>
+<span class="label">Returns</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20"></td><td><code>Boolean</code> &mdash; <code>true</code> if the item has been added.
+   </td>
+</tr>
+</table>
+</div>
+<a name="addAt()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">addAt</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public override function addAt(index:uint, item:*):Boolean</code><p>
+   
+   
+   Adds an item at a specific position.
+   
+   </p><p>If the given position exceeds the list size, the method
+   aborts with <code>false</code>.</p>
+   
+   <span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">index</span>:uint</code> &mdash; The position of the new item.
+   </td>
+</tr>
+<tr>
+<td class="paramSpacer">&nbsp;</td>
+</tr>
+<tr>
+<td width="20px"></td><td><code><span class="label">item</span>:*</code> &mdash; The item to add.
+   </td>
+</tr>
+</table>
+<p></p>
+<span class="label">Returns</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20"></td><td><code>Boolean</code> &mdash; <code>true</code> if the item has been added.
+   </td>
+</tr>
+</table>
+</div>
+<a name="addEventListener()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">addEventListener</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public function addEventListener(type:String, listener:Function, useCapture:Boolean = false, priority:int = 0, useWeakReference:Boolean = false):void</code><p>
+   </p><span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">type</span>:String</code></td>
+</tr>
+<tr>
+<td class="paramSpacer">&nbsp;</td>
+</tr>
+<tr>
+<td width="20px"></td><td><code><span class="label">listener</span>:Function</code></td>
+</tr>
+<tr>
+<td class="paramSpacer">&nbsp;</td>
+</tr>
+<tr>
+<td width="20px"></td><td><code><span class="label">useCapture</span>:Boolean</code> (default = <code>false</code>)<code></code></td>
+</tr>
+<tr>
+<td class="paramSpacer">&nbsp;</td>
+</tr>
+<tr>
+<td width="20px"></td><td><code><span class="label">priority</span>:int</code> (default = <code>0</code>)<code></code></td>
+</tr>
+<tr>
+<td class="paramSpacer">&nbsp;</td>
+</tr>
+<tr>
+<td width="20px"></td><td><code><span class="label">useWeakReference</span>:Boolean</code> (default = <code>false</code>)<code></code></td>
+</tr>
+</table>
+</div>
+<a name="addFirst()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">addFirst</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public override function addFirst(item:*):void</code><p>
+   
+   
+   Adds an item in front of the list.
+   
+   </p><span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">item</span>:*</code> &mdash; The item to add.
+   </td>
+</tr>
+</table>
+</div>
+<a name="addLast()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">addLast</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public override function addLast(item:*):void</code><p>
+   
+   
+   Adds an item at the end of the list.
+   
+   </p><span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">item</span>:*</code> &mdash; The item to add.
+   </td>
+</tr>
+</table>
+</div>
+<a name="clear()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">clear</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public override function clear():Boolean</code><p>
+   
+   Removes all items from the collection.
+   
+   </p><p>If the collection is already empty, the method aborts with <code>false</code>.</p>
+   
+   <p></p>
+<span class="label">Returns</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20"></td><td><code>Boolean</code> &mdash; <code>true</code> if items have been removed.
+   </td>
+</tr>
+</table>
+</div>
+<a name="dispatchEvent()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">dispatchEvent</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public function dispatchEvent(event:Event):Boolean</code><p>
+   </p><span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">event</span>:Event</code></td>
+</tr>
+</table>
+<p></p>
+<span class="label">Returns</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20"></td><td><code>Boolean</code></td>
+</tr>
+</table>
+</div>
+<a name="hasEventListener()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">hasEventListener</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public function hasEventListener(type:String):Boolean</code><p>
+   </p><span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">type</span>:String</code></td>
+</tr>
+</table>
+<p></p>
+<span class="label">Returns</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20"></td><td><code>Boolean</code></td>
+</tr>
+</table>
+</div>
+<a name="itemRemoved()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">itemRemoved</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>protected override function itemRemoved(index:uint, item:*):void</code><p>
+   
+   Template method to notify subclasses after an item has been removed.
+   
+   </p><span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">index</span>:uint</code> &mdash; The former index of the removed item.
+   </td>
+</tr>
+<tr>
+<td class="paramSpacer">&nbsp;</td>
+</tr>
+<tr>
+<td width="20px"></td><td><code><span class="label">item</span>:*</code> &mdash; The removed item.
+   </td>
+</tr>
+</table>
+</div>
+<a name="removeAllAt()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">removeAllAt</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public override function removeAllAt(index:uint, numItems:uint):Array</code><p>
+   
+   
+   Removes a number of items starting at the specified position.
+   
+   </p><p>If the given position exceeds the list size, the method aborts with <code>false</code>.</p>
+   
+   <p>If the number of items exceeds the list size, the method
+   removes all items starting at the given index.</p>
+   
+   <p>Returns an empty array if the index is invalid.</p>
+   
+   <span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">index</span>:uint</code> &mdash; The position of the first item to remove.
+   </td>
+</tr>
+<tr>
+<td class="paramSpacer">&nbsp;</td>
+</tr>
+<tr>
+<td width="20px"></td><td><code><span class="label">numItems</span>:uint</code> &mdash; The number of items to remove.
+   </td>
+</tr>
+</table>
+<p></p>
+<span class="label">Returns</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20"></td><td><code>Array</code> &mdash; An array of all removed items.
+   </td>
+</tr>
+</table>
+</div>
+<a name="removeAt()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">removeAt</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public override function removeAt(index:uint):*</code><p>
+   
+   
+   Removes the item at the specified position.
+   
+   </p><span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">index</span>:uint</code> &mdash; The position of the item to remove.
+   </td>
+</tr>
+</table>
+<p></p>
+<span class="label">Returns</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20"></td><td><code>*</code> &mdash; The removed item or <code>undefined</code> if there is no item at that position.
+   </td>
+</tr>
+</table>
+</div>
+<a name="removeEventListener()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">removeEventListener</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public function removeEventListener(type:String, listener:Function, useCapture:Boolean = false):void</code><p>
+   </p><span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">type</span>:String</code></td>
+</tr>
+<tr>
+<td class="paramSpacer">&nbsp;</td>
+</tr>
+<tr>
+<td width="20px"></td><td><code><span class="label">listener</span>:Function</code></td>
+</tr>
+<tr>
+<td class="paramSpacer">&nbsp;</td>
+</tr>
+<tr>
+<td width="20px"></td><td><code><span class="label">useCapture</span>:Boolean</code> (default = <code>false</code>)<code></code></td>
+</tr>
+</table>
+</div>
+<a name="removeFirst()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">removeFirst</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public override function removeFirst():*</code><p>
+   
+   
+   Removes the first item of the ordered collection.
+   
+   </p><p></p>
+<span class="label">Returns</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20"></td><td><code>*</code> &mdash; The formerly first item or <code>undefined</code> if the collection is empty.
+   </td>
+</tr>
+</table>
+</div>
+<a name="removeLast()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">removeLast</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public override function removeLast():*</code><p>
+   
+   
+   Removes the last item of the ordered collection.
+   
+   </p><p></p>
+<span class="label">Returns</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20"></td><td><code>*</code> &mdash; The formerly last item or <code>undefined</code> if the collection is empty.
+   </td>
+</tr>
+</table>
+</div>
+<a name="replaceAt()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">replaceAt</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public override function replaceAt(index:uint, item:*):Boolean</code><p>
+   
+   
+   Replaces the item at the specified position.
+   
+   </p><p>If the item at the position strictly equals the given item or the index
+   exceeds the list length, this method aborts with <code>false</code>.</p>
+   
+   <span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">index</span>:uint</code> &mdash; The position of the item to replace.
+   </td>
+</tr>
+<tr>
+<td class="paramSpacer">&nbsp;</td>
+</tr>
+<tr>
+<td width="20px"></td><td><code><span class="label">item</span>:*</code> &mdash; The replacing item.
+   </td>
+</tr>
+</table>
+<p></p>
+<span class="label">Returns</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20"></td><td><code>Boolean</code> &mdash; <code>true</code> if the item has been replaced.
+   </td>
+</tr>
+</table>
+</div>
+<a name="reverse()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">reverse</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public override function reverse():Boolean</code><p>
+   
+   
+   Reverses the collection order.
+   
+   </p><p>If the collection size is less than 2, the method aborts with <code>false</code>.</p>
+   
+   <p></p>
+<span class="label">Returns</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20"></td><td><code>Boolean</code> &mdash; <code>true</code> if the collection has been reversed.
+   </td>
+</tr>
+</table>
+</div>
+<a name="sort()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">sort</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public override function sort(comparator:<a href="../framework/IComparator.html">IComparator</a>):Boolean</code><p>
+   
+   
+   Sorts the linked collection using the given comparator.
+   
+   </p><p>The sort algorithm used by implementors of this interface is stable which
+   means that equal items are sorted in the same order they had before the sorting.</p>
+   
+   <p>If the collection size is less than 2, the method aborts with <code>false</code>.</p>
+   
+   <span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">comparator</span>:<a href="../framework/IComparator.html">IComparator</a></code> &mdash; The sort criterion.
+   </td>
+</tr>
+</table>
+<p></p>
+<span class="label">Returns</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20"></td><td><code>Boolean</code> &mdash; <code>true</code> if the linked collection has been sorted.
+   </td>
+</tr>
+</table>
+</div>
+<a name="willTrigger()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">willTrigger</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public function willTrigger(type:String):Boolean</code><p>
+   </p><span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">type</span>:String</code></td>
+</tr>
+</table>
+<p></p>
+<span class="label">Returns</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20"></td><td><code>Boolean</code></td>
+</tr>
+</table>
+</div>
+<div class="detailSectionHeader">Event detail</div>
+<a name="event:collectionChanged"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">collectionChanged</td><td class="detailHeaderType">event&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<span class="label">Event object type: </span><a href="events/ListEvent.html"><code>org.as3commons.collections.fx.events.ListEvent</code></a>
+<br>
+<span class="label">ListEvent.type property = </span><a href="events/CollectionEvent.html#COLLECTION_CHANGED"><code>org.as3commons.collections.fx.events.CollectionEvent.COLLECTION_CHANGED</code></a>
+<br><p>
+   Event type of all collection events.
+   
+   </p><p>Dispatched after all modifications of the collection.</p>
+   
+   <table class="innertable">
+   
+   <tr>
+   <th>Property</th>
+   <th>Value</th>
+   </tr>
+   
+   <tr>
+   <td>type</td>
+   <td>CollectionEvent.COLLECTION_CHANGED</td>
+   </tr>
+   
+   <tr>
+   <td>kind</td>
+   <td>CollectionEvent.ITEM_ADDED - Item (or items) has been added.<br />
+   CollectionEvent.ITEM_REPLACED - Item has been replaced.<br />
+   CollectionEvent.ITEM_REMOVED - Item (or items) has been removed.<br />
+   CollectionEvent.RESET - Collection has changed drastically.</td>
+   </tr>
+   
+   <tr>
+   <td>item<br />
+   items</td>
+   <td>The item that has been added, removed or the replacing item (singular operation).<br />
+   The items that have been added or removed (bulk operation).</td>
+   </tr>
+   
+   <tr>
+   <td>numItems</td>
+   <td>The number of items added, removed or replaced.</td>
+   </tr>
+   
+   <tr>
+   <td>iterator()</td>
+   <td>Iterator pointing to the position of an insertion, replacement or removal operation.</td>
+   </tr>
+   
+   <tr>
+   <th colspan="2">ListEvent</th>
+   </tr>
+   
+   <tr>
+   <td>list<br />
+   index</td>
+   <td>The event dispatching list.<br />
+   The position of the item added, removed or replacing.</td>
+   </tr>
+   
+   <tr>
+   <th colspan="2">SetEvent</th>
+   </tr>
+   
+   <tr>
+   <td>set</td>
+   <td>The event dispatching set.</td>
+   </tr>
+   
+   <tr>
+   <th colspan="2">MapEvent</th>
+   </tr>
+   
+   <tr>
+   <td>map<br />
+   key</td>
+   <td>The event dispatching map.<br />
+   The key of the item added, removed or replacing.</td>
+   </tr>
+   
+   </table>
+   
+   </div>
+<br>
+<br>
+<hr>
+<br>
+<p></p>
+<center class="copyright"> 
+</center>
+</div>
+</body>
+</html>
+<!-- -->

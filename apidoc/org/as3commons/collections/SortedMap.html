@@ -1,0 +1,1411 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" href="../../../style.css" type="text/css" media="screen">
+<link rel="stylesheet" href="../../../print.css" type="text/css" media="print">
+<meta content="SortedMap,org.as3commons.collections.SortedMap,_items,_keys,_stringMap,add,addNode,clear,equalKeys,getNode,hasKey,higherKey,itemFor,iterator,keyIterator,keysToArray,lesserKey,removeKey,removeNode,replaceFor" name="keywords">
+<title>org.as3commons.collections.SortedMap</title>
+</head>
+<body>
+<script type="text/javascript" language="javascript" src="../../../asdoc.js"></script><script type="text/javascript" language="javascript" src="../../../cookies.js"></script><script type="text/javascript" language="javascript">
+<!--
+				asdocTitle = 'SortedMap - AS3Commons Collections 1.2.0';
+				var baseRef = '../../../';
+				window.onload = configPage;
+			--></script>
+<table style="display:none" id="titleTable" cellspacing="0" cellpadding="0" class="titleTable">
+<tr>
+<td align="left" class="titleTableTitle">API Documentation</td><td align="right" class="titleTableTopNav"><a onclick="loadClassListFrame('../../../all-classes.html')" href="../../../package-summary.html">All&nbsp;Packages</a>&nbsp;|&nbsp;<a onclick="loadClassListFrame('../../../all-classes.html')" href="../../../class-summary.html">All&nbsp;Classes</a>&nbsp;|&nbsp;<a onclick="loadClassListFrame('../../../index-list.html')" href="../../../all-index-A.html">Index</a>&nbsp;|&nbsp;<a href="../../../index.html?org/as3commons/collections/SortedMap.html&amp;org/as3commons/collections/class-list.html" id="framesLink1">Frames</a><a onclick="parent.location=document.location" href="" style="display:none" id="noFramesLink1">No&nbsp;Frames</a></td><td rowspan="3" align="right" class="titleTableLogo"><img alt="Adobe Logo" title="Adobe Logo" class="logoImage" src="../../../images/logo.jpg"></td>
+</tr>
+<tr class="titleTableRow2">
+<td align="left" id="subTitle" class="titleTableSubTitle">Class&nbsp;SortedMap</td><td align="right" id="subNav" class="titleTableSubNav"><a href="#propertySummary">Properties</a>&nbsp;| <a href="#methodSummary">Methods</a></td>
+</tr>
+<tr class="titleTableRow3">
+<td colspan="2">&nbsp;</td>
+</tr>
+</table>
+<script type="text/javascript" language="javascript">
+<!--
+if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Class SortedMap"); titleBar_setSubNav(false,true,false,false,false,false,true,false,false,false,false,false,false,false);}
+--></script>
+<div class="MainContent">
+<table cellspacing="0" cellpadding="0" class="classHeaderTable">
+<tr>
+<td class="classHeaderTableLabel">Package</td><td><a onclick="javascript:loadClassListFrame('class-list.html')" href="package-detail.html">org.as3commons.collections</a></td>
+</tr>
+<tr>
+<td class="classHeaderTableLabel">Class</td><td class="classSignature">public class SortedMap</td>
+</tr>
+<tr>
+<td class="classHeaderTableLabel">Inheritance</td><td class="inheritanceList">SortedMap <img class="inheritArrow" alt="Inheritance" title="Inheritance" src="../../../images/inherit-arrow.gif"> <a href="framework/core/AbstractSortedDuplicatesCollection.html">AbstractSortedDuplicatesCollection</a> <img class="inheritArrow" alt="Inheritance" title="Inheritance" src="../../../images/inherit-arrow.gif"> <a href="framework/core/AbstractSortedCollection.html">AbstractSortedCollection</a></td>
+</tr>
+<tr>
+<td class="classHeaderTableLabel">Implements</td><td><a href="framework/ISortedMap.html">ISortedMap</a></td>
+</tr>
+<tr>
+<td class="classHeaderTableLabel">Subclasses</td><td><a href="fx/SortedMapFx.html">SortedMapFx</a></td>
+</tr>
+</table>
+<p></p>
+  Sort order implementation of a map.
+  
+  <p><strong>Description</strong></p>
+  
+  <p>The <code>SortedMap</code> is a combination of a dictionary and a binary search tree.</p>
+  
+  <p><strong>Runtime of operations</strong></p>
+  
+  <ul>
+  <li>Getting or removing of items - constant runtime O(1).<br />
+  <code>first, last, removeFirst(), removeLast()</code></li>
+  <li>Key lookup operations - constant runtime O(1).<br />
+  hasKey(), addBefore(), addAfter(), itemFor(), replaceFor(), removeKey()</code></li>
+  <li>Adding and removing of items - logarithmic runtime O(log n).<br />
+  add(), remove(), removeAll()</code></li>
+  <li>Item lookup inspection operations - logarithmic runtime O(log n).<br />
+  has(), count(), lesserKey(), higherKey(), equalKeys()</code></li>
+  </ul>
+  
+  <p><strong>Notes</strong></p>
+  
+  <p>The <code>iterator()</code> method accepts a key as the cursor parameter. If the given
+  key is not contained by the map, it will be ignored.</p>
+  
+  <p>The <code>iterator()</code> method retuns an <code>IMapIterator</code>.</p>
+  
+  <p><code>null</code> is allowed for keys and for values if the comparator allows <code>null</code>.</p>
+  
+  <p id="link_SortedMapExample"><strong>SortedMap example</strong></p>
+  
+  <p>This example shows the specific behaviour of a <code>SortedMap</code>.
+  The general work with collections and iterators is more detailed illustrated
+  in the <code>Map</code> and <code>ArrayList</code> examples below.</p>
+  
+  <a class="exampleCollapsed" href="#link_SortedMapExample" onClick="toggleExample(this, 'SortedMapExample');">Show example</a><br /><div id="SortedMapExample" style='display:none'><div class='listing'><pre>package {
+    import org.as3commons.collections.SortedMap;
+    import org.as3commons.collections.framework.ICollectionIterator;
+    import org.as3commons.collections.framework.IIterator;
+    import org.as3commons.collections.framework.IMapIterator;
+    import org.as3commons.collections.utils.NumericComparator;
+    import flash.display.Sprite;
+
+    public class SortedMapExample extends Sprite {
+
+        public function SortedMapExample() {
+            
+            var map : SortedMap = new SortedMap(new NumericComparator());
+            
+            // Add
+            
+            map.add("threeA", 3);
+            map.add("four", 4);
+            map.add("one", 1);
+            map.add("threeB", 3);
+            map.add("five", 5);
+            map.add("two", 2);
+            map.add("threeC", 3);
+            trace (map.keysToArray()); // one,two,threeA,threeB,threeC,four,five
+            trace (map.toArray()); // 1,2,3,3,3,4,5
+            
+            // Replace
+
+            map.replaceFor("one", 4);
+            map.replaceFor("threeB", -3);
+            trace (map.keysToArray()); // threeB,two,threeA,threeC,four,one,five
+            trace (map.toArray()); // -3,2,3,3,4,4,5
+
+            // Inspection
+            
+            trace (map.first); // -3
+            trace (map.last); // 5
+
+            trace (map.hasEqual(3)); // true
+            trace (map.hasEqual(6)); // false
+            trace (map.equalKeys(3)); // threeA,threeC
+            
+            trace (map.lesserKey(-4)); // undefined
+            trace (map.lesserKey(-3)); // undefined
+            trace (map.lesserKey(-2)); // threeB
+            trace (map.lesserKey(4)); // threeC
+            
+            trace (map.higherKey(2)); // threeA
+            trace (map.higherKey(3)); // four
+            trace (map.higherKey(5)); // undefined
+            trace (map.higherKey(6)); // undefined
+            
+            // Iterator
+
+            var iterator : IIterator = map.iterator();
+            trace (iterator is IIterator); // true
+            trace (iterator is ICollectionIterator); // true
+            trace (iterator is IMapIterator); // true
+            
+            while (iterator.hasNext()) {
+                trace (iterator.next()); // -3,2,3,3,4,4,5
+            }
+
+            // Remove
+
+            map.removeFirst();
+            map.removeFirst();
+            map.removeLast();
+            map.removeLast();
+            trace (map.keysToArray()); // threeA,threeC,four
+            trace (map.toArray()); // 3,3,4
+        }
+    }
+}
+</pre></div></div>
+  
+  <p id="link_MapExample"><strong>Map example</strong></p>
+  
+  <a class="exampleCollapsed" href="#link_MapExample" onClick="toggleExample(this, 'MapExample');">Show example</a><br /><div id="MapExample" style='display:none'><div class='listing'><pre>package {
+    import org.as3commons.collections.Map;
+    import org.as3commons.collections.framework.ICollectionIterator;
+    import org.as3commons.collections.framework.IIterator;
+    import org.as3commons.collections.framework.IMapIterator;
+    import flash.display.Sprite;
+
+    public class MapExample extends Sprite {
+
+        public function MapExample() {
+            var map : Map = new Map();
+            
+            // Add
+            
+            map.add(1, "one");
+            map.add(2, "two");
+            map.add(3, "three");
+            map.add("4a", "four");
+            map.add("4b", "four");
+            map.add("4c", "four");
+            
+            map.add("4c", "fourC"); // no effect (key already contained)
+            
+            trace (map.toArray()); // four,four,four,one,two,three
+            
+            // Replace
+
+            map.replaceFor(3, "three3");
+            map.replaceFor("4a", "fourA");
+            
+            map.replaceFor(1, "one"); // no effect ("one" === "one")
+            map.replaceFor(4, "four"); // no effect (key not contained)
+            
+            trace (map.toArray()); // fourA,four,four,one,two,three3
+
+            // Inspection
+            
+            trace (map.size); // 6
+            trace (map.hasKey(3)); // true
+            trace (map.hasKey(4)); // false
+            trace (map.itemFor(3)); // three3
+            trace (map.itemFor(4)); // undefined
+            trace (map.keysToArray()); // 4a,4b,4c,1,2,3
+
+            // Iterator
+
+            var iterator : IIterator = map.iterator();
+            trace (iterator is IIterator); // true
+            trace (iterator is ICollectionIterator); // true
+            trace (iterator is IMapIterator); // true
+
+            while (iterator.hasNext()) {
+                trace (iterator.next()); // fourA,four,four,one,two,three3
+            }
+
+            // Map iterator
+
+            var mi : IMapIterator = map.iterator() as IMapIterator;
+            trace (mi.previousKey + " [" + mi.key + "=" + mi.current + "] " + mi.nextKey);
+            while (mi.hasNext()) {
+                mi.next();
+                trace (mi.previousKey + " [" + mi.key + "=" + mi.current + "] " + mi.nextKey);
+            }
+
+            // undefined [undefined=undefined] 4a
+            // 4a [4a=fourA] 4b
+            // 4b [4b=four] 4c
+            // 4c [4c=four] 1
+            // 1 [1=one] 2
+            // 2 [2=two] 3
+            // 3 [3=three3] undefined
+            
+            // Remove
+
+            map.removeKey(2);
+            map.removeKey("4a");            
+            map.removeKey(4); // no effect (key not contained)
+            
+            trace (map.toArray()); // four,four,one,three3
+
+            map.remove("one");            
+            map.remove("fourC"); // no effect (item not contained)
+            
+            trace (map.toArray()); // four,four,three3
+
+            map.removeAll("four");            
+            trace (map.toArray()); // three3
+        }
+    }
+}
+</pre></div></div>
+  
+  <p id="link_ArrayListExample"><strong>ArrayList example</strong></p>
+  
+  <a class="exampleCollapsed" href="#link_ArrayListExample" onClick="toggleExample(this, 'ArrayListExample');">Show example</a><br /><div id="ArrayListExample" style='display:none'><div class='listing'><pre>package {
+    import org.as3commons.collections.ArrayList;
+    import org.as3commons.collections.framework.ICollectionIterator;
+    import org.as3commons.collections.framework.IIterator;
+    import org.as3commons.collections.framework.IListIterator;
+    import org.as3commons.collections.framework.IOrderedListIterator;
+    import org.as3commons.collections.utils.StringComparator;
+    import flash.display.Sprite;
+
+    public class ArrayListExample extends Sprite {
+
+        public function ArrayListExample() {
+            var list : ArrayList = new ArrayList();
+            
+            // Add
+
+            list.add("a");
+            list.add("b");
+            list.addAllAt(1, ["c", "d"]);
+            trace (list.toArray()); // a,c,d,b
+
+            list.addFirst("e");
+            list.addLast("a");
+            list.addAt(3, "a");
+            trace (list.toArray()); // e,a,c,a,d,b,a
+            
+            // Replace
+
+            list.replaceAt(2, "a");
+            list.replaceAt(3, "f");
+            trace (list.toArray()); // e,a,a,f,d,b,a
+
+            // Inspection
+
+            trace (list.size); // 7
+            trace (list.has("b")); // true
+            trace (list.itemAt(3)); // f
+            trace (list.firstIndexOf("a")); // 1
+            trace (list.lastIndexOf("a")); // 6
+            trace (list.count("a")); // 3
+            
+            // Reorder
+
+            list.reverse();
+            trace (list.toArray()); // a,b,d,f,a,a,e
+
+            list.sort(new StringComparator());
+            trace (list.toArray()); // a,a,a,b,d,e,f
+            
+            // Iterator
+
+            var iterator : IIterator = list.iterator();
+            trace (iterator is IIterator); // true
+            trace (iterator is ICollectionIterator); // true
+            trace (iterator is IListIterator); // true
+            trace (iterator is IOrderedListIterator); // true
+
+            while (iterator.hasNext()) {
+                trace (iterator.next()); // a,a,a,b,d,e,f
+            }
+
+            // List iterator
+
+            var listIterator : IListIterator = list.iterator() as IListIterator;
+            while (listIterator.hasNext()) {
+                listIterator.next();
+                trace (listIterator.index + "=" + listIterator.current);
+            }
+
+            // 0=a
+            // 1=a
+            // 2=a
+            // 3=b
+            // 4=d
+            // 5=e
+            // 6=f
+
+            // Remove
+
+            list.remove("a");
+            trace (list.toArray()); // a,a,b,d,e,f
+
+            list.removeAll("a");
+            trace (list.toArray()); // b,d,e,f
+
+            list.removeAt(1);
+            list.removeFirst();
+            list.removeLast();
+            trace (list.toArray()); // e
+
+            list.clear();
+            trace (list.toArray()); // []
+        }
+    }
+}
+</pre></div></div>
+  
+  <p id="link_ArrayListIteratorExample"><strong>ArrayListIterator example</strong></p>
+  
+  <a class="exampleCollapsed" href="#link_ArrayListIteratorExample" onClick="toggleExample(this, 'ArrayListIteratorExample');">Show example</a><br /><div id="ArrayListIteratorExample" style='display:none'><div class='listing'><pre>package {
+    import org.as3commons.collections.ArrayList;
+    import org.as3commons.collections.framework.IOrderedListIterator;
+    import flash.display.Sprite;
+
+    public class ArrayListIteratorExample extends Sprite {
+
+        public function ArrayListIteratorExample() {
+            var list : ArrayList = new ArrayList();
+            var iterator : IOrderedListIterator;
+            var item : 
+            
+            // ^ = cursor, [n] = current
+            
+            // Navigation
+            
+            list.array = [1, 2, 3];
+            iterator = list.iterator() as IOrderedListIterator;
+            
+                                      //  ^  1  2  3
+            iterator.next();          // [1] ^  2  3
+            iterator.next();          //  1 [2] ^  3
+            iterator.next();          //  1  2 [3] ^
+            iterator.next();          //  1  2  3  ^
+            iterator.previous();      //  1  2  ^ [3]
+            iterator.previous();      //  1  ^ [2] 3
+            iterator.previous();      //  ^ [1] 2  3
+            iterator.previous();      //  ^  1  2  3
+
+            iterator.next();          // [1] ^  2  3
+            iterator.next();          //  1 [2] ^  3
+            iterator.start();         //  ^  1  2  3
+
+            iterator.next();          // [1] ^  2  3
+            iterator.next();          //  1 [2] ^  3
+            iterator.end();           //  1  2  3  ^
+            
+            // Current and index
+
+            iterator = list.iterator() as IOrderedListIterator;
+            
+            with (iterator) {
+                trace (index, current, previousIndex, nextIndex);
+                // -1 undefined -1 0
+
+                next();
+                trace (index, current, previousIndex, nextIndex);
+                // 0 1 0 1
+
+                next();
+                trace (index, current, previousIndex, nextIndex);
+                // 1 2 1 2
+
+                next();
+                trace (index, current, previousIndex, nextIndex);
+                // 2 3 2 -1
+
+                next();
+                trace (index, current, previousIndex, nextIndex);
+                // -1 undefined 2 -1
+            }
+            
+            // Start position
+            
+            iterator = list.iterator() as IOrderedListIterator;   //  ^  1  2  3
+            iterator = list.iterator(1) as IOrderedListIterator;  //  1  ^  2  3
+            iterator = list.iterator(2) as IOrderedListIterator;  //  1  2  ^  3
+            iterator = list.iterator(10) as IOrderedListIterator; //  1  2  3  ^
+
+            // Replace
+
+            iterator = list.iterator() as IOrderedListIterator;
+
+                                      //  ^  1  2  3
+            iterator.next();          // [1] ^  2  3
+            iterator.next();          //  1 [2] ^  3
+            iterator.replace(4);      //  1 [4] ^  3
+            iterator.next();          //  1  4 [3] ^
+            iterator.replace(5);      //  1  4 [5] ^
+            iterator.next();          //  1  4  5  ^
+            iterator.replace(6);      //  1  4  5  ^
+
+            // Remove
+
+            list.array = [1, 2, 3];
+            iterator = list.iterator() as IOrderedListIterator;
+            
+                                      //  ^  1  2  3
+            iterator.next();          // [1] ^  2  3
+            iterator.next();          //  1 [2] ^  3
+            iterator.remove();        //  1  ^  3
+            iterator.next();          //  1 [3] ^
+            iterator.remove();        //  1  ^
+            iterator.remove();        //  1  ^
+
+            // Add
+
+            list.array = [1, 2, 3];
+            iterator = list.iterator() as IOrderedListIterator;
+            
+                                      //  ^  1  2  3
+            iterator.addAfter(4);     //  ^  4  1  2  3
+            iterator.addBefore(5);    //  5  ^  4  1  2  3
+
+            iterator.next();          //  5 [4] ^  1  2  3
+            iterator.next();          //  5  4 [1] ^  2  3
+            iterator.addBefore(6);    //  5  4  1  6  ^  2  3
+            iterator.addAfter(7);     //  5  4  1  6  ^  7  2  3
+
+            iterator.next();          //  5  4  1  6 [7] ^  2  3
+            iterator.next();          //  5  4  1  6  7 [2] ^  3
+            iterator.next();          //  5  4  1  6  7  2 [3] ^
+            iterator.addBefore(8);    //  5  4  1  6  7  2  3  8  ^
+            iterator.addAfter(9);     //  5  4  1  6  7  2  3  8  ^  9
+            
+            // Add during iteration
+
+            list.array = [1, 2, 3];
+            iterator = list.iterator() as IOrderedListIterator;
+            while (iterator.hasNext()) {
+                item = iterator.next();
+                trace (item); // 1,2,5,3,7
+
+                if (item == 1) iterator.addBefore(4);   //  1  4  ^  2  3
+                if (item == 2) iterator.addAfter(5);    //  1  4  2  ^  5  3
+                if (item == 5) iterator.addBefore(6);   //  1  4  2  5  6  ^  3
+                if (item == 3) iterator.addAfter(7);    //  1  4  2  5  6  3  ^  7
+            }
+            trace (list.toArray()); // 1,4,2,5,6,3,7
+
+            // Replace during iteration
+
+            list.array = [1, 2, 3];
+            iterator = list.iterator() as IOrderedListIterator;
+            while (iterator.hasNext()) {
+                item = iterator.next();
+                trace (item); // 1,2,3
+
+                if (item == 1) iterator.replace(4);   // [4] ^  2  3
+                if (item == 2) iterator.replace(5);   //  4 [5] ^  3
+                if (item == 3) iterator.replace(6);   //  4  5 [6] ^
+            }
+            trace (list.toArray()); // 4,5,6
+
+            // Remove during iteration
+
+            list.array = [1, 2, 3, 4, 5];
+            iterator = list.iterator() as IOrderedListIterator;
+            while (iterator.hasNext()) {
+                item = iterator.next();
+                trace (item); // 1,2,3,4,5
+
+                if (item == 1) iterator.remove();   //  ^  2  3  4  5
+                if (item == 3) iterator.remove();   //  2  ^  4  5
+                if (item == 5) iterator.remove();   //  2  4  ^
+            }
+            trace (list.toArray()); // 2,4
+
+            // Reverse iteration
+
+            list.array = [1, 2, 3, 4, 5];
+            iterator = list.iterator() as IOrderedListIterator;
+            iterator.end();
+            while (iterator.hasPrevious()) {
+                trace (iterator.previous()); // 5,4,3,2,1
+            }
+        }
+    }
+}
+</pre></div></div>
+  
+  <p></p>
+<p>
+<span class="classHeaderTableLabel">See also</span>
+</p>
+<div class="seeAlso">
+<a href="framework/ISortedMap.html" target="">ISortedMap interface - Detailed description of the sorted map features.</a>
+<br>
+<a href="framework/IMapIterator.html" target="">IMapIterator interface - Detailed description of the map iterator features.</a>
+<br>
+<a href="framework/IMap.html" target="">IMap interface - Detailed description of the base map features.</a>
+</div>
+<br>
+<hr>
+</div>
+<a name="propertySummary"></a>
+<div class="summarySection">
+<div class="summaryTableTitle">Public Properties</div>
+<div class="showHideLinks">
+<div class="hideInheritedProperty" id="hideInheritedProperty">
+<a onclick="javascript:setInheritedVisible(false,'Property');" href="#propertySummary" class="showHideLink"><img src="../../../images/expanded.gif" class="showHideLinkImage"> Hide Inherited Public Properties</a>
+</div>
+<div class="showInheritedProperty" id="showInheritedProperty">
+<a onclick="javascript:setInheritedVisible(true,'Property');" href="#propertySummary" class="showHideLink"><img src="../../../images/collapsed.gif" class="showHideLinkImage"> Show Inherited Public Properties</a>
+</div>
+</div>
+<table id="summaryTableProperty" class="summaryTable hideInheritedProperty" cellpadding="3" cellspacing="0">
+<tr>
+<th>&nbsp;</th><th colspan="2">Property</th><th class="summaryTableOwnerCol">Defined&nbsp;by</th>
+</tr>
+<tr class="hideInheritedProperty">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol"><img class="inheritedSummaryImage" title="Inherited" alt="Inherited" src="../../../images/inheritedSummary.gif"></td><td class="summaryTableSignatureCol"><a class="signatureLink" href="framework/core/AbstractSortedCollection.html#first">first</a> : *<div class="summaryTableDescription">
+   
+   The first item or <code>undefined</code> if the collection is empty.</div>
+</td><td class="summaryTableOwnerCol"><a href="framework/core/AbstractSortedCollection.html">AbstractSortedCollection</a></td>
+</tr>
+<tr class="hideInheritedProperty">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol"><img class="inheritedSummaryImage" title="Inherited" alt="Inherited" src="../../../images/inheritedSummary.gif"></td><td class="summaryTableSignatureCol"><a class="signatureLink" href="framework/core/AbstractSortedCollection.html#last">last</a> : *<div class="summaryTableDescription">
+   
+   The last item or <code>undefined</code> if the collection is empty.</div>
+</td><td class="summaryTableOwnerCol"><a href="framework/core/AbstractSortedCollection.html">AbstractSortedCollection</a></td>
+</tr>
+<tr class="hideInheritedProperty">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol"><img class="inheritedSummaryImage" title="Inherited" alt="Inherited" src="../../../images/inheritedSummary.gif"></td><td class="summaryTableSignatureCol"><a class="signatureLink" href="framework/core/AbstractSortedCollection.html#size">size</a> : uint<div class="summaryTableDescription">
+   
+   The number of items contained by the collection.</div>
+</td><td class="summaryTableOwnerCol"><a href="framework/core/AbstractSortedCollection.html">AbstractSortedCollection</a></td>
+</tr>
+</table>
+</div>
+<a name="protectedPropertySummary"></a>
+<div class="summarySection">
+<div class="summaryTableTitle">Protected Properties</div>
+<div class="showHideLinks">
+<div class="hideInheritedProtectedProperty" id="hideInheritedProtectedProperty">
+<a onclick="javascript:setInheritedVisible(false,'ProtectedProperty');" href="#protectedPropertySummary" class="showHideLink"><img src="../../../images/expanded.gif" class="showHideLinkImage"> Hide Inherited Protected Properties</a>
+</div>
+<div class="showInheritedProtectedProperty" id="showInheritedProtectedProperty">
+<a onclick="javascript:setInheritedVisible(true,'ProtectedProperty');" href="#protectedPropertySummary" class="showHideLink"><img src="../../../images/collapsed.gif" class="showHideLinkImage"> Show Inherited Protected Properties</a>
+</div>
+</div>
+<table id="summaryTableProtectedProperty" class="summaryTable " cellpadding="3" cellspacing="0">
+<tr>
+<th>&nbsp;</th><th colspan="2">Property</th><th class="summaryTableOwnerCol">Defined&nbsp;by</th>
+</tr>
+<tr class="hideInheritedProtectedProperty">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol"><img class="inheritedSummaryImage" title="Inherited" alt="Inherited" src="../../../images/inheritedSummary.gif"></td><td class="summaryTableSignatureCol"><a class="signatureLink" href="framework/core/AbstractSortedCollection.html#_comparator">_comparator</a> : <a href="framework/IComparator.html">IComparator</a>
+<div class="summaryTableDescription">
+   The sort criterion.</div>
+</td><td class="summaryTableOwnerCol"><a href="framework/core/AbstractSortedCollection.html">AbstractSortedCollection</a></td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#_items">_items</a> : Dictionary<div class="summaryTableDescription">
+   The items of the non string keys.</div>
+</td><td class="summaryTableOwnerCol">SortedMap</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#_keys">_keys</a> : Dictionary<div class="summaryTableDescription">
+   The non string keys.</div>
+</td><td class="summaryTableOwnerCol">SortedMap</td>
+</tr>
+<tr class="hideInheritedProtectedProperty">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol"><img class="inheritedSummaryImage" title="Inherited" alt="Inherited" src="../../../images/inheritedSummary.gif"></td><td class="summaryTableSignatureCol"><a class="signatureLink" href="framework/core/AbstractSortedCollection.html#_root">_root</a> : <a href="framework/core/SortedNode.html">SortedNode</a>
+<div class="summaryTableDescription">
+   The root node.</div>
+</td><td class="summaryTableOwnerCol"><a href="framework/core/AbstractSortedCollection.html">AbstractSortedCollection</a></td>
+</tr>
+<tr class="hideInheritedProtectedProperty">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol"><img class="inheritedSummaryImage" title="Inherited" alt="Inherited" src="../../../images/inheritedSummary.gif"></td><td class="summaryTableSignatureCol"><a class="signatureLink" href="framework/core/AbstractSortedCollection.html#_size">_size</a> : uint = 0<div class="summaryTableDescription">
+   The size of the collection.</div>
+</td><td class="summaryTableOwnerCol"><a href="framework/core/AbstractSortedCollection.html">AbstractSortedCollection</a></td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#_stringMap">_stringMap</a> : Object<div class="summaryTableDescription">
+   The stringed key item map.</div>
+</td><td class="summaryTableOwnerCol">SortedMap</td>
+</tr>
+</table>
+</div>
+<a name="methodSummary"></a>
+<div class="summarySection">
+<div class="summaryTableTitle">Public Methods</div>
+<div class="showHideLinks">
+<div class="hideInheritedMethod" id="hideInheritedMethod">
+<a onclick="javascript:setInheritedVisible(false,'Method');" href="#methodSummary" class="showHideLink"><img src="../../../images/expanded.gif" class="showHideLinkImage"> Hide Inherited Public Methods</a>
+</div>
+<div class="showInheritedMethod" id="showInheritedMethod">
+<a onclick="javascript:setInheritedVisible(true,'Method');" href="#methodSummary" class="showHideLink"><img src="../../../images/collapsed.gif" class="showHideLinkImage"> Show Inherited Public Methods</a>
+</div>
+</div>
+<table id="summaryTableMethod" class="summaryTable " cellpadding="3" cellspacing="0">
+<tr>
+<th>&nbsp;</th><th colspan="2">Method</th><th class="summaryTableOwnerCol">Defined&nbsp;by</th>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#SortedMap()">SortedMap</a>(comparator:<a href="framework/IComparator.html">IComparator</a>)</div>
+<div class="summaryTableDescription">
+   SortedMap constructor.</div>
+</td><td class="summaryTableOwnerCol">SortedMap</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#add()">add</a>(key:*, item:*):Boolean</div>
+<div class="summaryTableDescription">
+   
+   Adds an item to the map.</div>
+</td><td class="summaryTableOwnerCol">SortedMap</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#clear()">clear</a>():Boolean</div>
+<div class="summaryTableDescription">
+   
+   Removes all items from the collection.</div>
+</td><td class="summaryTableOwnerCol">SortedMap</td>
+</tr>
+<tr class="hideInheritedMethod">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol"><img class="inheritedSummaryImage" title="Inherited" alt="Inherited" src="../../../images/inheritedSummary.gif"></td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="framework/core/AbstractSortedDuplicatesCollection.html#count()">count</a>(item:*):uint</div>
+<div class="summaryTableDescription">
+   
+   Returns the number of occurrences of an item.</div>
+</td><td class="summaryTableOwnerCol"><a href="framework/core/AbstractSortedDuplicatesCollection.html">AbstractSortedDuplicatesCollection</a></td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#equalKeys()">equalKeys</a>(item:*):Array</div>
+<div class="summaryTableDescription">
+   
+   Returns an array of the keys of all items that are equal to the given item.</div>
+</td><td class="summaryTableOwnerCol">SortedMap</td>
+</tr>
+<tr class="hideInheritedMethod">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol"><img class="inheritedSummaryImage" title="Inherited" alt="Inherited" src="../../../images/inheritedSummary.gif"></td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="framework/core/AbstractSortedCollection.html#has()">has</a>(item:*):Boolean</div>
+<div class="summaryTableDescription">
+   
+   Tests if an item is contained by the collection.</div>
+</td><td class="summaryTableOwnerCol"><a href="framework/core/AbstractSortedCollection.html">AbstractSortedCollection</a></td>
+</tr>
+<tr class="hideInheritedMethod">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol"><img class="inheritedSummaryImage" title="Inherited" alt="Inherited" src="../../../images/inheritedSummary.gif"></td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="framework/core/AbstractSortedCollection.html#hasEqual()">hasEqual</a>(item:*):Boolean</div>
+<div class="summaryTableDescription">
+   
+   Tests if the collection contains an item that is equal to the given item.</div>
+</td><td class="summaryTableOwnerCol"><a href="framework/core/AbstractSortedCollection.html">AbstractSortedCollection</a></td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#hasKey()">hasKey</a>(key:*):Boolean</div>
+<div class="summaryTableDescription">
+   
+   Returns <code>true</code> if the map contains the given key.</div>
+</td><td class="summaryTableOwnerCol">SortedMap</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#higherKey()">higherKey</a>(item:*):*</div>
+<div class="summaryTableDescription">
+   
+   Returns the key of the first item that is higher than the given item.</div>
+</td><td class="summaryTableOwnerCol">SortedMap</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#itemFor()">itemFor</a>(key:*):*</div>
+<div class="summaryTableDescription">
+   
+   Returns the item associated with the given key.</div>
+</td><td class="summaryTableOwnerCol">SortedMap</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#iterator()">iterator</a>(cursor:*):<a href="framework/IIterator.html">IIterator</a>
+</div>
+<div class="summaryTableDescription">
+   
+   Returns an iterator over the iterable data structure.</div>
+</td><td class="summaryTableOwnerCol">SortedMap</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#keyIterator()">keyIterator</a>():<a href="framework/IIterator.html">IIterator</a>
+</div>
+<div class="summaryTableDescription">
+   
+   Returns an iterator over the keys of the map.</div>
+</td><td class="summaryTableOwnerCol">SortedMap</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#keysToArray()">keysToArray</a>():Array</div>
+<div class="summaryTableDescription">
+   
+   Returns an array of all keys in the order of the particular map.</div>
+</td><td class="summaryTableOwnerCol">SortedMap</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#lesserKey()">lesserKey</a>(item:*):*</div>
+<div class="summaryTableDescription">
+   
+   Returns the key of the last item that is lesser than the given item.</div>
+</td><td class="summaryTableOwnerCol">SortedMap</td>
+</tr>
+<tr class="hideInheritedMethod">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol"><img class="inheritedSummaryImage" title="Inherited" alt="Inherited" src="../../../images/inheritedSummary.gif"></td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="framework/core/AbstractSortedCollection.html#remove()">remove</a>(item:*):Boolean</div>
+<div class="summaryTableDescription">
+   
+   Removes an item from the collection.</div>
+</td><td class="summaryTableOwnerCol"><a href="framework/core/AbstractSortedCollection.html">AbstractSortedCollection</a></td>
+</tr>
+<tr class="hideInheritedMethod">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol"><img class="inheritedSummaryImage" title="Inherited" alt="Inherited" src="../../../images/inheritedSummary.gif"></td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="framework/core/AbstractSortedDuplicatesCollection.html#removeAll()">removeAll</a>(item:*):uint</div>
+<div class="summaryTableDescription">
+   
+   Removes all occurrences of a particular item from the collection.</div>
+</td><td class="summaryTableOwnerCol"><a href="framework/core/AbstractSortedDuplicatesCollection.html">AbstractSortedDuplicatesCollection</a></td>
+</tr>
+<tr class="hideInheritedMethod">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol"><img class="inheritedSummaryImage" title="Inherited" alt="Inherited" src="../../../images/inheritedSummary.gif"></td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="framework/core/AbstractSortedCollection.html#removeFirst()">removeFirst</a>():*</div>
+<div class="summaryTableDescription">
+   
+   Removes the first item of the ordered collection.</div>
+</td><td class="summaryTableOwnerCol"><a href="framework/core/AbstractSortedCollection.html">AbstractSortedCollection</a></td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#removeKey()">removeKey</a>(key:*):*</div>
+<div class="summaryTableDescription">
+   
+   Removes the given key and its associated item from the map.</div>
+</td><td class="summaryTableOwnerCol">SortedMap</td>
+</tr>
+<tr class="hideInheritedMethod">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol"><img class="inheritedSummaryImage" title="Inherited" alt="Inherited" src="../../../images/inheritedSummary.gif"></td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="framework/core/AbstractSortedCollection.html#removeLast()">removeLast</a>():*</div>
+<div class="summaryTableDescription">
+   
+   Removes the last item of the ordered collection.</div>
+</td><td class="summaryTableOwnerCol"><a href="framework/core/AbstractSortedCollection.html">AbstractSortedCollection</a></td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#replaceFor()">replaceFor</a>(key:*, item:*):Boolean</div>
+<div class="summaryTableDescription">
+   
+   Replaces the item associated with the given key.</div>
+</td><td class="summaryTableOwnerCol">SortedMap</td>
+</tr>
+<tr class="hideInheritedMethod">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol"><img class="inheritedSummaryImage" title="Inherited" alt="Inherited" src="../../../images/inheritedSummary.gif"></td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="framework/core/AbstractSortedCollection.html#toArray()">toArray</a>():Array</div>
+<div class="summaryTableDescription">
+   
+   Returns an array of all items.</div>
+</td><td class="summaryTableOwnerCol"><a href="framework/core/AbstractSortedCollection.html">AbstractSortedCollection</a></td>
+</tr>
+</table>
+</div>
+<a name="protectedMethodSummary"></a>
+<div class="summarySection">
+<div class="summaryTableTitle">Protected Methods</div>
+<div class="showHideLinks">
+<div class="hideInheritedProtectedMethod" id="hideInheritedProtectedMethod">
+<a onclick="javascript:setInheritedVisible(false,'ProtectedMethod');" href="#protectedMethodSummary" class="showHideLink"><img src="../../../images/expanded.gif" class="showHideLinkImage"> Hide Inherited Protected Methods</a>
+</div>
+<div class="showInheritedProtectedMethod" id="showInheritedProtectedMethod">
+<a onclick="javascript:setInheritedVisible(true,'ProtectedMethod');" href="#protectedMethodSummary" class="showHideLink"><img src="../../../images/collapsed.gif" class="showHideLinkImage"> Show Inherited Protected Methods</a>
+</div>
+</div>
+<table id="summaryTableProtectedMethod" class="summaryTable " cellpadding="3" cellspacing="0">
+<tr>
+<th>&nbsp;</th><th colspan="2">Method</th><th class="summaryTableOwnerCol">Defined&nbsp;by</th>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#addNode()">addNode</a>(node:<a href="framework/core/SortedNode.html">SortedNode</a>):void</div>
+<div class="summaryTableDescription">
+   
+   Adds an item to the tree.</div>
+</td><td class="summaryTableOwnerCol">SortedMap</td>
+</tr>
+<tr class="hideInheritedProtectedMethod">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol"><img class="inheritedSummaryImage" title="Inherited" alt="Inherited" src="../../../images/inheritedSummary.gif"></td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="framework/core/AbstractSortedCollection.html#firstEqualNode()">firstEqualNode</a>(item:*):<a href="framework/core/SortedNode.html">SortedNode</a>
+</div>
+<div class="summaryTableDescription">
+   Returns the first node whose item equals the given item.</div>
+</td><td class="summaryTableOwnerCol"><a href="framework/core/AbstractSortedCollection.html">AbstractSortedCollection</a></td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#getNode()">getNode</a>(key:*):<a href="framework/core/SortedMapNode.html">SortedMapNode</a>
+</div>
+<div class="summaryTableDescription">
+   Returns the node of the given key.</div>
+</td><td class="summaryTableOwnerCol">SortedMap</td>
+</tr>
+<tr class="hideInheritedProtectedMethod">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol"><img class="inheritedSummaryImage" title="Inherited" alt="Inherited" src="../../../images/inheritedSummary.gif"></td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="framework/core/AbstractSortedCollection.html#higherNode()">higherNode</a>(item:*):<a href="framework/core/SortedNode.html">SortedNode</a>
+</div>
+<div class="summaryTableDescription">
+   Returns the first node whose item is higher than the given item.</div>
+</td><td class="summaryTableOwnerCol"><a href="framework/core/AbstractSortedCollection.html">AbstractSortedCollection</a></td>
+</tr>
+<tr class="hideInheritedProtectedMethod">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol"><img class="inheritedSummaryImage" title="Inherited" alt="Inherited" src="../../../images/inheritedSummary.gif"></td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="framework/core/AbstractSortedCollection.html#lesserNode()">lesserNode</a>(item:*):<a href="framework/core/SortedNode.html">SortedNode</a>
+</div>
+<div class="summaryTableDescription">
+   Returns the last node whose item is lesser than the given item.</div>
+</td><td class="summaryTableOwnerCol"><a href="framework/core/AbstractSortedCollection.html">AbstractSortedCollection</a></td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#removeNode()">removeNode</a>(node:<a href="framework/core/SortedNode.html">SortedNode</a>):void</div>
+<div class="summaryTableDescription">
+   
+   Removes a node from the tree.</div>
+</td><td class="summaryTableOwnerCol">SortedMap</td>
+</tr>
+<tr class="hideInheritedProtectedMethod">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol"><img class="inheritedSummaryImage" title="Inherited" alt="Inherited" src="../../../images/inheritedSummary.gif"></td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="framework/core/AbstractSortedCollection.html#rotate()">rotate</a>(parent:<a href="framework/core/SortedNode.html">SortedNode</a>, child:<a href="framework/core/SortedNode.html">SortedNode</a>):void</div>
+<div class="summaryTableDescription">
+   Rotates a parent with its child node.</div>
+</td><td class="summaryTableOwnerCol"><a href="framework/core/AbstractSortedCollection.html">AbstractSortedCollection</a></td>
+</tr>
+</table>
+</div>
+<script type="text/javascript" language="javascript">
+<!--
+showHideInherited();
+--></script>
+<div class="MainContent">
+<a name="propertyDetail"></a>
+<div class="detailSectionHeader">Property detail</div>
+<a name="_items"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">_items</td><td class="detailHeaderType">property</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>protected var _items:Dictionary</code><p>
+   The items of the non string keys.
+   </p></div>
+<a name="_keys"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">_keys</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>protected var _keys:Dictionary</code><p>
+   The non string keys.
+   </p></div>
+<a name="_stringMap"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">_stringMap</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>protected var _stringMap:Object</code><p>
+   The stringed key item map.
+   </p></div>
+<a name="constructorDetail"></a>
+<div class="detailSectionHeader">Constructor detail</div>
+<a name="SortedMap()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">SortedMap</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">constructor</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public function SortedMap(comparator:<a href="framework/IComparator.html">IComparator</a>)</code><p>
+   SortedMap constructor.
+   
+   </p><span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">comparator</span>:<a href="framework/IComparator.html">IComparator</a></code> &mdash; The sort criterion.
+   </td>
+</tr>
+</table>
+</div>
+<a name="methodDetail"></a>
+<div class="detailSectionHeader">Method detail</div>
+<a name="add()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">add</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public function add(key:*, item:*):Boolean</code><p>
+   
+   Adds an item to the map.
+   
+   </p><p>If the map already contains the given key, the method abords with <code>false</code>.</p>
+   
+   <p>The <code>LinkedMap</code> appends the item.</p>
+   
+   <p>The position of items that are added to a <code>SortedMap</code>
+   depends on its sort order.</p>
+   
+   <span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">key</span>:*</code> &mdash; The key of the item to add.
+   </td>
+</tr>
+<tr>
+<td class="paramSpacer">&nbsp;</td>
+</tr>
+<tr>
+<td width="20px"></td><td><code><span class="label">item</span>:*</code> &mdash; The item to add.
+   </td>
+</tr>
+</table>
+<p></p>
+<span class="label">Returns</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20"></td><td><code>Boolean</code> &mdash; <code>true</code> if the item has been added.
+   </td>
+</tr>
+</table>
+</div>
+<a name="addNode()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">addNode</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>protected override function addNode(node:<a href="framework/core/SortedNode.html">SortedNode</a>):void</code><p>
+   
+   Adds an item to the tree.
+   
+   </p><p>The method creates a new tree node, inserts the node as the leaf of
+   its successor/predecessor and rotates then the node upwards until
+   the tree becomes consistent again regarding the priority constraint.</p>
+   
+   <p>If the tree is empty, the method simply creates a new root node.</p>
+   
+   <span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">node</span>:<a href="framework/core/SortedNode.html">SortedNode</a></code> &mdash; The node to add.
+   </td>
+</tr>
+</table>
+</div>
+<a name="clear()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">clear</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public override function clear():Boolean</code><p>
+   
+   Removes all items from the collection.
+   
+   </p><p>If the collection is already empty, the method aborts with <code>false</code>.</p>
+   
+   <p></p>
+<span class="label">Returns</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20"></td><td><code>Boolean</code> &mdash; <code>true</code> if items have been removed.
+   </td>
+</tr>
+</table>
+</div>
+<a name="equalKeys()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">equalKeys</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public function equalKeys(item:*):Array</code><p>
+   
+   Returns an array of the keys of all items that are equal to the given item.
+   
+   </p><p>If there is no equal item, the method returns an empty array.</p>
+   
+   <span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">item</span>:*</code> &mdash; The item to test.
+   </td>
+</tr>
+</table>
+<p></p>
+<span class="label">Returns</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20"></td><td><code>Array</code> &mdash; An array of the keys of all equal items.
+   </td>
+</tr>
+</table>
+</div>
+<a name="getNode()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">getNode</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>protected function getNode(key:*):<a href="framework/core/SortedMapNode.html">SortedMapNode</a></code><p>
+   Returns the node of the given key.
+   
+   </p><span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">key</span>:*</code> &mdash; The key to get the node for.
+   </td>
+</tr>
+</table>
+<p></p>
+<span class="label">Returns</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20"></td><td><code><a href="framework/core/SortedMapNode.html">SortedMapNode</a></code> &mdash; 
+                        The node or <code>null</code> if the key is not contained.
+   
+                        
+                     </td>
+</tr>
+</table>
+</div>
+<a name="hasKey()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">hasKey</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public function hasKey(key:*):Boolean</code><p>
+   
+   Returns <code>true</code> if the map contains the given key.
+   
+   </p><span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">key</span>:*</code> &mdash; The key to test.
+   </td>
+</tr>
+</table>
+<p></p>
+<span class="label">Returns</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20"></td><td><code>Boolean</code> &mdash; <code>true</code> if the key is contained.
+   </td>
+</tr>
+</table>
+</div>
+<a name="higherKey()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">higherKey</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public function higherKey(item:*):*</code><p>
+   
+   Returns the key of the first item that is higher than the given item.
+   
+   </p><span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">item</span>:*</code> &mdash; The item to test.
+   </td>
+</tr>
+</table>
+<p></p>
+<span class="label">Returns</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20"></td><td><code>*</code> &mdash; The key of the next higher item or <code>undefined</code> if there is no higher item.
+   </td>
+</tr>
+</table>
+</div>
+<a name="itemFor()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">itemFor</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public function itemFor(key:*):*</code><p>
+   
+   Returns the item associated with the given key.
+   
+   </p><span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">key</span>:*</code> &mdash; The key.
+   </td>
+</tr>
+</table>
+<p></p>
+<span class="label">Returns</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20"></td><td><code>*</code> &mdash; The item if the key is contained, else <code>undefined</code>.
+   </td>
+</tr>
+</table>
+</div>
+<a name="iterator()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">iterator</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public override function iterator(cursor:*):<a href="framework/IIterator.html">IIterator</a></code><p>
+   
+   Returns an iterator over the iterable data structure.
+   
+   </p><p>The <code>cursor</code> parameter is optional and not considered by all iterable
+   data structures. E.g. the iterator of an unordered collection such as <code>Map</code>
+   or <code>Set</code> starts always with the first item found. Still passing a parameter to
+   such a data structure does not throw an error and will simply show no effect.</p>
+   
+   <p>The type of the cursor is unspecified and depends on the particular data structure.
+   E.g. lists allow to specify an index, sets to specify an item and maps to specify a key.</p>
+   
+   <p>If <code>cursor</code> is specified, the iterator returns the item that is related
+   to that cursor with the first call to <code>next()</code> (and its predecessor with
+   the first call to <code>previous()</code> if the iterator allows bidirectional
+   navigation.</p>
+   
+   <span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">cursor</span>:*</code> &mdash; The initial cursor position.
+   </td>
+</tr>
+</table>
+<p></p>
+<span class="label">Returns</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20"></td><td><code><a href="framework/IIterator.html">IIterator</a></code> &mdash; 
+                        An iterator.
+   
+                        
+                     </td>
+</tr>
+</table>
+</div>
+<a name="keyIterator()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">keyIterator</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public function keyIterator():<a href="framework/IIterator.html">IIterator</a></code><p>
+   
+   Returns an iterator over the keys of the map.
+   
+   </p><p>The order of keys returned by the iterator is the same as in the particular collection.</p>
+   
+   <p></p>
+<span class="label">Returns</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20"></td><td><code><a href="framework/IIterator.html">IIterator</a></code> &mdash; 
+                        An iterator over the map keys.
+   
+                        
+                     </td>
+</tr>
+</table>
+</div>
+<a name="keysToArray()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">keysToArray</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public function keysToArray():Array</code><p>
+   
+   Returns an array of all keys in the order of the particular map.
+   
+   </p><p>The order of keys in the array is the same as in the particular collection.</p>
+   
+   <p></p>
+<span class="label">Returns</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20"></td><td><code>Array</code> &mdash; An array of the keys of the map.
+   </td>
+</tr>
+</table>
+</div>
+<a name="lesserKey()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">lesserKey</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public function lesserKey(item:*):*</code><p>
+   
+   Returns the key of the last item that is lesser than the given item.
+   
+   </p><span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">item</span>:*</code> &mdash; The item to test.
+   </td>
+</tr>
+</table>
+<p></p>
+<span class="label">Returns</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20"></td><td><code>*</code> &mdash; The key of the last lesser item or <code>undefined</code> if there is no lesser item.
+   </td>
+</tr>
+</table>
+</div>
+<a name="removeKey()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">removeKey</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public function removeKey(key:*):*</code><p>
+   
+   Removes the given key and its associated item from the map.
+   
+   </p><p>If the key is not contained the method abords with <code>undefined</code>.</p>
+   <span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">key</span>:*</code> &mdash; The key.
+   </td>
+</tr>
+</table>
+<p></p>
+<span class="label">Returns</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20"></td><td><code>*</code> &mdash; The item associated with the removed key or <code>undefined</code> if the key is not contained.
+   </td>
+</tr>
+</table>
+</div>
+<a name="removeNode()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">removeNode</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>protected override function removeNode(node:<a href="framework/core/SortedNode.html">SortedNode</a>):void</code><p>
+   
+   Removes a node from the tree.
+   
+   </p><p>The method rotates the given node downwards until it becomes a leaf node
+   and gets removed from the tree.</p>
+   
+   <span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">node</span>:<a href="framework/core/SortedNode.html">SortedNode</a></code> &mdash; The node to remove.
+   </td>
+</tr>
+</table>
+</div>
+<a name="replaceFor()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">replaceFor</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public function replaceFor(key:*, item:*):Boolean</code><p>
+   
+   Replaces the item associated with the given key.
+   
+   </p><p>If the key is not contained or the given item equals the item
+   stored with the given key, the method abords with <code>false</code>.</p>
+   
+   <span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">key</span>:*</code> &mdash; The key.
+   </td>
+</tr>
+<tr>
+<td class="paramSpacer">&nbsp;</td>
+</tr>
+<tr>
+<td width="20px"></td><td><code><span class="label">item</span>:*</code> &mdash; The replacing item.
+   </td>
+</tr>
+</table>
+<p></p>
+<span class="label">Returns</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20"></td><td><code>Boolean</code> &mdash; <code>true</code> if the item has been replaced.
+   </td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+<hr>
+<br>
+<p></p>
+<center class="copyright"> 
+</center>
+</div>
+</body>
+</html>
+<!-- -->
