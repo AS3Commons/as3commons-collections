@@ -1,10 +1,63 @@
-h2. AS3Commons Collections
+h2. AS3Commons Collections - ActionScript Collections Framework
 
-The AS3Commons Collections project is the most serious ActionScript collections resource in the web – providing both a sophisticated collections framework as well as a library of fast collection implementations.
-
-h3. Resources
+h3. References
 
 * "Examples":http://sibirjak.com/osflash/projects/as3commons-collections/examples/
 * "Project Homepage":http://sibirjak.com/osflash/projects/as3commons-collections/ (Overview, Features, Documentation, Examples)
-* "APIDoc":http://kakenbok.github.com/Jakute-Styling-Engine/apidoc/
+* "APIDoc":http://as3commons.github.com/as3commons-collections/apidoc/
 * "Downloads":http://code.google.com/p/as3-commons/downloads/list (ZIP, SWC)
+* "AS3Commons Project":http://as3commons.org/
+
+*Related Articles*
+
+* "Collections Framework Performance Comparision":http://sibirjak.com/osflash/blog/collections-framework-performance-comparision/
+* "Array, Dictionary, Collections – Performance, Functionality, Reliability":http://sibirjak.com/osflash/blog/array-dictionary-collections-performance-functionality-reliability/
+* "Why we need a collection framework in ActionScript":http://sibirjak.com/osflash/blog/why-we-need-a-collection-framework-in-actionscript/
+
+h3. About
+
+The AS3Commons Collections project is the most serious ActionScript collections resource in the web – providing both a sophisticated collections framework as well as a library of fast collection implementations.
+
+h3. Features
+
+* Small, consistent and plausible API
+* Fast collection implementations
+* Powerful iterators
+* Collection util classes
+* Data binding enabled collections
+
+h3. Implementations provided
+
+*Collections*
+
+* ArrayList
+* SortedList
+* Set
+* LinkedSet
+* SortedSet
+* Map
+* LinkedMap
+* SortedMap
+* LinkedList
+* Treap
+
+*Bindable Collections*
+
+* ArrayListFx
+* SortedListFx
+* SetFx
+* LinkedSetFx
+* SortedSetFx
+* MapFx
+* LinkedMapFx
+* SortedMapFx
+
+*Special purpose iterators*
+
+* ArrayIterator
+* RecursiveIterator
+
+* FilterIterator
+* CollectionFilterIterator
+* MapFilterIterator
+* RecursiveFilterIterator
