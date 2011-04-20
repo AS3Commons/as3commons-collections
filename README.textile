@@ -7,7 +7,7 @@ h3. References
 * "APIDoc":http://as3commons.github.com/as3commons-collections/apidoc/
 * "Downloads":http://code.google.com/p/as3-commons/downloads/list (ZIP, SWC)
 * "AS3Commons Project":http://as3commons.org/
-* "Google Code Page":http://code.google.com/p/as3-commons/ (old SVN branch, Revsion history up to V 1.2.0, Downloads)
+* "Google Code (legacy)":http://code.google.com/p/as3-commons/ (old SVN branch, Revsion history up to V 1.2.0, Downloads)
 
 *Related Articles*
 
