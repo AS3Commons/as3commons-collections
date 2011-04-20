@@ -1,0 +1,450 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" href="../../../../style.css" type="text/css" media="screen">
+<link rel="stylesheet" href="../../../../print.css" type="text/css" media="print">
+<meta content="RecursiveFilterIterator,org.as3commons.collections.iterators.RecursiveFilterIterator,depth,hasNext,next" name="keywords">
+<title>org.as3commons.collections.iterators.RecursiveFilterIterator</title>
+</head>
+<body>
+<script type="text/javascript" language="javascript" src="../../../../asdoc.js"></script><script type="text/javascript" language="javascript" src="../../../../cookies.js"></script><script type="text/javascript" language="javascript">
+<!--
+				asdocTitle = 'RecursiveFilterIterator - AS3Commons Collections 1.2.0';
+				var baseRef = '../../../../';
+				window.onload = configPage;
+			--></script>
+<table style="display:none" id="titleTable" cellspacing="0" cellpadding="0" class="titleTable">
+<tr>
+<td align="left" class="titleTableTitle">API Documentation</td><td align="right" class="titleTableTopNav"><a onclick="loadClassListFrame('../../../../all-classes.html')" href="../../../../package-summary.html">All&nbsp;Packages</a>&nbsp;|&nbsp;<a onclick="loadClassListFrame('../../../../all-classes.html')" href="../../../../class-summary.html">All&nbsp;Classes</a>&nbsp;|&nbsp;<a onclick="loadClassListFrame('../../../../index-list.html')" href="../../../../all-index-A.html">Index</a>&nbsp;|&nbsp;<a href="../../../../index.html?org/as3commons/collections/iterators/RecursiveFilterIterator.html&amp;org/as3commons/collections/iterators/class-list.html" id="framesLink1">Frames</a><a onclick="parent.location=document.location" href="" style="display:none" id="noFramesLink1">No&nbsp;Frames</a></td><td rowspan="3" align="right" class="titleTableLogo"><img alt="Adobe Logo" title="Adobe Logo" class="logoImage" src="../../../../images/logo.jpg"></td>
+</tr>
+<tr class="titleTableRow2">
+<td align="left" id="subTitle" class="titleTableSubTitle">Class&nbsp;RecursiveFilterIterator</td><td align="right" id="subNav" class="titleTableSubNav"><a href="#propertySummary">Properties</a>&nbsp;| <a href="#methodSummary">Methods</a></td>
+</tr>
+<tr class="titleTableRow3">
+<td colspan="2">&nbsp;</td>
+</tr>
+</table>
+<script type="text/javascript" language="javascript">
+<!--
+if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Class RecursiveFilterIterator"); titleBar_setSubNav(false,true,false,false,false,false,true,false,false,false,false,false,false,false);}
+--></script>
+<div class="MainContent">
+<table cellspacing="0" cellpadding="0" class="classHeaderTable">
+<tr>
+<td class="classHeaderTableLabel">Package</td><td><a onclick="javascript:loadClassListFrame('class-list.html')" href="package-detail.html">org.as3commons.collections.iterators</a></td>
+</tr>
+<tr>
+<td class="classHeaderTableLabel">Class</td><td class="classSignature">public final  class RecursiveFilterIterator</td>
+</tr>
+<tr>
+<td class="classHeaderTableLabel">Implements</td><td><a href="../framework/IRecursiveIterator.html">IRecursiveIterator</a></td>
+</tr>
+</table>
+<p></p>
+  Recursive filter iterator.
+  
+  <p><strong>Description</strong></p>
+  
+  <p>The <code>RecursiveFilterIterator</code> accepts an <code>IIterable</code> instance
+  and iterates recursively over the items of the given iterable collection while applying
+  the specified filters. To do so, all children that should be further iterated should be
+  also instance of <code>IIterable</code>.</p>
+  
+  <p><strong>Filter functions</strong></p>
+  
+  <p>Its possible to set up two different filters. The first filter tests if an
+  item should be returned. The second filter tests if children of a specific item
+  should be considered or not. It is possible to set up both filters together.</p>
+  
+  <p>Both filter functions accept the current item and return a boolean
+  value (<code>true</code> if the item is accepted).</p>
+  
+  <div class='listing'><pre>
+   function filter(item :  : Boolean {
+    var accept : Boolean = false;
+    // test the item
+    return accept;
+   }
+
+   function childrenFilter(item :  : Boolean {
+    var accept : Boolean = false;
+    // test the item
+    return accept;
+   }
+   
+   var iterator : IRecursiveIterator = new RecursiveFilterIterator(collection, filter, childrenFilter);
+  </pre></div>
+  
+  <p id="link_RecursiveFilterIteratorExample"><strong>Recursive filter iterator example</strong></p>
+  
+  <a class="exampleCollapsed" href="#link_RecursiveFilterIteratorExample" onClick="toggleExample(this, 'RecursiveFilterIteratorExample');">Show example</a><br /><div id="RecursiveFilterIteratorExample" style='display:none'><div class='listing'><pre>package {
+    import org.as3commons.collections.framework.IRecursiveIterator;
+    import org.as3commons.collections.iterators.RecursiveFilterIterator;
+    import flash.display.Sprite;
+
+    public class RecursiveFilterIteratorExample extends Sprite {
+
+        public function RecursiveFilterIteratorExample() {
+            var root : Node = new Node(0);
+            var child1 : Node = new Node(1);
+            child1.children = [new Node(2), new Node(3)];
+            var child2 : Node = new Node(4);
+            child2.children = [new Node(5), new Node(6)];
+            var child3 : Node = new Node(7);
+            var child4 : Node = new Node(8);
+            child4.children = [new Node(9), new Node(10)];
+            child3.children = [child4, new Node(11)];
+            root.children = [child1, child2, child3];
+            
+            var iterator : IRecursiveIterator;
+            var item : Node;
+            
+            // All items
+            
+            iterator = new RecursiveFilterIterator(root, null, null);
+            while (iterator.hasNext()) {
+                item = iterator.next();
+                trace (prefix(iterator.depth) + item);
+            }
+
+            // Node 1
+            // .......Node 2
+            // .......Node 3
+            // Node 4
+            // .......Node 5
+            // .......Node 6
+            // Node 7
+            // .......Node 8
+            // ..............Node 9
+            // ..............Node 10
+            // .......Node 11
+            
+            // Only odd items
+
+            iterator = new RecursiveFilterIterator(
+                root, oddFilter, null
+            );
+            while (iterator.hasNext()) {
+                item = iterator.next();
+                trace (prefix(iterator.depth) + item);
+            }
+
+            // Node 1
+            // .......Node 3
+            // Node 7
+            // .......Node 11
+
+            // Only even items
+
+            iterator = new RecursiveFilterIterator(
+                root, evenFilter, null
+            );
+            while (iterator.hasNext()) {
+                item = iterator.next();
+                trace (prefix(iterator.depth) + item);
+            }
+
+            // Node 4
+            // .......Node 6
+
+            // All items + only children of odd items
+
+            iterator = new RecursiveFilterIterator(
+                root, null, oddFilter
+            );
+            while (iterator.hasNext()) {
+                item = iterator.next();
+                trace (prefix(iterator.depth) + item);
+            }
+
+            // Node 1
+            // .......Node 2
+            // .......Node 3
+            // Node 4
+            // Node 7
+            // .......Node 8
+            // .......Node 11
+
+            // All items + only children of even items
+
+            iterator = new RecursiveFilterIterator(
+                root, null, evenFilter
+            );
+            while (iterator.hasNext()) {
+                item = iterator.next();
+                trace (prefix(iterator.depth) + item);
+            }
+
+            // Node 1
+            // Node 4
+            // .......Node 5
+            // .......Node 6
+            // Node 7
+
+            // Only items &gt; 5
+
+            iterator = new RecursiveFilterIterator(
+                root, greater5Filter, null
+            );
+            while (iterator.hasNext()) {
+                item = iterator.next();
+                trace (prefix(iterator.depth) + item);
+            }
+
+            // Node 7
+            // .......Node 8
+            // ..............Node 9
+            // ..............Node 10
+            // .......Node 11
+
+            // All items + only children of items &gt; 5
+
+            iterator = new RecursiveFilterIterator(
+                root, null, greater5Filter
+            );
+            while (iterator.hasNext()) {
+                item = iterator.next();
+                trace (prefix(iterator.depth) + item);
+            }
+
+            // Node 1
+            // Node 4
+            // Node 7
+            // .......Node 8
+            // ..............Node 9
+            // ..............Node 10
+            // .......Node 11
+        }
+        
+        private function oddFilter(item :  : Boolean {
+            // lets pass only odd numbers
+            return Node(item).number % 2 == 1;
+        }
+
+        private function evenFilter(item :  : Boolean {
+            // lets pass only even numbers
+            return Node(item).number % 2 == 0;
+        }
+
+        private function greater5Filter(item :  : Boolean {
+            // lets pass only items &gt; 5
+            return Node(item).number &gt; 5;
+        }
+
+        private function prefix(depth : uint) : String {
+            var prefix : String = "";
+            for (var i : uint = 0; i &lt; depth; i++) prefix += ".......";
+            return prefix;
+        }
+    }
+}
+
+import org.as3commons.collections.framework.IIterable;
+import org.as3commons.collections.framework.IIterator;
+import org.as3commons.collections.iterators.ArrayIterator;
+
+internal class Node implements IIterable {
+    public var number : uint;
+    public var children : Array;
+    public function Node(theNumber : uint) {
+        number = theNumber;
+        children = new Array();
+    }
+    public function iterator(cursor : = undefined) : IIterator {
+        return new ArrayIterator(children);
+    }
+    public function toString() : String {
+        return "Node " + number.toString();
+    }
+}
+</pre></div></div>
+  
+  <p></p>
+<p>
+<span class="classHeaderTableLabel">See also</span>
+</p>
+<div class="seeAlso">
+<a href="../framework/IRecursiveIterator.html" target="">IRecursiveIterator interface - Description of the recursive iterator features.</a>
+<br>
+<a href="FilterIterator.html" target="">FilterIterator - Filter iterator usage example.</a>
+</div>
+<br>
+<hr>
+</div>
+<a name="propertySummary"></a>
+<div class="summarySection">
+<div class="summaryTableTitle">Public Properties</div>
+<table id="summaryTableProperty" class="summaryTable " cellpadding="3" cellspacing="0">
+<tr>
+<th>&nbsp;</th><th colspan="2">Property</th><th class="summaryTableOwnerCol">Defined&nbsp;by</th>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#depth">depth</a> : uint<div class="summaryTableDescription">[read-only]
+   The recursion depth of the current item.</div>
+</td><td class="summaryTableOwnerCol">RecursiveFilterIterator</td>
+</tr>
+</table>
+</div>
+<a name="methodSummary"></a>
+<div class="summarySection">
+<div class="summaryTableTitle">Public Methods</div>
+<table id="summaryTableMethod" class="summaryTable " cellpadding="3" cellspacing="0">
+<tr>
+<th>&nbsp;</th><th colspan="2">Method</th><th class="summaryTableOwnerCol">Defined&nbsp;by</th>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#RecursiveFilterIterator()">RecursiveFilterIterator</a>(iterable:<a href="../framework/IIterable.html">IIterable</a>, filter:Function, childrenFilter:Function, depth:uint = 0, parentItems:Array = null)</div>
+<div class="summaryTableDescription">
+   RecursiveFilterIterator constructor.</div>
+</td><td class="summaryTableOwnerCol">RecursiveFilterIterator</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#hasNext()">hasNext</a>():Boolean</div>
+<div class="summaryTableDescription">
+   
+   Returns <code>true</code> if there are succeeding items to be enumerated.</div>
+</td><td class="summaryTableOwnerCol">RecursiveFilterIterator</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#next()">next</a>():*</div>
+<div class="summaryTableDescription">
+   
+   Returns the next item and places the internal cursor after that item.</div>
+</td><td class="summaryTableOwnerCol">RecursiveFilterIterator</td>
+</tr>
+</table>
+</div>
+<script type="text/javascript" language="javascript">
+<!--
+showHideInherited();
+--></script>
+<div class="MainContent">
+<a name="propertyDetail"></a>
+<div class="detailSectionHeader">Property detail</div>
+<a name="depth"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">depth</td><td class="detailHeaderType">property</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>depth:uint</code>&nbsp;&nbsp;[read-only]<p>
+   The recursion depth of the current item.
+   </p><span class="label">Implementation</span>
+<br>
+<code>&nbsp;&nbsp;&nbsp;&nbsp;public function get depth():uint</code>
+<br>
+</div>
+<a name="constructorDetail"></a>
+<div class="detailSectionHeader">Constructor detail</div>
+<a name="RecursiveFilterIterator()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">RecursiveFilterIterator</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">constructor</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public function RecursiveFilterIterator(iterable:<a href="../framework/IIterable.html">IIterable</a>, filter:Function, childrenFilter:Function, depth:uint = 0, parentItems:Array = null)</code><p>
+   RecursiveFilterIterator constructor.
+   
+   </p><span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">iterable</span>:<a href="../framework/IIterable.html">IIterable</a></code> &mdash; An <code>IIterable</code> implementing collection.
+   </td>
+</tr>
+<tr>
+<td class="paramSpacer">&nbsp;</td>
+</tr>
+<tr>
+<td width="20px"></td><td><code><span class="label">filter</span>:Function</code> &mdash; The filter function. 
+   </td>
+</tr>
+<tr>
+<td class="paramSpacer">&nbsp;</td>
+</tr>
+<tr>
+<td width="20px"></td><td><code><span class="label">childrenFilter</span>:Function</code> &mdash; The children filter function. 
+   </td>
+</tr>
+<tr>
+<td class="paramSpacer">&nbsp;</td>
+</tr>
+<tr>
+<td width="20px"></td><td><code><span class="label">depth</span>:uint</code> (default = <code>0</code>)<code></code> &mdash; Internally passed recursion depth. 
+   </td>
+</tr>
+<tr>
+<td class="paramSpacer">&nbsp;</td>
+</tr>
+<tr>
+<td width="20px"></td><td><code><span class="label">parentItems</span>:Array</code> (default = <code>null</code>)<code></code> &mdash; Internally passed parent chain, considered in recursion detection.
+   </td>
+</tr>
+</table>
+</div>
+<a name="methodDetail"></a>
+<div class="detailSectionHeader">Method detail</div>
+<a name="hasNext()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">hasNext</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public function hasNext():Boolean</code><p>
+   
+   Returns <code>true</code> if there are succeeding items to be enumerated.
+   
+   </p><p>Returns <code>false</code>, if the internal cursor is placed after the
+   last item or the collection is empty.</p>
+   
+   <p></p>
+<span class="label">Returns</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20"></td><td><code>Boolean</code> &mdash; <code>true</code> if there are items left to be enumerated.
+   </td>
+</tr>
+</table>
+</div>
+<a name="next()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">next</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public function next():*</code><p>
+   
+   Returns the next item and places the internal cursor after that item.
+   
+   </p><p>Returnes <code>undefined</code> if no next item exists or the collection is empty.</p>
+   
+   <p></p>
+<span class="label">Returns</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20"></td><td><code>*</code> &mdash; The next item of iteration or <code>undefined</code> if no such item exists.
+   </td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+<hr>
+<br>
+<p></p>
+<center class="copyright"> 
+</center>
+</div>
+</body>
+</html>
+<!-- -->

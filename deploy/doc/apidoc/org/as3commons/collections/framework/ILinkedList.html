@@ -1,0 +1,326 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" href="../../../../style.css" type="text/css" media="screen">
+<link rel="stylesheet" href="../../../../print.css" type="text/css" media="print">
+<meta content="ILinkedList,org.as3commons.collections.framework.ILinkedList,add,addFirst,addLast" name="keywords">
+<title>org.as3commons.collections.framework.ILinkedList</title>
+</head>
+<body>
+<script type="text/javascript" language="javascript" src="../../../../asdoc.js"></script><script type="text/javascript" language="javascript" src="../../../../cookies.js"></script><script type="text/javascript" language="javascript">
+<!--
+				asdocTitle = 'ILinkedList - AS3Commons Collections 1.2.0';
+				var baseRef = '../../../../';
+				window.onload = configPage;
+			--></script>
+<table style="display:none" id="titleTable" cellspacing="0" cellpadding="0" class="titleTable">
+<tr>
+<td align="left" class="titleTableTitle">API Documentation</td><td align="right" class="titleTableTopNav"><a onclick="loadClassListFrame('../../../../all-classes.html')" href="../../../../package-summary.html">All&nbsp;Packages</a>&nbsp;|&nbsp;<a onclick="loadClassListFrame('../../../../all-classes.html')" href="../../../../class-summary.html">All&nbsp;Classes</a>&nbsp;|&nbsp;<a onclick="loadClassListFrame('../../../../index-list.html')" href="../../../../all-index-A.html">Index</a>&nbsp;|&nbsp;<a href="../../../../index.html?org/as3commons/collections/framework/ILinkedList.html&amp;org/as3commons/collections/framework/class-list.html" id="framesLink1">Frames</a><a onclick="parent.location=document.location" href="" style="display:none" id="noFramesLink1">No&nbsp;Frames</a></td><td rowspan="3" align="right" class="titleTableLogo"><img alt="Adobe Logo" title="Adobe Logo" class="logoImage" src="../../../../images/logo.jpg"></td>
+</tr>
+<tr class="titleTableRow2">
+<td align="left" id="subTitle" class="titleTableSubTitle">Interface&nbsp;ILinkedList</td><td align="right" id="subNav" class="titleTableSubNav"><a href="#propertySummary">Properties</a>&nbsp;| <a href="#methodSummary">Methods</a></td>
+</tr>
+<tr class="titleTableRow3">
+<td colspan="2">&nbsp;</td>
+</tr>
+</table>
+<script type="text/javascript" language="javascript">
+<!--
+if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Interface ILinkedList"); titleBar_setSubNav(false,true,false,false,false,false,true,false,false,false,false,false,false,false);}
+--></script>
+<div class="MainContent">
+<table cellspacing="0" cellpadding="0" class="classHeaderTable">
+<tr>
+<td class="classHeaderTableLabel">Package</td><td><a onclick="javascript:loadClassListFrame('class-list.html')" href="package-detail.html">org.as3commons.collections.framework</a></td>
+</tr>
+<tr>
+<td class="classHeaderTableLabel">Interface</td><td class="classSignature">public interface ILinkedList extends <a href="IInsertionOrder.html">IInsertionOrder</a>, <a href="IOrder.html">IOrder</a>, <a href="ICollection.html">ICollection</a>, <a href="IIterable.html">IIterable</a>, <a href="IDuplicates.html">IDuplicates</a></td>
+</tr>
+<tr>
+<td class="classHeaderTableLabel">Implementors</td><td><a href="../../collections/LinkedList.html">LinkedList</a>, <a href="core/LinkedListIterator.html">LinkedListIterator</a></td>
+</tr>
+</table>
+<p></p>
+  Linked list data structure definition.
+  
+  <p><strong>Description</strong></p>
+  
+  <p>A linked list is an ordered sequence of items made up of mutually linking nodes.
+  Insertion and removal operations at start, in between or at end only require
+  constant time regardless of the size of the list.</p>
+  
+  <ul>
+  <li>Elements are accessed sequentially using an iterator.</li>
+  <li>Always ordered by insertion.</li>
+  <li>May contain duplicates.</li>
+  </ul>
+  
+  <p><strong>Features</strong></p>
+  
+  <p>Addionally to or refining the basic collection definition, the <code>LinkedList</code> provides:</p>
+  
+  <ul>
+  <li>Rich sequential access using an <code>IListIterator</code>.<br />
+  <code>iterator()</code></li>
+  <li>Access to the first and the last element (from <code>IOrder</code>).<br />
+  <code>first, last, removeFirst(), removeLast()</code></li>
+  <li>Order modification operations (from <code>IInsertionOrder</code>).<br />
+  <code>sort(), reverse()</code></li>
+  <li>Methods to handle duplicates (from <code>IDuplicates</code>).<br />
+  <code>count(), removeAll()</code></li>
+  <li>Random adding of items.<br />
+  <code>add(), addFirst(), addLast()</code></li>
+  </ul>
+  
+  <p><strong>Notes</strong></p>
+  
+  <p>A linked does not implement the <code>IList</code> interface since it does not provide
+  index based access to its items.</p>
+  
+  <p>The internal node structure is hidden to the user and cannot be accessed.</p>
+  
+  <p></p>
+<p>
+<span class="classHeaderTableLabel">See also</span>
+</p>
+<div class="seeAlso">
+<a href="ICollection.html" target="">ICollection interface - Detailed description of the base collection features.</a>
+</div>
+<br>
+<hr>
+</div>
+<a name="propertySummary"></a>
+<div class="summarySection">
+<div class="summaryTableTitle">Public Properties</div>
+<div class="showHideLinks">
+<div class="hideInheritedProperty" id="hideInheritedProperty">
+<a onclick="javascript:setInheritedVisible(false,'Property');" href="#propertySummary" class="showHideLink"><img src="../../../../images/expanded.gif" class="showHideLinkImage"> Hide Inherited Public Properties</a>
+</div>
+<div class="showInheritedProperty" id="showInheritedProperty">
+<a onclick="javascript:setInheritedVisible(true,'Property');" href="#propertySummary" class="showHideLink"><img src="../../../../images/collapsed.gif" class="showHideLinkImage"> Show Inherited Public Properties</a>
+</div>
+</div>
+<table id="summaryTableProperty" class="summaryTable hideInheritedProperty" cellpadding="3" cellspacing="0">
+<tr>
+<th>&nbsp;</th><th colspan="2">Property</th><th class="summaryTableOwnerCol">Defined&nbsp;by</th>
+</tr>
+<tr class="hideInheritedProperty">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol"><img class="inheritedSummaryImage" title="Inherited" alt="Inherited" src="../../../../images/inheritedSummary.gif"></td><td class="summaryTableSignatureCol"><a class="signatureLink" href="IOrder.html#first">first</a> : *<div class="summaryTableDescription">
+   The first item or <code>undefined</code> if the collection is empty.</div>
+</td><td class="summaryTableOwnerCol"><a href="IOrder.html">IOrder</a></td>
+</tr>
+<tr class="hideInheritedProperty">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol"><img class="inheritedSummaryImage" title="Inherited" alt="Inherited" src="../../../../images/inheritedSummary.gif"></td><td class="summaryTableSignatureCol"><a class="signatureLink" href="IOrder.html#last">last</a> : *<div class="summaryTableDescription">
+   The last item or <code>undefined</code> if the collection is empty.</div>
+</td><td class="summaryTableOwnerCol"><a href="IOrder.html">IOrder</a></td>
+</tr>
+<tr class="hideInheritedProperty">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol"><img class="inheritedSummaryImage" title="Inherited" alt="Inherited" src="../../../../images/inheritedSummary.gif"></td><td class="summaryTableSignatureCol"><a class="signatureLink" href="ICollection.html#size">size</a> : uint<div class="summaryTableDescription">
+   The number of items contained by the collection.</div>
+</td><td class="summaryTableOwnerCol"><a href="ICollection.html">ICollection</a></td>
+</tr>
+</table>
+</div>
+<a name="methodSummary"></a>
+<div class="summarySection">
+<div class="summaryTableTitle">Public Methods</div>
+<div class="showHideLinks">
+<div class="hideInheritedMethod" id="hideInheritedMethod">
+<a onclick="javascript:setInheritedVisible(false,'Method');" href="#methodSummary" class="showHideLink"><img src="../../../../images/expanded.gif" class="showHideLinkImage"> Hide Inherited Public Methods</a>
+</div>
+<div class="showInheritedMethod" id="showInheritedMethod">
+<a onclick="javascript:setInheritedVisible(true,'Method');" href="#methodSummary" class="showHideLink"><img src="../../../../images/collapsed.gif" class="showHideLinkImage"> Show Inherited Public Methods</a>
+</div>
+</div>
+<table id="summaryTableMethod" class="summaryTable " cellpadding="3" cellspacing="0">
+<tr>
+<th>&nbsp;</th><th colspan="2">Method</th><th class="summaryTableOwnerCol">Defined&nbsp;by</th>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#add()">add</a>(item:*):void</div>
+<div class="summaryTableDescription">
+   Adds an item at the end of the list.</div>
+</td><td class="summaryTableOwnerCol">ILinkedList</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#addFirst()">addFirst</a>(item:*):void</div>
+<div class="summaryTableDescription">
+   Adds an item in front of the list.</div>
+</td><td class="summaryTableOwnerCol">ILinkedList</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#addLast()">addLast</a>(item:*):void</div>
+<div class="summaryTableDescription">
+   Adds an item at the end of the list.</div>
+</td><td class="summaryTableOwnerCol">ILinkedList</td>
+</tr>
+<tr class="hideInheritedMethod">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol"><img class="inheritedSummaryImage" title="Inherited" alt="Inherited" src="../../../../images/inheritedSummary.gif"></td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="ICollection.html#clear()">clear</a>():Boolean</div>
+<div class="summaryTableDescription">
+   Removes all items from the collection.</div>
+</td><td class="summaryTableOwnerCol"><a href="ICollection.html">ICollection</a></td>
+</tr>
+<tr class="hideInheritedMethod">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol"><img class="inheritedSummaryImage" title="Inherited" alt="Inherited" src="../../../../images/inheritedSummary.gif"></td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="IDuplicates.html#count()">count</a>(item:*):uint</div>
+<div class="summaryTableDescription">
+   Returns the number of occurrences of an item.</div>
+</td><td class="summaryTableOwnerCol"><a href="IDuplicates.html">IDuplicates</a></td>
+</tr>
+<tr class="hideInheritedMethod">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol"><img class="inheritedSummaryImage" title="Inherited" alt="Inherited" src="../../../../images/inheritedSummary.gif"></td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="ICollection.html#has()">has</a>(item:*):Boolean</div>
+<div class="summaryTableDescription">
+   Tests if an item is contained by the collection.</div>
+</td><td class="summaryTableOwnerCol"><a href="ICollection.html">ICollection</a></td>
+</tr>
+<tr class="hideInheritedMethod">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol"><img class="inheritedSummaryImage" title="Inherited" alt="Inherited" src="../../../../images/inheritedSummary.gif"></td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="IIterable.html#iterator()">iterator</a>(cursor:*):<a href="../framework/IIterator.html">IIterator</a>
+</div>
+<div class="summaryTableDescription">
+   Returns an iterator over the iterable data structure.</div>
+</td><td class="summaryTableOwnerCol"><a href="IIterable.html">IIterable</a></td>
+</tr>
+<tr class="hideInheritedMethod">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol"><img class="inheritedSummaryImage" title="Inherited" alt="Inherited" src="../../../../images/inheritedSummary.gif"></td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="ICollection.html#remove()">remove</a>(item:*):Boolean</div>
+<div class="summaryTableDescription">
+   Removes an item from the collection.</div>
+</td><td class="summaryTableOwnerCol"><a href="ICollection.html">ICollection</a></td>
+</tr>
+<tr class="hideInheritedMethod">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol"><img class="inheritedSummaryImage" title="Inherited" alt="Inherited" src="../../../../images/inheritedSummary.gif"></td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="IDuplicates.html#removeAll()">removeAll</a>(item:*):uint</div>
+<div class="summaryTableDescription">
+   Removes all occurrences of a particular item from the collection.</div>
+</td><td class="summaryTableOwnerCol"><a href="IDuplicates.html">IDuplicates</a></td>
+</tr>
+<tr class="hideInheritedMethod">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol"><img class="inheritedSummaryImage" title="Inherited" alt="Inherited" src="../../../../images/inheritedSummary.gif"></td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="IOrder.html#removeFirst()">removeFirst</a>():*</div>
+<div class="summaryTableDescription">
+   Removes the first item of the ordered collection.</div>
+</td><td class="summaryTableOwnerCol"><a href="IOrder.html">IOrder</a></td>
+</tr>
+<tr class="hideInheritedMethod">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol"><img class="inheritedSummaryImage" title="Inherited" alt="Inherited" src="../../../../images/inheritedSummary.gif"></td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="IOrder.html#removeLast()">removeLast</a>():*</div>
+<div class="summaryTableDescription">
+   Removes the last item of the ordered collection.</div>
+</td><td class="summaryTableOwnerCol"><a href="IOrder.html">IOrder</a></td>
+</tr>
+<tr class="hideInheritedMethod">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol"><img class="inheritedSummaryImage" title="Inherited" alt="Inherited" src="../../../../images/inheritedSummary.gif"></td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="IInsertionOrder.html#reverse()">reverse</a>():Boolean</div>
+<div class="summaryTableDescription">
+   Reverses the collection order.</div>
+</td><td class="summaryTableOwnerCol"><a href="IInsertionOrder.html">IInsertionOrder</a></td>
+</tr>
+<tr class="hideInheritedMethod">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol"><img class="inheritedSummaryImage" title="Inherited" alt="Inherited" src="../../../../images/inheritedSummary.gif"></td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="IInsertionOrder.html#sort()">sort</a>(comparator:<a href="../framework/IComparator.html">IComparator</a>):Boolean</div>
+<div class="summaryTableDescription">
+   Sorts the linked collection using the given comparator.</div>
+</td><td class="summaryTableOwnerCol"><a href="IInsertionOrder.html">IInsertionOrder</a></td>
+</tr>
+<tr class="hideInheritedMethod">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol"><img class="inheritedSummaryImage" title="Inherited" alt="Inherited" src="../../../../images/inheritedSummary.gif"></td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="ICollection.html#toArray()">toArray</a>():Array</div>
+<div class="summaryTableDescription">
+   Returns an array of all items.</div>
+</td><td class="summaryTableOwnerCol"><a href="ICollection.html">ICollection</a></td>
+</tr>
+</table>
+</div>
+<script type="text/javascript" language="javascript">
+<!--
+showHideInherited();
+--></script>
+<div class="MainContent">
+<a name="methodDetail"></a>
+<div class="detailSectionHeader">Method detail</div>
+<a name="add()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">add</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public function add(item:*):void</code><p>
+   Adds an item at the end of the list.
+   
+   </p><span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">item</span>:*</code> &mdash; The item to add.
+   </td>
+</tr>
+</table>
+</div>
+<a name="addFirst()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">addFirst</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public function addFirst(item:*):void</code><p>
+   Adds an item in front of the list.
+   
+   </p><span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">item</span>:*</code> &mdash; The item to add.
+   </td>
+</tr>
+</table>
+</div>
+<a name="addLast()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">addLast</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public function addLast(item:*):void</code><p>
+   Adds an item at the end of the list.
+   
+   </p><span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">item</span>:*</code> &mdash; The item to add.
+   </td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+<hr>
+<br>
+<p></p>
+<center class="copyright"> 
+</center>
+</div>
+</body>
+</html>
+<!-- -->

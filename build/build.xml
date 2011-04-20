@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="AS3Commons Collections" default="APIDoc" basedir="../" >
+
+	<property name="FLEX_HOME" value="c:\FDT\plugins\com.powerflasher.fdt.shippedFlexSDK_3.5.0.12683a_1000\\flex" />
+	<property name="ASDOC" value="${FLEX_HOME}\bin\asdoc.exe" />
+
+	<property name="FILE_NAME" value="as3commons-collections" />
+	<property name="VERSION" value="1.2.0" />
+
+	<property name="BUILD" value="build" />
+	<property name="SRC" value="src" />
+	<property name="EXAMPLES" value="examples" />
+	<property name="TESTS" value="tests" />
+	<property name="ZIP" value="zip" />
+	<property name="SWC" value="swc" />
+	<property name="DOC" value="doc" />
+	<property name="TMP" value="tmp" />
+
+	<target name="APIDoc" depends="Clean, Embed_Examples, Create_ApiDoc, Clean_TMP" />
+
+	<target name="Clean" description="Clean" depends="Clean_TMP">
+		<delete dir="doc/apidoc" failonerror="false" />
+	</target>
+	
+	<target name="Clean_TMP">
+		<delete dir="${TMP}" failonerror="false" />
+	</target>
+
+	<target name="Embed_Examples">
+		<mkdir dir="${TMP}"/>
+		<mkdir dir="${TMP}/asdoc"/>
+		<mkdir dir="${TMP}/src"/>
+		
+		<copy todir="${TMP}/src">
+			<fileset dir="${SRC}" />
+		</copy>
+	
+		<javac srcdir="${BUILD}/asdoc" destdir="${TMP}/asdoc" />
+
+		<java classpath="${TMP}/asdoc" classname="EmbedExamples">
+			<arg value="${basedir}/${TMP}/src" />
+			<arg value="${basedir}/${EXAMPLES}" />
+		</java>
+	</target>
+
+	<target name="Create_ApiDoc" depends="Clean, Embed_Examples">
+		<exec executable="${ASDOC}" failonerror="true">
+			<arg line="-doc-sources '${basedir}/${TMP}/src/org/as3commons/collections'" />
+			<arg line="-source-path '${TMP}/src'" />
+			<arg line="-window-title 'AS3Commons Collections ${VERSION}'" />
+			<arg line="-output '${DOC}/apidoc'"/>
+			<arg line="-package org.as3commons.collections 'All collection implementations (public).'" />
+			<arg line="-package org.as3commons.collections.fx 'All bindable collection implementations (public).'" />
+			<arg line="-package org.as3commons.collections.fx.events 'Bindable collection events (public).'" />
+			<arg line="-package org.as3commons.collections.framework 'All collection and framework interfaces (public).'" />
+			<arg line="-package org.as3commons.collections.framework.core 'Framework internal basic and shared implementations (hidden).'" />
+			<arg line="-package org.as3commons.collections.iterators 'Special purpose iterators (public).'" />
+			<arg line="-package org.as3commons.collections.utils 'Collection framework utils (public).'" />
+			<arg line="-library-path ${FLEX_HOME}/frameworks/locale/en_US" />
+		</exec>
+
+		<copy file="${BUILD}/asdoc/asdoc.js" todir="${DOC}/apidoc" overwrite="true" />
+		<copy file="${BUILD}/asdoc/style.css" todir="${DOC}/apidoc" overwrite="true" />
+	</target>
+
+	<target name="Zip" description="ZIP">
+ 		<delete file="${ZIP}/${FILE_NAME}-${VERSION}.zip" />
+
+		<zip destfile="${ZIP}/${FILE_NAME}-${VERSION}.zip">
+			<zipfileset dir="${SRC}" prefix="src" />
+			<zipfileset dir="${TESTS}" prefix="tests" />
+			<zipfileset dir="${EXAMPLES}" prefix="examples" />
+			<zipfileset file="${SWC}/${FILE_NAME}-${VERSION}.swc" prefix="swc" />
+			<zipfileset dir="${DOC}" prefix="doc" />
+		</zip>
+		
+	</target>
+
+</project>
