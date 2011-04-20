@@ -10,9 +10,9 @@ h3. References
 
 *Related Articles*
 
-* "Collections Framework Performance Comparision":http://sibirjak.com/osflash/blog/collections-framework-performance-comparision/
-* "Array, Dictionary, Collections – Performance, Functionality, Reliability":http://sibirjak.com/osflash/blog/array-dictionary-collections-performance-functionality-reliability/
 * "Why we need a collection framework in ActionScript":http://sibirjak.com/osflash/blog/why-we-need-a-collection-framework-in-actionscript/
+* "Array, Dictionary, Collections - Performance, Functionality, Reliability":http://sibirjak.com/osflash/blog/array-dictionary-collections-performance-functionality-reliability/
+* "Collections Framework Performance Comparision":http://sibirjak.com/osflash/blog/collections-framework-performance-comparision/
 
 h3. About
 
