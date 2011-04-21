@@ -8,15 +8,12 @@ h3. References
 
 * "Downloads":http://code.google.com/p/as3-commons/downloads/list (ZIP, SWC)
 
-*Roadmap*
-
-* "Roadmap":https://github.com/AS3Commons/as3commons-collections/wiki
-
 *Documentation*
 
 * "Examples":http://sibirjak.com/osflash/projects/as3commons-collections/examples/
 * "Project Homepage":http://sibirjak.com/osflash/projects/as3commons-collections/ (Overview, Features, Documentation, Examples)
 * "APIDoc":http://as3commons.github.com/as3commons-collections/apidoc/
+* "Roadmap":https://github.com/AS3Commons/as3commons-collections/wiki
 
 *Related Articles*
 
