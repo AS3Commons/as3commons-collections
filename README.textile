@@ -4,18 +4,30 @@ The AS3Commons Collections project is the most serious AS3 collections resource 
 
 h3. References
 
+*Downloads*
+
+* "Downloads":http://code.google.com/p/as3-commons/downloads/list (ZIP, SWC)
+
+*Roadmap*
+
+* "Roadmap":https://github.com/AS3Commons/as3commons-collections/wiki
+
+*Documentation*
+
 * "Examples":http://sibirjak.com/osflash/projects/as3commons-collections/examples/
 * "Project Homepage":http://sibirjak.com/osflash/projects/as3commons-collections/ (Overview, Features, Documentation, Examples)
 * "APIDoc":http://as3commons.github.com/as3commons-collections/apidoc/
-* "Downloads":http://code.google.com/p/as3-commons/downloads/list (ZIP, SWC)
-* "AS3Commons Project":http://as3commons.org/
-* "Google Code":http://code.google.com/p/as3-commons/ (SVN branch and revsion history up to 1.2.0)
 
 *Related Articles*
 
 * "Why we need a collection framework in ActionScript":http://sibirjak.com/osflash/blog/why-we-need-a-collection-framework-in-actionscript/
 * "Array, Dictionary, Collections - Performance, Functionality, Reliability":http://sibirjak.com/osflash/blog/array-dictionary-collections-performance-functionality-reliability/
 * "Collections Framework Performance Comparision":http://sibirjak.com/osflash/blog/collections-framework-performance-comparision/
+
+*Other resources*
+
+* "AS3Commons Project":http://as3commons.org/
+* "Google Code":http://code.google.com/p/as3-commons/ (SVN branch and revsion history up to 1.2.0)
 
 h3. Team
 
