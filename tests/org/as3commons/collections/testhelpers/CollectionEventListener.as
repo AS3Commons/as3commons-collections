@@ -14,6 +14,8 @@
  * limitations under the License.
  */
 package org.as3commons.collections.testhelpers {
+
+	import org.as3commons.collections.framework.ICollectionFx;
 	import org.as3commons.collections.framework.IListIterator;
 	import org.as3commons.collections.fx.events.CollectionEvent;
 	import org.as3commons.collections.fx.events.ListEvent;
@@ -24,7 +26,7 @@ package org.as3commons.collections.testhelpers {
 	 */
 	public class CollectionEventListener {
 
-		private var _collection : *;
+		private var _collection : ICollectionFx;
 		private var _eventReceived : Boolean = false;
 		private var _event : CollectionEvent;
 		private var _events : Array;

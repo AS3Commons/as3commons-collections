@@ -14,6 +14,7 @@
  * limitations under the License.
  */
 package org.as3commons.collections.framework.core {
+
 	import org.as3commons.collections.framework.IIterator;
 	import org.as3commons.collections.mocks.TreapMock;
 	import org.as3commons.collections.testhelpers.AbstractIteratorTestCase;
@@ -35,7 +36,7 @@ package org.as3commons.collections.framework.core {
 		}
 
 		override public function fillCollection(items : Array) : void {
-			collection.clear();
+			TreapMock(collection).clear();
 			
 			for each (var item : * in items) {
 				TreapMock(collection).add(item);

@@ -41,7 +41,7 @@ package org.as3commons.collections.framework.core {
 		}
 
 		override public function getIterator(index : uint = 0) : IIterator {
-			return collection.iterator(index);
+			return IOrderedList(collection).iterator(index);
 		}
 
 		override public function toArray() : Array {

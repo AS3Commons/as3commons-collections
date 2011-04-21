@@ -34,7 +34,7 @@ package org.as3commons.collections.testhelpers {
 //			var collectionTest : String = "[" + getQualifiedClassName(_test).replace(/^.*::/, "") + "]";
 			var description:XML = describeType(this);
 			
-			var list : XMLList = description..method.@name;
+			var list : XMLList = description.descendants("method").@name;
 			for each (var method : String in list) {
 				if (method.toString().indexOf("test") == 0) {
 					
