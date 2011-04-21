@@ -190,5 +190,23 @@ package org.as3commons.collections.utils {
 			}
 			return destination;
 		}
+
+		/**
+		 * Adds the supplied supplied list of key-item-pairs to the given map.
+		 * 
+		 * <listing>
+				Maps.populate(key1, item1, key2, item2, ...);
+		 * </listing>
+		 * 
+		 * @param map The map to be populated.
+		 * @param List of key-item-pairs to add to the map.
+		 */
+		public static function populate(map : IMap, ...args) : void {
+			for (var i : uint; i < args.length; i+=2) {
+				if (i == args.length - 1) break;
+				map.add(args[i], args[i + 1]);
+			}
+		}
+
 	}
 }

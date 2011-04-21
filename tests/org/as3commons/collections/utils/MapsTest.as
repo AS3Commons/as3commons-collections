@@ -266,6 +266,36 @@ package org.as3commons.collections.utils {
 			assertEquals("Resulting Map has the expected number of entries", 2, target.size);
 			assertTrue("Target map retains its original mappings", target.hasKey("original-key"));
 		}
+
+		public function test_populate() : void {
+			// even number of arguments
+
+			var map : IMap = new LinkedMap();
+			Maps.populate(map, 1, "1", 2, "2", 3, "3", 4, "4", 5, "5");
+			assertTrue(CollectionTest.keysEqual(map, [1, 2, 3, 4, 5]));
+			assertTrue(CollectionTest.itemsEqual(map, ["1", "2", "3", "4", "5"]));
+
+			// odd number of arguments
+
+			map = new LinkedMap();
+			Maps.populate(map, 1, "1", 2, "2", 3, "3", 4, "4", 5);
+			assertTrue(CollectionTest.keysEqual(map, [1, 2, 3, 4]));
+			assertTrue(CollectionTest.itemsEqual(map, ["1", "2", "3", "4"]));
+
+			// single argument
+
+			map = new LinkedMap();
+			Maps.populate(map, 1);
+			assertTrue(CollectionTest.keysEqual(map, []));
+			assertTrue(CollectionTest.itemsEqual(map, []));
+
+			// no argument
+
+			map = new LinkedMap();
+			Maps.populate(map);
+			assertTrue(CollectionTest.keysEqual(map, []));
+			assertTrue(CollectionTest.itemsEqual(map, []));
+		}
 	}
 }
 

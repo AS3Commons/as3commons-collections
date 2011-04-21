@@ -14,6 +14,7 @@
  * limitations under the License.
  */
 package {
+
 	import flexunit.framework.TestSuite;
 
 	import org.as3commons.collections.ArrayListTest;
@@ -56,6 +57,7 @@ package {
 	import org.as3commons.collections.utils.MapsTest;
 	import org.as3commons.collections.utils.SetBuilderTest;
 	import org.as3commons.collections.utils.StringComparatorTest;
+	import org.as3commons.collections.utils.shortcut.MapShortcutTest;
 
 	/**
 	 * @author Jens Struwe 19.02.2010
@@ -128,6 +130,10 @@ package {
 			
 			addTestSuite(SetBuilderTest);
 			addTestSuite(MapBuilderTest);
+			
+			// shortcuts
+
+			addTestSuite(MapShortcutTest);
 
 		}
 		

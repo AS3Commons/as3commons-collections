@@ -1,10 +1,10 @@
 package org.as3commons.collections.utils {
-	import org.as3commons.collections.testhelpers.CollectionTest;
-	import org.as3commons.collections.SortedMap;
+
 	import flexunit.framework.TestCase;
 
 	import org.as3commons.collections.LinkedMap;
 	import org.as3commons.collections.Map;
+	import org.as3commons.collections.SortedMap;
 	import org.as3commons.collections.framework.IMap;
 
 	import flash.utils.getQualifiedClassName;
@@ -48,43 +48,6 @@ package org.as3commons.collections.utils {
 			assertEquals("Resulting map instance is of type Map", getQualifiedClassName(SortedMap), getQualifiedClassName(result));
 		}
 
-		public function test_addMany() : void {
-			// even number of arguments
-
-			var map : IMap = MapBuilder.linkedMap()
-				.addMany(1, "1", 2, "2", 3, "3", 4, "4", 5, "5")
-				.build();
-				
-			assertTrue(CollectionTest.keysEqual(map, [1, 2, 3, 4, 5]));
-			assertTrue(CollectionTest.itemsEqual(map, ["1", "2", "3", "4", "5"]));
-
-			// odd number of arguments
-
-			map = MapBuilder.linkedMap()
-				.addMany(1, "1", 2, "2", 3, "3", 4, "4", 5)
-				.build();
-				
-			assertTrue(CollectionTest.keysEqual(map, [1, 2, 3, 4]));
-			assertTrue(CollectionTest.itemsEqual(map, ["1", "2", "3", "4"]));
-
-			// single argument
-
-			map = MapBuilder.linkedMap()
-				.addMany(1)
-				.build();
-				
-			assertTrue(CollectionTest.keysEqual(map, []));
-			assertTrue(CollectionTest.itemsEqual(map, []));
-
-			// no argument
-
-			map = MapBuilder.linkedMap()
-				.addMany()
-				.build();
-				
-			assertTrue(CollectionTest.keysEqual(map, []));
-			assertTrue(CollectionTest.itemsEqual(map, []));
-		}
 	}
 }
 

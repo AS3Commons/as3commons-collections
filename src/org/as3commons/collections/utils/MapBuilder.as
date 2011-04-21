@@ -24,7 +24,6 @@ package org.as3commons.collections.utils {
 	/**
 	 * <p>Uses the Builder Pattern to simplify the creation of new IMap instances in a fluent fashion.</p>
 	 *  
-	 * @author John Reeves.
 	 * @example Creating a new LinkedMap instance using MapBuilder.
 	 * &lt;listing version="3.0"&gt;
 	 * 		const result : IMap = MapBuilder.linkedMap()
@@ -94,26 +93,6 @@ package org.as3commons.collections.utils {
 			return this;
 		}
 		
-		/**
-		 * Adds the supplied supplied list of key-item-pairs to the IMap under construction, returns a reference 
-		 * to this MapBuilder instance.
-		 * 
-		 * <listing>
-				mapBuilder.addMany(key1, item1, key2, item2, ...);
-		 * </listing>
-		 * 
-		 * @param List of key-item-pairs to add to the map
-		 * @param item to be mapped to the supplied key 
-		 * @return a reference to this MapBuilder instance to allow method chaining.
-		 */
-		public function addMany(...args) : MapBuilder {
-			for (var i : uint; i < args.length; i+=2) {
-				if (i == args.length - 1) break;
-				_map.add(args[i], args[i + 1]);
-			}
-			return this;
-		}
-
 		/**
 		 * <p>Completes construction.</p>
 		 */
