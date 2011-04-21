@@ -6,7 +6,7 @@ h3. References
 
 *Downloads*
 
-* "Downloads":http://code.google.com/p/as3-commons/downloads/list (ZIP, SWC)
+* "Downloads":https://github.com/AS3Commons/as3commons-collections/downloads (ZIP, SWC)
 
 *Documentation*
 
