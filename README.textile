@@ -1,5 +1,7 @@
 h2. AS3Commons Collections - ActionScript Collections Framework
 
+The AS3Commons Collections project is the most serious AS3 collections resource in the web - providing both a sophisticated collections framework as well as a library of fast collection implementations.
+
 h3. References
 
 * "Examples":http://sibirjak.com/osflash/projects/as3commons-collections/examples/
@@ -14,10 +16,6 @@ h3. References
 * "Why we need a collection framework in ActionScript":http://sibirjak.com/osflash/blog/why-we-need-a-collection-framework-in-actionscript/
 * "Array, Dictionary, Collections - Performance, Functionality, Reliability":http://sibirjak.com/osflash/blog/array-dictionary-collections-performance-functionality-reliability/
 * "Collections Framework Performance Comparision":http://sibirjak.com/osflash/blog/collections-framework-performance-comparision/
-
-h3. About
-
-The AS3Commons Collections project is the most serious AS3 collections resource in the web - providing both a sophisticated collections framework as well as a library of fast collection implementations.
 
 h3. Team
 
@@ -53,3 +51,8 @@ h3. Implementations provided
 
 * ArrayIterator, RecursiveIterator
 * FilterIterator, RecursiveFilterIterator, CollectionFilterIterator, MapFilterIterator
+
+*Utils*
+
+* CollectionUtils, ListUtils, SetUtils, MapUtils, ArrayUtils
+* ListBuilder, SetBuilder, MapBuilder
