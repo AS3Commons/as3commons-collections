@@ -17,15 +17,22 @@ h3. References
 
 h3. About
 
-The AS3Commons Collections project is the most serious ActionScript collections resource in the web – providing both a sophisticated collections framework as well as a library of fast collection implementations.
+The AS3Commons Collections project is the most serious AS3 collections resource in the web - providing both a sophisticated collections framework as well as a library of fast collection implementations.
+
+h3. Team
+
+* "John Reeves":https://github.com/jonnyreeves
+* "Jens Struwe":https://github.com/kakenbok
+* Contribution is highly welcome.
 
 h3. Features
 
-* Small, consistent and plausible API
+* Small and consistent API
 * Fast collection implementations
 * Powerful iterators
 * Collection util classes
 * Data binding enabled collections
+* 100% unit tested
 
 h3. Implementations provided
 
@@ -34,8 +41,7 @@ h3. Implementations provided
 * ArrayList, SortedList
 * Set, LinkedSet, SortedSet
 * Map, LinkedMap, SortedMap
-* LinkedList
-* Treap
+* LinkedList, Treap
 
 *Bindable Collections*
 
@@ -45,10 +51,5 @@ h3. Implementations provided
 
 *Special purpose iterators*
 
-* ArrayIterator
-* RecursiveIterator
-
-* FilterIterator
-* CollectionFilterIterator
-* MapFilterIterator
-* RecursiveFilterIterator
+* ArrayIterator, RecursiveIterator
+* FilterIterator, RecursiveFilterIterator, CollectionFilterIterator, MapFilterIterator
