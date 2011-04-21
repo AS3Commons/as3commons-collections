@@ -53,11 +53,14 @@ package {
 	import org.as3commons.collections.iterators.FilterIteratorTest;
 	import org.as3commons.collections.iterators.RecursiveFilterIteratorTest;
 	import org.as3commons.collections.iterators.RecursiveIteratorTest;
+	import org.as3commons.collections.utils.ListsTest;
 	import org.as3commons.collections.utils.MapBuilderTest;
 	import org.as3commons.collections.utils.MapsTest;
 	import org.as3commons.collections.utils.SetBuilderTest;
 	import org.as3commons.collections.utils.StringComparatorTest;
-	import org.as3commons.collections.utils.shortcut.MapShortcutTest;
+	import org.as3commons.collections.utils.shortcut.NewArrayListShortcutTest;
+	import org.as3commons.collections.utils.shortcut.NewLinkedMapShortcutTest;
+	import org.as3commons.collections.utils.shortcut.NewMapShortcutTest;
 
 	/**
 	 * @author Jens Struwe 19.02.2010
@@ -126,14 +129,18 @@ package {
 			// utils
 
 			addTestSuite(StringComparatorTest);
-			addTestSuite(MapsTest);
 			
+			addTestSuite(ListsTest);
+			addTestSuite(MapsTest);
+
 			addTestSuite(SetBuilderTest);
 			addTestSuite(MapBuilderTest);
 			
 			// shortcuts
 
-			addTestSuite(MapShortcutTest);
+			addTestSuite(NewArrayListShortcutTest);
+			addTestSuite(NewLinkedMapShortcutTest);
+			addTestSuite(NewMapShortcutTest);
 
 		}
 		

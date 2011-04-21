@@ -194,8 +194,12 @@ package org.as3commons.collections.utils {
 		/**
 		 * Adds the supplied supplied list of key-item-pairs to the given map.
 		 * 
+		 * <p>The arguments may be left out. In that case no item is added to the map.</p>
+		 * 
+		 * <p>The last argument is skipped if the size of arguments is not even.</p>
+		 * 
 		 * <listing>
-				Maps.populate(key1, item1, key2, item2, ...);
+				Maps.populate(myMap, key1, item1, key2, item2, ...);
 		 * </listing>
 		 * 
 		 * @param map The map to be populated.
@@ -207,6 +211,6 @@ package org.as3commons.collections.utils {
 				map.add(args[i], args[i + 1]);
 			}
 		}
-
+		
 	}
 }
