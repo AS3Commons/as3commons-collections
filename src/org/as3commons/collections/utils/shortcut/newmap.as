@@ -36,7 +36,7 @@ package org.as3commons.collections.utils.shortcut {
 	public function newmap(...args) : Map {
 		var map : Map = new Map();
 		args.unshift(map);
-		Maps.populate.apply(null, args);
+		Maps.addAll.apply(null, args);
 		return map;
 	}
 

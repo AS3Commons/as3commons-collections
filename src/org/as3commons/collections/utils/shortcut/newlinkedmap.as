@@ -36,7 +36,7 @@ package org.as3commons.collections.utils.shortcut {
 	public function newlinkedmap(...args) : LinkedMap {
 		var map : LinkedMap = new LinkedMap();
 		args.unshift(map);
-		Maps.populate.apply(null, args);
+		Maps.addAll.apply(null, args);
 		return map;
 	}
 

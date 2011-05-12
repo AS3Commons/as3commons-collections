@@ -271,28 +271,28 @@ package org.as3commons.collections.utils {
 			// even number of arguments
 
 			var map : IMap = new LinkedMap();
-			Maps.populate(map, 1, "1", 2, "2", 3, "3", 4, "4", 5, "5");
+			Maps.addAll(map, 1, "1", 2, "2", 3, "3", 4, "4", 5, "5");
 			assertTrue(CollectionTest.keysEqual(map, [1, 2, 3, 4, 5]));
 			assertTrue(CollectionTest.itemsEqual(map, ["1", "2", "3", "4", "5"]));
 
 			// odd number of arguments
 
 			map = new LinkedMap();
-			Maps.populate(map, 1, "1", 2, "2", 3, "3", 4, "4", 5);
+			Maps.addAll(map, 1, "1", 2, "2", 3, "3", 4, "4", 5);
 			assertTrue(CollectionTest.keysEqual(map, [1, 2, 3, 4]));
 			assertTrue(CollectionTest.itemsEqual(map, ["1", "2", "3", "4"]));
 
 			// single argument
 
 			map = new LinkedMap();
-			Maps.populate(map, 1);
+			Maps.addAll(map, 1);
 			assertTrue(CollectionTest.keysEqual(map, []));
 			assertTrue(CollectionTest.itemsEqual(map, []));
 
 			// no argument
 
 			map = new LinkedMap();
-			Maps.populate(map);
+			Maps.addAll(map);
 			assertTrue(CollectionTest.keysEqual(map, []));
 			assertTrue(CollectionTest.itemsEqual(map, []));
 		}

@@ -15,6 +15,9 @@
  */
 package org.as3commons.collections.utils {
 
+	import org.as3commons.collections.ArrayList;
+	import org.as3commons.collections.SortedList;
+	import org.as3commons.collections.framework.IComparator;
 	import org.as3commons.collections.framework.IList;
 
 	/**
@@ -23,6 +26,46 @@ package org.as3commons.collections.utils {
 	 * @author Jens Struwe 21.04.2011
 	 */
 	public class Lists {
+
+		/**
+		 * Creates, populates and returns a new <code>ArrayList</code> instance.
+		 * 
+		 * <p>The arguments may be left out. In that case no item is added to the list.</p>
+		 * 
+		 * <listing>
+				var list : ArrayList = Lists.arrayList(item1, item2, ...);
+		 * </listing>
+		 * 
+		 * @param List of items to add to the list.
+		 * @return A new <code>ArrayList</code> instance populated from the given arguments.
+		 * @author Jens Struwe 21.04.2011
+		 */
+		public static function arrayList(...args) : ArrayList {
+			var list : ArrayList = new ArrayList();
+			args.unshift(list);
+			Lists.addAll.apply(null, args);
+			return list;
+		}
+
+		/**
+		 * Creates, populates and returns a new <code>ArrayList</code> instance.
+		 * 
+		 * <p>The arguments may be left out. In that case no item is added to the list.</p>
+		 * 
+		 * <listing>
+				var list : ArrayList = Lists.sortedList(comparator, item1, item2, ...);
+		 * </listing>
+		 * 
+		 * @param List of items to add to the list.
+		 * @return A new <code>ArrayList</code> instance populated from the given arguments.
+		 * @author Jens Struwe 21.04.2011
+		 */
+		public static function sortedList(comparator : IComparator, ...args) : SortedList {
+			var list : SortedList = new SortedList(comparator);
+			args.unshift(list);
+			Lists.addAll.apply(null, args);
+			return list;
+		}
 
 		/**
 		 * Adds the supplied supplied list of items to the given list.
@@ -36,7 +79,7 @@ package org.as3commons.collections.utils {
 		 * @param list The list to be populated.
 		 * @param List of items to add to the list.
 		 */
-		public static function populate(list : IList, ...args) : void {
+		public static function addAll(list : IList, ...args) : void {
 			for (var i : uint; i < args.length; i++) {
 				list.add(args[i]);
 			}

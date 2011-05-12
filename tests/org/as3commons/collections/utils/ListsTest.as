@@ -12,19 +12,19 @@ package org.as3commons.collections.utils {
 			// multiple arguments
 
 			var list : IList = new ArrayList();
-			Lists.populate(list, 1, "1", 2, "2", 3, "3", 4, "4", 5, "5");
+			Lists.addAll(list, 1, "1", 2, "2", 3, "3", 4, "4", 5, "5");
 			assertTrue(CollectionTest.itemsEqual(list, [1, "1", 2, "2", 3, "3", 4, "4", 5, "5"]));
 
 			// single argument
 
 			list = new ArrayList();
-			Lists.populate(list, 1);
+			Lists.addAll(list, 1);
 			assertTrue(CollectionTest.itemsEqual(list, [1]));
 
 			// no argument
 
 			list = new ArrayList();
-			Lists.populate(list);
+			Lists.addAll(list);
 			assertTrue(CollectionTest.itemsEqual(list, []));
 		}
 	}

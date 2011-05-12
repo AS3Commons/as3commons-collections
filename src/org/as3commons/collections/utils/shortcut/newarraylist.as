@@ -34,7 +34,7 @@ package org.as3commons.collections.utils.shortcut {
 	public function newarraylist(...args) : ArrayList {
 		var list : ArrayList = new ArrayList();
 		args.unshift(list);
-		Lists.populate.apply(null, args);
+		Lists.addAll.apply(null, args);
 		return list;
 	}
 

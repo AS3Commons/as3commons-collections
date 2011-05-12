@@ -14,13 +14,15 @@
  * limitations under the License.
  */
 package org.as3commons.collections.utils {
+
+	import org.as3commons.collections.LinkedMap;
 	import org.as3commons.collections.Map;
+	import org.as3commons.collections.SortedMap;
 	import org.as3commons.collections.framework.IBasicMapIterator;
+	import org.as3commons.collections.framework.IComparator;
 	import org.as3commons.collections.framework.IMap;
 	import org.as3commons.collections.framework.IMapIterator;
 	import org.as3commons.collections.iterators.MapFilterIterator;
-
-	import flash.utils.Dictionary;
 
 	/**
 	 * <p>A set of common utilities for working with IMap implementations.</p>
@@ -77,7 +79,7 @@ package org.as3commons.collections.utils {
 			if (!map.hasKey(key)) {
 				map.add(key, item);
 			}
-			return map.itemFor(key);
+			return item;
 		}
 
 		/**
@@ -101,57 +103,33 @@ package org.as3commons.collections.utils {
 		}
 
 		/**
-		 * <p>Conveneice method which constructs a Map from the supplied Dictionary.</p>
-		 * 
-		 * @param source Dictionary object to create the Map from
-		 * @return new Map instance with the values taken from the supplied source Dictionary.
-		 */
-		public static function fromDictionary(source : Dictionary) : IMap {
-			return fromObject(source);
-		}
-
-		/**
-		 * <p>Conveneice method which constructs a Map from the publicly accessible properties in the supplied Object.</p>
-		 * 
-		 * @param source Object to create the Map from.
-		 * @return new Map instance with the values taken from the supplied source Object.
-		 */
-		public static function fromObject(source : Object) : IMap {
-			const result : IMap = new Map();
-			for (var key : * in source) {
-				result.add(key, source[key]);
-			}
-			return result;
-		}
-
-		/**
-		 * <p>Clones the supplied IMap instance returning a new IMap of the same type. If filter are specified,
+		 * <p>Clones the supplied IMap instance returning a new IMap of the same type. If filters are specified,
 		 * the resulting map only contains mappings that meet the supplied predicates.<p>
 		 * 
 		 * <p>The key filter function accepts the current key and returns a boolean
 		 * value (<code>true</code> if the key is accepted).</p>
 		 * 
 		 * <listing>
-		function keyFilter(key : *) : Boolean {
-		var accept : Boolean = false;
-		// test the key
-		return accept;
-		}
-				
-		var iterator : IIterator = new MapFilterIterator(map, keyFilter);
+			function keyFilter(key : *) : Boolean {
+			var accept : Boolean = false;
+			// test the key
+			return accept;
+			}
+					
+			var iterator : IIterator = new MapFilterIterator(map, keyFilter);
 		 * </listing>
 		 * 
 		 * <p>The item filter function accepts the current item and returns a boolean
 		 * value (<code>true</code> if the item is accepted).</p>
 		 * 
 		 * <listing>
-		function itemFilter(item : *) : Boolean {
-		var accept : Boolean = false;
-		// test the item
-		return accept;
-		}
-				
-		var iterator : IIterator = new MapFilterIterator(map, keyFilter, itemFilter);
+			function itemFilter(item : *) : Boolean {
+			var accept : Boolean = false;
+			// test the item
+			return accept;
+			}
+					
+			var iterator : IIterator = new MapFilterIterator(map, keyFilter, itemFilter);
 		 * </listing>
 		 * 
 		 * @param map the IMap instance to operate on.
@@ -192,6 +170,76 @@ package org.as3commons.collections.utils {
 		}
 
 		/**
+		 * Creates, populates and returns a new <code>Map</code> instance.
+		 * 
+		 * <p>The arguments may be left out. In that case no item is added to the map.</p>
+		 * 
+		 * <p>The last argument is skipped if the size of arguments is not even.</p>
+		 * 
+		 * <listing>
+				var map : Map = Maps.map(key1, item1, key2, item2, ...);
+		 * </listing>
+		 * 
+		 * @param List of key-item-pairs to add to the map.
+		 * @return map A new <code>Map</code> instance populated from the given arguments.
+		 * @author Jens Struwe 21.04.2011
+		 */
+		public static function map(...args) : Map {
+			var map : Map = new Map();
+			args.unshift(map);
+			Maps.addAll.apply(null, args);
+			return map;
+		}
+
+		/**
+		 * Creates, populates and returns a new <code>LinkedMap</code> instance.
+		 * 
+		 * <p>The arguments may be left out. In that case no item is added to the map.</p>
+		 * 
+		 * <p>The last argument is skipped if the size of arguments is not even.</p>
+		 * 
+		 * <listing>
+				var map : Map = Maps.linkedMap(key1, item1, key2, item2, ...);
+		 * </listing>
+		 * 
+		 * @param List of key-item-pairs to add to the map.
+		 * @return map A new <code>LinkedMap</code> instance populated from the given arguments.
+		 * @author Jens Struwe 21.04.2011
+		 */
+		public static function linkedMap(...args) : LinkedMap {
+			var map : LinkedMap = new LinkedMap();
+			args.unshift(map);
+			Maps.addAll.apply(null, args);
+			return map;
+		}
+
+		/**
+		 * Creates, populates and returns a new <code>SortedMap</code> instance.
+		 * 
+		 * <p>The arguments may be left out. In that case no item is added to the map.</p>
+		 * 
+		 * <p>The last argument is skipped if the size of arguments is not even.</p>
+		 * 
+		 * <listing>
+				var map : Map = Maps.sortedMap(key1, item1, key2, item2, ...);
+		 * </listing>
+		 * 
+		 * @param List of key-item-pairs to add to the map.
+		 * @return map A new <code>SortedMap</code> instance populated from the given arguments.
+		 * @author Jens Struwe 21.04.2011
+		 */
+		public static function sortedMap(comparator : IComparator, ...args) : SortedMap {
+			var map : SortedMap = new SortedMap(comparator);
+			args.unshift(map);
+			Maps.addAll.apply(null, args);
+			return map;
+		}
+		
+		/*
+		 * Map Population
+		 */
+
+		/**
 		 * Adds the supplied supplied list of key-item-pairs to the given map.
 		 * 
 		 * <p>The arguments may be left out. In that case no item is added to the map.</p>
@@ -205,7 +253,7 @@ package org.as3commons.collections.utils {
 		 * @param map The map to be populated.
 		 * @param List of key-item-pairs to add to the map.
 		 */
-		public static function populate(map : IMap, ...args) : void {
+		public static function addAll(map : IMap, ...args) : void {
 			for (var i : uint; i < args.length; i+=2) {
 				if (i == args.length - 1) break;
 				map.add(args[i], args[i + 1]);
