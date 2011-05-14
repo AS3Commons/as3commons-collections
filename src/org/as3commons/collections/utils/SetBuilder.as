@@ -18,64 +18,66 @@ package org.as3commons.collections.utils {
 	import org.as3commons.collections.LinkedSet;
 	import org.as3commons.collections.Set;
 	import org.as3commons.collections.SortedSet;
-	import org.as3commons.collections.framework.ICollection;
 	import org.as3commons.collections.framework.IComparator;
-	import org.as3commons.collections.framework.IIterator;
 	import org.as3commons.collections.framework.ISet;
 
 	/**
-	 * <p>Uses the Builder Pattern to simplify the creation of new ISet instances in a fluent fashion.</p>
+	 * Set builder using the builder pattern.
+	 * 
+	 * <p>Uses the builder Pattern to simplify the creation of new ISet instances in a fluent fashion.</p>
 	 *  
-	 * @author John Reeves.
-	 * @example Creating a new LinkedSet instance using SetBuilder.
-	 * &lt;listing version="3.0"&gt;
-	 * 		const result : IMap = SetBuilder.linkedSet()
+	 * <p>Example: Creating a new LinkedSet instance using SetBuilder.</p>
+	 * 
+	 * <listing>
+	 * 		const result : ISet = SetBuilder.newLinkedSet()
 	 * 			.add("item-one")
 	 * 			.add("item-two")
 	 * 			.build();
 	 * 		
-	 * 		// Creates the following Set: { item-one, item-two }
+	 * 		// Creates the following set: { item-one, item-two }
 	 * 		trace(result);
-	 * &lt;/listing&gt;
+	 * </listing>
 	 * 
 	 * @author John Reeves 14.04.2011
 	 */
 	public class SetBuilder {
+
 		/**
-		 * Backing ISet instance which will be modified during Builder operation.
+		 * Backing <code>ISet</code> instance.
 		 */
 		private var _set : ISet;
 		
 		/**
-		 * <p>Starts the construction of a new Set instance</p>
+		 * Starts the construction of a new <code>Set</code> instance.
 		 * 
-		 * @return a SetBuilder instance which will build and return an instance of Set
+		 * @return a <code>SetBuilder</code> instance which will build and return an instance of Set
 		 */
-		public static function set() : SetBuilder {
+		public static function newSet() : SetBuilder {
 			return new SetBuilder(new Set());
 		}
 		
 		/**
-		 * <p>Starts construction of a new LinkedSet instance.</p>
+		 * Starts construction of a new <code>LinkedSet</code> instance.
 		 * 
-		 * @return a SetBuilder instance which will build and return an instance of LinkedSet
+		 * @return a <code>SetBuilder</code> instance which will build and return an instance of <code>LinkedSet</code>
 		 */		
-		public static function linkedSet() : SetBuilder {
+		public static function newLinkedSet() : SetBuilder {
 			return new SetBuilder(new LinkedSet());
 		}
 
 		/**
-		 * <p>Starts construction of a new SortedSet instance.</p>
+		 * Starts construction of a new <code>SortedSet</code> instance.
 		 * 
-		 * @param comparator the sort criterion which will be used by the resulting SortedSet instance.
-		 * @return a MapBuilder instance which will build and return an instance of SortedSet
+		 * @param comparator The sort criterion which will be used by the resulting <code>SortedSet</code> instance.
+		 * @return a <code>SetBuilder</code> instance which will build and return an instance of <code>SortedSet</code>
 		 */	
-		public static function sortedSet(comparator : IComparator) : SetBuilder {
+		public static function newSortedSet(comparator : IComparator) : SetBuilder {
 			return new SetBuilder(new SortedSet(comparator));
 		}
 		
 		/**
-		 * <p>Please make use of one of the static factory methods for creating a new SetBuilder instance.</p>
+		 * Please make use of one of the static factory methods for creating a new <code>SetBuilder</code> instance.
+		 * 
 		 * @private
 		 */
 		public function SetBuilder(underlyingSet : ISet) {
@@ -83,11 +85,12 @@ package org.as3commons.collections.utils {
 		}
 		
 		/**
-		 * <p>Adds the supplied item to the ISet under construction, returns a reference to this
-		 * SetBuilder instance.</p>
+		 * Adds the supplied item to the <code>ISet</code> under construction.
 		 * 
-		 * @param item to add to the ISet instance under construction.
-		 * @return a reference to this SetBuilder instance to allow method chaining.
+		 * <p>Returns a reference to this SetBuilder instance.</p>
+		 * 
+		 * @param item to add to the <code>ISet</code> instance under construction.
+		 * @return a reference to this <code>SetBuilder</code> instance to allow method chaining.
 		 */
 		public function add(item : *) : SetBuilder {
 			_set.add(item);
@@ -95,39 +98,7 @@ package org.as3commons.collections.utils {
 		}
 		
 		/**
-		 * <p>Adds the supplied items to the ISet under construction, returns a reference to this
-		 * SetBuilder instance.</p>
-		 * 
-		 * <listing>
-				setBuilder.addMany(item1, item2, item3, ...);
-		 * </listing>
-		 * 
-		 * @param args List of items to add to the ISet instance under construction.
-		 * @return a reference to this SetBuilder instance to allow method chaining.
-		 */
-		public function addMany(...args) : SetBuilder {
-			for (var i : uint; i < args.length; i++) _set.add(args[i]);
-			return this;
-		}
-
-		/**
-		 * <p>Adds all the elements contained in the supplied ICollection instance to the ISet under
-		 * construction.</p>
-		 * 
-		 * @param collection all elements from the supplied collection will be added to the ISet instance
-		 * under construction.
-		 * @return a reference to this SetBuilder instance to allow method chaining.
-		 */
-		public function addAll(collection : ICollection) : SetBuilder {
-			const items : IIterator = collection.iterator();
-			while (items.hasNext()) {
-				_set.add(items.next());
-			}
-			return this;
-		}
-		
-		/**
-		 * <p>Completes construction.</p>
+		 * Completes construction.
 		 */
 		public function build() : ISet {
 			return _set;

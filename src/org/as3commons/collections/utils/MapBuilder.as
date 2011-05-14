@@ -22,58 +22,62 @@ package org.as3commons.collections.utils {
 	import org.as3commons.collections.framework.IMap;
 
 	/**
-	 * <p>Uses the Builder Pattern to simplify the creation of new IMap instances in a fluent fashion.</p>
+	 * Map builder using the builder pattern.
+	 * 
+	 * <p>Uses the builder Pattern to simplify the creation of new <code>IMap</code> instances in a fluent fashion.</p>
 	 *  
-	 * @example Creating a new LinkedMap instance using MapBuilder.
-	 * &lt;listing version="3.0"&gt;
-	 * 		const result : IMap = MapBuilder.linkedMap()
+	 * <p>Example: Creating a new <code>LinkedMap</code> instance using MapBuilder.</p>
+	 * 
+	 * <listing>
+	 * 		const result : IMap = MapBuilder.newLinkedMap()
 	 * 			.add("key1", "item-one")
 	 * 			.add("key2", "item-two")
 	 * 			.build();
 	 * 		
-	 * 		// Creates the following Map: { key1 => item-one, key2 => item-two }
+	 * 		// Creates the following map: { key1 => item-one, key2 => item-two }
 	 * 		trace(result);
-	 * &lt;/listing&gt;
+	 * </listing>
 	 * 
 	 * @author John Reeves 14.04.2011
 	 */
 	public class MapBuilder {
 
 		/**
-		 * <p>Backing IMap instance which will be modified during Builder operation.</p>
+		 * Backing <code>IMap</code> instance.
 		 */
 		private var _map : IMap;
 		
 		/**
-		 * <p>Starts the construction of a new Map instance</p>
+		 * Starts the construction of a new <code>Map</code> instance.
 		 * 
-		 * @return a MapBuilder instance which will build and return an instance of Map
+		 * @return a <code>MapBuilder</code> instance which will build and return an instance of <code>Map</code>
 		 */
-		public static function map() : MapBuilder {
+		public static function newMap() : MapBuilder {
 			return new MapBuilder(new Map());
 		}
 		
 		/**
-		 * <p>Starts construction of a new LinkedMap instance.</p>
+		 * Starts construction of a new <code>LinkedMap</code> instance.
 		 * 
-		 * @return a MapBuilder instance which will build and return an instance of LinkedMap
+		 * @return a <code>MapBuilder</code> instance which will build and return an instance of <code>LinkedMap</code>
 		 */
-		public static function linkedMap() : MapBuilder {
+		public static function newLinkedMap() : MapBuilder {
 			return new MapBuilder(new LinkedMap());
 		}
 		
 		/**
-		 * <p>Starts construction of a new SortedMap instance which makes use of the supplied comparator.</p>
+		 * Starts construction of a new <code>SortedMap</code> instance.
 		 * 
-		 * @param comparator the sort criterion which will be used by the resulting SortedMap instance.
-		 * @return a MapBuilder instance which will build and return an instance of SortedMap
+		 * @param comparator The sort criterion which will be used by the resulting <code>SortedMap</code> instance.
+		 * @return a <code>MapBuilder</code> instance which will build and return an instance of <code>SortedMap</code>
 		 */
-		public static function sortedMap(comparator : IComparator) : MapBuilder {
+		public static function newSortedMap(comparator : IComparator) : MapBuilder {
 			return new MapBuilder(new SortedMap(comparator));
 		}
 		
 		/**
-		 * <p>Please make use of one of the static factory methods for creating a new MapBuilder instance.</p>
+		 * Please make use of one of the static factory methods for creating a new <code>MapBuilder</code> instance.
+		 * 
 		 * @private
 		 */
 		public function MapBuilder(underlyingMap : IMap) {
@@ -81,12 +85,13 @@ package org.as3commons.collections.utils {
 		}
 		
 		/**
-		 * <p>Adds the supplied key and item mapping to the IMap under construction, returns a reference 
-		 * to this MapBuilder instance.</p>
+		 * Adds the supplied key and item mapping to the <code>IMap</code> under construction.
+		 * 
+		 * <p>Returns a reference to this <code>MapBuilder</code> instance.</p>
 		 * 
 		 * @param key to add to the map
 		 * @param item to be mapped to the supplied key 
-		 * @return a reference to this MapBuilder instance to allow method chaining.
+		 * @return a reference to this <code>MapBuilder</code> instance to allow method chaining.
 		 */
 		public function add(key : *, item : *) : MapBuilder {
 			_map.add(key, item);
@@ -94,7 +99,7 @@ package org.as3commons.collections.utils {
 		}
 		
 		/**
-		 * <p>Completes construction.</p>
+		 * Completes construction.
 		 */
 		public function build() : IMap {
 			return _map;

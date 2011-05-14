@@ -53,7 +53,9 @@ package {
 	import org.as3commons.collections.iterators.FilterIteratorTest;
 	import org.as3commons.collections.iterators.RecursiveFilterIteratorTest;
 	import org.as3commons.collections.iterators.RecursiveIteratorTest;
+	import org.as3commons.collections.utils.LinkedListBuilderTest;
 	import org.as3commons.collections.utils.LinkedListsTest;
+	import org.as3commons.collections.utils.ListBuilderTest;
 	import org.as3commons.collections.utils.ListsTest;
 	import org.as3commons.collections.utils.MapBuilderTest;
 	import org.as3commons.collections.utils.MapsTest;
@@ -130,12 +132,14 @@ package {
 			addTestSuite(StringComparatorTest);
 			
 			addTestSuite(ListsTest);
-			addTestSuite(MapsTest);
 			addTestSuite(SetsTest);
+			addTestSuite(MapsTest);
 			addTestSuite(LinkedListsTest);
 
+			addTestSuite(ListBuilderTest);
 			addTestSuite(SetBuilderTest);
 			addTestSuite(MapBuilderTest);
+			addTestSuite(LinkedListBuilderTest);
 			
 		}
 		

@@ -13,7 +13,7 @@ package org.as3commons.collections.utils {
 	 */
 	public class MapBuilderTest extends TestCase {
 		public function test_buildMap() : void {
-			const result : IMap = MapBuilder.map()
+			const result : IMap = MapBuilder.newMap()
 				.add("key", "item")
 				.build();
 			
@@ -23,7 +23,7 @@ package org.as3commons.collections.utils {
 		}
 		
 		public function test_buildLinkedMap() : void {
-			const result : IMap = MapBuilder.linkedMap()
+			const result : IMap = MapBuilder.newLinkedMap()
 				.add("key1", "item-1")
 				.add("key2", "item-2")
 				.build();
@@ -35,7 +35,7 @@ package org.as3commons.collections.utils {
 		}
 		
 		public function test_buildSortedMap() : void {
-			const result : IMap = MapBuilder.sortedMap(new NumericComparator())
+			const result : IMap = MapBuilder.newSortedMap(new NumericComparator())
 				.add("key1", 200)
 				.add("key2", 100)
 				.add("key3", 25)
