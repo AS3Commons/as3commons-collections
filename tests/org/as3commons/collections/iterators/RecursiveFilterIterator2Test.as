@@ -14,6 +14,7 @@
  * limitations under the License.
  */
 package org.as3commons.collections.iterators {
+
 	import org.as3commons.collections.framework.IIterator;
 	import org.as3commons.collections.framework.IRecursiveIterator;
 	import org.as3commons.collections.testhelpers.AbstractSpecialIteratorTestCase;
@@ -24,22 +25,22 @@ package org.as3commons.collections.iterators {
 	/**
 	 * @author Jens Struwe 19.03.2010
 	 */
-	public class RecursiveFilterIteratorTest extends AbstractSpecialIteratorTestCase {
+	public class RecursiveFilterIterator2Test extends AbstractSpecialIteratorTestCase {
 
 		/*
 		 * AbstractIteratorTest
 		 */
 
 		override public function getIterator(index : uint = 0) : IIterator {
-			return new RecursiveFilterIterator(collection, null, null);
+			return new RecursiveFilterIterator2(collection, null, null);
 		}
 
 		override public function getFilterIterator() : IIterator {
-			return new RecursiveFilterIterator(collection, filter, null);
+			return new RecursiveFilterIterator2(collection, filter, null);
 		}
 
 		override public function getRecursiveIterator() : IRecursiveIterator {
-			return new RecursiveFilterIterator(collection, null, null);
+			return new RecursiveFilterIterator2(collection, null, null);
 		}
 
 		/*
@@ -71,7 +72,7 @@ package org.as3commons.collections.iterators {
 		}
 
 		/*
-		 * RecursiveFilterIterator
+		 * RecursiveFilterIterator2
 		 */
 
 		private var list : Node;
@@ -105,7 +106,7 @@ package org.as3commons.collections.iterators {
 		 */
 	
 		private function getRecursiveFilterIterator(flagFilter : String = "", flagChildren : String = "") : IRecursiveIterator {
-			return new RecursiveFilterIterator(
+			return new RecursiveFilterIterator2(
 				list,
 				flagFilter ? flagFilter == "true" ? trueFilter : falseFilter : null,
 				flagChildren ? flagChildren == "true" ? trueChildrenFilter : falseChildrenFilter : null
@@ -168,7 +169,7 @@ package org.as3commons.collections.iterators {
 			
 			setUpList();
 			
-			var iterator : IIterator = getRecursiveFilterIterator(null, null);
+			var iterator : IRecursiveIterator = getRecursiveFilterIterator(null, null);
 			
 			var result : Array = new Array();
 			while (iterator.hasNext()) {
@@ -205,12 +206,12 @@ package org.as3commons.collections.iterators {
 			
 			expectedResult = [
 				list0,
-					list0_0,
+					list0_0, // false
 						list0_0_0,
 					list0_1,
 						list0_1_0,
 						list0_1_1,
-				list1,
+				list1, // false
 					list1_0,
 				list2,
 					list2_0,
@@ -231,12 +232,14 @@ package org.as3commons.collections.iterators {
 			
 			expectedResult = [
 				list0,
+						list0_0_0,
 					list0_1,
 						list0_1_0,
 						list0_1_1,
+					list1_0,
 				list2,
-					list2_0,
-				list3
+					list2_0, // false
+				list3 // false
 			];
 
 			assertTrue(validateItems(expectedResult, result));
@@ -253,9 +256,11 @@ package org.as3commons.collections.iterators {
 			
 			expectedResult = [
 				list0,
+						list0_0_0,
 					list0_1,
-						list0_1_0,
-						list0_1_1,
+						list0_1_0, // false
+						list0_1_1, // false
+					list1_0,
 				list2
 			];
 
@@ -272,8 +277,10 @@ package org.as3commons.collections.iterators {
 			}
 			
 			expectedResult = [
-				list0,
+				list0, // false
+						list0_0_0,
 					list0_1,
+					list1_0,
 				list2
 			];
 
@@ -289,7 +296,10 @@ package org.as3commons.collections.iterators {
 			}
 			
 			expectedResult = [
-				list2
+						list0_0_0,
+					list0_1,
+					list1_0,
+				list2 // false
 			];
 
 			assertTrue(validateItems(expectedResult, result));
@@ -304,6 +314,9 @@ package org.as3commons.collections.iterators {
 			}
 			
 			expectedResult = [
+						list0_0_0,
+					list0_1,
+					list1_0,
 			];
 
 			assertTrue(validateItems(expectedResult, result));
@@ -330,19 +343,137 @@ package org.as3commons.collections.iterators {
 			//list3 // false
 
 			expectedResult = [
-				list0,
-					list0_0,
-						list0_0_1,
-				list1,
-				list2,
-					list2_0,
-				list3
+				list0, // false
+					list0_0, // false
+						list0_0_1, // false
+						list0_1_0, // false
+						list0_1_1, // false
+				list1, // false
+						list1_0_0, // false
+				list2, // false
+					list2_0, // false
+				list3 // false
 			];
 			
 			assertTrue(validateItems(expectedResult, result));
 
 		}
 		
+		public function test_filter2() : void {
+			
+			list = new Node("list");
+				list0 = new Node("list0");
+					list0_0 = new Node("list0_0", false);
+						list0_0_0 = new Node("list0_0_0");
+						list0_0_1 = new Node("list0_0_1");
+					list0_1 = new Node("list0_1");
+						list0_1_0 = new Node("list0_1_0");
+						list0_1_1 = new Node("list0_1_1");
+				list1 = new Node("list1");
+					list1_0 = new Node("list1_0");
+					list1_0_0 = new Node("list1_0_0");
+				list2 = new Node("list2");
+					list2_0 = new Node("list2_0");
+				list3 = new Node("list3");
+
+			list.add(list0);
+				list0.add(list0_0);
+					list0_0.add(list0_0_0);
+					list0_0.add(list0_0_1);
+				list0.add(list0_1);
+					list0_1.add(list0_1_0);
+					list0_1.add(list0_1_1);
+			list.add(list1);
+				list1.add(list1_0);
+					list1_0.add(list1_0_0);
+			list.add(list2);
+				list2.add(list2_0);
+			list.add(list3);
+			
+			// return only items of "true" and respect only children of items that are "true"
+			var iterator : IRecursiveIterator = getRecursiveFilterIterator("true", "true");
+			
+			var result : Array = new Array();
+			while (iterator.hasNext()) {
+				result.push(iterator.next());
+			}
+			
+			var expectedResult : Array = [
+				list0,
+					list0_1,
+						list0_1_0,
+						list0_1_1,
+				list1,
+					list1_0,
+						list1_0_0,
+				list2,
+					list2_0,
+				list3
+			];
+			
+			assertEquals(10, result.length);
+			assertTrue(validateItems(expectedResult, result));
+			
+		}
+
+		public function test_filter3() : void {
+			
+			list = new Node("list");
+				list0 = new Node("list0");
+					list0_0 = new Node("list0_0", false);
+						list0_0_0 = new Node("list0_0_0");
+						list0_0_1 = new Node("list0_0_1");
+					list0_1 = new Node("list0_1");
+						list0_1_0 = new Node("list0_1_0");
+						list0_1_1 = new Node("list0_1_1");
+				list1 = new Node("list1");
+					list1_0 = new Node("list1_0");
+					list1_0_0 = new Node("list1_0_0");
+				list2 = new Node("list2");
+					list2_0 = new Node("list2_0");
+				list3 = new Node("list3");
+
+			list.add(list0);
+				list0.add(list0_0);
+					list0_0.add(list0_0_0);
+					list0_0.add(list0_0_1);
+				list0.add(list0_1);
+					list0_1.add(list0_1_0);
+					list0_1.add(list0_1_1);
+			list.add(list1);
+				list1.add(list1_0);
+					list1_0.add(list1_0_0);
+			list.add(list2);
+				list2.add(list2_0);
+			list.add(list3);
+			
+			// return only items of "true" and respect children of all active statuses
+			var iterator : IRecursiveIterator = getRecursiveFilterIterator("true", null);
+			
+			var result : Array = new Array();
+			while (iterator.hasNext()) {
+				result.push(iterator.next());
+			}
+			
+			var expectedResult : Array = [
+				list0,
+						list0_0_0,
+						list0_0_1,
+					list0_1,
+						list0_1_0,
+						list0_1_1,
+				list1,
+					list1_0,
+						list1_0_0,
+				list2,
+					list2_0,
+				list3
+			];
+			
+			assertEquals(12, result.length);
+			assertTrue(validateItems(expectedResult, result));
+		}
+
 		public function test_filter4() : void {
 			
 			list = new Node("list");
@@ -398,7 +529,8 @@ package org.as3commons.collections.iterators {
 			
 			expectedResult = [
 				list0,
-					list0_0
+					list0_0,
+					list1_0
 			];
 			
 			assertTrue(validateItems(expectedResult, result));
@@ -413,6 +545,7 @@ package org.as3commons.collections.iterators {
 			}
 			
 			expectedResult = [
+					list0_1, // false
 				list1, // false
 					list1_1 // false
 			];
@@ -445,6 +578,7 @@ package org.as3commons.collections.iterators {
 			}
 			
 			expectedResult = [
+					list0_1, // false
 				list1 // false
 			];
 			
@@ -496,7 +630,8 @@ package org.as3commons.collections.iterators {
 			}
 			
 			expectedResult = [
-				list0
+				list0,
+					list1_0, 
 			];
 			
 			assertTrue(validateItems(expectedResult, result));
@@ -767,8 +902,12 @@ package org.as3commons.collections.iterators {
 			
 			expectedResult = [
 				list0,
+						list0_0_0,
+						list0_0_1,
 					list0_1,
 						list0_1_1,
+						list1_0_0,
+					list2_0,
 				list3
 			];
 			
@@ -782,9 +921,11 @@ package org.as3commons.collections.iterators {
 			}
 			
 			expectedResult = [
+					list0_0, // false
+						list0_1_0, // false
 				list1, // false
 					list1_0, // false
-				list2 // false
+				list2, // false
 			];
 			
 			assertTrue(validateItems(expectedResult, result));
@@ -833,6 +974,8 @@ package org.as3commons.collections.iterators {
 			}
 			
 			expectedResult = [
+					list0_0, // false
+						list0_1_0, // false
 				list1, // false
 				list2 // false
 			];
@@ -867,6 +1010,8 @@ package org.as3commons.collections.iterators {
 			
 			expectedResult = [
 				list0,
+						list1_0_0,
+					list2_0,
 				list3
 			];
 			
@@ -882,12 +1027,13 @@ package org.as3commons.collections.iterators {
 			expectedResult = [
 				list1, // false
 					list1_0, // false
-				list2 // false
+				list2, // false
 			];
 			
 			assertTrue(validateItems(expectedResult, result));
 
 		}
+
 	}
 }
 

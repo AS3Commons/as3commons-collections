@@ -5,7 +5,7 @@
 	<property name="ASDOC" value="${FLEX_HOME}\bin\asdoc.exe" />
 
 	<property name="FILE_NAME" value="as3commons-collections" />
-	<property name="VERSION" value="1.2.0" />
+	<property name="VERSION" value="1.3.0" />
 
 	<property name="BUILD" value="build" />
 	<property name="SRC" value="src" />
@@ -15,6 +15,17 @@
 	<property name="SWC" value="swc" />
 	<property name="DOC" value="doc" />
 	<property name="TMP" value="tmp" />
+
+	<taskdef resource="flexTasks.tasks" classpath="${FLEX_HOME}/ant/lib/flexTasks.jar"/> 
+
+	<target name="SWC" description="Compile Libray">
+		<compc output="${SWC}/${FILE_NAME}-${VERSION}.swc">
+			<include-sources dir="${basedir}/${SRC}/org/as3commons/collections/" includes="*" /> 
+
+			<!-- Libs -->
+			<external-library-path dir="${FLEX_HOME}/frameworks/libs/player/9" includes="*" />
+		</compc>
+	</target>
 
 	<target name="APIDoc" depends="Clean, Embed_Examples, Create_ApiDoc, Clean_TMP" />
 

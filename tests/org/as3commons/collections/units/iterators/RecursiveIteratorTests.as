@@ -185,6 +185,35 @@ package org.as3commons.collections.units.iterators {
 			);
 		}
 	
+		public function test_null(): void {
+			fillList();
+
+			list1.add(null);
+			list1.add(null);
+			list2.add(null);
+			list2.add(null);
+
+			var iterator : IRecursiveIterator = _specialIteratorTest.getRecursiveIterator();
+
+			var result : Array = new Array();
+			while (iterator.hasNext()) {
+				var next : * = iterator.next();
+				result.push(next);
+			}
+
+			assertEquals(12, result.length);
+	
+			assertTrue(
+				_test.validateItems(
+					[list1,
+						TestItems.object1, TestItems.object2, TestItems.object3, null, null,
+					list2,
+						TestItems.object4, TestItems.object5, TestItems.object6, null, null],
+					result
+				)
+			);
+		}
+	
 		public function test_returnsAllItemsAdded_complex(): void {
 			fillComplexList();
 

@@ -51,6 +51,7 @@ package {
 	import org.as3commons.collections.iterators.ArrayIteratorTest;
 	import org.as3commons.collections.iterators.CollectionFilterIteratorTest;
 	import org.as3commons.collections.iterators.FilterIteratorTest;
+	import org.as3commons.collections.iterators.RecursiveFilterIterator2Test;
 	import org.as3commons.collections.iterators.RecursiveFilterIteratorTest;
 	import org.as3commons.collections.iterators.RecursiveIteratorTest;
 	import org.as3commons.collections.utils.LinkedListBuilderTest;
@@ -126,6 +127,7 @@ package {
 			addTestSuite(CollectionFilterIteratorTest);
 			addTestSuite(RecursiveIteratorTest);
 			addTestSuite(RecursiveFilterIteratorTest);
+			addTestSuite(RecursiveFilterIterator2Test);
 
 			// utils
 

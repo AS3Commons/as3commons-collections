@@ -61,7 +61,7 @@ package org.as3commons.collections.iterators {
 	 * @see org.as3commons.collections.framework.IRecursiveIterator IRecursiveIterator interface - Description of the recursive iterator features.
 	 * @see FilterIterator FilterIterator - Filter iterator usage example.
 	 */
-	public final class RecursiveFilterIterator implements IRecursiveIterator {
+	public final class RecursiveFilterIterator2 implements IRecursiveIterator {
 
 		/**
 		 * Iterator to start with.
@@ -112,7 +112,7 @@ package org.as3commons.collections.iterators {
 		 * @param depth Internally passed recursion depth. 
 		 * @param parentItems Internally passed parent chain, considered in recursion detection.
 		 */
-		public function RecursiveFilterIterator(
+		public function RecursiveFilterIterator2(
 			iterable : IIterable,
 			filter : Function,
 			childrenFilter : Function,
@@ -152,12 +152,9 @@ package org.as3commons.collections.iterators {
 			
 			var next : *;
 			if (_childIterator) {
-				while (_childIterator.hasNext()) {
-					next = _childIterator.next();
-					if (_filter(next)) {
-						_next = next;
-						return true;
-					}
+				if (_childIterator.hasNext()) {
+					_next = _childIterator.next();
+					return true;
 				}
 				_childIterator = null;
 				return hasNext();
@@ -165,10 +162,21 @@ package org.as3commons.collections.iterators {
 
 			while (_iterator.hasNext()) {
 				next = _iterator.next();
-				if (_filter(next)) {
-					_next = next;
-					return true;
+				if (_filter(next)) _next = next;
+				if (next is IIterable && _childrenFilter(next)) {
+					if (_parentItems.indexOf(next) < 0) {
+						_childIterator = new RecursiveFilterIterator2(
+							next,
+							_filter,
+							_childrenFilter,
+							_depth + 1,
+							_parentItems.concat(next)
+						);
+						if (_next === undefined) return hasNext();
+					}
 				}
+
+				if (_next !== undefined) return true;
 			}
 
 			return false;
@@ -191,18 +199,6 @@ package org.as3commons.collections.iterators {
 
 			_depth = _rootDepth; // cannot use _iterator.getDepth() as we have here an IIterator instance
 
-			if (_next is IIterable && _childrenFilter(_next)) {
-				if (_parentItems.indexOf(_next) < 0) {
-					_childIterator = new RecursiveFilterIterator(
-						_next,
-						_filter,
-						_childrenFilter,
-						_depth + 1,
-						_parentItems.concat(_next)
-					);
-				}
-			}
-			
 			next = _next;
 			_next = undefined;
 			return next;
