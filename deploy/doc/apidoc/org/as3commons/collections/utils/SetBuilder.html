@@ -4,13 +4,13 @@
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" href="../../../../style.css" type="text/css" media="screen">
 <link rel="stylesheet" href="../../../../print.css" type="text/css" media="print">
-<meta content="SetBuilder,org.as3commons.collections.utils.SetBuilder,add,addAll,addMany,build,linkedSet,sortedSet,set" name="keywords">
+<meta content="SetBuilder,org.as3commons.collections.utils.SetBuilder,add,build,newLinkedSet,newSet,newSortedSet" name="keywords">
 <title>org.as3commons.collections.utils.SetBuilder</title>
 </head>
 <body>
 <script type="text/javascript" language="javascript" src="../../../../asdoc.js"></script><script type="text/javascript" language="javascript" src="../../../../cookies.js"></script><script type="text/javascript" language="javascript">
 <!--
-				asdocTitle = 'SetBuilder - AS3Commons Collections 1.2.0';
+				asdocTitle = 'SetBuilder - AS3Commons Collections 1.3.0';
 				var baseRef = '../../../../';
 				window.onload = configPage;
 			--></script>
@@ -39,21 +39,21 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 </tr>
 </table>
 <p></p>
-  <p>Uses the Builder Pattern to simplify the creation of new ISet instances in a fluent fashion.</p>
+  Set builder using the builder pattern.
+  
+  <p>Uses the builder Pattern to simplify the creation of new ISet instances in a fluent fashion.</p>
    
-  <p></p>
-<br>
-<span class="label">Example</span>
-<br>Creating a new LinkedSet instance using SetBuilder.
-  &lt;listing version="3.0"&gt;
-    const result : IMap = SetBuilder.linkedSet()
+  <p>Example: Creating a new LinkedSet instance using SetBuilder.</p>
+  
+  <div class='listing'><pre>
+    const result : ISet = SetBuilder.newLinkedSet()
      .add("item-one")
      .add("item-two")
      .build();
     
-    // Creates the following Set: { item-one, item-two }
+    // Creates the following set: { item-one, item-two }
     trace(result);
-  &lt;/listing&gt;
+  </pre></div>
   
   <p></p>
 <br>
@@ -72,38 +72,7 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <a class="signatureLink" href="#add()">add</a>(item:*):<a href="../utils/SetBuilder.html">SetBuilder</a>
 </div>
 <div class="summaryTableDescription">
-   <p>Adds the supplied item to the ISet under construction, returns a reference to this
-   SetBuilder instance.</p>
-   
-   </div>
-</td><td class="summaryTableOwnerCol">SetBuilder</td>
-</tr>
-<tr class="">
-<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
-<div class="summarySignature">
-<a class="signatureLink" href="#addAll()">addAll</a>(collection:<a href="../framework/ICollection.html">ICollection</a>):<a href="../utils/SetBuilder.html">SetBuilder</a>
-</div>
-<div class="summaryTableDescription">
-   <p>Adds all the elements contained in the supplied ICollection instance to the ISet under
-   construction.</p>
-   
-   </div>
-</td><td class="summaryTableOwnerCol">SetBuilder</td>
-</tr>
-<tr class="">
-<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
-<div class="summarySignature">
-<a class="signatureLink" href="#addMany()">addMany</a>(... args):<a href="../utils/SetBuilder.html">SetBuilder</a>
-</div>
-<div class="summaryTableDescription">
-   <p>Adds the supplied items to the ISet under construction, returns a reference to this
-   SetBuilder instance.</p>
-   
-   <div class='listing'><pre>
-    setBuilder.addMany(item1, item2, item3, ...);
-   </pre></div>
-   
-   </div>
+   Adds the supplied item to the <code>ISet</code> under construction.</div>
 </td><td class="summaryTableOwnerCol">SetBuilder</td>
 </tr>
 <tr class="">
@@ -112,41 +81,34 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <a class="signatureLink" href="#build()">build</a>():<a href="../framework/ISet.html">ISet</a>
 </div>
 <div class="summaryTableDescription">
-   <p>Completes construction.</p>
-   </div>
+   Completes construction.</div>
 </td><td class="summaryTableOwnerCol">SetBuilder</td>
 </tr>
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
 <div class="summarySignature">
-<a class="signatureLink" href="#linkedSet()">linkedSet</a>():<a href="../utils/SetBuilder.html">SetBuilder</a>
+<a class="signatureLink" href="#newLinkedSet()">newLinkedSet</a>():<a href="../utils/SetBuilder.html">SetBuilder</a>
 </div>
 <div class="summaryTableDescription">[static]
-   <p>Starts construction of a new LinkedSet instance.</p>
-   
-   </div>
+   Starts construction of a new <code>LinkedSet</code> instance.</div>
 </td><td class="summaryTableOwnerCol">SetBuilder</td>
 </tr>
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
 <div class="summarySignature">
-<a class="signatureLink" href="#set()">set</a>():<a href="../utils/SetBuilder.html">SetBuilder</a>
+<a class="signatureLink" href="#newSet()">newSet</a>():<a href="../utils/SetBuilder.html">SetBuilder</a>
 </div>
 <div class="summaryTableDescription">[static]
-   <p>Starts the construction of a new Set instance</p>
-   
-   </div>
+   Starts the construction of a new <code>Set</code> instance.</div>
 </td><td class="summaryTableOwnerCol">SetBuilder</td>
 </tr>
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
 <div class="summarySignature">
-<a class="signatureLink" href="#sortedSet()">sortedSet</a>(comparator:<a href="../framework/IComparator.html">IComparator</a>):<a href="../utils/SetBuilder.html">SetBuilder</a>
+<a class="signatureLink" href="#newSortedSet()">newSortedSet</a>(comparator:<a href="../framework/IComparator.html">IComparator</a>):<a href="../utils/SetBuilder.html">SetBuilder</a>
 </div>
 <div class="summaryTableDescription">[static]
-   <p>Starts construction of a new SortedSet instance.</p>
-   
-   </div>
+   Starts construction of a new <code>SortedSet</code> instance.</div>
 </td><td class="summaryTableOwnerCol">SetBuilder</td>
 </tr>
 </table>
@@ -166,13 +128,14 @@ showHideInherited();
 </table>
 <div class="detailBody">
 <code>public function add(item:*):<a href="../utils/SetBuilder.html">SetBuilder</a></code><p>
-   </p><p>Adds the supplied item to the ISet under construction, returns a reference to this
-   SetBuilder instance.</p>
+   Adds the supplied item to the <code>ISet</code> under construction.
+   
+   </p><p>Returns a reference to this SetBuilder instance.</p>
    
    <span class="label">Parameters</span>
 <table border="0" cellspacing="0" cellpadding="0">
 <tr>
-<td width="20px"></td><td><code><span class="label">item</span>:*</code> &mdash; to add to the ISet instance under construction.
+<td width="20px"></td><td><code><span class="label">item</span>:*</code> &mdash; to add to the <code>ISet</code> instance under construction.
    </td>
 </tr>
 </table>
@@ -181,72 +144,7 @@ showHideInherited();
 <table border="0" cellspacing="0" cellpadding="0">
 <tr>
 <td width="20"></td><td><code><a href="../utils/SetBuilder.html">SetBuilder</a></code> &mdash; 
-                        a reference to this SetBuilder instance to allow method chaining.
-   
-                        
-                     </td>
-</tr>
-</table>
-</div>
-<a name="addAll()"></a>
-<table cellspacing="0" cellpadding="0" class="detailHeader">
-<tr>
-<td class="detailHeaderName">addAll</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
-</tr>
-</table>
-<div class="detailBody">
-<code>public function addAll(collection:<a href="../framework/ICollection.html">ICollection</a>):<a href="../utils/SetBuilder.html">SetBuilder</a></code><p>
-   </p><p>Adds all the elements contained in the supplied ICollection instance to the ISet under
-   construction.</p>
-   
-   <span class="label">Parameters</span>
-<table border="0" cellspacing="0" cellpadding="0">
-<tr>
-<td width="20px"></td><td><code><span class="label">collection</span>:<a href="../framework/ICollection.html">ICollection</a></code> &mdash; all elements from the supplied collection will be added to the ISet instance
-   under construction.
-   </td>
-</tr>
-</table>
-<p></p>
-<span class="label">Returns</span>
-<table border="0" cellspacing="0" cellpadding="0">
-<tr>
-<td width="20"></td><td><code><a href="../utils/SetBuilder.html">SetBuilder</a></code> &mdash; 
-                        a reference to this SetBuilder instance to allow method chaining.
-   
-                        
-                     </td>
-</tr>
-</table>
-</div>
-<a name="addMany()"></a>
-<table cellspacing="0" cellpadding="0" class="detailHeader">
-<tr>
-<td class="detailHeaderName">addMany</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
-</tr>
-</table>
-<div class="detailBody">
-<code>public function addMany(... args):<a href="../utils/SetBuilder.html">SetBuilder</a></code><p>
-   </p><p>Adds the supplied items to the ISet under construction, returns a reference to this
-   SetBuilder instance.</p>
-   
-   <div class='listing'><pre>
-    setBuilder.addMany(item1, item2, item3, ...);
-   </pre></div>
-   
-   <span class="label">Parameters</span>
-<table border="0" cellspacing="0" cellpadding="0">
-<tr>
-<td width="20px"></td><td><code>... <span class="label">args</span></code> &mdash; List of items to add to the ISet instance under construction.
-   </td>
-</tr>
-</table>
-<p></p>
-<span class="label">Returns</span>
-<table border="0" cellspacing="0" cellpadding="0">
-<tr>
-<td width="20"></td><td><code><a href="../utils/SetBuilder.html">SetBuilder</a></code> &mdash; 
-                        a reference to this SetBuilder instance to allow method chaining.
+                        a reference to this <code>SetBuilder</code> instance to allow method chaining.
    
                         
                      </td>
@@ -261,8 +159,8 @@ showHideInherited();
 </table>
 <div class="detailBody">
 <code>public function build():<a href="../framework/ISet.html">ISet</a></code><p>
-   </p><p>Completes construction.</p>
-   <p></p>
+   Completes construction.
+   </p><p></p>
 <span class="label">Returns</span>
 <table border="0" cellspacing="0" cellpadding="0">
 <tr>
@@ -270,64 +168,64 @@ showHideInherited();
 </tr>
 </table>
 </div>
-<a name="linkedSet()"></a>
+<a name="newLinkedSet()"></a>
 <table cellspacing="0" cellpadding="0" class="detailHeader">
 <tr>
-<td class="detailHeaderName">linkedSet</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+<td class="detailHeaderName">newLinkedSet</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
 </tr>
 </table>
 <div class="detailBody">
-<code>public static function linkedSet():<a href="../utils/SetBuilder.html">SetBuilder</a></code><p>
-   </p><p>Starts construction of a new LinkedSet instance.</p>
+<code>public static function newLinkedSet():<a href="../utils/SetBuilder.html">SetBuilder</a></code><p>
+   Starts construction of a new <code>LinkedSet</code> instance.
    
-   <p></p>
+   </p><p></p>
 <span class="label">Returns</span>
 <table border="0" cellspacing="0" cellpadding="0">
 <tr>
 <td width="20"></td><td><code><a href="../utils/SetBuilder.html">SetBuilder</a></code> &mdash; 
-                        a SetBuilder instance which will build and return an instance of LinkedSet
+                        a <code>SetBuilder</code> instance which will build and return an instance of <code>LinkedSet</code>
    
                         
                      </td>
 </tr>
 </table>
 </div>
-<a name="set()"></a>
+<a name="newSet()"></a>
 <table cellspacing="0" cellpadding="0" class="detailHeader">
 <tr>
-<td class="detailHeaderName">set</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+<td class="detailHeaderName">newSet</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
 </tr>
 </table>
 <div class="detailBody">
-<code>public static function set():<a href="../utils/SetBuilder.html">SetBuilder</a></code><p>
-   </p><p>Starts the construction of a new Set instance</p>
+<code>public static function newSet():<a href="../utils/SetBuilder.html">SetBuilder</a></code><p>
+   Starts the construction of a new <code>Set</code> instance.
    
-   <p></p>
+   </p><p></p>
 <span class="label">Returns</span>
 <table border="0" cellspacing="0" cellpadding="0">
 <tr>
 <td width="20"></td><td><code><a href="../utils/SetBuilder.html">SetBuilder</a></code> &mdash; 
-                        a SetBuilder instance which will build and return an instance of Set
+                        a <code>SetBuilder</code> instance which will build and return an instance of Set
    
                         
                      </td>
 </tr>
 </table>
 </div>
-<a name="sortedSet()"></a>
+<a name="newSortedSet()"></a>
 <table cellspacing="0" cellpadding="0" class="detailHeader">
 <tr>
-<td class="detailHeaderName">sortedSet</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+<td class="detailHeaderName">newSortedSet</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
 </tr>
 </table>
 <div class="detailBody">
-<code>public static function sortedSet(comparator:<a href="../framework/IComparator.html">IComparator</a>):<a href="../utils/SetBuilder.html">SetBuilder</a></code><p>
-   </p><p>Starts construction of a new SortedSet instance.</p>
+<code>public static function newSortedSet(comparator:<a href="../framework/IComparator.html">IComparator</a>):<a href="../utils/SetBuilder.html">SetBuilder</a></code><p>
+   Starts construction of a new <code>SortedSet</code> instance.
    
-   <span class="label">Parameters</span>
+   </p><span class="label">Parameters</span>
 <table border="0" cellspacing="0" cellpadding="0">
 <tr>
-<td width="20px"></td><td><code><span class="label">comparator</span>:<a href="../framework/IComparator.html">IComparator</a></code> &mdash; the sort criterion which will be used by the resulting SortedSet instance.
+<td width="20px"></td><td><code><span class="label">comparator</span>:<a href="../framework/IComparator.html">IComparator</a></code> &mdash; The sort criterion which will be used by the resulting <code>SortedSet</code> instance.
    </td>
 </tr>
 </table>
@@ -336,7 +234,7 @@ showHideInherited();
 <table border="0" cellspacing="0" cellpadding="0">
 <tr>
 <td width="20"></td><td><code><a href="../utils/SetBuilder.html">SetBuilder</a></code> &mdash; 
-                        a MapBuilder instance which will build and return an instance of SortedSet
+                        a <code>SetBuilder</code> instance which will build and return an instance of <code>SortedSet</code>
    
                         
                      </td>

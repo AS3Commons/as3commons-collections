@@ -4,13 +4,13 @@
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" href="../../../../style.css" type="text/css" media="screen">
 <link rel="stylesheet" href="../../../../print.css" type="text/css" media="print">
-<meta content="ISortOrder,org.as3commons.collections.framework.ISortOrder,hasEqual" name="keywords">
+<meta content="ISortOrder,org.as3commons.collections.framework.ISortOrder,comparator,hasEqual" name="keywords">
 <title>org.as3commons.collections.framework.ISortOrder</title>
 </head>
 <body>
 <script type="text/javascript" language="javascript" src="../../../../asdoc.js"></script><script type="text/javascript" language="javascript" src="../../../../cookies.js"></script><script type="text/javascript" language="javascript">
 <!--
-				asdocTitle = 'ISortOrder - AS3Commons Collections 1.2.0';
+				asdocTitle = 'ISortOrder - AS3Commons Collections 1.3.0';
 				var baseRef = '../../../../';
 				window.onload = configPage;
 			--></script>
@@ -62,9 +62,15 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("In
 <a onclick="javascript:setInheritedVisible(true,'Property');" href="#propertySummary" class="showHideLink"><img src="../../../../images/collapsed.gif" class="showHideLinkImage"> Show Inherited Public Properties</a>
 </div>
 </div>
-<table id="summaryTableProperty" class="summaryTable hideInheritedProperty" cellpadding="3" cellspacing="0">
+<table id="summaryTableProperty" class="summaryTable " cellpadding="3" cellspacing="0">
 <tr>
 <th>&nbsp;</th><th colspan="2">Property</th><th class="summaryTableOwnerCol">Defined&nbsp;by</th>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#comparator">comparator</a> : <a href="../framework/IComparator.html">IComparator</a>
+<div class="summaryTableDescription">
+   Returns or sets the initial comparator of the collection.</div>
+</td><td class="summaryTableOwnerCol">ISortOrder</td>
 </tr>
 <tr class="hideInheritedProperty">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol"><img class="inheritedSummaryImage" title="Inherited" alt="Inherited" src="../../../../images/inheritedSummary.gif"></td><td class="summaryTableSignatureCol"><a class="signatureLink" href="IOrder.html#first">first</a> : *<div class="summaryTableDescription">
@@ -170,6 +176,37 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("In
 showHideInherited();
 --></script>
 <div class="MainContent">
+<a name="propertyDetail"></a>
+<div class="detailSectionHeader">Property detail</div>
+<a name="comparator"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">comparator</td><td class="detailHeaderType">property</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>comparator:<a href="../framework/IComparator.html">IComparator</a></code>&nbsp;&nbsp;[read-write]<p>
+   Returns or sets the initial comparator of the collection.
+   
+   </p><p>You cannot reset a comparator of a collection that contains items.
+   In that case an <code>ArgumentError</code> is thrown.</p>
+   
+   <span class="label">Implementation</span>
+<br>
+<code>&nbsp;&nbsp;&nbsp;&nbsp;public function get comparator():<a href="../framework/IComparator.html">IComparator</a></code>
+<br>
+<code>&nbsp;&nbsp;&nbsp;&nbsp;public function set comparator(value:<a href="../framework/IComparator.html">IComparator</a>):void</code>
+<br>
+<br>
+<span class="label">Throws</span>
+<br>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20"></td><td><code></code> &mdash; if set to a collection with a size > 0.
+   </td>
+</tr>
+</table>
+</div>
 <a name="methodDetail"></a>
 <div class="detailSectionHeader">Method detail</div>
 <a name="hasEqual()"></a>

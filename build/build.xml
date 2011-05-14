@@ -11,9 +11,9 @@
 	<property name="SRC" value="src" />
 	<property name="EXAMPLES" value="examples" />
 	<property name="TESTS" value="tests" />
-	<property name="ZIP" value="zip" />
-	<property name="SWC" value="swc" />
-	<property name="DOC" value="doc" />
+	<property name="ZIP" value="deploy/zip" />
+	<property name="SWC" value="deploy/swc" />
+	<property name="DOC" value="deploy/doc" />
 	<property name="TMP" value="tmp" />
 
 	<taskdef resource="flexTasks.tasks" classpath="${FLEX_HOME}/ant/lib/flexTasks.jar"/> 
@@ -72,6 +72,8 @@
 
 		<copy file="${BUILD}/asdoc/asdoc.js" todir="${DOC}/apidoc" overwrite="true" />
 		<copy file="${BUILD}/asdoc/style.css" todir="${DOC}/apidoc" overwrite="true" />
+		
+		<antcall target="Clean_TMP"></antcall>
 	</target>
 
 	<target name="Zip" description="ZIP">

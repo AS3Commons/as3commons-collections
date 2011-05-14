@@ -32,7 +32,10 @@ package org.as3commons.collections.iterators {
 	 * 
 	 * <p>Its possible to set up two different filters. The first filter tests if an
 	 * item should be returned. The second filter tests if children of a specific item
-	 * should be considered or not. It is possible to set up both filters together.</p>
+	 * should be considered or not. Children of items that did not pass the first
+	 * <code>filter</code> function are skipped by the iterator. This is the difference
+	 * to <code>RecursiveFilterIterator2</code>. It is possible to set
+	 * up both filters together.</p>
 	 * 
 	 * <p>Both filter functions accept the current item and return a boolean
 	 * value (<code>true</code> if the item is accepted).</p>

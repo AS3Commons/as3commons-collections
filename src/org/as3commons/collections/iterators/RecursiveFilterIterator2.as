@@ -23,7 +23,15 @@ package org.as3commons.collections.iterators {
 	 * 
 	 * <p><strong>Description</strong></p>
 	 * 
-	 * <p>The <code>RecursiveFilterIterator</code> accepts an <code>IIterable</code> instance
+	 * <p>Filter a complex data structure using this iterator. Two filters let specify what
+	 * items should be returned and if children of a parent item should be considered.</p>
+	 * 
+	 * <p>In difference to the legacy <code>RecursiveFilterIterator</code> this iterator
+	 * iterates through parent items even if the parent items should not be returned.
+	 * The <code>RecursiveFilterIterator</code> never checks children of items that are
+	 * excluded by the <code>filter</code> function.</p>
+	 * 
+	 * <p>The <code>RecursiveFilterIterator2</code> accepts an <code>IIterable</code> instance
 	 * and iterates recursively over the items of the given iterable collection while applying
 	 * the specified filters. To do so, all children that should be further iterated should be
 	 * also instance of <code>IIterable</code>.</p>
@@ -32,7 +40,9 @@ package org.as3commons.collections.iterators {
 	 * 
 	 * <p>Its possible to set up two different filters. The first filter tests if an
 	 * item should be returned. The second filter tests if children of a specific item
-	 * should be considered or not. It is possible to set up both filters together.</p>
+	 * should be considered or not. Children of items that did not pass the first
+	 * <code>filter</code> function are still being considered by the iterator. It is
+	 * possible to set up both filters together.</p>
 	 * 
 	 * <p>Both filter functions accept the current item and return a boolean
 	 * value (<code>true</code> if the item is accepted).</p>
