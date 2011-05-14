@@ -1,0 +1,24 @@
+Version 1.3.0
+----------------------------------------------------------
+
+"Provide utilities"
+
+New features:
+- Map, List and Set utilities (clone, copy, addFrom)
+- Map, List and Set builder
+- RecursiveIterator2 (will replace RecursiveIterator in Version 2)
+
+Bugs:
+- none
+
+
+Version 1.2.0
+----------------------------------------------------------
+
+"Reset to 1.0.0"
+
+Features:
+- none
+
+Bugs:
+- none
