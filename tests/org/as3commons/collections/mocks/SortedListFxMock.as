@@ -26,7 +26,7 @@ package org.as3commons.collections.mocks {
 		ITestSortOrderDuplicateEquals,
 		ITestDuplicates
 	{
-		public function SortedListFxMock(comparator : IComparator) {
+		public function SortedListFxMock(comparator : IComparator = null) {
 			super(comparator);
 		}
 		

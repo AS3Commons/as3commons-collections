@@ -25,7 +25,7 @@ package org.as3commons.collections.mocks {
 	public class SortedSetMock extends SortedSet implements
 		ITestSortOrderDuplicateEquals
 	{
-		public function SortedSetMock(comparator : IComparator) {
+		public function SortedSetMock(comparator : IComparator = null) {
 			super(comparator);
 		}
 		

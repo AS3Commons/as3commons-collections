@@ -56,7 +56,7 @@ package org.as3commons.collections.fx {
 		/**
 		 * SortedListFx constructor.
 		 */
-		public function SortedSetFx(comparator : IComparator) {
+		public function SortedSetFx(comparator : IComparator = null) {
 			_eventDispatcher = new EventDispatcher(this);
 
 			super(comparator);

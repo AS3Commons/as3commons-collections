@@ -14,6 +14,7 @@
  * limitations under the License.
  */
 package org.as3commons.collections {
+	import org.as3commons.collections.utils.NullComparator;
 	import org.as3commons.collections.framework.IComparator;
 	import org.as3commons.collections.framework.IIterator;
 	import org.as3commons.collections.framework.IBinarySearchTree;
@@ -109,8 +110,35 @@ package org.as3commons.collections {
 		 * 
 		 * @param comparator The sort criterion.
 		 */
-		public function Treap(comparator : IComparator) {
+		public function Treap(comparator : IComparator = null) {
+			_comparator = comparator ? comparator : new NullComparator();
+		}
+		
+		/*
+		 * ISortOrder
+		 */
+
+		/**
+		 * @inheritDoc
+		 */
+		public function set comparator(comparator : IComparator) : void {
+			if (_size) throw new ArgumentError("You cannot set a comparator to a collection with size > 0");
 			_comparator = comparator;
+		}
+
+		/**
+		 * @inheritDoc
+		 */
+		public function get comparator() : IComparator {
+			return _comparator;
+		}
+		
+		/**
+		 * @inheritDoc
+		 */
+		public function hasEqual(item : *) : Boolean {
+			var node : TreapNode = getNode(item);
+			return node ? true : false;
 		}
 		
 		/*
@@ -124,14 +152,6 @@ package org.as3commons.collections {
 			return add_protected(item) !== null;
 		}
 
-		/**
-		 * @inheritDoc
-		 */
-		public function hasEqual(item : *) : Boolean {
-			var node : TreapNode = getNode(item);
-			return node ? true : false;
-		}
-		
 		/**
 		 * @inheritDoc
 		 */

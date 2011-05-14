@@ -14,9 +14,11 @@
  * limitations under the License.
  */
 package org.as3commons.collections.framework.core {
+
 	import org.as3commons.collections.framework.IComparator;
 	import org.as3commons.collections.framework.IIterator;
 	import org.as3commons.collections.framework.ISortOrder;
+	import org.as3commons.collections.utils.NullComparator;
 
 	/**
 	 * Abstract sorted tree based collection implementation.
@@ -50,13 +52,28 @@ package org.as3commons.collections.framework.core {
 		 * 
 		 * @param comparator The sort criterion.
 		 */
-		public function AbstractSortedCollection(comparator : IComparator) {
-			_comparator = comparator;
+		public function AbstractSortedCollection(comparator : IComparator = null) {
+			_comparator = comparator ? comparator : new NullComparator();
 		}
 		
 		/*
-		 * ISortedCollection
+		 * ISortedOrder
 		 */
+		
+		/**
+		 * @inheritDoc
+		 */
+		public function set comparator(comparator : IComparator) : void {
+			if (_size) throw new ArgumentError("You cannot set a comparator to a collection with size > 0");
+			_comparator = comparator;
+		}
+
+		/**
+		 * @inheritDoc
+		 */
+		public function get comparator() : IComparator {
+			return _comparator;
+		}
 		
 		/**
 		 * @inheritDoc
@@ -506,6 +523,6 @@ package org.as3commons.collections.framework.core {
 
 			return higher;
 		}
-		
+
 	}
 }

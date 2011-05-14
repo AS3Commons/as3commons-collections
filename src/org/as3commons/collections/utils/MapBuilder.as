@@ -20,7 +20,6 @@ package org.as3commons.collections.utils {
 	import org.as3commons.collections.SortedMap;
 	import org.as3commons.collections.framework.IComparator;
 	import org.as3commons.collections.framework.IMap;
-	import org.as3commons.collections.framework.IMapIterator;
 
 	/**
 	 * <p>Uses the Builder Pattern to simplify the creation of new IMap instances in a fluent fashion.</p>
@@ -94,51 +93,6 @@ package org.as3commons.collections.utils {
 			return this;
 		}
 		
-		public function addAll(...args) : MapBuilder {
-			var wrapper : AsArgs;
-			var item : *;
-			for (var i : uint; i < args.length; i++) {
-				if (args[i] is AsArgs) {
-					wrapper = args[i];
-					if (wrapper.source is Array) return addFromArray(wrapper.source as Array);
-					else if (wrapper.source is IMap) return addFromMap(wrapper.source as IMap);
-					else if (wrapper.source is Object) return addFromObject(wrapper.source);
-
-				} else {
-					// skip key without item
-					if (i == args.length - 1) break;
-					// ignore args wrapper for items
-					item = args[i + 1] is AsArgs ? args[i + 1] : AsArgs(args[i + 1]).source;
-					_map.add(args[i], item);
-					i++;
-				}
-			}
-			return this;
-		}
-		
-		public function addFromArray(array : Array) : MapBuilder {
-			for (var i : uint; i < array.length; i+=2) {
-				if (i == array.length - 1) break;
-				_map.add(array[i], array[i + 1]);
-			}
-			return this;
-		}
-
-		public function addFromMap(map : IMap) : MapBuilder {
-			var iterator : IMapIterator = map.iterator() as IMapIterator;
-			while (iterator.next() !== undefined) {
-				_map.add(iterator.key, iterator.current);
-			} 
-			return this;
-		}
-
-		public function addFromObject(object : Object) : MapBuilder {
-			for (var key : * in object) {
-				_map.add(key, object[key]);
-			}
-			return this;
-		}
-
 		/**
 		 * <p>Completes construction.</p>
 		 */

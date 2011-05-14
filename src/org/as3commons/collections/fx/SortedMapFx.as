@@ -64,7 +64,7 @@ package org.as3commons.collections.fx {
 		/**
 		 * SortedMapFx constructor.
 		 */
-		public function SortedMapFx(comparator : IComparator) {
+		public function SortedMapFx(comparator : IComparator = null) {
 			_eventDispatcher = new EventDispatcher(this);
 
 			super(comparator);

@@ -14,10 +14,12 @@
  * limitations under the License.
  */
 package org.as3commons.collections {
+
 	import org.as3commons.collections.framework.IComparator;
 	import org.as3commons.collections.framework.ISortedList;
 	import org.as3commons.collections.framework.core.AbstractList;
 	import org.as3commons.collections.utils.ArrayUtils;
+	import org.as3commons.collections.utils.NullComparator;
 
 	/**
 	 * Sort order implementation of a list.
@@ -83,8 +85,8 @@ package org.as3commons.collections {
 		 * 
 		 * @param comparator The sort criterion.
 		 */
-		public function SortedList(comparator : IComparator) {
-			_comparator = comparator;
+		public function SortedList(comparator : IComparator = null) {
+			_comparator = comparator ? comparator : new NullComparator();
 		}
 
 		/*
@@ -142,9 +144,24 @@ package org.as3commons.collections {
 		}
 		
 		/*
-		 * ISortedCollection
+		 * ISortedOrder
 		 */
 
+		/**
+		 * @inheritDoc
+		 */
+		public function set comparator(comparator : IComparator) : void {
+			if (_array.length) throw new ArgumentError("You cannot set a comparator to a collection with size > 0");
+			_comparator = comparator;
+		}
+
+		/**
+		 * @inheritDoc
+		 */
+		public function get comparator() : IComparator {
+			return _comparator;
+		}
+		
 		/**
 		 * @inheritDoc
 		 */
@@ -372,6 +389,6 @@ package org.as3commons.collections {
 			}
 			return -1;
 		}
-		
+
 	}
 }

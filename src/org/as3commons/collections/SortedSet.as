@@ -95,7 +95,7 @@ package org.as3commons.collections {
 		 * 
 		 * @param comparator The sort criterion.
 		 */
-		public function SortedSet(comparator : IComparator) {
+		public function SortedSet(comparator : IComparator = null) {
 			super(comparator);
 
 			_items = new Dictionary();

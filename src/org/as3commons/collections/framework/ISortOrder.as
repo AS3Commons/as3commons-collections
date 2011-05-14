@@ -21,6 +21,21 @@ package org.as3commons.collections.framework {
 	 * @author Jens Struwe 09.04.2010
 	 */
 	public interface ISortOrder extends IOrder {
+		
+		/**
+		 * @private
+		 */
+		function set comparator(comparator : IComparator) : void;
+
+		/**
+		 * Returns or sets the initial comparator of the collection.
+		 * 
+		 * <p>You cannot reset a comparator of a collection that contains items.
+		 * In that case an <code>ArgumentError</code> is thrown.</p>
+		 * 
+		 * @throws ArgumentError if set to a collection with a size > 0.
+		 */
+		function get comparator() : IComparator;
 
 		/**
 		 * Tests if the collection contains an item that is equal to the given item.

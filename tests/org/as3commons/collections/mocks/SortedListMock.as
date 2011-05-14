@@ -28,7 +28,7 @@ package org.as3commons.collections.mocks {
 		ITestDuplicates
 	{
 
-		public function SortedListMock(comparator : IComparator) {
+		public function SortedListMock(comparator : IComparator = null) {
 			super(comparator);
 		}
 		

@@ -24,7 +24,7 @@ package org.as3commons.collections.mocks {
 	public class SortedSetFxMock extends SortedSetFx implements
 		ITestSortOrderDuplicateEquals
 	{
-		public function SortedSetFxMock(comparator : IComparator) {
+		public function SortedSetFxMock(comparator : IComparator = null) {
 			super(comparator);
 		}
 		

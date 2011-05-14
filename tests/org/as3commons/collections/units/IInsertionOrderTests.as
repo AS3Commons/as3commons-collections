@@ -14,11 +14,12 @@
  * limitations under the License.
  */
 package org.as3commons.collections.units {
+
 	import org.as3commons.collections.framework.IInsertionOrder;
 	import org.as3commons.collections.testhelpers.AbstractCollectionTestCase;
-	import org.as3commons.collections.testhelpers.NullComparator;
 	import org.as3commons.collections.testhelpers.TestComparator;
 	import org.as3commons.collections.testhelpers.TestItems;
+	import org.as3commons.collections.utils.NullComparator;
 
 	/**
 	 * @author Jens Struwe 18.03.2010

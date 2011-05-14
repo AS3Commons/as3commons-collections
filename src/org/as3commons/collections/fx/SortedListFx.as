@@ -55,7 +55,7 @@ package org.as3commons.collections.fx {
 		 * 
 		 * @param comparator The sort criterion.
 		 */
-		public function SortedListFx(comparator : IComparator) {
+		public function SortedListFx(comparator : IComparator = null) {
 			_eventDispatcher = new EventDispatcher(this);
 
 			super(comparator);

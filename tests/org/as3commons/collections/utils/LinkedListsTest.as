@@ -2,62 +2,41 @@ package org.as3commons.collections.utils {
 
 	import flexunit.framework.TestCase;
 
-	import org.as3commons.collections.ArrayList;
-	import org.as3commons.collections.SortedList;
-	import org.as3commons.collections.framework.IList;
+	import org.as3commons.collections.LinkedList;
+	import org.as3commons.collections.framework.ILinkedList;
 	import org.as3commons.collections.framework.IMap;
 	import org.as3commons.collections.testhelpers.CollectionTest;
 
 	import flash.utils.getQualifiedClassName;
 
-	public class ListsTest extends TestCase {
+	public class LinkedListsTest extends TestCase {
 
-		private var list: IList;
+		private var list: ILinkedList;
 		
 		override public function setUp() : void {
-			list = new ArrayList();
+			list = new LinkedList();
 		}
 
 		/*
 		 * Creation
 		 */
 
-		public function test_newArrayList() : void {
+		public function test_newLinkedList() : void {
 			
 			var map : IMap = Maps.newMap(5, 5);
 			var a : Array = [3, 3];
 
 			// list of items to add
 
-			var list : ArrayList = Lists.newArrayList(2, Args.from(map), 1, 1, Args.from(a));
-			assertTrue(list is ArrayList);
+			var list : LinkedList = LinkedLists.newLinkedList(2, Args.from(map), 1, 1, Args.from(a));
+			assertTrue(list is LinkedList);
 			assertEquals(6, list.size);
 			assertTrue(CollectionTest.itemsEqual(list, [2, 5, 1, 1, 3, 3]));
 			
 			// no item
 
-			list = Lists.newArrayList();
-			assertTrue(list is ArrayList);
-			assertEquals(0, list.size);
-			assertTrue(CollectionTest.itemsEqual(list, []));
-		}
-
-		public function test_newSortedList() : void {
-			
-			var map : IMap = Maps.newMap(5, 5);
-			var a : Array = [3, 3];
-
-			// even list of items to add
-
-			var list : SortedList = Lists.newSortedList(new NumericComparator(), 2, Args.from(map), 1, Args.from(a));
-			assertTrue(list is SortedList);
-			assertEquals(5, list.size);
-			assertTrue(CollectionTest.itemsEqual(list, [1, 2, 3, 3, 5]));
-			
-			// no item
-
-			list = Lists.newSortedList(new NumericComparator());
-			assertTrue(list is SortedList);
+			list = LinkedLists.newLinkedList();
+			assertTrue(list is LinkedList);
 			assertEquals(0, list.size);
 			assertTrue(CollectionTest.itemsEqual(list, []));
 		}
@@ -76,17 +55,17 @@ package org.as3commons.collections.utils {
 
 			// no filter
 			
-			var clone : IList = Lists.clone(list);
+			var clone : ILinkedList = LinkedLists.clone(list);
 			assertTrue (list !== clone);
 
 			// only item filter
 
-			clone = Lists.clone(list, filter);
+			clone = LinkedLists.clone(list, filter);
 			assertTrue (list !== clone);
 
 			// both filters
 
-			clone = Lists.clone(list, filter);
+			clone = LinkedLists.clone(list, filter);
 			assertTrue (list !== clone);
 		}
 
@@ -110,14 +89,14 @@ package org.as3commons.collections.utils {
 
 			// no filter
 			
-			var clone : IList = Lists.clone(list);
+			var clone : ILinkedList = LinkedLists.clone(list);
 			assertEquals(12, clone.size);
 			assertEquals(getQualifiedClassName(list), getQualifiedClassName(clone));
 			assertTrue(CollectionTest.itemsEqual(clone, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]));
 
 			// filter
 
-			clone = Lists.clone(list, filter);
+			clone = LinkedLists.clone(list, filter);
 			assertEquals(6, clone.size);
 			assertEquals(getQualifiedClassName(list), getQualifiedClassName(clone));
 			assertTrue(CollectionTest.itemsEqual(clone, [2, 4, 6, 8, 10, 12]));
@@ -125,28 +104,15 @@ package org.as3commons.collections.utils {
 		}
 		
 		public function test_clone_type_and_order() : void {
+			list = new LinkedList();
+			list.add(3);
+			list.add(2);
+			list.add(4);
+			list.add(1);
 
-			// array list
-			list = new ArrayList();
-			populate(list);
-			var clone : IList = Lists.clone(list);
-			assertTrue(clone is ArrayList);
+			var clone : ILinkedList = LinkedLists.clone(list);
+			assertTrue(clone is LinkedList);
 			assertTrue(CollectionTest.itemsEqual(clone, [3, 2, 4, 1]));
-
-			// sorted list
-			list = new SortedList(new NumericComparator());
-			populate(list);
-			clone = Lists.clone(list);
-			assertTrue(clone is SortedList);
-			assertTrue(CollectionTest.itemsEqual(clone, [1, 2, 3, 4]));
-			
-			function populate(list : IList) : void {
-				list.add(3);
-				list.add(2);
-				list.add(4);
-				list.add(1);
-			}
-			
 		}
 
 		/*
@@ -158,43 +124,43 @@ package org.as3commons.collections.utils {
 		public function test_addFromArray() : void {
 			// even number of arguments
 
-			var list : IList = new ArrayList();
-			var numItems : uint = Lists.addFromArray(list, [1, 2, 3, 4, 5]);
+			var list : ILinkedList = new LinkedList();
+			var numItems : uint = LinkedLists.addFromArray(list, [1, 2, 3, 4, 5]);
 			assertEquals(5, numItems);
 			assertEquals(5, list.size);
 			assertTrue(CollectionTest.itemsEqual(list, [1, 2, 3, 4, 5]));
 
 			// no argument
 
-			list = new ArrayList();
-			numItems = Lists.addFromArray(list, []);
+			list = new LinkedList();
+			numItems = LinkedLists.addFromArray(list, []);
 			assertEquals(0, numItems);
 			assertEquals(0, list.size);
 			assertTrue(CollectionTest.itemsEqual(list, []));
 		}		
 
 		public function test_addFromArray_null() : void {
-			var list : ArrayList = new ArrayList();
-			var numItems : uint = Lists.addFromArray(list, null);
+			var list : LinkedList = new LinkedList();
+			var numItems : uint = LinkedLists.addFromArray(list, null);
 			assertEquals(0, numItems);
 			assertEquals(0, list.size);
 			assertTrue(CollectionTest.itemsEqual(list, []));
 		}
 		
 		public function test_addFromArray_entries_kept() : void {
-			var list : ArrayList = new ArrayList();
+			var list : LinkedList = new LinkedList();
 			list.add(1);
 
 			var source : Array = [2, 3];
 			
-			var numItems : uint = Lists.addFromArray(list, source);
+			var numItems : uint = LinkedLists.addFromArray(list, source);
 			assertEquals(2, numItems);
 			assertEquals(3, list.size);
 			assertTrue(CollectionTest.itemsEqual(list, [1, 2, 3]));
 		}
 
 		public function test_addFromArray_mixed_array() : void {
-			var sourceList : ArrayList = new ArrayList();
+			var sourceList : LinkedList = new LinkedList();
 			sourceList.add(2);
 			sourceList.add(3);
 			sourceList.add(4);
@@ -211,8 +177,8 @@ package org.as3commons.collections.utils {
 				9, 9
 			];
 
-			var list : ArrayList = new ArrayList();
-			var numItems : uint = Lists.addFromArray(list, source);
+			var list : LinkedList = new LinkedList();
+			var numItems : uint = LinkedLists.addFromArray(list, source);
 
 			assertEquals(13, numItems);
 			assertEquals(13, list.size);
@@ -222,12 +188,12 @@ package org.as3commons.collections.utils {
 		// from collection
 
 		public function test_addFromCollection() : void {
-			var source : ArrayList = new ArrayList();
+			var source : LinkedList = new LinkedList();
 			source.add(1);
 			source.add(2);
 			
-			var list : ArrayList = new ArrayList();
-			var numItems : uint = Lists.addFromCollection(list, source);
+			var list : LinkedList = new LinkedList();
+			var numItems : uint = LinkedLists.addFromCollection(list, source);
 			
 			assertEquals(2, numItems);
 			assertEquals(2, list.size);
@@ -235,21 +201,21 @@ package org.as3commons.collections.utils {
 		}		
 		
 		public function test_addFromCollection_null() : void {
-			var list : ArrayList = new ArrayList();
-			var numItems : uint = Lists.addFromCollection(list, null);
+			var list : LinkedList = new LinkedList();
+			var numItems : uint = LinkedLists.addFromCollection(list, null);
 			assertEquals(0, numItems);
 			assertEquals(0, list.size);
 			assertTrue(CollectionTest.itemsEqual(list, []));
 		}
 		
 		public function test_addFromCollection_entries_kept() : void {
-			var list : ArrayList = new ArrayList();
+			var list : LinkedList = new LinkedList();
 			list.add(1);
 
-			var source : ArrayList = new ArrayList();
+			var source : LinkedList = new LinkedList();
 			source.add(2);
 
-			var numItems : uint = Lists.addFromCollection(list, source);
+			var numItems : uint = LinkedLists.addFromCollection(list, source);
 
 			assertEquals(1, numItems);
 			assertEquals(2, list.size);
@@ -261,14 +227,14 @@ package org.as3commons.collections.utils {
 		public function test_addFromArgs() : void {
 			// even number of arguments
 
-			var list : IList = new ArrayList();
-			Lists.addFromArgs(list, 1, 2, 3, 4, 5);
+			var list : ILinkedList = new LinkedList();
+			LinkedLists.addFromArgs(list, 1, 2, 3, 4, 5);
 			assertTrue(CollectionTest.itemsEqual(list, [1, 2, 3, 4, 5]));
 
 			// no argument
 
-			list = new ArrayList();
-			Lists.addFromArgs(list);
+			list = new LinkedList();
+			LinkedLists.addFromArgs(list);
 			assertTrue(CollectionTest.itemsEqual(list, []));
 		}
 

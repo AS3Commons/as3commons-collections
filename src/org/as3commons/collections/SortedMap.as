@@ -103,7 +103,7 @@ package org.as3commons.collections {
 		 * 
 		 * @param comparator The sort criterion.
 		 */
-		public function SortedMap(comparator : IComparator) {
+		public function SortedMap(comparator : IComparator = null) {
 			super(comparator);
 
 			_items = new Dictionary();

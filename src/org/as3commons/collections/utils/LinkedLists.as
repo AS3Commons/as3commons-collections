@@ -15,59 +15,38 @@
  */
 package org.as3commons.collections.utils {
 
-	import org.as3commons.collections.ArrayList;
-	import org.as3commons.collections.SortedList;
+	import org.as3commons.collections.LinkedList;
 	import org.as3commons.collections.framework.ICollection;
-	import org.as3commons.collections.framework.IComparator;
 	import org.as3commons.collections.framework.IIterator;
-	import org.as3commons.collections.framework.IList;
+	import org.as3commons.collections.framework.ILinkedList;
 	import org.as3commons.collections.framework.ISortOrder;
 	import org.as3commons.collections.iterators.FilterIterator;
 
 	/**
-	 * <code>IList</code> utilities.
+	 * <code>ILinkedList</code> utilities.
 	 * 
 	 * @author Jens Struwe 21.04.2011
 	 */
-	public class Lists {
+	public class LinkedLists {
 
 		/*
 		 * Factories
 		 */
 
 		/**
-		 * Creates, populates and returns a new <code>ArrayList</code> instance.
+		 * Creates, populates and returns a new <code>LinkedList</code> instance.
 		 * 
 		 * <p>The arguments may be left out. In that case no item is added to the list.</p>
 		 * 
 		 * <listing>
-				var list : ArrayList = Lists.newArrayList(item1, item2, ...);
+				var list : LinkedList = LinkedLists.newLinkedList(item1, item2, ...);
 		 * </listing>
 		 * 
 		 * @param ...args List of items to add to the list.
-		 * @return A new <code>ArrayList</code> instance populated from the given arguments.
+		 * @return A new <code>LinkedList</code> instance populated from the given arguments.
 		 */
-		public static function newArrayList(...args) : ArrayList {
-			var list : ArrayList = new ArrayList();
-			addFromArray(list, args);
-			return list;
-		}
-
-		/**
-		 * Creates, populates and returns a new <code>ArrayList</code> instance.
-		 * 
-		 * <p>The arguments may be left out. In that case no item is added to the list.</p>
-		 * 
-		 * <listing>
-				var list : ArrayList = Lists.newSortedList(comparator, item1, item2, ...);
-		 * </listing>
-		 * 
-		 * @param ...args List of items to add to the list.
-		 * @param comparator The sort criterion.
-		 * @return A new <code>SortedList</code> instance populated from the given arguments.
-		 */
-		public static function newSortedList(comparator : IComparator, ...args) : SortedList {
-			var list : SortedList = new SortedList(comparator);
+		public static function newLinkedList(...args) : LinkedList {
+			var list : LinkedList = new LinkedList();
 			addFromArray(list, args);
 			return list;
 		}
@@ -81,14 +60,14 @@ package org.as3commons.collections.utils {
 		 * 
 		 * <listing>
 				var array : Array = [item1, item2, ...];
-				var count : uint = Lists.addFromArray(list, array);
+				var count : uint = LinkedLists.addFromArray(list, array);
 		 * </listing>
 		 * 
 		 * @param list The list to populate.
 		 * @param source The <code>Array</code> to add from.
 		 * @return The number of items added to the list.
 		 */
-		public static function addFromArray(list : IList, source : Array) : uint {
+		public static function addFromArray(list : ILinkedList, source : Array) : uint {
 			if (!source) return 0;
 
 			var numAdded : uint;
@@ -115,14 +94,14 @@ package org.as3commons.collections.utils {
 		 * Adds the contents of the given <code>ICollection</code> to the specified list.
 		 * 
 		 * <listing>
-				var count : uint = Lists.addFromCollection(list, sourceCollection);
+				var count : uint = LinkedLists.addFromCollection(list, sourceCollection);
 		 * </listing>
 		 * 
 		 * @param list The list to populate.
 		 * @param source The <code>ICollection</code> to add from.
 		 * @return The number of items added to the list.
 		 */
-		public static function addFromCollection(list : IList, source : ICollection) : uint {
+		public static function addFromCollection(list : ILinkedList, source : ICollection) : uint {
 			if (!source) return 0;
 
 			var added : uint;
@@ -138,19 +117,19 @@ package org.as3commons.collections.utils {
 		 * Adds the given list of items to the specified list.
 		 * 
 		 * <listing>
-				Lists.addFromArgs(myList, item1, item2, ...);
+				LinkedLists.addFromArgs(myList, item1, item2, ...);
 		 * </listing>
 		 * 
 		 * @param list The list to populate.
 		 * @param ...args List of items to add to the list.
 		 * @return The number of items added to the list.
 		 */
-		public static function addFromArgs(list : IList, ...args) : uint {
+		public static function addFromArgs(list : ILinkedList, ...args) : uint {
 			return addFromArray(list, args);
 		}
 
 		/**
-		 * Clones the supplied <code>IList</code> instance returning a new <code>IList</code>
+		 * Clones the supplied <code>ILinkedList</code> instance returning a new <code>ILinkedList</code>
 		 * of the same type.
 		 * 
 		 * <p>If a filter is specified the resulting list only contains items that
@@ -166,15 +145,15 @@ package org.as3commons.collections.utils {
 				return accept;
 			}
 					
-			var list : IList = Lists.clone(list, filter);
+			var list : ILinkedList = LinkedLists.clone(list, filter);
 		 * </listing>
 		 * 
-		 * @param list The <code>IList</code> instance to clone.
+		 * @param list The <code>ILinkedList</code> instance to clone.
 		 * @param filter Function which will be applied to each item in the source list.
-		 * @return A new <code>IList</code> instance.
+		 * @return A new <code>ILinkedList</code> instance.
 		 */
-		public static function clone(list : IList, filter : Function = null) : IList {
-			var clone : IList = new ((list as Object).constructor)() as IList;
+		public static function clone(list : ILinkedList, filter : Function = null) : ILinkedList {
+			var clone : ILinkedList = new ((list as Object).constructor)() as ILinkedList;
 			if (list is ISortOrder) ISortOrder(clone).comparator = ISortOrder(list).comparator;
 			
 			var iterator : IIterator = new FilterIterator(list, filter);

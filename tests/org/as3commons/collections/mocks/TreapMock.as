@@ -14,9 +14,11 @@
  * limitations under the License.
  */
 package org.as3commons.collections.mocks {
+
 	import org.as3commons.collections.Treap;
 	import org.as3commons.collections.framework.IComparator;
 	import org.as3commons.collections.framework.IIterator;
+	import org.as3commons.collections.framework.core.TreapNode;
 	import org.as3commons.collections.units.ITestSortOrder;
 
 	/**
@@ -25,12 +27,13 @@ package org.as3commons.collections.mocks {
 	public class TreapMock extends Treap implements 
 		ITestSortOrder
 	{
-		public function TreapMock(comparator : IComparator) {
+		public function TreapMock(comparator : IComparator = null) {
 			super(comparator);
 		}
 		
 		override public function iterator(cursor : * = undefined) : IIterator {
-			return new TreapIteratorMock(this, getNode(cursor));
+			var node : TreapNode = cursor === undefined ? null : getNode(cursor);
+			return new TreapIteratorMock(this, node);
 		}
 
 		public function addMock(item : *) : void {

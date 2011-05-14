@@ -14,9 +14,17 @@
  * limitations under the License.
  */
 package org.as3commons.collections.units {
+
+	import org.as3commons.collections.framework.IComparator;
 	import org.as3commons.collections.framework.ISortOrder;
 	import org.as3commons.collections.testhelpers.AbstractCollectionTestCase;
+	import org.as3commons.collections.testhelpers.CollectionTest;
+	import org.as3commons.collections.testhelpers.TestComparator;
 	import org.as3commons.collections.testhelpers.TestItems;
+	import org.as3commons.collections.utils.NullComparator;
+	import org.as3commons.collections.utils.NumericComparator;
+
+	import flash.utils.getQualifiedClassName;
 
 	/**
 	 * @author Jens Struwe 19.03.2010
@@ -189,6 +197,71 @@ package org.as3commons.collections.units {
 			assertFalse(_sortOrder.hasEqual(TestItems.object1));
 			assertFalse(_sortOrder.hasEqual(TestItems.object2));
 
+		}
+
+		/*
+		 * Test setting / getting comparator
+		 */
+
+		public function test_constructor_without_args() : void {
+			var thrownError : ArgumentError;
+			var sortOrder : ITestSortOrder;
+			
+			try {
+				sortOrder = new ((_sortOrder as Object).constructor)() as ITestSortOrder;
+			}
+			catch (e : Error) {
+				thrownError = e as ArgumentError;
+			}
+			
+			assertNull(thrownError);
+			assertTrue(sortOrder is ITestSortOrder);
+			assertEquals(getQualifiedClassName(sortOrder), getQualifiedClassName(_sortOrder));
+		}
+
+		public function test_constructor_without_args_sets_nullcomparator() : void {
+			var sortOrder : ITestSortOrder = new ((_sortOrder as Object).constructor)() as ITestSortOrder;
+			assertNotNull(sortOrder.comparator);
+			assertTrue(sortOrder.comparator is NullComparator);
+		}
+
+		public function test_set_comparator_without_items() : void {
+			assertTrue(_sortOrder.comparator is TestComparator);
+
+			var comparator : IComparator = new NumericComparator();
+			
+			_sortOrder.comparator = comparator;
+			assertEquals(comparator, _sortOrder.comparator);
+		}
+
+		public function test_set_comparator_without_items2() : void {
+			_sortOrder.comparator = new NumericComparator();
+
+			_test.fillCollection([7, 6, 9, 3, 1]);
+			
+			assertTrue(CollectionTest.itemsEqual(_sortOrder, [1, 3, 6, 7, 9]));
+		}
+
+		public function test_set_comparator_without_items3() : void {
+			assertTrue(_sortOrder.comparator is TestComparator);
+			_sortOrder.comparator = new NumericComparator();
+			assertTrue(_sortOrder.comparator is NumericComparator);
+			_sortOrder.comparator = new TestComparator();
+			assertTrue(_sortOrder.comparator is TestComparator);
+		}
+
+		public function test_set_comparator_with_items() : void {
+			_test.fillCollection([1, 5, 8, 10, 14]);
+
+			var thrownError : Error;
+			try {
+				_sortOrder.comparator = new NumericComparator();;
+			} catch (e : Error) {
+				thrownError = e;
+			}
+
+			assertNotNull(thrownError);
+			assertTrue(thrownError is ArgumentError);
 		}
 
 	}
