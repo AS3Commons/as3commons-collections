@@ -4,13 +4,13 @@
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" href="../../../../style.css" type="text/css" media="screen">
 <link rel="stylesheet" href="../../../../print.css" type="text/css" media="print">
-<meta content="MapBuilder,org.as3commons.collections.utils.MapBuilder,add,addMany,build,linkedMap,map,sortedMap" name="keywords">
+<meta content="MapBuilder,org.as3commons.collections.utils.MapBuilder,add,build,newLinkedMap,newMap,newSortedMap" name="keywords">
 <title>org.as3commons.collections.utils.MapBuilder</title>
 </head>
 <body>
 <script type="text/javascript" language="javascript" src="../../../../asdoc.js"></script><script type="text/javascript" language="javascript" src="../../../../cookies.js"></script><script type="text/javascript" language="javascript">
 <!--
-				asdocTitle = 'MapBuilder - AS3Commons Collections 1.2.0';
+				asdocTitle = 'MapBuilder - AS3Commons Collections 1.3.0';
 				var baseRef = '../../../../';
 				window.onload = configPage;
 			--></script>
@@ -39,21 +39,21 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 </tr>
 </table>
 <p></p>
-  <p>Uses the Builder Pattern to simplify the creation of new IMap instances in a fluent fashion.</p>
+  Map builder using the builder pattern.
+  
+  <p>Uses the builder Pattern to simplify the creation of new <code>IMap</code> instances in a fluent fashion.</p>
    
-  <p></p>
-<br>
-<span class="label">Example</span>
-<br>Creating a new LinkedMap instance using MapBuilder.
-  &lt;listing version="3.0"&gt;
-    const result : IMap = MapBuilder.linkedMap()
+  <p>Example: Creating a new <code>LinkedMap</code> instance using MapBuilder.</p>
+  
+  <div class='listing'><pre>
+    const result : IMap = MapBuilder.newLinkedMap()
      .add("key1", "item-one")
      .add("key2", "item-two")
      .build();
     
-    // Creates the following Map: { key1 => item-one, key2 => item-two }
+    // Creates the following map: { key1 => item-one, key2 => item-two }
     trace(result);
-  &lt;/listing&gt;
+  </pre></div>
   
   <p></p>
 <br>
@@ -72,20 +72,7 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <a class="signatureLink" href="#add()">add</a>(key:*, item:*):<a href="../utils/MapBuilder.html">MapBuilder</a>
 </div>
 <div class="summaryTableDescription">
-   <p>Adds the supplied key and item mapping to the IMap under construction, returns a reference 
-   to this MapBuilder instance.</p>
-   
-   </div>
-</td><td class="summaryTableOwnerCol">MapBuilder</td>
-</tr>
-<tr class="">
-<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
-<div class="summarySignature">
-<a class="signatureLink" href="#addMany()">addMany</a>(... args):<a href="../utils/MapBuilder.html">MapBuilder</a>
-</div>
-<div class="summaryTableDescription">
-   Adds the supplied supplied list of key-item-pairs to the IMap under construction, returns a reference 
-   to this MapBuilder instance.</div>
+   Adds the supplied key and item mapping to the <code>IMap</code> under construction.</div>
 </td><td class="summaryTableOwnerCol">MapBuilder</td>
 </tr>
 <tr class="">
@@ -94,41 +81,34 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <a class="signatureLink" href="#build()">build</a>():<a href="../framework/IMap.html">IMap</a>
 </div>
 <div class="summaryTableDescription">
-   <p>Completes construction.</p>
-   </div>
+   Completes construction.</div>
 </td><td class="summaryTableOwnerCol">MapBuilder</td>
 </tr>
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
 <div class="summarySignature">
-<a class="signatureLink" href="#linkedMap()">linkedMap</a>():<a href="../utils/MapBuilder.html">MapBuilder</a>
+<a class="signatureLink" href="#newLinkedMap()">newLinkedMap</a>():<a href="../utils/MapBuilder.html">MapBuilder</a>
 </div>
 <div class="summaryTableDescription">[static]
-   <p>Starts construction of a new LinkedMap instance.</p>
-   
-   </div>
+   Starts construction of a new <code>LinkedMap</code> instance.</div>
 </td><td class="summaryTableOwnerCol">MapBuilder</td>
 </tr>
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
 <div class="summarySignature">
-<a class="signatureLink" href="#map()">map</a>():<a href="../utils/MapBuilder.html">MapBuilder</a>
+<a class="signatureLink" href="#newMap()">newMap</a>():<a href="../utils/MapBuilder.html">MapBuilder</a>
 </div>
 <div class="summaryTableDescription">[static]
-   <p>Starts the construction of a new Map instance</p>
-   
-   </div>
+   Starts the construction of a new <code>Map</code> instance.</div>
 </td><td class="summaryTableOwnerCol">MapBuilder</td>
 </tr>
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
 <div class="summarySignature">
-<a class="signatureLink" href="#sortedMap()">sortedMap</a>(comparator:<a href="../framework/IComparator.html">IComparator</a>):<a href="../utils/MapBuilder.html">MapBuilder</a>
+<a class="signatureLink" href="#newSortedMap()">newSortedMap</a>(comparator:<a href="../framework/IComparator.html">IComparator</a>):<a href="../utils/MapBuilder.html">MapBuilder</a>
 </div>
 <div class="summaryTableDescription">[static]
-   <p>Starts construction of a new SortedMap instance which makes use of the supplied comparator.</p>
-   
-   </div>
+   Starts construction of a new <code>SortedMap</code> instance.</div>
 </td><td class="summaryTableOwnerCol">MapBuilder</td>
 </tr>
 </table>
@@ -148,8 +128,9 @@ showHideInherited();
 </table>
 <div class="detailBody">
 <code>public function add(key:*, item:*):<a href="../utils/MapBuilder.html">MapBuilder</a></code><p>
-   </p><p>Adds the supplied key and item mapping to the IMap under construction, returns a reference 
-   to this MapBuilder instance.</p>
+   Adds the supplied key and item mapping to the <code>IMap</code> under construction.
+   
+   </p><p>Returns a reference to this <code>MapBuilder</code> instance.</p>
    
    <span class="label">Parameters</span>
 <table border="0" cellspacing="0" cellpadding="0">
@@ -170,41 +151,7 @@ showHideInherited();
 <table border="0" cellspacing="0" cellpadding="0">
 <tr>
 <td width="20"></td><td><code><a href="../utils/MapBuilder.html">MapBuilder</a></code> &mdash; 
-                        a reference to this MapBuilder instance to allow method chaining.
-   
-                        
-                     </td>
-</tr>
-</table>
-</div>
-<a name="addMany()"></a>
-<table cellspacing="0" cellpadding="0" class="detailHeader">
-<tr>
-<td class="detailHeaderName">addMany</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
-</tr>
-</table>
-<div class="detailBody">
-<code>public function addMany(... args):<a href="../utils/MapBuilder.html">MapBuilder</a></code><p>
-   Adds the supplied supplied list of key-item-pairs to the IMap under construction, returns a reference 
-   to this MapBuilder instance.
-   
-   <div class='listing'><pre>
-    mapBuilder.addMany(key1, item1, key2, item2, ...);
-   </pre></div>
-   
-   </p><span class="label">Parameters</span>
-<table border="0" cellspacing="0" cellpadding="0">
-<tr>
-<td width="20px"></td><td><code>... <span class="label">args</span></code> &mdash; of key-item-pairs to add to the map
-   </td>
-</tr>
-</table>
-<p></p>
-<span class="label">Returns</span>
-<table border="0" cellspacing="0" cellpadding="0">
-<tr>
-<td width="20"></td><td><code><a href="../utils/MapBuilder.html">MapBuilder</a></code> &mdash; 
-                        a reference to this MapBuilder instance to allow method chaining.
+                        a reference to this <code>MapBuilder</code> instance to allow method chaining.
    
                         
                      </td>
@@ -219,8 +166,8 @@ showHideInherited();
 </table>
 <div class="detailBody">
 <code>public function build():<a href="../framework/IMap.html">IMap</a></code><p>
-   </p><p>Completes construction.</p>
-   <p></p>
+   Completes construction.
+   </p><p></p>
 <span class="label">Returns</span>
 <table border="0" cellspacing="0" cellpadding="0">
 <tr>
@@ -228,64 +175,64 @@ showHideInherited();
 </tr>
 </table>
 </div>
-<a name="linkedMap()"></a>
+<a name="newLinkedMap()"></a>
 <table cellspacing="0" cellpadding="0" class="detailHeader">
 <tr>
-<td class="detailHeaderName">linkedMap</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+<td class="detailHeaderName">newLinkedMap</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
 </tr>
 </table>
 <div class="detailBody">
-<code>public static function linkedMap():<a href="../utils/MapBuilder.html">MapBuilder</a></code><p>
-   </p><p>Starts construction of a new LinkedMap instance.</p>
+<code>public static function newLinkedMap():<a href="../utils/MapBuilder.html">MapBuilder</a></code><p>
+   Starts construction of a new <code>LinkedMap</code> instance.
    
-   <p></p>
+   </p><p></p>
 <span class="label">Returns</span>
 <table border="0" cellspacing="0" cellpadding="0">
 <tr>
 <td width="20"></td><td><code><a href="../utils/MapBuilder.html">MapBuilder</a></code> &mdash; 
-                        a MapBuilder instance which will build and return an instance of LinkedMap
+                        a <code>MapBuilder</code> instance which will build and return an instance of <code>LinkedMap</code>
    
                         
                      </td>
 </tr>
 </table>
 </div>
-<a name="map()"></a>
+<a name="newMap()"></a>
 <table cellspacing="0" cellpadding="0" class="detailHeader">
 <tr>
-<td class="detailHeaderName">map</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+<td class="detailHeaderName">newMap</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
 </tr>
 </table>
 <div class="detailBody">
-<code>public static function map():<a href="../utils/MapBuilder.html">MapBuilder</a></code><p>
-   </p><p>Starts the construction of a new Map instance</p>
+<code>public static function newMap():<a href="../utils/MapBuilder.html">MapBuilder</a></code><p>
+   Starts the construction of a new <code>Map</code> instance.
    
-   <p></p>
+   </p><p></p>
 <span class="label">Returns</span>
 <table border="0" cellspacing="0" cellpadding="0">
 <tr>
 <td width="20"></td><td><code><a href="../utils/MapBuilder.html">MapBuilder</a></code> &mdash; 
-                        a MapBuilder instance which will build and return an instance of Map
+                        a <code>MapBuilder</code> instance which will build and return an instance of <code>Map</code>
    
                         
                      </td>
 </tr>
 </table>
 </div>
-<a name="sortedMap()"></a>
+<a name="newSortedMap()"></a>
 <table cellspacing="0" cellpadding="0" class="detailHeader">
 <tr>
-<td class="detailHeaderName">sortedMap</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+<td class="detailHeaderName">newSortedMap</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
 </tr>
 </table>
 <div class="detailBody">
-<code>public static function sortedMap(comparator:<a href="../framework/IComparator.html">IComparator</a>):<a href="../utils/MapBuilder.html">MapBuilder</a></code><p>
-   </p><p>Starts construction of a new SortedMap instance which makes use of the supplied comparator.</p>
+<code>public static function newSortedMap(comparator:<a href="../framework/IComparator.html">IComparator</a>):<a href="../utils/MapBuilder.html">MapBuilder</a></code><p>
+   Starts construction of a new <code>SortedMap</code> instance.
    
-   <span class="label">Parameters</span>
+   </p><span class="label">Parameters</span>
 <table border="0" cellspacing="0" cellpadding="0">
 <tr>
-<td width="20px"></td><td><code><span class="label">comparator</span>:<a href="../framework/IComparator.html">IComparator</a></code> &mdash; the sort criterion which will be used by the resulting SortedMap instance.
+<td width="20px"></td><td><code><span class="label">comparator</span>:<a href="../framework/IComparator.html">IComparator</a></code> &mdash; The sort criterion which will be used by the resulting <code>SortedMap</code> instance.
    </td>
 </tr>
 </table>
@@ -294,7 +241,7 @@ showHideInherited();
 <table border="0" cellspacing="0" cellpadding="0">
 <tr>
 <td width="20"></td><td><code><a href="../utils/MapBuilder.html">MapBuilder</a></code> &mdash; 
-                        a MapBuilder instance which will build and return an instance of SortedMap
+                        a <code>MapBuilder</code> instance which will build and return an instance of <code>SortedMap</code>
    
                         
                      </td>

@@ -10,7 +10,7 @@
 <body>
 <script type="text/javascript" language="javascript" src="../../../../asdoc.js"></script><script type="text/javascript" language="javascript" src="../../../../cookies.js"></script><script type="text/javascript" language="javascript">
 <!--
-				asdocTitle = 'RecursiveFilterIterator - AS3Commons Collections 1.2.0';
+				asdocTitle = 'RecursiveFilterIterator - AS3Commons Collections 1.3.0';
 				var baseRef = '../../../../';
 				window.onload = configPage;
 			--></script>
@@ -55,7 +55,10 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
   
   <p>Its possible to set up two different filters. The first filter tests if an
   item should be returned. The second filter tests if children of a specific item
-  should be considered or not. It is possible to set up both filters together.</p>
+  should be considered or not. Children of items that did not pass the first
+  <code>filter</code> function are skipped by the iterator. This is the difference
+  to <code>RecursiveFilterIterator2</code>. It is possible to set
+  up both filters together.</p>
   
   <p>Both filter functions accept the current item and return a boolean
   value (<code>true</code> if the item is accepted).</p>
