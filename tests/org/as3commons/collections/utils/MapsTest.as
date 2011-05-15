@@ -338,6 +338,59 @@ package org.as3commons.collections.utils {
 			
 		}
 
+		public function test_copy() : void {
+			map.add(1, 1);
+			map.add(2, 1);
+			map.add(3, 2);
+			map.add(4, 2);
+			map.add(5, 3);
+			map.add(6, 3);
+			map.add(7, 4);
+			map.add(8, 4);
+			map.add(9, 5);
+			map.add(10, 5);
+			map.add(11, 6);
+			map.add(12, 6);
+			
+			var filter : Function = function(key : int) : Boolean {
+				return (key % 2 == 0);
+			};
+
+			// no filter
+			var destination : IMap = new Map();
+			Maps.copy(map, destination);
+			assertEquals(12, destination.size);
+			assertTrue(CollectionTest.keysMatch(destination, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]));
+			assertTrue(CollectionTest.itemsMatch(destination, [1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6]));
+
+			// only key filter
+
+			destination = new Map();
+			Maps.copy(map, destination, filter);
+			assertEquals(6, destination.size);
+			assertEquals(getQualifiedClassName(map), getQualifiedClassName(destination));
+			assertTrue(CollectionTest.keysMatch(destination, [2, 4, 6, 8, 10, 12]));
+			assertTrue(CollectionTest.itemsMatch(destination, [1, 2, 3, 4, 5, 6]));
+
+			// only item filter
+
+			destination = new Map();
+			Maps.copy(map, destination, null, filter);
+			assertEquals(6, destination.size);
+			assertEquals(getQualifiedClassName(map), getQualifiedClassName(destination));
+			assertTrue(CollectionTest.keysMatch(destination, [3, 4, 7, 8, 11, 12]));
+			assertTrue(CollectionTest.itemsMatch(destination, [2, 2, 4, 4, 6, 6]));
+
+			// both filters
+
+			destination = new Map();
+			Maps.copy(map, destination, filter, filter);
+			assertEquals(3, destination.size);
+			assertEquals(getQualifiedClassName(map), getQualifiedClassName(destination));
+			assertTrue(CollectionTest.keysMatch(destination, [4, 8, 12]));
+			assertTrue(CollectionTest.itemsMatch(destination, [2, 4, 6]));
+		}
+		
 		/*
 		 * Population
 		 */

@@ -251,6 +251,55 @@ package org.as3commons.collections.utils {
 			return clone;
 		}
 		
+		/**
+		 * Copies mappings from one to another map.
+		 * 
+		 * <p>If filters are specified only mappings are copied that meet
+		 * the supplied predicates.<p>
+		 * 
+		 * <p>The key filter function accepts the current key and returns a boolean
+		 * value (<code>true</code> if the key is accepted).</p>
+		 * 
+		 * <listing>
+			function keyFilter(key : *) : Boolean {
+				var accept : Boolean = false;
+				// test the key
+				return accept;
+			}
+					
+			Maps.copy(sourceMap, destinationMap, keyFilter);
+		 * </listing>
+		 * 
+		 * <p>The item filter function accepts the current item and returns a boolean
+		 * value (<code>true</code> if the item is accepted).</p>
+		 * 
+		 * <listing>
+			function itemFilter(item : *) : Boolean {
+				var accept : Boolean = false;
+				// test the item
+				return accept;
+			}
+					
+			Maps.copy(sourceMap, destinationMap, keyFilter, itemFilter);
+		 * </listing>
+		 * 
+		 * @param source The <code>IMap</code> instance to copy from.
+		 * @param destination The <code>IMap</code> to copy to.
+		 * @param keyFilter Function which will be applied to each key in the source map.
+		 * @param itemFilter Function which will be applied to each item in the source map.
+		 * @return The number of items copied to the map.
+		 */
+		public static function copy(source : IMap, destination : IMap, keyFilter : Function = null, itemFilter : Function = null) : uint {
+			var iterator : IBasicMapIterator = new MapFilterIterator(source, keyFilter, itemFilter);
+			var item : *;
+			var numAdded : uint;
+			while (iterator.hasNext()) {
+				item = iterator.next();
+				if (destination.add(iterator.key, item)) numAdded++;
+			}
+			return numAdded;
+		}
+		
 		/*
 		 * Getting items
 		 */

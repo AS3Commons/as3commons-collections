@@ -184,5 +184,39 @@ package org.as3commons.collections.utils {
 			return clone;
 		}
 
+		/**
+		 * Copies items from one list to another.
+		 * 
+		 * <p>If a filter is specified only items are copied that meet the
+		 * supplied predicates.<p>
+		 * 
+		 * <p>The filter function accepts the current item and returns a boolean
+		 * value (<code>true</code> if the item is accepted).</p>
+		 * 
+		 * <listing>
+			function itemFilter(item : *) : Boolean {
+				var accept : Boolean = false;
+				// test the item
+				return accept;
+			}
+					
+			Lists.copy(sourceList, destinationList, filter);
+		 * </listing>
+		 * 
+		 * @param source The <code>IList</code> instance to copy from.
+		 * @param destination The <code>IList</code> to copy to.
+		 * @param filter Function which will be applied to each item in the source list.
+		 * @return The number of items copied to the list.
+		 */
+		public static function copy(source : IList, destination : IList, filter : Function = null) : uint {
+			var iterator : IIterator = new FilterIterator(source, filter);
+			var numAdded : uint;
+			while (iterator.hasNext()) {
+				destination.add(iterator.next());
+				numAdded++;
+			}
+			return numAdded;
+		}
+
 	}
 }

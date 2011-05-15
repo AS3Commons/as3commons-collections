@@ -149,6 +149,42 @@ package org.as3commons.collections.utils {
 			
 		}
 
+		public function test_copy() : void {
+			list.add(1);
+			list.add(2);
+			list.add(3);
+			list.add(4);
+			list.add(5);
+			list.add(6);
+			list.add(7);
+			list.add(8);
+			list.add(9);
+			list.add(10);
+			list.add(11);
+			list.add(12);
+			
+			var filter : Function = function(key : int) : Boolean {
+				return (key % 2 == 0);
+			};
+
+			// no filter
+			
+			var destination : IList = new ArrayList();
+			Lists.copy(list, destination);
+			assertEquals(12, destination.size);
+			assertEquals(getQualifiedClassName(list), getQualifiedClassName(destination));
+			assertTrue(CollectionTest.itemsEqual(destination, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]));
+
+			// filter
+
+			destination = new ArrayList();
+			Lists.copy(list, destination, filter);
+			assertEquals(6, destination.size);
+			assertEquals(getQualifiedClassName(list), getQualifiedClassName(destination));
+			assertTrue(CollectionTest.itemsEqual(destination, [2, 4, 6, 8, 10, 12]));
+
+		}
+		
 		/*
 		 * Population
 		 */

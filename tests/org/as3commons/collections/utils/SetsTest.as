@@ -170,6 +170,42 @@ package org.as3commons.collections.utils {
 			
 		}
 
+		public function test_copy() : void {
+			theSet.add(1);
+			theSet.add(2);
+			theSet.add(3);
+			theSet.add(4);
+			theSet.add(5);
+			theSet.add(6);
+			theSet.add(7);
+			theSet.add(8);
+			theSet.add(9);
+			theSet.add(10);
+			theSet.add(11);
+			theSet.add(12);
+			
+			var filter : Function = function(key : int) : Boolean {
+				return (key % 2 == 0);
+			};
+
+			// no filter
+			
+			var destination : ISet = new LinkedSet();
+			Sets.copy(theSet, destination);
+			assertEquals(12, destination.size);
+			assertEquals(getQualifiedClassName(theSet), getQualifiedClassName(destination));
+			assertTrue(CollectionTest.itemsEqual(destination, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]));
+
+			// filter
+
+			destination = new LinkedSet();
+			Sets.copy(theSet, destination, filter);
+			assertEquals(6, destination.size);
+			assertEquals(getQualifiedClassName(theSet), getQualifiedClassName(destination));
+			assertTrue(CollectionTest.itemsEqual(destination, [2, 4, 6, 8, 10, 12]));
+
+		}
+		
 		/*
 		 * Population
 		 */

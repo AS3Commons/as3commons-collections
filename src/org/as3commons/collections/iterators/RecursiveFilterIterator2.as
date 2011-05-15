@@ -70,6 +70,8 @@ package org.as3commons.collections.iterators {
 	 * @author Jens Struwe 14.05.2009
 	 * @see org.as3commons.collections.framework.IRecursiveIterator IRecursiveIterator interface - Description of the recursive iterator features.
 	 * @see FilterIterator FilterIterator - Filter iterator usage example.
+	 * 
+	 * @TODO Peplace RecursiveFilterIterator with this implementation in V2.
 	 */
 	public final class RecursiveFilterIterator2 implements IRecursiveIterator {
 
