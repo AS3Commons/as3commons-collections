@@ -41,6 +41,326 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <p></p>
   <code>IList</code> utilities.
   
+  <p id="link_ListsAddFromExample"><strong><code>Lists.addFrom...()</code> example</strong></p>
+  
+  <a class="exampleCollapsed" href="#link_ListsAddFromExample" onClick="toggleExample(this, 'ListsAddFromExample');">Show example</a><br /><div id="ListsAddFromExample" style='display:none'><div class='listing'><pre>package {
+    import org.as3commons.collections.ArrayList;
+    import org.as3commons.collections.LinkedList;
+    import org.as3commons.collections.Map;
+    import org.as3commons.collections.utils.Lists;
+    import flash.display.Sprite;
+
+    public class ListsAddFromExample extends Sprite {
+
+        public function ListsAddFromExample() {
+            // list to populate
+            var list : ArrayList = new ArrayList();
+
+            // from array (ordered)
+            var a : Array = [1, "2", "2"];
+            Lists.addFromArray(list, a);
+
+            // from linked list (ordered)
+            var l : LinkedList = new LinkedList();
+            l.add("2");
+            l.add(3);
+            l.add("4");
+            l.add(3);
+            Lists.addFromCollection(list, l);
+
+            // from map (no order)
+            var m : Map = new Map();
+            m.add("five", 5);
+            m.add("six", "6");
+            m.add("four", "4");
+            Lists.addFromCollection(list, m);
+
+            // from args (ordered)
+            Lists.addFromArgs(list,
+                7, "8", "8", 5
+            );
+
+            // test
+            trace (list.toArray().join("n"));
+            
+            //    1            // from array
+            //    2
+            //    2
+            //    2            // from linked list
+            //    3
+            //    4
+            //    3
+            //    4            // from map
+            //    6
+            //    5
+            //    7            // from args
+            //    8
+            //    8
+            //    5
+        }
+
+    }
+}
+</pre></div></div>
+  
+  <p id="link_ListsCloneExample"><strong><code>Lists.clone()</code> example</strong></p>
+  
+  <a class="exampleCollapsed" href="#link_ListsCloneExample" onClick="toggleExample(this, 'ListsCloneExample');">Show example</a><br /><div id="ListsCloneExample" style='display:none'><div class='listing'><pre>package {
+    import org.as3commons.collections.utils.NumericComparator;
+    import flash.utils.getQualifiedClassName;
+    import org.as3commons.collections.framework.IList;
+    import org.as3commons.collections.utils.Lists;
+    import flash.display.Sprite;
+
+    public class ListsCloneExample extends Sprite {
+
+        public function ListsCloneExample() {
+            // clone array list
+            var list : IList = Lists.newArrayList(2, 4, 1, 3);
+            var clone : IList = Lists.clone(list);
+            trace (list.toArray().join("n"));
+            trace (getQualifiedClassName(clone));
+            //    2
+            //    4
+            //    1
+            //    3
+            //    org.as3commons.collections::ArrayList
+
+            // clone sorted list
+            list = Lists.newSortedList(
+                new NumericComparator(),
+                2, 4, 1, 3
+            );
+            clone = Lists.clone(list);
+            trace (list.toArray().join("n"));
+            trace (getQualifiedClassName(clone));
+            //    1
+            //    2
+            //    3
+            //    4
+            //    org.as3commons.collections::SortedList
+        }
+        
+    }
+}
+</pre></div></div>
+  
+  <p id="link_ListsCopyExample"><strong><code>Lists.copy()</code> example</strong></p>
+  
+  <a class="exampleCollapsed" href="#link_ListsCopyExample" onClick="toggleExample(this, 'ListsCopyExample');">Show example</a><br /><div id="ListsCopyExample" style='display:none'><div class='listing'><pre>package {
+    import org.as3commons.collections.framework.IList;
+    import org.as3commons.collections.utils.Lists;
+    import org.as3commons.collections.utils.NumericComparator;
+    import flash.display.Sprite;
+
+    public class ListsCopyExample extends Sprite {
+        public function ListsCopyExample() {
+            // source
+            var source : IList = Lists.newArrayList(1, 2, 3, 4);
+            trace (source.toArray() + "n");
+            //    1, 2, 3, 4
+            
+            // copy all
+            var list : IList = Lists.newSortedList(
+                new NumericComparator(),
+                5, 6, 7, 8
+            );
+            trace (list.toArray() + "n");
+            //    5, 6, 7, 8
+            Lists.copy(source, list);
+            trace (list.toArray() + "n");
+            //    1, 2, 3, 4, 5, 6, 7, 8
+
+            // copy only even items
+            list = Lists.newSortedList(
+                new NumericComparator(),
+                6, 8
+            );
+            trace (list.toArray() + "n");
+            //    6, 8
+            Lists.copy(source, list, evenFilter);
+            trace (list.toArray() + "n");
+            //    2, 4, 6, 8
+        }
+        
+        private function evenFilter(item :  : Boolean {
+            return item % 2 == 0;
+        }
+
+    }
+}
+</pre></div></div>
+  
+  <p id="link_AddFromArgsExample"><strong><code>Lists.new...()</code> example</strong></p>
+  
+  <a class="exampleCollapsed" href="#link_AddFromArgsExample" onClick="toggleExample(this, 'AddFromArgsExample');">Show example</a><br /><div id="AddFromArgsExample" style='display:none'><div class='listing'><pre>package {
+    import org.as3commons.collections.framework.
+    import org.as3commons.collections.utils.
+    import flash.display.Sprite;
+
+    public class AddFromArgsExample extends Sprite {
+
+        public function AddFromArgsExample() {
+            // ArrayList
+            var list : IList = Lists.newArrayList(
+                1, 2, 3, 4, 5, 6, 7, 8
+            );
+            trace (list.toArray() + "n");
+            // 1, 2, 3, 4, 5, 6, 7, 8
+            
+            // ArrayList
+            list = Lists.newSortedList(
+                new NumericComparator(),
+                6, 3, 1, 5, 8, 2, 7, 4
+            );
+            trace (list.toArray() + "n");
+            // 1, 2, 3, 4, 5, 6, 7, 8
+            
+            // Set
+            var theSet : ISet = Sets.newSet(
+                1, 2, 3, 4, 5, 6, 7, 8
+            );
+            trace (theSet.toArray() + "n");
+            // 1, 2, 3, 4, 5, 6, 7, 8
+            
+            // LinkedSet
+            theSet = Sets.newLinkedSet(
+                1, 2, 3, 4, 5, 6, 7, 8
+            );
+            trace (theSet.toArray() + "n");
+            // 1, 2, 3, 4, 5, 6, 7, 8
+            
+            // SortedSet
+            theSet = Sets.newSortedSet(
+                new NumericComparator(),
+                6, 3, 1, 5, 8, 2, 7, 4
+            );
+            trace (theSet.toArray() + "n");
+            // 1, 2, 3, 4, 5, 6, 7, 8
+            
+            // Map
+            var map : IMap = Maps.newMap(
+                "one", 1, "two", 2, "three", 3, "four", 4
+            );
+            trace (map.toArray() + "n");
+            // 1, 4, 2, 3
+            
+            // LinkedMap
+            map = Maps.newLinkedMap(
+                "one", 1, "two", 2, "three", 3, "four", 4
+            );
+            trace (map.toArray() + "n");
+            // 1, 2, 3, 4
+            
+            // SortedMap
+            map = Maps.newSortedMap(
+                new NumericComparator(),
+                "one", 1, "two", 2, "three", 3, "four", 4
+            );
+            trace (map.toArray() + "n");
+            // 1, 2, 3, 4
+            
+            // LinkedList
+            var linkedList : ILinkedList = LinkedLists.newLinkedList(
+                1, 2, 3, 4, 5, 6, 7, 8
+            );
+            trace (linkedList.toArray() + "n");
+            // 1, 2, 3, 4, 5, 6, 7, 8
+        }
+
+    }
+}
+</pre></div></div>
+  
+  <p id="link_NestedCollectionsExample"><strong>Nested collections example</strong></p>
+  
+  <a class="exampleCollapsed" href="#link_NestedCollectionsExample" onClick="toggleExample(this, 'NestedCollectionsExample');">Show example</a><br /><div id="NestedCollectionsExample" style='display:none'><div class='listing'><pre>package {
+    import org.as3commons.collections.ArrayList;
+    import org.as3commons.collections.LinkedSet;
+    import org.as3commons.collections.framework.IComparator;
+    import org.as3commons.collections.utils.
+    import flash.display.Sprite;
+
+    public class NestedCollectionsExample extends Sprite {
+
+        public function NestedCollectionsExample() {
+            // nested array list
+            var list : ArrayList = Lists.newArrayList(
+                Lists.newArrayList(1, 2),
+                Lists.newArrayList(
+                    Lists.newArrayList(3, 4),
+                    Lists.newArrayList(5, 6)
+                ),
+                Lists.newArrayList(7, 8),
+                Lists.newArrayList(
+                    Lists.newArrayList(9, 10),
+                    Lists.newArrayList(11, 12)
+                )
+            );
+            trace (CollectionUtils.dumpAsString(list));
+            //    [object ArrayList]
+            //    .......[object ArrayList]
+            //    ..............1
+            //    ..............2
+            //    .......[object ArrayList]
+            //    ..............[object ArrayList]
+            //    .....................3
+            //    .....................4
+            //    ..............[object ArrayList]
+            //    .....................5
+            //    .....................6
+            //    .......[object ArrayList]
+            //    ..............7
+            //    ..............8
+            //    .......[object ArrayList]
+            //    ..............[object ArrayList]
+            //    .....................9
+            //    .....................10
+            //    ..............[object ArrayList]
+            //    .....................11
+            //    .....................12            
+            
+            // nested mixed collection
+            var c : IComparator = new NumericComparator();
+            var theSet : LinkedSet = Sets.newLinkedSet(
+                Maps.newLinkedMap("one", 1, "two", 2),
+                Lists.newArrayList(
+                    Sets.newSortedSet(c, 4, 3),
+                    LinkedLists.newLinkedList(5, 6)
+                ),
+                Lists.newSortedList(c, 8, 7),
+                Lists.newArrayList(
+                    Maps.newLinkedMap("nine", 9, "ten", 10),
+                    Maps.newSortedMap(c, "twelve", 12, "eleven", 11)
+                )
+            );
+            trace (CollectionUtils.dumpAsString(theSet));
+            //    [object LinkedSet]
+            //    .......[object LinkedMap]
+            //    ..............1
+            //    ..............2
+            //    .......[object ArrayList]
+            //    ..............[object SortedSet]
+            //    .....................3
+            //    .....................4
+            //    ..............[object LinkedList]
+            //    .....................5
+            //    .....................6
+            //    .......[object SortedList]
+            //    ..............7
+            //    ..............8
+            //    .......[object ArrayList]
+            //    ..............[object LinkedMap]
+            //    .....................9
+            //    .....................10
+            //    ..............[object SortedMap]
+            //    .....................11
+            //    .....................12            
+        }
+    }
+}
+</pre></div></div>
+  
   <p></p>
 <br>
 <hr>

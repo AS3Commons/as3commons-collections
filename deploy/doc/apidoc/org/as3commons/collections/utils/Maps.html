@@ -41,6 +41,411 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <p></p>
   <code>IMap</code> utilities.
   
+  <p id="link_MapsAddFromExample"><strong><code>Maps.addFrom...()</code> example</strong></p>
+  
+  <a class="exampleCollapsed" href="#link_MapsAddFromExample" onClick="toggleExample(this, 'MapsAddFromExample');">Show example</a><br /><div id="MapsAddFromExample" style='display:none'><div class='listing'><pre>package {
+    import org.as3commons.collections.LinkedMap;
+    import org.as3commons.collections.framework.IMapIterator;
+    import org.as3commons.collections.utils.Maps;
+    import flash.display.Sprite;
+    import flash.utils.Dictionary;
+
+    public class MapsAddFromExample extends Sprite {
+
+        public function MapsAddFromExample() {
+            // map to populate
+            var map : LinkedMap = new LinkedMap();
+
+            // from object (no order)
+            var o : Object = {
+                1: "1",
+                "2": "two"
+            };
+            Maps.addFromObject(map, o);
+
+            // from dictionary (no order)
+            var d : Dictionary = new Dictionary();
+            d["2"] = "two (2)"; // ignored by map
+            d[3] = "3";
+            d["4"] = "four";
+            Maps.addFromObject(map, d);
+
+            // from array (ordered)
+            var a : Array = [
+                3, "3 (2)", // ignored by map
+                5, "5",
+                "6", "six"
+            ];
+            Maps.addFromArray(map, a);
+
+            // from map (ordered)
+            var m : LinkedMap = new LinkedMap();
+            m.add("6", "six (2)"); // ignored by map
+            m.add(7, "7");
+            m.add("8", "eight");
+            Maps.addFromMap(map, m);
+
+            // from args (ordered)
+            Maps.addFromArgs(map,
+                "8", "eight (2)", // ignored by map
+                9, "9",
+                "10", "ten"
+            );
+
+            // test
+            var i : IMapIterator = map.iterator() as IMapIterator;
+            while (i.next()) trace (i.key, "=&gt;", i.current);
+            
+            //    1 =&gt; 1            // from object
+            //    2 =&gt; two
+            //    4 =&gt; four        // from dictionary
+            //    3 =&gt; 3
+            //    5 =&gt; 5            // from array
+            //    6 =&gt; six
+            //    7 =&gt; 7            // from linked map
+            //    8 =&gt; eight
+            //    9 =&gt; 9            // from args
+            //    10 =&gt; ten
+        }
+
+    }
+}
+</pre></div></div>
+  
+  <p id="link_MapsCloneExample"><strong><code>Maps.clone()</code> example</strong></p>
+  
+  <a class="exampleCollapsed" href="#link_MapsCloneExample" onClick="toggleExample(this, 'MapsCloneExample');">Show example</a><br /><div id="MapsCloneExample" style='display:none'><div class='listing'><pre>package {
+    import org.as3commons.collections.utils.NumericComparator;
+    import flash.utils.getQualifiedClassName;
+    import org.as3commons.collections.framework.IMap;
+    import org.as3commons.collections.framework.IMapIterator;
+    import org.as3commons.collections.utils.Maps;
+    import flash.display.Sprite;
+
+    public class MapsCloneExample extends Sprite {
+
+        public function MapsCloneExample() {
+            // clone simple map
+            var map : IMap = Maps.newMap(
+                "two", 2, "four", 4, "one", 1, "three", 3
+            );
+            var clone : IMap = Maps.clone(map);
+            dumpMap(clone);
+            trace (getQualifiedClassName(clone));
+            //    three =&gt; 3
+            //    four =&gt; 4
+            //    one =&gt; 1
+            //    two =&gt; 2
+            //    org.as3commons.collections::Map
+            
+            // clone linked map
+            map = Maps.newLinkedMap(
+                "two", 2, "four", 4, "one", 1, "three", 3
+            );
+            clone = Maps.clone(map);
+            dumpMap(clone);
+            trace (getQualifiedClassName(clone));
+            //    two =&gt; 2
+            //    four =&gt; 4
+            //    one =&gt; 1
+            //    three =&gt; 3
+            //    org.as3commons.collections::LinkedMap
+
+            // clone sorted map
+            map = Maps.newSortedMap(
+                new NumericComparator(),
+                "two", 2, "four", 4, "one", 1, "three", 3
+            );
+            clone = Maps.clone(map);
+            dumpMap(clone);
+            trace (getQualifiedClassName(clone));
+            //    one =&gt; 1
+            //    two =&gt; 2
+            //    three =&gt; 3
+            //    four =&gt; 4
+            //    org.as3commons.collections::SortedMap
+        }
+        
+        private function dumpMap(map : IMap) : void {
+            var i : IMapIterator = map.iterator() as IMapIterator;
+            while (i.next()) trace (i.key, "=&gt;", i.current);
+        }
+    }
+}
+</pre></div></div>
+  
+  <p id="link_MapsCopyExample"><strong><code>Maps.copy()</code> example</strong></p>
+  
+  <a class="exampleCollapsed" href="#link_MapsCopyExample" onClick="toggleExample(this, 'MapsCopyExample');">Show example</a><br /><div id="MapsCopyExample" style='display:none'><div class='listing'><pre>package {
+    import org.as3commons.collections.framework.IMap;
+    import org.as3commons.collections.framework.IMapIterator;
+    import org.as3commons.collections.utils.Maps;
+    import org.as3commons.collections.utils.NumericComparator;
+    import flash.display.Sprite;
+
+    public class MapsCopyExample extends Sprite {
+        public function MapsCopyExample() {
+            // source
+            var source : IMap = Maps.newLinkedMap(
+                1, 1, 2, 1,
+                3, 2, 4, 2 
+            );
+            dumpMap(source);
+            //    1 =&gt; 1
+            //    2 =&gt; 1
+            //    3 =&gt; 2
+            //    4 =&gt; 2
+            
+            // copy all
+            var map : IMap = Maps.newSortedMap(
+                new NumericComparator(),
+                5, 3, 6, 3,
+                7, 4, 8, 4
+            );
+            dumpMap(map);
+            //    5 =&gt; 3
+            //    6 =&gt; 3
+            //    7 =&gt; 4
+            //    8 =&gt; 4
+            Maps.copy(source, map);
+            dumpMap(map);
+            //    1 =&gt; 1
+            //    2 =&gt; 1
+            //    3 =&gt; 2
+            //    4 =&gt; 2
+            //    5 =&gt; 3
+            //    6 =&gt; 3
+            //    7 =&gt; 4
+            //    8 =&gt; 4
+
+            // copy only even keys
+            map = Maps.newSortedMap(
+                new NumericComparator(),
+                6, 3,
+                8, 4
+            );
+            dumpMap(map);
+            //    6 =&gt; 3
+            //    8 =&gt; 4
+            Maps.copy(source, map, evenFilter);
+            dumpMap(map);
+            //    2 =&gt; 1
+            //    4 =&gt; 2
+            //    6 =&gt; 3
+            //    8 =&gt; 4
+
+            // copy only even items
+            map = Maps.newSortedMap(
+                new NumericComparator(),
+                7, 4, 8, 4
+            );
+            dumpMap(map);
+            //    7 =&gt; 4
+            //    8 =&gt; 4
+            Maps.copy(source, map, null, evenFilter);
+            dumpMap(map);
+            //    3 =&gt; 2
+            //    4 =&gt; 2
+            //    7 =&gt; 4
+            //    8 =&gt; 4
+
+            // copy only even keys with even items
+            map = Maps.newSortedMap(
+                new NumericComparator(),
+                8, 4
+            );
+            dumpMap(map);
+            //    8 =&gt; 4
+            Maps.copy(source, map, evenFilter, evenFilter);
+            dumpMap(map);
+            //    4 =&gt; 2
+            //    8 =&gt; 4
+        }
+        
+        private function evenFilter(item :  : Boolean {
+            return item % 2 == 0;
+        }
+
+        private function dumpMap(map : IMap) : void {
+            var i : IMapIterator = map.iterator() as IMapIterator;
+            while (i.next()) trace (i.key, "=&gt;", i.current);
+            trace();
+        }
+
+    }
+}
+</pre></div></div>
+  
+  <p id="link_AddFromArgsExample"><strong><code>Maps.new...()</code> example</strong></p>
+  
+  <a class="exampleCollapsed" href="#link_AddFromArgsExample" onClick="toggleExample(this, 'AddFromArgsExample');">Show example</a><br /><div id="AddFromArgsExample" style='display:none'><div class='listing'><pre>package {
+    import org.as3commons.collections.framework.
+    import org.as3commons.collections.utils.
+    import flash.display.Sprite;
+
+    public class AddFromArgsExample extends Sprite {
+
+        public function AddFromArgsExample() {
+            // ArrayList
+            var list : IList = Lists.newArrayList(
+                1, 2, 3, 4, 5, 6, 7, 8
+            );
+            trace (list.toArray() + "n");
+            // 1, 2, 3, 4, 5, 6, 7, 8
+            
+            // ArrayList
+            list = Lists.newSortedList(
+                new NumericComparator(),
+                6, 3, 1, 5, 8, 2, 7, 4
+            );
+            trace (list.toArray() + "n");
+            // 1, 2, 3, 4, 5, 6, 7, 8
+            
+            // Set
+            var theSet : ISet = Sets.newSet(
+                1, 2, 3, 4, 5, 6, 7, 8
+            );
+            trace (theSet.toArray() + "n");
+            // 1, 2, 3, 4, 5, 6, 7, 8
+            
+            // LinkedSet
+            theSet = Sets.newLinkedSet(
+                1, 2, 3, 4, 5, 6, 7, 8
+            );
+            trace (theSet.toArray() + "n");
+            // 1, 2, 3, 4, 5, 6, 7, 8
+            
+            // SortedSet
+            theSet = Sets.newSortedSet(
+                new NumericComparator(),
+                6, 3, 1, 5, 8, 2, 7, 4
+            );
+            trace (theSet.toArray() + "n");
+            // 1, 2, 3, 4, 5, 6, 7, 8
+            
+            // Map
+            var map : IMap = Maps.newMap(
+                "one", 1, "two", 2, "three", 3, "four", 4
+            );
+            trace (map.toArray() + "n");
+            // 1, 4, 2, 3
+            
+            // LinkedMap
+            map = Maps.newLinkedMap(
+                "one", 1, "two", 2, "three", 3, "four", 4
+            );
+            trace (map.toArray() + "n");
+            // 1, 2, 3, 4
+            
+            // SortedMap
+            map = Maps.newSortedMap(
+                new NumericComparator(),
+                "one", 1, "two", 2, "three", 3, "four", 4
+            );
+            trace (map.toArray() + "n");
+            // 1, 2, 3, 4
+            
+            // LinkedList
+            var linkedList : ILinkedList = LinkedLists.newLinkedList(
+                1, 2, 3, 4, 5, 6, 7, 8
+            );
+            trace (linkedList.toArray() + "n");
+            // 1, 2, 3, 4, 5, 6, 7, 8
+        }
+
+    }
+}
+</pre></div></div>
+  
+  <p id="link_NestedCollectionsExample"><strong>Nested collections example</strong></p>
+  
+  <a class="exampleCollapsed" href="#link_NestedCollectionsExample" onClick="toggleExample(this, 'NestedCollectionsExample');">Show example</a><br /><div id="NestedCollectionsExample" style='display:none'><div class='listing'><pre>package {
+    import org.as3commons.collections.ArrayList;
+    import org.as3commons.collections.LinkedSet;
+    import org.as3commons.collections.framework.IComparator;
+    import org.as3commons.collections.utils.
+    import flash.display.Sprite;
+
+    public class NestedCollectionsExample extends Sprite {
+
+        public function NestedCollectionsExample() {
+            // nested array list
+            var list : ArrayList = Lists.newArrayList(
+                Lists.newArrayList(1, 2),
+                Lists.newArrayList(
+                    Lists.newArrayList(3, 4),
+                    Lists.newArrayList(5, 6)
+                ),
+                Lists.newArrayList(7, 8),
+                Lists.newArrayList(
+                    Lists.newArrayList(9, 10),
+                    Lists.newArrayList(11, 12)
+                )
+            );
+            trace (CollectionUtils.dumpAsString(list));
+            //    [object ArrayList]
+            //    .......[object ArrayList]
+            //    ..............1
+            //    ..............2
+            //    .......[object ArrayList]
+            //    ..............[object ArrayList]
+            //    .....................3
+            //    .....................4
+            //    ..............[object ArrayList]
+            //    .....................5
+            //    .....................6
+            //    .......[object ArrayList]
+            //    ..............7
+            //    ..............8
+            //    .......[object ArrayList]
+            //    ..............[object ArrayList]
+            //    .....................9
+            //    .....................10
+            //    ..............[object ArrayList]
+            //    .....................11
+            //    .....................12            
+            
+            // nested mixed collection
+            var c : IComparator = new NumericComparator();
+            var theSet : LinkedSet = Sets.newLinkedSet(
+                Maps.newLinkedMap("one", 1, "two", 2),
+                Lists.newArrayList(
+                    Sets.newSortedSet(c, 4, 3),
+                    LinkedLists.newLinkedList(5, 6)
+                ),
+                Lists.newSortedList(c, 8, 7),
+                Lists.newArrayList(
+                    Maps.newLinkedMap("nine", 9, "ten", 10),
+                    Maps.newSortedMap(c, "twelve", 12, "eleven", 11)
+                )
+            );
+            trace (CollectionUtils.dumpAsString(theSet));
+            //    [object LinkedSet]
+            //    .......[object LinkedMap]
+            //    ..............1
+            //    ..............2
+            //    .......[object ArrayList]
+            //    ..............[object SortedSet]
+            //    .....................3
+            //    .....................4
+            //    ..............[object LinkedList]
+            //    .....................5
+            //    .....................6
+            //    .......[object SortedList]
+            //    ..............7
+            //    ..............8
+            //    .......[object ArrayList]
+            //    ..............[object LinkedMap]
+            //    .....................9
+            //    .....................10
+            //    ..............[object SortedMap]
+            //    .....................11
+            //    .....................12            
+        }
+    }
+}
+</pre></div></div>
+  
   <p></p>
 <br>
 <hr>
