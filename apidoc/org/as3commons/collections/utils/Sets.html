@@ -4,7 +4,7 @@
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" href="../../../../style.css" type="text/css" media="screen">
 <link rel="stylesheet" href="../../../../print.css" type="text/css" media="print">
-<meta content="Sets,org.as3commons.collections.utils.Sets,addFromArgs,addFromArray,addFromCollection,clone,newLinkedSet,newSet,newSortedSet" name="keywords">
+<meta content="Sets,org.as3commons.collections.utils.Sets,addFromArgs,addFromArray,addFromCollection,clone,copy,newLinkedSet,newSet,newSortedSet" name="keywords">
 <title>org.as3commons.collections.utils.Sets</title>
 </head>
 <body>
@@ -40,6 +40,331 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 </table>
 <p></p>
   <code>ISet</code> utilities.
+  
+  <p id="link_SetsAddFromExample"><strong><code>Sets.addFrom...()</code> example</strong></p>
+  
+  <a class="exampleCollapsed" href="#link_SetsAddFromExample" onClick="toggleExample(this, 'SetsAddFromExample');">Show example</a><br /><div id="SetsAddFromExample" style='display:none'><div class='listing'><pre>package {
+    import org.as3commons.collections.LinkedList;
+    import org.as3commons.collections.LinkedSet;
+    import org.as3commons.collections.Map;
+    import org.as3commons.collections.utils.Sets;
+    import flash.display.Sprite;
+
+    public class SetsAddFromExample extends Sprite {
+
+        public function SetsAddFromExample() {
+            // set to populate
+            var theSet : LinkedSet = new LinkedSet();
+
+            // from array (ordered)
+            var a : Array = [1, "2", "2"]; // second "2" ignored by set
+            Sets.addFromArray(theSet, a);
+
+            // from linked list (ordered)
+            var l : LinkedList = new LinkedList();
+            l.add("2"); // ignored by set
+            l.add(3);
+            l.add("4");
+            l.add(3); // ignored by set
+            Sets.addFromCollection(theSet, l);
+
+            // from map (no order)
+            var m : Map = new Map();
+            m.add("five", 5);
+            m.add("six", "6");
+            m.add("four", "4"); // ignored by set
+            Sets.addFromCollection(theSet, m);
+
+            // from args (ordered)
+            Sets.addFromArgs(theSet,
+                7, "8", "6" // "6" ignored by set
+            );
+
+            // test
+            trace (theSet.toArray().join("n"));
+            
+            //    1            // from array
+            //    2
+            //    3            // from linked list
+            //    4
+            //    6            // from map
+            //    5
+            //    7            // from args
+            //    8
+        }
+
+    }
+}
+</pre></div></div>
+  
+  <p id="link_SetsCloneExample"><strong><code>Sets.clone()</code> example</strong></p>
+  
+  <a class="exampleCollapsed" href="#link_SetsCloneExample" onClick="toggleExample(this, 'SetsCloneExample');">Show example</a><br /><div id="SetsCloneExample" style='display:none'><div class='listing'><pre>package {
+    import org.as3commons.collections.utils.NumericComparator;
+    import flash.utils.getQualifiedClassName;
+    import org.as3commons.collections.framework.ISet;
+    import org.as3commons.collections.utils.Sets;
+    import flash.display.Sprite;
+
+    public class SetsCloneExample extends Sprite {
+
+        public function SetsCloneExample() {
+            // clone simple set
+            var theSet : ISet = Sets.newSet(2, 4, 1, 3);
+            var clone : ISet = Sets.clone(theSet);
+            trace (theSet.toArray().join("n"));
+            trace (getQualifiedClassName(clone));
+            //    1
+            //    2
+            //    3
+            //    4
+            //    org.as3commons.collections::Set
+            
+            // clone linked theSet
+            theSet = Sets.newLinkedSet(2, 4, 1, 3);
+            clone = Sets.clone(theSet);
+            trace (theSet.toArray().join("n"));
+            trace (getQualifiedClassName(clone));
+            //    2
+            //    4
+            //    1
+            //    3
+            //    org.as3commons.collections::LinkedSet
+
+            // clone sorted set
+            theSet = Sets.newSortedSet(
+                new NumericComparator(),
+                2, 4, 1, 3
+            );
+            clone = Sets.clone(theSet);
+            trace (theSet.toArray().join("n"));
+            trace (getQualifiedClassName(clone));
+            //    1
+            //    2
+            //    3
+            //    4
+            //    org.as3commons.collections::SortedSet
+        }
+        
+    }
+}
+</pre></div></div>
+  
+  <p id="link_SetsCopyExample"><strong><code>Sets.copy()</code> example</strong></p>
+  
+  <a class="exampleCollapsed" href="#link_SetsCopyExample" onClick="toggleExample(this, 'SetsCopyExample');">Show example</a><br /><div id="SetsCopyExample" style='display:none'><div class='listing'><pre>package {
+    import org.as3commons.collections.framework.ISet;
+    import org.as3commons.collections.utils.Sets;
+    import org.as3commons.collections.utils.NumericComparator;
+    import flash.display.Sprite;
+
+    public class SetsCopyExample extends Sprite {
+        public function SetsCopyExample() {
+            // source
+            var source : ISet = Sets.newLinkedSet(1, 2, 3, 4);
+            trace (source.toArray() + "n");
+            //    1, 2, 3, 4
+            
+            // copy all
+            var theSet : ISet = Sets.newSortedSet(
+                new NumericComparator(),
+                5, 6, 7, 8
+            );
+            trace (theSet.toArray() + "n");
+            //    5, 6, 7, 8
+            Sets.copy(source, theSet);
+            trace (theSet.toArray() + "n");
+            //    1, 2, 3, 4, 5, 6, 7, 8
+
+            // copy only even items
+            theSet = Sets.newSortedSet(
+                new NumericComparator(),
+                6, 8
+            );
+            trace (theSet.toArray() + "n");
+            //    6, 8
+            Sets.copy(source, theSet, evenFilter);
+            trace (theSet.toArray() + "n");
+            //    2, 4, 6, 8
+        }
+        
+        private function evenFilter(item :  : Boolean {
+            return item % 2 == 0;
+        }
+
+    }
+}
+</pre></div></div>
+  
+  <p id="link_AddFromArgsExample"><strong><code>Sets.new...()</code> example</strong></p>
+  
+  <a class="exampleCollapsed" href="#link_AddFromArgsExample" onClick="toggleExample(this, 'AddFromArgsExample');">Show example</a><br /><div id="AddFromArgsExample" style='display:none'><div class='listing'><pre>package {
+    import org.as3commons.collections.framework.
+    import org.as3commons.collections.utils.
+    import flash.display.Sprite;
+
+    public class AddFromArgsExample extends Sprite {
+
+        public function AddFromArgsExample() {
+            // ArrayList
+            var list : IList = Lists.newArrayList(
+                1, 2, 3, 4, 5, 6, 7, 8
+            );
+            trace (list.toArray() + "n");
+            // 1, 2, 3, 4, 5, 6, 7, 8
+            
+            // ArrayList
+            list = Lists.newSortedList(
+                new NumericComparator(),
+                6, 3, 1, 5, 8, 2, 7, 4
+            );
+            trace (list.toArray() + "n");
+            // 1, 2, 3, 4, 5, 6, 7, 8
+            
+            // Set
+            var theSet : ISet = Sets.newSet(
+                1, 2, 3, 4, 5, 6, 7, 8
+            );
+            trace (theSet.toArray() + "n");
+            // 1, 2, 3, 4, 5, 6, 7, 8
+            
+            // LinkedSet
+            theSet = Sets.newLinkedSet(
+                1, 2, 3, 4, 5, 6, 7, 8
+            );
+            trace (theSet.toArray() + "n");
+            // 1, 2, 3, 4, 5, 6, 7, 8
+            
+            // SortedSet
+            theSet = Sets.newSortedSet(
+                new NumericComparator(),
+                6, 3, 1, 5, 8, 2, 7, 4
+            );
+            trace (theSet.toArray() + "n");
+            // 1, 2, 3, 4, 5, 6, 7, 8
+            
+            // Map
+            var map : IMap = Maps.newMap(
+                "one", 1, "two", 2, "three", 3, "four", 4
+            );
+            trace (map.toArray() + "n");
+            // 1, 4, 2, 3
+            
+            // LinkedMap
+            map = Maps.newLinkedMap(
+                "one", 1, "two", 2, "three", 3, "four", 4
+            );
+            trace (map.toArray() + "n");
+            // 1, 2, 3, 4
+            
+            // SortedMap
+            map = Maps.newSortedMap(
+                new NumericComparator(),
+                "one", 1, "two", 2, "three", 3, "four", 4
+            );
+            trace (map.toArray() + "n");
+            // 1, 2, 3, 4
+            
+            // LinkedList
+            var linkedList : ILinkedList = LinkedLists.newLinkedList(
+                1, 2, 3, 4, 5, 6, 7, 8
+            );
+            trace (linkedList.toArray() + "n");
+            // 1, 2, 3, 4, 5, 6, 7, 8
+        }
+
+    }
+}
+</pre></div></div>
+  
+  <p id="link_NestedCollectionsExample"><strong>Nested collections example</strong></p>
+  
+  <a class="exampleCollapsed" href="#link_NestedCollectionsExample" onClick="toggleExample(this, 'NestedCollectionsExample');">Show example</a><br /><div id="NestedCollectionsExample" style='display:none'><div class='listing'><pre>package {
+    import org.as3commons.collections.ArrayList;
+    import org.as3commons.collections.LinkedSet;
+    import org.as3commons.collections.framework.IComparator;
+    import org.as3commons.collections.utils.
+    import flash.display.Sprite;
+
+    public class NestedCollectionsExample extends Sprite {
+
+        public function NestedCollectionsExample() {
+            // nested array list
+            var list : ArrayList = Lists.newArrayList(
+                Lists.newArrayList(1, 2),
+                Lists.newArrayList(
+                    Lists.newArrayList(3, 4),
+                    Lists.newArrayList(5, 6)
+                ),
+                Lists.newArrayList(7, 8),
+                Lists.newArrayList(
+                    Lists.newArrayList(9, 10),
+                    Lists.newArrayList(11, 12)
+                )
+            );
+            trace (CollectionUtils.dumpAsString(list));
+            //    [object ArrayList]
+            //    .......[object ArrayList]
+            //    ..............1
+            //    ..............2
+            //    .......[object ArrayList]
+            //    ..............[object ArrayList]
+            //    .....................3
+            //    .....................4
+            //    ..............[object ArrayList]
+            //    .....................5
+            //    .....................6
+            //    .......[object ArrayList]
+            //    ..............7
+            //    ..............8
+            //    .......[object ArrayList]
+            //    ..............[object ArrayList]
+            //    .....................9
+            //    .....................10
+            //    ..............[object ArrayList]
+            //    .....................11
+            //    .....................12            
+            
+            // nested mixed collection
+            var c : IComparator = new NumericComparator();
+            var theSet : LinkedSet = Sets.newLinkedSet(
+                Maps.newLinkedMap("one", 1, "two", 2),
+                Lists.newArrayList(
+                    Sets.newSortedSet(c, 4, 3),
+                    LinkedLists.newLinkedList(5, 6)
+                ),
+                Lists.newSortedList(c, 8, 7),
+                Lists.newArrayList(
+                    Maps.newLinkedMap("nine", 9, "ten", 10),
+                    Maps.newSortedMap(c, "twelve", 12, "eleven", 11)
+                )
+            );
+            trace (CollectionUtils.dumpAsString(theSet));
+            //    [object LinkedSet]
+            //    .......[object LinkedMap]
+            //    ..............1
+            //    ..............2
+            //    .......[object ArrayList]
+            //    ..............[object SortedSet]
+            //    .....................3
+            //    .....................4
+            //    ..............[object LinkedList]
+            //    .....................5
+            //    .....................6
+            //    .......[object SortedList]
+            //    ..............7
+            //    ..............8
+            //    .......[object ArrayList]
+            //    ..............[object LinkedMap]
+            //    .....................9
+            //    .....................10
+            //    ..............[object SortedMap]
+            //    .....................11
+            //    .....................12            
+        }
+    }
+}
+</pre></div></div>
   
   <p></p>
 <br>
@@ -84,6 +409,14 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <div class="summaryTableDescription">[static]
    Clones the supplied <code>ISet</code> instance returning a new <code>ISet</code>
    of the same type.</div>
+</td><td class="summaryTableOwnerCol">Sets</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#copy()">copy</a>(source:<a href="../framework/ISet.html">ISet</a>, destination:<a href="../framework/ISet.html">ISet</a>, filter:Function = null):uint</div>
+<div class="summaryTableDescription">[static]
+   Copies items from one set to another.</div>
 </td><td class="summaryTableOwnerCol">Sets</td>
 </tr>
 <tr class="">
@@ -284,6 +617,62 @@ showHideInherited();
    
                         
                      </td>
+</tr>
+</table>
+</div>
+<a name="copy()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">copy</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public static function copy(source:<a href="../framework/ISet.html">ISet</a>, destination:<a href="../framework/ISet.html">ISet</a>, filter:Function = null):uint</code><p>
+   Copies items from one set to another.
+   
+   </p><p>If a filter is specified only items are copied that meet the
+   supplied predicates.<p>
+   
+   <p>The filter function accepts the current item and returns a boolean
+   value (<code>true</code> if the item is accepted).</p>
+   
+   <div class='listing'><pre>
+   function itemFilter(item :  : Boolean {
+    var accept : Boolean = false;
+    // test the item
+    return accept;
+   }
+     
+   Sets.copy(sourceSet, destinationSet, filter);
+   </pre></div>
+   
+   <span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">source</span>:<a href="../framework/ISet.html">ISet</a></code> &mdash; The <code>ISet</code> instance to copy from.
+   </td>
+</tr>
+<tr>
+<td class="paramSpacer">&nbsp;</td>
+</tr>
+<tr>
+<td width="20px"></td><td><code><span class="label">destination</span>:<a href="../framework/ISet.html">ISet</a></code> &mdash; The <code>ISet</code> to copy to.
+   </td>
+</tr>
+<tr>
+<td class="paramSpacer">&nbsp;</td>
+</tr>
+<tr>
+<td width="20px"></td><td><code><span class="label">filter</span>:Function</code> (default = <code>null</code>)<code></code> &mdash; Function which will be applied to each item in the source set.
+   </td>
+</tr>
+</table>
+<p></p>
+<span class="label">Returns</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20"></td><td><code>uint</code> &mdash; The number of items copied to the set.
+   </td>
 </tr>
 </table>
 </div>
