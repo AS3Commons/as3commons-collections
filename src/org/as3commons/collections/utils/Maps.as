@@ -305,8 +305,9 @@ package org.as3commons.collections.utils {
 		 */
 
 		/**
-		 * <p>Attempts to retrieve the item mapped to the supplied key.  If the supplied key is not mapped an 
-		 * ArgumentError will be thrown.</p>
+		 * Attempts to retrieve the item mapped to the supplied key.
+		 * 
+		 * <p>If the supplied key is not mapped an ArgumentError will be thrown.</p>
 		 *
 		 * @param map the IMap instance to operate on. 
 		 * @param key the key to perform the lookup using.
@@ -320,8 +321,10 @@ package org.as3commons.collections.utils {
 		}
 
 		/**
-		 * <p>Attempts to retrieve the item mapped to the supplied key.  If the supplied key is not mapped then the
-		 * supplied default value will be returned instead.</p>
+		 * Attempts to retrieve the item mapped to the supplied key.
+		 * 
+		 * <p>If the supplied key is not mapped then the supplied default value
+		 * will be returned instead.</p>
 		 * 
 		 * @param map the IMap instance to operate on.
 		 * @param key the key to perform the lookup using.
@@ -335,8 +338,9 @@ package org.as3commons.collections.utils {
 		}
 
 		/**
-		 * <p>Attempts to retrieve the item mapped to the supplied key.  If the supplied key is not mapped then the
-		 * supplied value will mapped to the key and returned.</p>
+		 * Attempts to retrieve the item mapped to the supplied key.
+		 * 
+		 * <p>If the supplied key is not mapped then the supplied value will mapped to the key and returned.</p>
 		 * 
 		 * @param map the IMap instance to operate on.
 		 * @param key the key to perform the lookup using.

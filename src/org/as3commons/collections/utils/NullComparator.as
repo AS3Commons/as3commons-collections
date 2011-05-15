@@ -17,7 +17,7 @@ package org.as3commons.collections.utils {
 	import org.as3commons.collections.framework.IComparator;
 
 	/**
-	 * Null comparator
+	 * Null comparator.
 	 * 
 	 * <p>This comparator is being used as the default comparator for sorted collections
 	 * if no comparator has been specified else.</p>
