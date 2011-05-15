@@ -28,6 +28,26 @@ package org.as3commons.collections.utils {
 	/**
 	 * <code>ISet</code> utilities.
 	 * 
+	 * <p id="link_SetsAddFromExample"><strong><code>Sets.addFrom...()</code> example</strong></p>
+	 * 
+	 * {{EXAMPLE: SetsAddFromExample}}
+	 * 
+	 * <p id="link_SetsCloneExample"><strong><code>Sets.clone()</code> example</strong></p>
+	 * 
+	 * {{EXAMPLE: SetsCloneExample}}
+	 * 
+	 * <p id="link_SetsCopyExample"><strong><code>Sets.copy()</code> example</strong></p>
+	 * 
+	 * {{EXAMPLE: SetsCopyExample}}
+	 * 
+	 * <p id="link_AddFromArgsExample"><strong><code>Sets.new...()</code> example</strong></p>
+	 * 
+	 * {{EXAMPLE: AddFromArgsExample}}
+	 * 
+	 * <p id="link_NestedCollectionsExample"><strong>Nested collections example</strong></p>
+	 * 
+	 * {{EXAMPLE: NestedCollectionsExample}}
+	 * 
 	 * @author Jens Struwe 21.04.2011
 	 */
 	public class Sets {

@@ -27,6 +27,26 @@ package org.as3commons.collections.utils {
 	/**
 	 * <code>IList</code> utilities.
 	 * 
+	 * <p id="link_ListsAddFromExample"><strong><code>Lists.addFrom...()</code> example</strong></p>
+	 * 
+	 * {{EXAMPLE: ListsAddFromExample}}
+	 * 
+	 * <p id="link_ListsCloneExample"><strong><code>Lists.clone()</code> example</strong></p>
+	 * 
+	 * {{EXAMPLE: ListsCloneExample}}
+	 * 
+	 * <p id="link_ListsCopyExample"><strong><code>Lists.copy()</code> example</strong></p>
+	 * 
+	 * {{EXAMPLE: ListsCopyExample}}
+	 * 
+	 * <p id="link_AddFromArgsExample"><strong><code>Lists.new...()</code> example</strong></p>
+	 * 
+	 * {{EXAMPLE: AddFromArgsExample}}
+	 * 
+	 * <p id="link_NestedCollectionsExample"><strong>Nested collections example</strong></p>
+	 * 
+	 * {{EXAMPLE: NestedCollectionsExample}}
+	 * 
 	 * @author Jens Struwe 21.04.2011
 	 */
 	public class Lists {

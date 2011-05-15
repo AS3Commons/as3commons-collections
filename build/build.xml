@@ -70,6 +70,8 @@
 			<arg line="-library-path ${FLEX_HOME}/frameworks/locale/en_US" />
 		</exec>
 
+		<fixcrlf srcdir="${DOC}/apidoc" includes="**/*.*" eol="lf" />
+		
 		<copy file="${BUILD}/asdoc/asdoc.js" todir="${DOC}/apidoc" overwrite="true" />
 		<copy file="${BUILD}/asdoc/style.css" todir="${DOC}/apidoc" overwrite="true" />
 		

@@ -28,6 +28,26 @@ package org.as3commons.collections.utils {
 	/**
 	 * <code>IMap</code> utilities.
 	 * 
+	 * <p id="link_MapsAddFromExample"><strong><code>Maps.addFrom...()</code> example</strong></p>
+	 * 
+	 * {{EXAMPLE: MapsAddFromExample}}
+	 * 
+	 * <p id="link_MapsCloneExample"><strong><code>Maps.clone()</code> example</strong></p>
+	 * 
+	 * {{EXAMPLE: MapsCloneExample}}
+	 * 
+	 * <p id="link_MapsCopyExample"><strong><code>Maps.copy()</code> example</strong></p>
+	 * 
+	 * {{EXAMPLE: MapsCopyExample}}
+	 * 
+	 * <p id="link_AddFromArgsExample"><strong><code>Maps.new...()</code> example</strong></p>
+	 * 
+	 * {{EXAMPLE: AddFromArgsExample}}
+	 * 
+	 * <p id="link_NestedCollectionsExample"><strong>Nested collections example</strong></p>
+	 * 
+	 * {{EXAMPLE: NestedCollectionsExample}}
+	 * 
 	 * @author John Reeves 14.04.2011
 	 */
 	public class Maps {
