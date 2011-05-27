@@ -28,6 +28,7 @@ package org.as3commons.collections.framework {
 		 * 
 		 * @return Number of occurrences of the given item.
 		 */
+		[Bindable("collectionChanged")]
 		function count(item : *) : uint;
 
 		/**
