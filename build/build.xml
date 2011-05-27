@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="AS3Commons Collections" default="APIDoc" basedir="../" >
 
-	<property name="FLEX_HOME" value="c:\FDT\plugins\com.powerflasher.fdt.shippedFlexSDK_3.5.0.12683a_1000\\flex" />
+	<property name="FLEX_HOME" value="D:\Program Files\Adobe\Adobe Flash Builder Burrito\sdks\3.5.0" />
 	<property name="ASDOC" value="${FLEX_HOME}\bin\asdoc.exe" />
 
 	<property name="FILE_NAME" value="as3commons-collections" />

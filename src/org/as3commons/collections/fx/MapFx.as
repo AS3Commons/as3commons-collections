@@ -15,7 +15,7 @@
  */
 package org.as3commons.collections.fx {
 	import org.as3commons.collections.Map;
-	import org.as3commons.collections.framework.ICollectionFx;
+	import org.as3commons.collections.framework.IMapFx;
 	import org.as3commons.collections.fx.events.CollectionEvent;
 
 	import flash.events.Event;
@@ -47,7 +47,7 @@ package org.as3commons.collections.fx {
 	 * @see org.as3commons.collections.fx.events.MapEvent MapEvent - Description of the map event properties.
 	 * @see org.as3commons.collections.Map Map - Map description and usage examples.
 	 */
-	public class MapFx extends Map implements ICollectionFx {
+	public class MapFx extends Map implements IMapFx {
 
 		/**
 		 * Event dispatcher.
@@ -180,6 +180,24 @@ package org.as3commons.collections.fx {
 				key,
 				item
 			));
+		}
+
+		/**
+		 * @inheritDoc
+		 */
+		[Bindable("collectionChanged")]
+		override public function hasKey(key:*):Boolean
+		{
+			return super.hasKey(key);
+		}
+		
+		/**
+		 * @inheritDoc
+		 */
+		[Bindable("collectionChanged")]
+		override public function keysToArray() : Array
+		{
+			return super.keysToArray();
 		}
 	}
 }
