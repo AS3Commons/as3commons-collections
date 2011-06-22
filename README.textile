@@ -3,5 +3,5 @@ AS3Commons Collections - ActionScript Collections Framework
 h3. References
 
 * "Project Homepage":http://sibirjak.com/osflash/projects/as3commons-collections/ (Overview, Features, Documentation, Examples)
-* "Downloads":http://sibirjak.com/osflash/projects/as3commons-collections/downloads (ZIP, SWC)
+* "Downloads":http://sibirjak.com/osflash/projects/as3commons-collections/downloads/ (ZIP, SWC)
 * "APIDoc":http://as3commons.github.com/as3commons-collections/apidoc/
