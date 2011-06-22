@@ -1,67 +1,7 @@
-h2. AS3Commons Collections - ActionScript Collections Framework
-
-The AS3Commons Collections project is the most serious AS3 collections resource in the web - providing both a sophisticated collections framework as well as a library of fast collection implementations.
+AS3Commons Collections - ActionScript Collections Framework
 
 h3. References
 
-*Downloads*
-
-* "Downloads":https://github.com/AS3Commons/as3commons-collections/downloads (ZIP, SWC)
-
-*Documentation*
-
-* "Examples":http://sibirjak.com/osflash/projects/as3commons-collections/examples/
 * "Project Homepage":http://sibirjak.com/osflash/projects/as3commons-collections/ (Overview, Features, Documentation, Examples)
+* "Downloads":http://sibirjak.com/osflash/projects/as3commons-collections/downloads (ZIP, SWC)
 * "APIDoc":http://as3commons.github.com/as3commons-collections/apidoc/
-* "Roadmap":https://github.com/AS3Commons/as3commons-collections/wiki
-
-*Related Articles*
-
-* "Why we need a collection framework in ActionScript":http://sibirjak.com/osflash/blog/why-we-need-a-collection-framework-in-actionscript/
-* "Array, Dictionary, Collections - Performance, Functionality, Reliability":http://sibirjak.com/osflash/blog/array-dictionary-collections-performance-functionality-reliability/
-* "Collections Framework Performance Comparision":http://sibirjak.com/osflash/blog/collections-framework-performance-comparision/
-
-*Other resources*
-
-* "AS3Commons Project":http://as3commons.org/
-* "Google Code":http://code.google.com/p/as3-commons/ (SVN branch and revsion history up to 1.2.0)
-
-h3. Team
-
-* "John Reeves":https://github.com/jonnyreeves
-* "Jens Struwe":https://github.com/kakenbok
-* Contribution is highly welcome.
-
-h3. Features
-
-* Small and consistent API
-* Fast collection implementations
-* Powerful iterators
-* Collection util classes
-* Data binding enabled collections
-* 100% unit tested
-
-h3. Implementations provided
-
-*Collections*
-
-* ArrayList, SortedList
-* Set, LinkedSet, SortedSet
-* Map, LinkedMap, SortedMap
-* LinkedList, Treap
-
-*Bindable Collections*
-
-* ArrayListFx, SortedListFx
-* SetFx, LinkedSetFx, SortedSetFx
-* MapFx, LinkedMapFx, SortedMapFx
-
-*Special purpose iterators*
-
-* ArrayIterator, RecursiveIterator
-* FilterIterator, RecursiveFilterIterator, CollectionFilterIterator, MapFilterIterator
-
-*Utils*
-
-* CollectionUtils, ListUtils, SetUtils, MapUtils, ArrayUtils
-* ListBuilder, SetBuilder, MapBuilder
