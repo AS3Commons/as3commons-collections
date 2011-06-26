@@ -14,11 +14,13 @@
  * limitations under the License.
  */
 package org.as3commons.collections {
+
 	import org.as3commons.collections.framework.ICollection;
 	import org.as3commons.collections.framework.ISortedSet;
 	import org.as3commons.collections.mocks.SortedSetMock;
 	import org.as3commons.collections.testhelpers.AbstractCollectionTestCase;
 	import org.as3commons.collections.testhelpers.TestComparator;
+	import org.as3commons.collections.testhelpers.TestItems;
 	import org.as3commons.collections.units.ISetTests;
 	import org.as3commons.collections.units.ISortOrderDuplicateEqualsTests;
 
@@ -43,6 +45,10 @@ package org.as3commons.collections {
 			}
 		}
 
+		private function get _sortedSet() : ISortedSet {
+			return collection as ISortedSet;
+		}
+
 		/*
 		 * Units
 		 */
@@ -61,6 +67,75 @@ package org.as3commons.collections {
 
 		public function test_order() : void {
 			new ISortOrderDuplicateEqualsTests(this).runAllTests();
+		}
+
+		/*
+		 * IOrderedMap
+		 */
+
+		/*
+		 * Initial state
+		 */
+
+		public function test_init() : void {
+			assertTrue(_sortedSet is ISortedSet);
+		}
+
+		/*
+		 * Test next, previous
+		 */
+
+		public function test_nextPrevious() : void {
+			
+			// empty
+			
+			assertTrue(undefined === _sortedSet.next(TestItems.object1Key));
+			assertTrue(undefined === _sortedSet.previous(TestItems.object1Key));
+			
+			assertTrue(undefined === _sortedSet.next(TestItems.object2Key));
+			assertTrue(undefined === _sortedSet.previous(TestItems.object2Key));
+
+			assertTrue(undefined === _sortedSet.next(TestItems.object3Key));
+			assertTrue(undefined === _sortedSet.previous(TestItems.object3Key));
+
+			// key1
+
+			_sortedSet.add(TestItems.object1Key);
+
+			assertTrue(undefined === _sortedSet.next(TestItems.object1Key));
+			assertTrue(undefined === _sortedSet.previous(TestItems.object1Key));
+
+			assertTrue(undefined === _sortedSet.next(TestItems.object2Key));
+			assertTrue(undefined === _sortedSet.previous(TestItems.object2Key));
+
+			assertTrue(undefined === _sortedSet.next(TestItems.object3Key));
+			assertTrue(undefined === _sortedSet.previous(TestItems.object3Key));
+
+			// key1, key2
+
+			_sortedSet.add(TestItems.object2Key);
+
+			assertStrictlyEquals(TestItems.object2Key, _sortedSet.next(TestItems.object1Key));
+			assertTrue(undefined === _sortedSet.previous(TestItems.object1Key));
+
+			assertTrue(undefined === _sortedSet.next(TestItems.object2Key));
+			assertStrictlyEquals(TestItems.object1Key, _sortedSet.previous(TestItems.object2Key));
+
+			assertTrue(undefined === _sortedSet.next(TestItems.object3Key));
+			assertTrue(undefined === _sortedSet.previous(TestItems.object3Key));
+
+			// key1, key2, key3
+
+			_sortedSet.add(TestItems.object3Key);
+
+			assertStrictlyEquals(TestItems.object2Key, _sortedSet.next(TestItems.object1Key));
+			assertTrue(undefined === _sortedSet.previous(TestItems.object1Key));
+
+			assertStrictlyEquals(TestItems.object3Key, _sortedSet.next(TestItems.object2Key));
+			assertStrictlyEquals(TestItems.object1Key, _sortedSet.previous(TestItems.object2Key));
+
+			assertTrue(undefined === _sortedSet.next(TestItems.object3Key));
+			assertStrictlyEquals(TestItems.object2Key, _sortedSet.previous(TestItems.object3Key));
 		}
 
 	}

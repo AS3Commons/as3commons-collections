@@ -14,11 +14,13 @@
  * limitations under the License.
  */
 package org.as3commons.collections {
+
 	import org.as3commons.collections.framework.ICollection;
 	import org.as3commons.collections.framework.ISortedMap;
 	import org.as3commons.collections.mocks.SortedMapMock;
 	import org.as3commons.collections.testhelpers.AbstractCollectionTestCase;
 	import org.as3commons.collections.testhelpers.TestComparator;
+	import org.as3commons.collections.testhelpers.TestItems;
 	import org.as3commons.collections.testhelpers.UniqueMapKey;
 	import org.as3commons.collections.units.IMapTests;
 	import org.as3commons.collections.units.ISortOrderDuplicatesTests;
@@ -43,6 +45,10 @@ package org.as3commons.collections {
 			}
 		}
 
+		private function get _sortedMap() : ISortedMap {
+			return collection as ISortedMap;
+		}
+
 		/*
 		 * Units
 		 */
@@ -61,6 +67,95 @@ package org.as3commons.collections {
 
 		public function test_order() : void {
 			new ISortOrderDuplicatesTests(this).runAllTests();
+		}
+
+		/*
+		 * IOrderedMap
+		 */
+
+		/*
+		 * Initial state
+		 */
+
+		public function test_init() : void {
+			assertTrue(_sortedMap is ISortedMap);
+		}
+
+		/*
+		 * Test firstKey, lastKey
+		 */
+
+		public function test_firstKeylastKey() : void {
+			assertTrue(undefined === _sortedMap.firstKey);
+			assertTrue(undefined === _sortedMap.lastKey);
+			
+			_sortedMap.add(TestItems.object1Key, TestItems.object1);
+
+			assertStrictlyEquals(TestItems.object1Key, _sortedMap.firstKey);
+			assertStrictlyEquals(TestItems.object1Key, _sortedMap.lastKey);
+
+			_sortedMap.add(TestItems.object2Key, TestItems.object2);
+			_sortedMap.add(TestItems.object3Key, TestItems.object3);
+			
+			assertStrictlyEquals(TestItems.object1Key, _sortedMap.firstKey);
+			assertStrictlyEquals(TestItems.object3Key, _sortedMap.lastKey);
+		}
+
+		/*
+		 * Test nextKey, previousKey
+		 */
+
+		public function test_nextKeyPreviousKey() : void {
+			
+			// empty
+			
+			assertTrue(undefined === _sortedMap.nextKey(TestItems.object1Key));
+			assertTrue(undefined === _sortedMap.previousKey(TestItems.object1Key));
+			
+			assertTrue(undefined === _sortedMap.nextKey(TestItems.object2Key));
+			assertTrue(undefined === _sortedMap.previousKey(TestItems.object2Key));
+
+			assertTrue(undefined === _sortedMap.nextKey(TestItems.object3Key));
+			assertTrue(undefined === _sortedMap.previousKey(TestItems.object3Key));
+
+			// key1
+
+			_sortedMap.add(TestItems.object1Key, TestItems.object1);
+
+			assertTrue(undefined === _sortedMap.nextKey(TestItems.object1Key));
+			assertTrue(undefined === _sortedMap.previousKey(TestItems.object1Key));
+
+			assertTrue(undefined === _sortedMap.nextKey(TestItems.object2Key));
+			assertTrue(undefined === _sortedMap.previousKey(TestItems.object2Key));
+
+			assertTrue(undefined === _sortedMap.nextKey(TestItems.object3Key));
+			assertTrue(undefined === _sortedMap.previousKey(TestItems.object3Key));
+
+			// key1, key2
+
+			_sortedMap.add(TestItems.object2Key, TestItems.object2);
+
+			assertStrictlyEquals(TestItems.object2Key, _sortedMap.nextKey(TestItems.object1Key));
+			assertTrue(undefined === _sortedMap.previousKey(TestItems.object1Key));
+
+			assertTrue(undefined === _sortedMap.nextKey(TestItems.object2Key));
+			assertStrictlyEquals(TestItems.object1Key, _sortedMap.previousKey(TestItems.object2Key));
+
+			assertTrue(undefined === _sortedMap.nextKey(TestItems.object3Key));
+			assertTrue(undefined === _sortedMap.previousKey(TestItems.object3Key));
+
+			// key1, key2, key3
+
+			_sortedMap.add(TestItems.object3Key, TestItems.object3);
+
+			assertStrictlyEquals(TestItems.object2Key, _sortedMap.nextKey(TestItems.object1Key));
+			assertTrue(undefined === _sortedMap.previousKey(TestItems.object1Key));
+
+			assertStrictlyEquals(TestItems.object3Key, _sortedMap.nextKey(TestItems.object2Key));
+			assertStrictlyEquals(TestItems.object1Key, _sortedMap.previousKey(TestItems.object2Key));
+
+			assertTrue(undefined === _sortedMap.nextKey(TestItems.object3Key));
+			assertStrictlyEquals(TestItems.object2Key, _sortedMap.previousKey(TestItems.object3Key));
 		}
 
 	}

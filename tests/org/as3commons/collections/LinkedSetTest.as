@@ -278,5 +278,62 @@ package org.as3commons.collections {
 			assertEquals(3, _orderedSet.size);
 		}
 
+		/*
+		 * Test next, previous
+		 */
+
+		public function test_nextPrevious() : void {
+			
+			// empty
+			
+			assertTrue(undefined === _orderedSet.next(TestItems.object1Key));
+			assertTrue(undefined === _orderedSet.previous(TestItems.object1Key));
+			
+			assertTrue(undefined === _orderedSet.next(TestItems.object2Key));
+			assertTrue(undefined === _orderedSet.previous(TestItems.object2Key));
+
+			assertTrue(undefined === _orderedSet.next(TestItems.object3Key));
+			assertTrue(undefined === _orderedSet.previous(TestItems.object3Key));
+
+			// key1
+
+			_orderedSet.add(TestItems.object1Key);
+
+			assertTrue(undefined === _orderedSet.next(TestItems.object1Key));
+			assertTrue(undefined === _orderedSet.previous(TestItems.object1Key));
+
+			assertTrue(undefined === _orderedSet.next(TestItems.object2Key));
+			assertTrue(undefined === _orderedSet.previous(TestItems.object2Key));
+
+			assertTrue(undefined === _orderedSet.next(TestItems.object3Key));
+			assertTrue(undefined === _orderedSet.previous(TestItems.object3Key));
+
+			// key1, key2
+
+			_orderedSet.add(TestItems.object2Key);
+
+			assertStrictlyEquals(TestItems.object2Key, _orderedSet.next(TestItems.object1Key));
+			assertTrue(undefined === _orderedSet.previous(TestItems.object1Key));
+
+			assertTrue(undefined === _orderedSet.next(TestItems.object2Key));
+			assertStrictlyEquals(TestItems.object1Key, _orderedSet.previous(TestItems.object2Key));
+
+			assertTrue(undefined === _orderedSet.next(TestItems.object3Key));
+			assertTrue(undefined === _orderedSet.previous(TestItems.object3Key));
+
+			// key1, key2, key3
+
+			_orderedSet.add(TestItems.object3Key);
+
+			assertStrictlyEquals(TestItems.object2Key, _orderedSet.next(TestItems.object1Key));
+			assertTrue(undefined === _orderedSet.previous(TestItems.object1Key));
+
+			assertStrictlyEquals(TestItems.object3Key, _orderedSet.next(TestItems.object2Key));
+			assertStrictlyEquals(TestItems.object1Key, _orderedSet.previous(TestItems.object2Key));
+
+			assertTrue(undefined === _orderedSet.next(TestItems.object3Key));
+			assertStrictlyEquals(TestItems.object2Key, _orderedSet.previous(TestItems.object3Key));
+		}
+
 	}
 }

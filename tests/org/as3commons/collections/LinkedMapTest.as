@@ -179,5 +179,82 @@ package org.as3commons.collections {
 			assertTrue(validateTestItems([1, 2, 3]));
 		}
 
+		/*
+		 * Test firstKey, lastKey
+		 */
+
+		public function test_firstKeylastKey() : void {
+			assertTrue(undefined === _orderedMap.firstKey);
+			assertTrue(undefined === _orderedMap.lastKey);
+			
+			_orderedMap.add(TestItems.object1Key, TestItems.object1);
+
+			assertStrictlyEquals(TestItems.object1Key, _orderedMap.firstKey);
+			assertStrictlyEquals(TestItems.object1Key, _orderedMap.lastKey);
+
+			_orderedMap.add(TestItems.object2Key, TestItems.object2);
+			_orderedMap.add(TestItems.object3Key, TestItems.object3);
+			
+			assertStrictlyEquals(TestItems.object1Key, _orderedMap.firstKey);
+			assertStrictlyEquals(TestItems.object3Key, _orderedMap.lastKey);
+		}
+
+		/*
+		 * Test nextKey, previousKey
+		 */
+
+		public function test_nextKeyPreviousKey() : void {
+			
+			// empty
+			
+			assertTrue(undefined === _orderedMap.nextKey(TestItems.object1Key));
+			assertTrue(undefined === _orderedMap.previousKey(TestItems.object1Key));
+			
+			assertTrue(undefined === _orderedMap.nextKey(TestItems.object2Key));
+			assertTrue(undefined === _orderedMap.previousKey(TestItems.object2Key));
+
+			assertTrue(undefined === _orderedMap.nextKey(TestItems.object3Key));
+			assertTrue(undefined === _orderedMap.previousKey(TestItems.object3Key));
+
+			// key1
+
+			_orderedMap.add(TestItems.object1Key, TestItems.object1);
+
+			assertTrue(undefined === _orderedMap.nextKey(TestItems.object1Key));
+			assertTrue(undefined === _orderedMap.previousKey(TestItems.object1Key));
+
+			assertTrue(undefined === _orderedMap.nextKey(TestItems.object2Key));
+			assertTrue(undefined === _orderedMap.previousKey(TestItems.object2Key));
+
+			assertTrue(undefined === _orderedMap.nextKey(TestItems.object3Key));
+			assertTrue(undefined === _orderedMap.previousKey(TestItems.object3Key));
+
+			// key1, key2
+
+			_orderedMap.add(TestItems.object2Key, TestItems.object2);
+
+			assertStrictlyEquals(TestItems.object2Key, _orderedMap.nextKey(TestItems.object1Key));
+			assertTrue(undefined === _orderedMap.previousKey(TestItems.object1Key));
+
+			assertTrue(undefined === _orderedMap.nextKey(TestItems.object2Key));
+			assertStrictlyEquals(TestItems.object1Key, _orderedMap.previousKey(TestItems.object2Key));
+
+			assertTrue(undefined === _orderedMap.nextKey(TestItems.object3Key));
+			assertTrue(undefined === _orderedMap.previousKey(TestItems.object3Key));
+
+			// key1, key2, key3
+
+			_orderedMap.add(TestItems.object3Key, TestItems.object3);
+
+			assertStrictlyEquals(TestItems.object2Key, _orderedMap.nextKey(TestItems.object1Key));
+			assertTrue(undefined === _orderedMap.previousKey(TestItems.object1Key));
+
+			assertStrictlyEquals(TestItems.object3Key, _orderedMap.nextKey(TestItems.object2Key));
+			assertStrictlyEquals(TestItems.object1Key, _orderedMap.previousKey(TestItems.object2Key));
+
+			assertTrue(undefined === _orderedMap.nextKey(TestItems.object3Key));
+			assertStrictlyEquals(TestItems.object2Key, _orderedMap.previousKey(TestItems.object3Key));
+		}
+
 	}
 }
