@@ -5,7 +5,7 @@
 	<property name="ASDOC" value="${FLEX_HOME}\bin\asdoc.exe" />
 
 	<property name="FILE_NAME" value="as3commons-collections" />
-	<property name="VERSION" value="1.3.0" />
+	<property name="VERSION" value="1.3.1-snapshot" />
 
 	<property name="BUILD" value="build" />
 	<property name="SRC" value="src" />
@@ -87,6 +87,15 @@
 			<zipfileset dir="${EXAMPLES}" prefix="examples" />
 			<zipfileset file="${SWC}/${FILE_NAME}-${VERSION}.swc" prefix="swc" />
 			<zipfileset dir="${DOC}" prefix="doc" />
+		</zip>
+		
+	</target>
+
+	<target name="Zip_Src" description="ZIP Sources">
+ 		<delete file="${ZIP}/${FILE_NAME}-${VERSION}-src.zip" />
+
+		<zip destfile="${ZIP}/${FILE_NAME}-${VERSION}-src.zip">
+			<zipfileset dir="${SRC}" />
 		</zip>
 		
 	</target>
