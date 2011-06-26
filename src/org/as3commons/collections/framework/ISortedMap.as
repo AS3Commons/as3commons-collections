@@ -55,6 +55,44 @@ package org.as3commons.collections.framework {
 	public interface ISortedMap extends IMap, ISortOrder {
 
 		/**
+		 * Returns the key of the first item, if any.
+		 * 
+		 * <p>If the key is not contained, the method returns <code>undefined</code>.</p>
+		 * 
+		 * @return The key of the first item or <code>undefined</code>.
+		 */
+		function get firstKey() : *;
+
+		/**
+		 * Returns the key of the last item, if any.
+		 * 
+		 * <p>If the key is not contained, the method returns <code>undefined</code>.</p>
+		 * 
+		 * @return The key of the last item or <code>undefined</code>.
+		 */
+		function get lastKey() : *;
+
+		/**
+		 * Returns the key of the successor of the item mapped to the given key.
+		 * 
+		 * <p>If the key is not contained, the method returns <code>undefined</code>.</p>
+		 * 
+		 * @param item The key of item to get its successing key.
+		 * @return The key of the predecessor or <code>undefined</code>.
+		 */
+		function nextKey(key : *) : *;
+
+		/**
+		 * Returns the key of the predecessor of the item mapped to the given key.
+		 * 
+		 * <p>If the key is not contained, the method returns <code>undefined</code>.</p>
+		 * 
+		 * @param item The key of item to get its predecessing key.
+		 * @return The key of the predecessor or <code>undefined</code>.
+		 */
+		function previousKey(key : *) : *;
+
+		/**
 		 * Returns the key of the last item that is lesser than the given item.
 		 * 
 		 * @param item The item to test.

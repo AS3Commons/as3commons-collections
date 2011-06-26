@@ -14,6 +14,7 @@
  * limitations under the License.
  */
 package org.as3commons.collections {
+
 	import org.as3commons.collections.framework.IComparator;
 	import org.as3commons.collections.framework.IIterator;
 	import org.as3commons.collections.framework.ISortedMap;
@@ -115,6 +116,46 @@ package org.as3commons.collections {
 		 * ISortedMap
 		 */
 		
+		/**
+		 * @inheritDoc
+		 */
+		public function get firstKey() : * {
+			if (!_root) return undefined;
+			return SortedMapNode(mostLeftNode_internal()).key;
+		}
+
+		/**
+		 * @inheritDoc
+		 */
+		public function get lastKey() : * {
+			if (!_root) return undefined;
+			return SortedMapNode(mostRightNode_internal()).key;
+		}
+
+		/**
+		 * @inheritDoc
+		 */
+		public function nextKey(key : *) : * {
+			var node : SortedMapNode = getNode(key);
+			if (node) {
+				node = nextNode_internal(node) as SortedMapNode;
+				if (node) return node.key;
+			}
+			return undefined;
+		}
+
+		/**
+		 * @inheritDoc
+		 */
+		public function previousKey(key : *) : * {
+			var node : SortedMapNode = getNode(key);
+			if (node) {
+				node = previousNode_internal(node) as SortedMapNode;
+				if (node) return node.key;
+			}
+			return undefined;
+		}
+
 		/**
 		 * @inheritDoc
 		 */

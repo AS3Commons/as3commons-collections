@@ -109,6 +109,30 @@ package org.as3commons.collections {
 		/**
 		 * @inheritDoc
 		 */
+		public function next(item : *) : * {
+			var node : SortedNode = getNode(item);
+			if (node) {
+				node = nextNode_internal(node);
+				if (node) return node.item;
+			}
+			return undefined;
+		}
+
+		/**
+		 * @inheritDoc
+		 */
+		public function previous(item : *) : * {
+			var node : SortedNode = getNode(item);
+			if (node) {
+				node = previousNode_internal(node);
+				if (node) return node.item;
+			}
+			return undefined;
+		}
+
+		/**
+		 * @inheritDoc
+		 */
 		public function lesser(item : *) : * {
 			var node : SortedNode = lesserNode(item);
 			if (!node) return undefined;
@@ -252,5 +276,6 @@ package org.as3commons.collections {
 				delete _items[node.item];
 			}
 		}
+
 	}
 }

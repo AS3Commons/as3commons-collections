@@ -187,6 +187,24 @@ package org.as3commons.collections {
 			return false;
 		}
 
+		/**
+		 * @inheritDoc
+		 */
+		public function next(item : *) : * {
+			var node : LinkedNode = getNode(item);
+			if (node && node.right) return node.right.item;
+			return undefined;
+		}
+
+		/**
+		 * @inheritDoc
+		 */
+		public function previous(item : *) : * {
+			var node : LinkedNode = getNode(item);
+			if (node && node.left) return node.left.item;
+			return undefined;
+		}
+
 		/*
 		 * ILinkedCollection
 		 */

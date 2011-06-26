@@ -104,5 +104,25 @@ package org.as3commons.collections.framework {
 		 */
 		function replace(oldItem: *, item : *) : Boolean;
 		
+		/**
+		 * Returns the successor of the given item.
+		 * 
+		 * <p>If the item is not contained, the method returns <code>undefined</code>.</p>
+		 * 
+		 * @param item The item to get its successor.
+		 * @return The predecessor or <code>undefined</code>.
+		 */
+		function next(item : *) : *;
+
+		/**
+		 * Returns the predecessor of the given item.
+		 * 
+		 * <p>If the item is not contained, the method returns <code>undefined</code>.</p>
+		 * 
+		 * @param item The item to get its predecessor.
+		 * @return The predecessor or <code>undefined</code>.
+		 */
+		function previous(item : *) : *;
+
 	}
 }

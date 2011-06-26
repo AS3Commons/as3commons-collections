@@ -166,6 +166,40 @@ package org.as3commons.collections {
 			return true;
 		}
 
+		/**
+		 * @inheritDoc
+		 */
+		public function get firstKey() : * {
+			if (_first) return LinkedMapNode(_first).key;
+			return undefined;
+		}
+
+		/**
+		 * @inheritDoc
+		 */
+		public function get lastKey() : * {
+			if (_last) return LinkedMapNode(_last).key;
+			return undefined;
+		}
+
+		/**
+		 * @inheritDoc
+		 */
+		public function nextKey(key : *) : * {
+			var node : LinkedNode = getNode(key);
+			if (node && node.right) return LinkedMapNode(node.right).key;
+			return undefined;
+		}
+
+		/**
+		 * @inheritDoc
+		 */
+		public function previousKey(key : *) : * {
+			var node : LinkedNode = getNode(key);
+			if (node && node.left) return LinkedMapNode(node.left).key;
+			return undefined;
+		}
+
 		/*
 		 * ILinkedCollection
 		 */
@@ -367,6 +401,7 @@ package org.as3commons.collections {
 				delete _items[key];
 			}
 		}
+
 	}
 }
 
