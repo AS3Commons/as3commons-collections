@@ -1,4 +1,4 @@
-Version 1.3.1-snapshot
+Version 1.3.1
 ----------------------------------------------------------
 
 - [Bug] Sorting a linked collection caused errors under certain circumstances since _first.left and _last.right were still set.
