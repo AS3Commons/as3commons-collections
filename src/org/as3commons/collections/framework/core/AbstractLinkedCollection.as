@@ -398,8 +398,12 @@ package org.as3commons.collections.framework.core {
 				}
 				insize <<= 1;
 			}
+
 			_first = h;
+			_first.left = null;
+			
 			_last = tail;
+			_last.right = null;
 		}
 		
 		/**
