@@ -5,3 +5,4 @@ h3. References
 * "Project Homepage":http://sibirjak.com/osflash/projects/as3commons-collections/ (Overview, Features, Documentation, Examples)
 * "Downloads":http://sibirjak.com/osflash/projects/as3commons-collections/downloads/ (ZIP, SWC)
 * "APIDoc":http://as3commons.github.com/as3commons-collections/apidoc/
+* "Changelog":https://github.com/AS3Commons/as3commons-collections/blob/master/Changelog.txt
