@@ -1,5 +1,5 @@
 /**
- * Copyright 2010 The original author or authors.
+ * Copyright 2011 The original author or authors.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,29 +16,28 @@
 package org.as3commons.collections {
 
 	import org.as3commons.collections.framework.ICollection;
-	import org.as3commons.collections.framework.IMap;
-	import org.as3commons.collections.mocks.MapMock;
+	import org.as3commons.collections.mocks.StringMapMock;
 	import org.as3commons.collections.testhelpers.AbstractCollectionTestCase;
 	import org.as3commons.collections.testhelpers.UniqueMapKey;
-	import org.as3commons.collections.units.IMapTests;
+	import org.as3commons.collections.units.IStringMapTests;
 
 	/**
-	 * @author Jens Struwe 23.03.2010
+	 * @author Jens Struwe 19.09.2011
 	 */
-	public class MapTest extends AbstractCollectionTestCase {
+	public class StringMapTest extends AbstractCollectionTestCase {
 
 		/*
 		 * AbstractCollectionTest
 		 */
 
 		override public function createCollection() : ICollection {
-			return new MapMock();
+			return new StringMapMock();
 		}
 
 		override public function fillCollection(items : Array) : void {
 			collection.clear();
 			for each (var item : * in items) {
-				IMap(collection).add(UniqueMapKey.key, item);
+				StringMap(collection).add(UniqueMapKey.key, item);
 			}
 		}
 
@@ -51,7 +50,7 @@ package org.as3commons.collections {
 		 */
 
 		public function test_map() : void {
-			new IMapTests(this).runAllTests();
+			new IStringMapTests(this).runAllTests();
 		}
 
 	}

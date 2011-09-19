@@ -14,7 +14,8 @@
  * limitations under the License.
  */
 package org.as3commons.collections.framework.core {
-	import org.as3commons.collections.Map;
+
+	import org.as3commons.collections.framework.IMap;
 	import org.as3commons.collections.framework.IMapIterator;
 	import org.as3commons.collections.iterators.ArrayIterator;
 
@@ -28,14 +29,14 @@ package org.as3commons.collections.framework.core {
 		/**
 		 * The map to enumerate.
 		 */
-		protected var _map : Map;
+		protected var _map : IMap;
 
 		/**
 		 * MapIterator constructor.
 		 * 
 		 * @param map The map to enumerate.
 		 */
-		public function MapIterator(map : Map) {
+		public function MapIterator(map : IMap) {
 			_map = map;
 			super(_map.keysToArray());
 		}

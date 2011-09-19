@@ -16,29 +16,27 @@
 package org.as3commons.collections {
 
 	import org.as3commons.collections.framework.ICollection;
-	import org.as3commons.collections.framework.IMap;
-	import org.as3commons.collections.mocks.MapMock;
+	import org.as3commons.collections.mocks.StringSetMock;
 	import org.as3commons.collections.testhelpers.AbstractCollectionTestCase;
-	import org.as3commons.collections.testhelpers.UniqueMapKey;
-	import org.as3commons.collections.units.IMapTests;
+	import org.as3commons.collections.units.IStringSetTests;
 
 	/**
-	 * @author Jens Struwe 23.03.2010
+	 * @author Jens Struwe 26.03.2010
 	 */
-	public class MapTest extends AbstractCollectionTestCase {
+	public class StringSetTest extends AbstractCollectionTestCase {
 
 		/*
 		 * AbstractCollectionTest
 		 */
 
 		override public function createCollection() : ICollection {
-			return new MapMock();
+			return new StringSetMock();
 		}
 
 		override public function fillCollection(items : Array) : void {
 			collection.clear();
 			for each (var item : * in items) {
-				IMap(collection).add(UniqueMapKey.key, item);
+				StringSet(collection).add(item);
 			}
 		}
 
@@ -47,11 +45,11 @@ package org.as3commons.collections {
 		 */
 
 		/*
-		 * Map tests
+		 * Set tests
 		 */
 
-		public function test_map() : void {
-			new IMapTests(this).runAllTests();
+		public function test_set() : void {
+			new IStringSetTests(this).runAllTests();
 		}
 
 	}

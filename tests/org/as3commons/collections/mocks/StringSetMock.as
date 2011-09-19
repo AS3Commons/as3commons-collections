@@ -1,5 +1,5 @@
 /**
- * Copyright 2010 The original author or authors.
+ * Copyright 2010-2011 The original author or authors.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,26 +15,23 @@
  */
 package org.as3commons.collections.mocks {
 
-	import org.as3commons.collections.framework.IMap;
-	import org.as3commons.collections.framework.core.MapIterator;
-	import org.as3commons.collections.units.iterators.ITestIteratorNextPreviousLookup;
+	import org.as3commons.collections.StringSet;
+	import org.as3commons.collections.framework.IIterator;
+	import org.as3commons.collections.units.ITestStringKeys;
 
 	/**
-	 * @author Jens Struwe 01.04.2010
+	 * @author Jens Struwe 19.09.2011
 	 */
-	public class MapIteratorMock extends MapIterator implements
-		ITestIteratorNextPreviousLookup
+	public dynamic class StringSetMock extends StringSet implements
+		ITestStringKeys
 	{
-		public function MapIteratorMock(map : IMap) {
-			super(map);
+
+		override public function iterator(cursor : * = undefined) : IIterator {
+			return new SetIteratorMock(this);
 		}
 
-		public function get previousMock() : * {
-			return _map.itemFor(previousKey);
-		}
-		
-		public function get nextMock() : * {
-			return _map.itemFor(nextKey);
+		public function addMock(item : *) : void {
+			add(item);
 		}
 
 	}

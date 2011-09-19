@@ -14,7 +14,8 @@
  * limitations under the License.
  */
 package org.as3commons.collections.mocks {
-	import org.as3commons.collections.Set;
+
+	import org.as3commons.collections.framework.ISet;
 	import org.as3commons.collections.framework.core.SetIterator;
 	import org.as3commons.collections.units.iterators.ITestIteratorNextPreviousLookup;
 
@@ -24,7 +25,7 @@ package org.as3commons.collections.mocks {
 	public class SetIteratorMock extends SetIterator implements
 		ITestIteratorNextPreviousLookup
 	{
-		public function SetIteratorMock(theSet : Set) {
+		public function SetIteratorMock(theSet : ISet) {
 			super(theSet);
 		}
 

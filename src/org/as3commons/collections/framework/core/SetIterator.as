@@ -14,7 +14,8 @@
  * limitations under the License.
  */
 package org.as3commons.collections.framework.core {
-	import org.as3commons.collections.Set;
+
+	import org.as3commons.collections.framework.ISet;
 	import org.as3commons.collections.framework.ISetIterator;
 	import org.as3commons.collections.iterators.ArrayIterator;
 
@@ -28,14 +29,14 @@ package org.as3commons.collections.framework.core {
 		/**
 		 * The set to enumerate.
 		 */
-		protected var _set : Set;
+		protected var _set : ISet;
 
 		/**
 		 * SetIterator constructor.
 		 * 
 		 * @param theSet The set to enumerate.
 		 */
-		public function SetIterator(theSet : Set) {
+		public function SetIterator(theSet : ISet) {
 			_set = theSet;
 			super(_set.toArray());
 		}

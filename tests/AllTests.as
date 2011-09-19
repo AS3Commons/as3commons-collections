@@ -29,6 +29,8 @@ package {
 	import org.as3commons.collections.SortedMapKeyIteratorTest;
 	import org.as3commons.collections.SortedMapTest;
 	import org.as3commons.collections.SortedSetTest;
+	import org.as3commons.collections.StringMapTest;
+	import org.as3commons.collections.StringSetTest;
 	import org.as3commons.collections.TreapTest;
 	import org.as3commons.collections.framework.core.ArrayListIteratorTest;
 	import org.as3commons.collections.framework.core.LinkedListIteratorTest;
@@ -83,6 +85,7 @@ package {
 
 			// sets
 
+			addTestSuite(StringSetTest);
 			addTestSuite(SetTest);
 			addTestSuite(SetFxTest);
 			addTestSuite(SetIteratorTest);
@@ -98,6 +101,7 @@ package {
 			// maps
 
 			addTestSuite(MapTest);
+			addTestSuite(StringMapTest);
 			addTestSuite(MapFxTest);
 			addTestSuite(MapIteratorTest);
 			addTestSuite(MapKeyIteratorTest);
