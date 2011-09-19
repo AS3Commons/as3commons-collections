@@ -119,6 +119,26 @@ package org.as3commons.collections.testhelpers {
 			}
 		}
 
+		public function validateTestItemsReverse(expectedItems : Array) : Boolean {
+			var items : Array = new Array();
+			var iterator : ICollectionIterator = collection.iterator() as ICollectionIterator;
+			iterator.end();
+			while (iterator.hasPrevious()) {
+				items.unshift(iterator.previous());
+			}
+			
+			if (collection is ITestSortOrder) {
+				expectedItems.sort(new TestComparator().compare);
+				return TestItems.itemsEqual(expectedItems, items);
+
+			} else if (collection is ITestOrder) {
+				return TestItems.itemsEqual(expectedItems, items);
+
+			} else {
+				return TestItems.itemsMatch(expectedItems, items);
+			}
+		}
+
 		public function validateTestItemsStrictly(expectedItems : Array, items : Array = null) : Boolean {
 			if (!items) items = collection.toArray();
 			

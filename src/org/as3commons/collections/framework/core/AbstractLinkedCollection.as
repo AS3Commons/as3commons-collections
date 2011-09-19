@@ -391,7 +391,6 @@ package org.as3commons.collections.framework.core {
 					p = q;
 				}
 				
-				_first.left = tail;
 				tail.right = null;
 				if (nmerges <= 1) {
 					break;
@@ -400,10 +399,7 @@ package org.as3commons.collections.framework.core {
 			}
 
 			_first = h;
-			_first.left = null;
-			
 			_last = tail;
-			_last.right = null;
 		}
 		
 		/**

@@ -149,9 +149,46 @@ package org.as3commons.collections.units {
 			assertTrue(_insertionOrder.sort(new TestComparator()));
 			
 			assertTrue(_test.validateTestItems([1, 2, 3, 4, 6]));
+			assertTrue(_test.validateTestItemsReverse([1, 2, 3, 4, 6]));
 			
 			assertStrictlyEquals(TestItems.object1, _insertionOrder.first);
 			assertStrictlyEquals(TestItems.object6, _insertionOrder.last);
+		}
+
+		public function test_sort2() : void {
+			_test.fillCollection(TestItems.itemArrayByIndices([1, 3, 2]));
+			
+			assertTrue(_insertionOrder.sort(new TestComparator()));
+			
+			assertTrue(_test.validateTestItems([1, 2, 3]));
+			assertTrue(_test.validateTestItemsReverse([1, 2, 3]));
+			
+			assertStrictlyEquals(TestItems.object1, _insertionOrder.first);
+			assertStrictlyEquals(TestItems.object3, _insertionOrder.last);
+		}
+
+		public function test_sort3() : void {
+			_test.fillCollection(TestItems.itemArrayByIndices([2, 1, 3]));
+			
+			assertTrue(_insertionOrder.sort(new TestComparator()));
+			
+			assertTrue(_test.validateTestItems([1, 2, 3]));
+			assertTrue(_test.validateTestItemsReverse([1, 2, 3]));
+			
+			assertStrictlyEquals(TestItems.object1, _insertionOrder.first);
+			assertStrictlyEquals(TestItems.object3, _insertionOrder.last);
+		}
+
+		public function test_sort4() : void {
+			_test.fillCollection(TestItems.itemArrayByIndices([2, 1]));
+			
+			assertTrue(_insertionOrder.sort(new TestComparator()));
+			
+			assertTrue(_test.validateTestItems([1, 2]));
+			assertTrue(_test.validateTestItemsReverse([1, 2]));
+			
+			assertStrictlyEquals(TestItems.object1, _insertionOrder.first);
+			assertStrictlyEquals(TestItems.object2, _insertionOrder.last);
 		}
 
 		public function test_sort_isStable() : void {
