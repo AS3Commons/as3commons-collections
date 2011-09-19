@@ -1,3 +1,12 @@
+Version 1.3.2
+----------------------------------------------------------
+
+- [Bug] Fixed again (and sufficiently tested): Sorting a linked collection caused errors under certain circumstances since _first.left and _last.right were still set.
+
+- [Dev] Added StringMap and StringSet collections (less memory consumption than Map and Set)
+
+
+
 Version 1.3.1
 ----------------------------------------------------------
 

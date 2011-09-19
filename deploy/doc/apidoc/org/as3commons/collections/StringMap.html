@@ -2,24 +2,24 @@
 <html>
 <head>
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<link rel="stylesheet" href="../../../../../style.css" type="text/css" media="screen">
-<link rel="stylesheet" href="../../../../../print.css" type="text/css" media="print">
-<meta content="AbstractList,org.as3commons.collections.framework.core.AbstractList,_array,array_internal,first,last,size,array,add,clear,count,firstIndexOf,has,itemAt,itemRemoved,iterator,lastIndexOf,remove,removeAll,removeAllAt,removeAt,removeFirst,removeLast,toArray" name="keywords">
-<title>org.as3commons.collections.framework.core.AbstractList</title>
+<link rel="stylesheet" href="../../../style.css" type="text/css" media="screen">
+<link rel="stylesheet" href="../../../print.css" type="text/css" media="print">
+<meta content="StringMap,org.as3commons.collections.StringMap,_map,_size,size,add,clear,count,has,hasKey,itemFor,itemRemoved,iterator,keyIterator,keysToArray,remove,removeAll,removeKey,replaceFor,toArray" name="keywords">
+<title>org.as3commons.collections.StringMap</title>
 </head>
 <body>
-<script type="text/javascript" language="javascript" src="../../../../../asdoc.js"></script><script type="text/javascript" language="javascript" src="../../../../../cookies.js"></script><script type="text/javascript" language="javascript">
+<script type="text/javascript" language="javascript" src="../../../asdoc.js"></script><script type="text/javascript" language="javascript" src="../../../cookies.js"></script><script type="text/javascript" language="javascript">
 <!--
-				asdocTitle = 'AbstractList - AS3Commons Collections 1.3.2';
-				var baseRef = '../../../../../';
+				asdocTitle = 'StringMap - AS3Commons Collections 1.3.2';
+				var baseRef = '../../../';
 				window.onload = configPage;
 			--></script>
 <table style="display:none" id="titleTable" cellspacing="0" cellpadding="0" class="titleTable">
 <tr>
-<td align="left" class="titleTableTitle">AS3Commons Collections 1.3.2</td><td align="right" class="titleTableTopNav"><a onclick="loadClassListFrame('../../../../../all-classes.html')" href="../../../../../package-summary.html">All&nbsp;Packages</a>&nbsp;|&nbsp;<a onclick="loadClassListFrame('../../../../../all-classes.html')" href="../../../../../class-summary.html">All&nbsp;Classes</a>&nbsp;|&nbsp;<a onclick="loadClassListFrame('../../../../../index-list.html')" href="../../../../../all-index-A.html">Index</a>&nbsp;|&nbsp;<a href="../../../../../index.html?org/as3commons/collections/framework/core/AbstractList.html&amp;org/as3commons/collections/framework/core/class-list.html" id="framesLink1">Frames</a><a onclick="parent.location=document.location" href="" style="display:none" id="noFramesLink1">No&nbsp;Frames</a></td><td rowspan="3" align="right" class="titleTableLogo"><img alt="Adobe Logo" title="Adobe Logo" class="logoImage" src="../../../../../images/logo.jpg"></td>
+<td align="left" class="titleTableTitle">AS3Commons Collections 1.3.2</td><td align="right" class="titleTableTopNav"><a onclick="loadClassListFrame('../../../all-classes.html')" href="../../../package-summary.html">All&nbsp;Packages</a>&nbsp;|&nbsp;<a onclick="loadClassListFrame('../../../all-classes.html')" href="../../../class-summary.html">All&nbsp;Classes</a>&nbsp;|&nbsp;<a onclick="loadClassListFrame('../../../index-list.html')" href="../../../all-index-A.html">Index</a>&nbsp;|&nbsp;<a href="../../../index.html?org/as3commons/collections/StringMap.html&amp;org/as3commons/collections/class-list.html" id="framesLink1">Frames</a><a onclick="parent.location=document.location" href="" style="display:none" id="noFramesLink1">No&nbsp;Frames</a></td><td rowspan="3" align="right" class="titleTableLogo"><img alt="Adobe Logo" title="Adobe Logo" class="logoImage" src="../../../images/logo.jpg"></td>
 </tr>
 <tr class="titleTableRow2">
-<td align="left" id="subTitle" class="titleTableSubTitle">Class&nbsp;AbstractList</td><td align="right" id="subNav" class="titleTableSubNav"><a href="#propertySummary">Properties</a>&nbsp;| <a href="#methodSummary">Methods</a></td>
+<td align="left" id="subTitle" class="titleTableSubTitle">Class&nbsp;StringMap</td><td align="right" id="subNav" class="titleTableSubNav"><a href="#propertySummary">Properties</a>&nbsp;| <a href="#methodSummary">Methods</a></td>
 </tr>
 <tr class="titleTableRow3">
 <td colspan="2">&nbsp;</td>
@@ -27,27 +27,66 @@
 </table>
 <script type="text/javascript" language="javascript">
 <!--
-if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Class AbstractList"); titleBar_setSubNav(false,true,false,false,false,false,true,false,false,false,false,false,false,false);}
+if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Class StringMap"); titleBar_setSubNav(false,true,false,false,false,false,true,false,false,false,false,false,false,false);}
 --></script>
 <div class="MainContent">
 <table cellspacing="0" cellpadding="0" class="classHeaderTable">
 <tr>
-<td class="classHeaderTableLabel">Package</td><td><a onclick="javascript:loadClassListFrame('class-list.html')" href="package-detail.html">org.as3commons.collections.framework.core</a></td>
+<td class="classHeaderTableLabel">Package</td><td><a onclick="javascript:loadClassListFrame('class-list.html')" href="package-detail.html">org.as3commons.collections</a></td>
 </tr>
 <tr>
-<td class="classHeaderTableLabel">Class</td><td class="classSignature">public class AbstractList</td>
+<td class="classHeaderTableLabel">Class</td><td class="classSignature">public class StringMap</td>
 </tr>
 <tr>
-<td class="classHeaderTableLabel">Implements</td><td><a href="../IDataProvider.html">IDataProvider</a>, <a href="../IList.html">IList</a></td>
-</tr>
-<tr>
-<td class="classHeaderTableLabel">Subclasses</td><td><a href="../../../collections/ArrayList.html">ArrayList</a>, <a href="../../../collections/SortedList.html">SortedList</a></td>
+<td class="classHeaderTableLabel">Implements</td><td><a href="framework/IMap.html">IMap</a></td>
 </tr>
 </table>
 <p></p>
-  Abstract list implementation.
+  String map implementation.
+  
+  <p>The <code>StringMap</code> maps literal keys to values.</p>
+  
+  <p>You are still allowed to add complex or numeric keys. No error is thrown.</p>
+  
+  <p>Complex keys are stored with their String representation such as
+  <code>[object Object]</code>.</p>
+  
+  <p>When you use keys containing numeric values (0, "0", 1, "1", -1, "-1", 1.5, "1.5"),
+  you should have in mind that the keys implicitely get converted as follows:</p>
+  
+  <ul>
+  <li>Int <code>0</code> is stored and returned as int <code>0</code>.</li>
+  <li>String <code>"0"</code> is stored and returned as int <code>"0"</code>.</li>
+  <li>Int <code>1</code> is stored and returned as int <code>1</code>.</li>
+  <li>String <code>"1"</code> is stored and returned as int <code>"1"</code>.</li>
+  <li>Int <code>-1</code> is stored and returned as String <code>"-1"</code>.</li>
+  <li>String <code>"-1"</code> is stored and returned as String <code>"-1"</code>.</li>
+  <li>Int <code>1.5</code> is stored and returned as String <code>"1.5"</code>.</li>
+  <li>String <code>"1.5"</code> is stored and returned as String <code>"1.5"</code>.</li>
+  </ul>
+  
+  <p>In any case, you are safe using the <code>StringMap</code> with non-numeric
+  literals or non negative integer values.</p>
+  
+  <p>Note to the universal type <code>/code>. The <code>StringMap</code> still implements
+  the <code>IMap</code> interface. This interface allows to pass and returns objects of the universal
+  type <code>/code>. This is not actually what we like, but since ActionScript does not
+  support generics, there is no other way to define a base interface for all map
+  implementations. If you are not comfortable with this, please make your own custom
+  typed copy of this class.</p>
+  
+  <p>In difference to the basic <code>Map</code> implementation, the <code>StringMap</code>
+  maintains an object as its source and hence requires less memory.</p>
+  
+  <p>See the <code>Map</code> documentation for more details.</p>
   
   <p></p>
+<p>
+<span class="classHeaderTableLabel">See also</span>
+</p>
+<div class="seeAlso">
+<a href="../collections/Map.html" target="">Basic map implementation - Basic map implementation description.</a>
+</div>
 <br>
 <hr>
 </div>
@@ -59,28 +98,10 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <th>&nbsp;</th><th colspan="2">Property</th><th class="summaryTableOwnerCol">Defined&nbsp;by</th>
 </tr>
 <tr class="">
-<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#array">array</a> : Array<div class="summaryTableDescription">[write-only]
-   
-   Specifies an array to be maintained by the list.</div>
-</td><td class="summaryTableOwnerCol">AbstractList</td>
-</tr>
-<tr class="">
-<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#first">first</a> : *<div class="summaryTableDescription">[read-only]
-   
-   The first item or <code>undefined</code> if the collection is empty.</div>
-</td><td class="summaryTableOwnerCol">AbstractList</td>
-</tr>
-<tr class="">
-<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#last">last</a> : *<div class="summaryTableDescription">[read-only]
-   
-   The last item or <code>undefined</code> if the collection is empty.</div>
-</td><td class="summaryTableOwnerCol">AbstractList</td>
-</tr>
-<tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#size">size</a> : uint<div class="summaryTableDescription">[read-only]
    
-   The number of items contained by the data provider.</div>
-</td><td class="summaryTableOwnerCol">AbstractList</td>
+   The number of items contained by the collection.</div>
+</td><td class="summaryTableOwnerCol">StringMap</td>
 </tr>
 </table>
 </div>
@@ -92,9 +113,14 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <th>&nbsp;</th><th colspan="2">Property</th><th class="summaryTableOwnerCol">Defined&nbsp;by</th>
 </tr>
 <tr class="">
-<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#_array">_array</a> : Array<div class="summaryTableDescription">
-   The internal array.</div>
-</td><td class="summaryTableOwnerCol">AbstractList</td>
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#_map">_map</a> : Object<div class="summaryTableDescription">
+   The stringed key item map.</div>
+</td><td class="summaryTableOwnerCol">StringMap</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#_size">_size</a> : uint = 0<div class="summaryTableDescription">
+   The map size.</div>
+</td><td class="summaryTableOwnerCol">StringMap</td>
 </tr>
 </table>
 </div>
@@ -108,19 +134,19 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
 <div class="summarySignature">
-<a class="signatureLink" href="#AbstractList()">AbstractList</a>()</div>
+<a class="signatureLink" href="#StringMap()">StringMap</a>()</div>
 <div class="summaryTableDescription">
-   AbstractList constructor.</div>
-</td><td class="summaryTableOwnerCol">AbstractList</td>
+   Map constructor.</div>
+</td><td class="summaryTableOwnerCol">StringMap</td>
 </tr>
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
 <div class="summarySignature">
-<a class="signatureLink" href="#add()">add</a>(item:*):uint</div>
+<a class="signatureLink" href="#add()">add</a>(key:*, item:*):Boolean</div>
 <div class="summaryTableDescription">
    
-   Adds an item to the list.</div>
-</td><td class="summaryTableOwnerCol">AbstractList</td>
+   Adds an item to the map.</div>
+</td><td class="summaryTableOwnerCol">StringMap</td>
 </tr>
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
@@ -129,7 +155,7 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <div class="summaryTableDescription">
    
    Removes all items from the collection.</div>
-</td><td class="summaryTableOwnerCol">AbstractList</td>
+</td><td class="summaryTableOwnerCol">StringMap</td>
 </tr>
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
@@ -138,16 +164,7 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <div class="summaryTableDescription">
    
    Returns the number of occurrences of an item.</div>
-</td><td class="summaryTableOwnerCol">AbstractList</td>
-</tr>
-<tr class="">
-<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
-<div class="summarySignature">
-<a class="signatureLink" href="#firstIndexOf()">firstIndexOf</a>(item:*):int</div>
-<div class="summaryTableDescription">
-   
-   Returns the index of the first occurrence of an item.</div>
-</td><td class="summaryTableOwnerCol">AbstractList</td>
+</td><td class="summaryTableOwnerCol">StringMap</td>
 </tr>
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
@@ -156,35 +173,54 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <div class="summaryTableDescription">
    
    Tests if an item is contained by the collection.</div>
-</td><td class="summaryTableOwnerCol">AbstractList</td>
+</td><td class="summaryTableOwnerCol">StringMap</td>
 </tr>
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
 <div class="summarySignature">
-<a class="signatureLink" href="#itemAt()">itemAt</a>(index:uint):*</div>
+<a class="signatureLink" href="#hasKey()">hasKey</a>(key:*):Boolean</div>
 <div class="summaryTableDescription">
    
-   Returns the item at the specified position.</div>
-</td><td class="summaryTableOwnerCol">AbstractList</td>
+   Returns <code>true</code> if the map contains the given key.</div>
+</td><td class="summaryTableOwnerCol">StringMap</td>
 </tr>
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
 <div class="summarySignature">
-<a class="signatureLink" href="#iterator()">iterator</a>(cursor:*):<a href="../../framework/IIterator.html">IIterator</a>
+<a class="signatureLink" href="#itemFor()">itemFor</a>(key:*):*</div>
+<div class="summaryTableDescription">
+   
+   Returns the item associated with the given key.</div>
+</td><td class="summaryTableOwnerCol">StringMap</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#iterator()">iterator</a>(cursor:*):<a href="framework/IIterator.html">IIterator</a>
 </div>
 <div class="summaryTableDescription">
    
    Returns an iterator over the iterable data structure.</div>
-</td><td class="summaryTableOwnerCol">AbstractList</td>
+</td><td class="summaryTableOwnerCol">StringMap</td>
 </tr>
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
 <div class="summarySignature">
-<a class="signatureLink" href="#lastIndexOf()">lastIndexOf</a>(item:*):int</div>
+<a class="signatureLink" href="#keyIterator()">keyIterator</a>():<a href="framework/IIterator.html">IIterator</a>
+</div>
 <div class="summaryTableDescription">
    
-   Returns the index of the last occurrence of an item.</div>
-</td><td class="summaryTableOwnerCol">AbstractList</td>
+   Returns an iterator over the keys of the map.</div>
+</td><td class="summaryTableOwnerCol">StringMap</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#keysToArray()">keysToArray</a>():Array</div>
+<div class="summaryTableDescription">
+   
+   Returns an array of all keys in the order of the particular map.</div>
+</td><td class="summaryTableOwnerCol">StringMap</td>
 </tr>
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
@@ -193,7 +229,7 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <div class="summaryTableDescription">
    
    Removes an item from the collection.</div>
-</td><td class="summaryTableOwnerCol">AbstractList</td>
+</td><td class="summaryTableOwnerCol">StringMap</td>
 </tr>
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
@@ -202,43 +238,25 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <div class="summaryTableDescription">
    
    Removes all occurrences of a particular item from the collection.</div>
-</td><td class="summaryTableOwnerCol">AbstractList</td>
+</td><td class="summaryTableOwnerCol">StringMap</td>
 </tr>
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
 <div class="summarySignature">
-<a class="signatureLink" href="#removeAllAt()">removeAllAt</a>(index:uint, numItems:uint):Array</div>
+<a class="signatureLink" href="#removeKey()">removeKey</a>(key:*):*</div>
 <div class="summaryTableDescription">
    
-   Removes a number of items starting at the specified position.</div>
-</td><td class="summaryTableOwnerCol">AbstractList</td>
+   Removes the given key and its associated item from the map.</div>
+</td><td class="summaryTableOwnerCol">StringMap</td>
 </tr>
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
 <div class="summarySignature">
-<a class="signatureLink" href="#removeAt()">removeAt</a>(index:uint):*</div>
+<a class="signatureLink" href="#replaceFor()">replaceFor</a>(key:*, item:*):Boolean</div>
 <div class="summaryTableDescription">
    
-   Removes the item at the specified position.</div>
-</td><td class="summaryTableOwnerCol">AbstractList</td>
-</tr>
-<tr class="">
-<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
-<div class="summarySignature">
-<a class="signatureLink" href="#removeFirst()">removeFirst</a>():*</div>
-<div class="summaryTableDescription">
-   
-   Removes the first item of the ordered collection.</div>
-</td><td class="summaryTableOwnerCol">AbstractList</td>
-</tr>
-<tr class="">
-<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
-<div class="summarySignature">
-<a class="signatureLink" href="#removeLast()">removeLast</a>():*</div>
-<div class="summaryTableDescription">
-   
-   Removes the last item of the ordered collection.</div>
-</td><td class="summaryTableOwnerCol">AbstractList</td>
+   Replaces the item associated with the given key.</div>
+</td><td class="summaryTableOwnerCol">StringMap</td>
 </tr>
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
@@ -247,7 +265,7 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <div class="summaryTableDescription">
    
    Returns an array of all items.</div>
-</td><td class="summaryTableOwnerCol">AbstractList</td>
+</td><td class="summaryTableOwnerCol">StringMap</td>
 </tr>
 </table>
 </div>
@@ -261,10 +279,10 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
 <div class="summarySignature">
-<a class="signatureLink" href="#itemRemoved()">itemRemoved</a>(index:uint, item:*):void</div>
+<a class="signatureLink" href="#itemRemoved()">itemRemoved</a>(key:*, item:*):void</div>
 <div class="summaryTableDescription">
    Template method to notify subclasses after an item has been removed.</div>
-</td><td class="summaryTableOwnerCol">AbstractList</td>
+</td><td class="summaryTableOwnerCol">StringMap</td>
 </tr>
 </table>
 </div>
@@ -275,80 +293,26 @@ showHideInherited();
 <div class="MainContent">
 <a name="propertyDetail"></a>
 <div class="detailSectionHeader">Property detail</div>
-<a name="_array"></a>
+<a name="_map"></a>
 <table cellspacing="0" cellpadding="0" class="detailHeader">
 <tr>
-<td class="detailHeaderName">_array</td><td class="detailHeaderType">property</td>
+<td class="detailHeaderName">_map</td><td class="detailHeaderType">property</td>
 </tr>
 </table>
 <div class="detailBody">
-<code>protected var _array:Array</code><p>
-   The internal array.
+<code>protected var _map:Object</code><p>
+   The stringed key item map.
    </p></div>
-<a name="array"></a>
+<a name="_size"></a>
 <table cellspacing="0" cellpadding="0" class="detailHeader">
 <tr>
-<td class="detailHeaderName">array</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
+<td class="detailHeaderName">_size</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
 </tr>
 </table>
 <div class="detailBody">
-<code>array:Array</code>&nbsp;&nbsp;[write-only]<p>
-   
-   Specifies an array to be maintained by the list.
-   
-   </p><p>Already contained elements will be removed beforehand.</p>
-   
-   <p>The list stores a copy of the given array not the array itself.</p>
-   
-   <span class="label">Implementation</span>
-<br>
-<code>&nbsp;&nbsp;&nbsp;&nbsp;public function set array(value:Array):void</code>
-<br>
-</div>
-<a name="array_internal"></a>
-<table cellspacing="0" cellpadding="0" class="detailHeader">
-<tr>
-<td class="detailHeaderName">array_internal</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
-</tr>
-</table>
-<div class="detailBody">
-<code>array_internal:Array</code>&nbsp;&nbsp;[read-only]<p>
-   Framework internal getter to retrieve a reference to the internal array.
-   </p><span class="label">Implementation</span>
-<br>
-<code>&nbsp;&nbsp;&nbsp;&nbsp;as3commons_collections function get array_internal():Array</code>
-<br>
-</div>
-<a name="first"></a>
-<table cellspacing="0" cellpadding="0" class="detailHeader">
-<tr>
-<td class="detailHeaderName">first</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
-</tr>
-</table>
-<div class="detailBody">
-<code>first:*</code>&nbsp;&nbsp;[read-only]<p>
-   
-   The first item or <code>undefined</code> if the collection is empty.
-   </p><span class="label">Implementation</span>
-<br>
-<code>&nbsp;&nbsp;&nbsp;&nbsp;public function get first():*</code>
-<br>
-</div>
-<a name="last"></a>
-<table cellspacing="0" cellpadding="0" class="detailHeader">
-<tr>
-<td class="detailHeaderName">last</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
-</tr>
-</table>
-<div class="detailBody">
-<code>last:*</code>&nbsp;&nbsp;[read-only]<p>
-   
-   The last item or <code>undefined</code> if the collection is empty.
-   </p><span class="label">Implementation</span>
-<br>
-<code>&nbsp;&nbsp;&nbsp;&nbsp;public function get last():*</code>
-<br>
-</div>
+<code>protected var _size:uint = 0</code><p>
+   The map size.
+   </p></div>
 <a name="size"></a>
 <table cellspacing="0" cellpadding="0" class="detailHeader">
 <tr>
@@ -358,7 +322,7 @@ showHideInherited();
 <div class="detailBody">
 <code>size:uint</code>&nbsp;&nbsp;[read-only]<p>
    
-   The number of items contained by the data provider.
+   The number of items contained by the collection.
    </p><span class="label">Implementation</span>
 <br>
 <code>&nbsp;&nbsp;&nbsp;&nbsp;public function get size():uint</code>
@@ -366,15 +330,15 @@ showHideInherited();
 </div>
 <a name="constructorDetail"></a>
 <div class="detailSectionHeader">Constructor detail</div>
-<a name="AbstractList()"></a>
+<a name="StringMap()"></a>
 <table cellspacing="0" cellpadding="0" class="detailHeader">
 <tr>
-<td class="detailHeaderName">AbstractList</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">constructor</td>
+<td class="detailHeaderName">StringMap</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">constructor</td>
 </tr>
 </table>
 <div class="detailBody">
-<code>public function AbstractList()</code><p>
-   AbstractList constructor.
+<code>public function StringMap()</code><p>
+   Map constructor.
    </p></div>
 <a name="methodDetail"></a>
 <div class="detailSectionHeader">Method detail</div>
@@ -385,17 +349,26 @@ showHideInherited();
 </tr>
 </table>
 <div class="detailBody">
-<code>public function add(item:*):uint</code><p>
+<code>public function add(key:*, item:*):Boolean</code><p>
    
-   Adds an item to the list.
+   Adds an item to the map.
    
-   </p><p>The <code>ArrayList</code> appends the item.</p>
+   </p><p>If the map already contains the given key, the method abords with <code>false</code>.</p>
    
-   <p>The position of items that are added to a <code>SortedList</code>
+   <p>The <code>LinkedMap</code> appends the item.</p>
+   
+   <p>The position of items that are added to a <code>SortedMap</code>
    depends on its sort order.</p>
    
    <span class="label">Parameters</span>
 <table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">key</span>:*</code> &mdash; The key of the item to add.
+   </td>
+</tr>
+<tr>
+<td class="paramSpacer">&nbsp;</td>
+</tr>
 <tr>
 <td width="20px"></td><td><code><span class="label">item</span>:*</code> &mdash; The item to add.
    </td>
@@ -405,7 +378,7 @@ showHideInherited();
 <span class="label">Returns</span>
 <table border="0" cellspacing="0" cellpadding="0">
 <tr>
-<td width="20"></td><td><code>uint</code> &mdash; The position where the item has been added.
+<td width="20"></td><td><code>Boolean</code> &mdash; <code>true</code> if the item has been added.
    </td>
 </tr>
 </table>
@@ -458,33 +431,6 @@ showHideInherited();
 </tr>
 </table>
 </div>
-<a name="firstIndexOf()"></a>
-<table cellspacing="0" cellpadding="0" class="detailHeader">
-<tr>
-<td class="detailHeaderName">firstIndexOf</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
-</tr>
-</table>
-<div class="detailBody">
-<code>public function firstIndexOf(item:*):int</code><p>
-   
-   Returns the index of the first occurrence of an item.
-   
-   </p><span class="label">Parameters</span>
-<table border="0" cellspacing="0" cellpadding="0">
-<tr>
-<td width="20px"></td><td><code><span class="label">item</span>:*</code> &mdash; The item to test.
-   </td>
-</tr>
-</table>
-<p></p>
-<span class="label">Returns</span>
-<table border="0" cellspacing="0" cellpadding="0">
-<tr>
-<td width="20"></td><td><code>int</code> &mdash; The first position of the item or <code>-1</code> if the item is not contained.
-   </td>
-</tr>
-</table>
-</div>
 <a name="has()"></a>
 <table cellspacing="0" cellpadding="0" class="detailHeader">
 <tr>
@@ -512,21 +458,21 @@ showHideInherited();
 </tr>
 </table>
 </div>
-<a name="itemAt()"></a>
+<a name="hasKey()"></a>
 <table cellspacing="0" cellpadding="0" class="detailHeader">
 <tr>
-<td class="detailHeaderName">itemAt</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+<td class="detailHeaderName">hasKey</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
 </tr>
 </table>
 <div class="detailBody">
-<code>public function itemAt(index:uint):*</code><p>
+<code>public function hasKey(key:*):Boolean</code><p>
    
-   Returns the item at the specified position.
+   Returns <code>true</code> if the map contains the given key.
    
    </p><span class="label">Parameters</span>
 <table border="0" cellspacing="0" cellpadding="0">
 <tr>
-<td width="20px"></td><td><code><span class="label">index</span>:uint</code> &mdash; The position of the item to get.
+<td width="20px"></td><td><code><span class="label">key</span>:*</code> &mdash; The key to test.
    </td>
 </tr>
 </table>
@@ -534,7 +480,34 @@ showHideInherited();
 <span class="label">Returns</span>
 <table border="0" cellspacing="0" cellpadding="0">
 <tr>
-<td width="20"></td><td><code>*</code> &mdash; The item or <code>undefined</code> if the position is invalid.
+<td width="20"></td><td><code>Boolean</code> &mdash; <code>true</code> if the key is contained.
+   </td>
+</tr>
+</table>
+</div>
+<a name="itemFor()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">itemFor</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public function itemFor(key:*):*</code><p>
+   
+   Returns the item associated with the given key.
+   
+   </p><span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">key</span>:*</code> &mdash; The key.
+   </td>
+</tr>
+</table>
+<p></p>
+<span class="label">Returns</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20"></td><td><code>*</code> &mdash; The item if the key is contained, else <code>undefined</code>.
    </td>
 </tr>
 </table>
@@ -546,20 +519,20 @@ showHideInherited();
 </tr>
 </table>
 <div class="detailBody">
-<code>protected function itemRemoved(index:uint, item:*):void</code><p>
+<code>protected function itemRemoved(key:*, item:*):void</code><p>
    Template method to notify subclasses after an item has been removed.
    
    </p><span class="label">Parameters</span>
 <table border="0" cellspacing="0" cellpadding="0">
 <tr>
-<td width="20px"></td><td><code><span class="label">index</span>:uint</code> &mdash; The former index of the removed item.
+<td width="20px"></td><td><code><span class="label">key</span>:*</code> &mdash; The removed item.
    </td>
 </tr>
 <tr>
 <td class="paramSpacer">&nbsp;</td>
 </tr>
 <tr>
-<td width="20px"></td><td><code><span class="label">item</span>:*</code> &mdash; The removed item.
+<td width="20px"></td><td><code><span class="label">item</span>:*</code> &mdash; The former index of the removed item.
    </td>
 </tr>
 </table>
@@ -571,7 +544,7 @@ showHideInherited();
 </tr>
 </table>
 <div class="detailBody">
-<code>public function iterator(cursor:*):<a href="../../framework/IIterator.html">IIterator</a></code><p>
+<code>public function iterator(cursor:*):<a href="framework/IIterator.html">IIterator</a></code><p>
    
    Returns an iterator over the iterable data structure.
    
@@ -599,7 +572,7 @@ showHideInherited();
 <span class="label">Returns</span>
 <table border="0" cellspacing="0" cellpadding="0">
 <tr>
-<td width="20"></td><td><code><a href="../../framework/IIterator.html">IIterator</a></code> &mdash; 
+<td width="20"></td><td><code><a href="framework/IIterator.html">IIterator</a></code> &mdash; 
                         An iterator.
    
                         
@@ -607,29 +580,49 @@ showHideInherited();
 </tr>
 </table>
 </div>
-<a name="lastIndexOf()"></a>
+<a name="keyIterator()"></a>
 <table cellspacing="0" cellpadding="0" class="detailHeader">
 <tr>
-<td class="detailHeaderName">lastIndexOf</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+<td class="detailHeaderName">keyIterator</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
 </tr>
 </table>
 <div class="detailBody">
-<code>public function lastIndexOf(item:*):int</code><p>
+<code>public function keyIterator():<a href="framework/IIterator.html">IIterator</a></code><p>
    
-   Returns the index of the last occurrence of an item.
+   Returns an iterator over the keys of the map.
    
-   </p><span class="label">Parameters</span>
-<table border="0" cellspacing="0" cellpadding="0">
-<tr>
-<td width="20px"></td><td><code><span class="label">item</span>:*</code> &mdash; The item to test.
-   </td>
-</tr>
-</table>
-<p></p>
+   </p><p>The order of keys returned by the iterator is the same as in the particular collection.</p>
+   
+   <p></p>
 <span class="label">Returns</span>
 <table border="0" cellspacing="0" cellpadding="0">
 <tr>
-<td width="20"></td><td><code>int</code> &mdash; The last position of the item or <code>-1</code> if the item is not contained.
+<td width="20"></td><td><code><a href="framework/IIterator.html">IIterator</a></code> &mdash; 
+                        An iterator over the map keys.
+   
+                        
+                     </td>
+</tr>
+</table>
+</div>
+<a name="keysToArray()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">keysToArray</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public function keysToArray():Array</code><p>
+   
+   Returns an array of all keys in the order of the particular map.
+   
+   </p><p>The order of keys in the array is the same as in the particular collection.</p>
+   
+   <p></p>
+<span class="label">Returns</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20"></td><td><code>Array</code> &mdash; An array of the keys of the map.
    </td>
 </tr>
 </table>
@@ -696,35 +689,59 @@ showHideInherited();
 </tr>
 </table>
 </div>
-<a name="removeAllAt()"></a>
+<a name="removeKey()"></a>
 <table cellspacing="0" cellpadding="0" class="detailHeader">
 <tr>
-<td class="detailHeaderName">removeAllAt</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+<td class="detailHeaderName">removeKey</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
 </tr>
 </table>
 <div class="detailBody">
-<code>public function removeAllAt(index:uint, numItems:uint):Array</code><p>
+<code>public function removeKey(key:*):*</code><p>
    
-   Removes a number of items starting at the specified position.
+   Removes the given key and its associated item from the map.
    
-   </p><p>If the given position exceeds the list size, the method aborts with <code>false</code>.</p>
+   </p><p>If the key is not contained the method abords with <code>undefined</code>.</p>
+   <span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">key</span>:*</code> &mdash; The key.
+   </td>
+</tr>
+</table>
+<p></p>
+<span class="label">Returns</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20"></td><td><code>*</code> &mdash; The item associated with the removed key or <code>undefined</code> if the key is not contained.
+   </td>
+</tr>
+</table>
+</div>
+<a name="replaceFor()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">replaceFor</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public function replaceFor(key:*, item:*):Boolean</code><p>
    
-   <p>If the number of items exceeds the list size, the method
-   removes all items starting at the given index.</p>
+   Replaces the item associated with the given key.
    
-   <p>Returns an empty array if the index is invalid.</p>
+   </p><p>If the key is not contained or the given item equals the item
+   stored with the given key, the method abords with <code>false</code>.</p>
    
    <span class="label">Parameters</span>
 <table border="0" cellspacing="0" cellpadding="0">
 <tr>
-<td width="20px"></td><td><code><span class="label">index</span>:uint</code> &mdash; The position of the first item to remove.
+<td width="20px"></td><td><code><span class="label">key</span>:*</code> &mdash; The key.
    </td>
 </tr>
 <tr>
 <td class="paramSpacer">&nbsp;</td>
 </tr>
 <tr>
-<td width="20px"></td><td><code><span class="label">numItems</span>:uint</code> &mdash; The number of items to remove.
+<td width="20px"></td><td><code><span class="label">item</span>:*</code> &mdash; The replacing item.
    </td>
 </tr>
 </table>
@@ -732,74 +749,7 @@ showHideInherited();
 <span class="label">Returns</span>
 <table border="0" cellspacing="0" cellpadding="0">
 <tr>
-<td width="20"></td><td><code>Array</code> &mdash; An array of all removed items.
-   </td>
-</tr>
-</table>
-</div>
-<a name="removeAt()"></a>
-<table cellspacing="0" cellpadding="0" class="detailHeader">
-<tr>
-<td class="detailHeaderName">removeAt</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
-</tr>
-</table>
-<div class="detailBody">
-<code>public function removeAt(index:uint):*</code><p>
-   
-   Removes the item at the specified position.
-   
-   </p><span class="label">Parameters</span>
-<table border="0" cellspacing="0" cellpadding="0">
-<tr>
-<td width="20px"></td><td><code><span class="label">index</span>:uint</code> &mdash; The position of the item to remove.
-   </td>
-</tr>
-</table>
-<p></p>
-<span class="label">Returns</span>
-<table border="0" cellspacing="0" cellpadding="0">
-<tr>
-<td width="20"></td><td><code>*</code> &mdash; The removed item or <code>undefined</code> if there is no item at that position.
-   </td>
-</tr>
-</table>
-</div>
-<a name="removeFirst()"></a>
-<table cellspacing="0" cellpadding="0" class="detailHeader">
-<tr>
-<td class="detailHeaderName">removeFirst</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
-</tr>
-</table>
-<div class="detailBody">
-<code>public function removeFirst():*</code><p>
-   
-   Removes the first item of the ordered collection.
-   
-   </p><p></p>
-<span class="label">Returns</span>
-<table border="0" cellspacing="0" cellpadding="0">
-<tr>
-<td width="20"></td><td><code>*</code> &mdash; The formerly first item or <code>undefined</code> if the collection is empty.
-   </td>
-</tr>
-</table>
-</div>
-<a name="removeLast()"></a>
-<table cellspacing="0" cellpadding="0" class="detailHeader">
-<tr>
-<td class="detailHeaderName">removeLast</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
-</tr>
-</table>
-<div class="detailBody">
-<code>public function removeLast():*</code><p>
-   
-   Removes the last item of the ordered collection.
-   
-   </p><p></p>
-<span class="label">Returns</span>
-<table border="0" cellspacing="0" cellpadding="0">
-<tr>
-<td width="20"></td><td><code>*</code> &mdash; The formerly last item or <code>undefined</code> if the collection is empty.
+<td width="20"></td><td><code>Boolean</code> &mdash; <code>true</code> if the item has been replaced.
    </td>
 </tr>
 </table>
