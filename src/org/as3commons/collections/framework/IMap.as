@@ -82,6 +82,7 @@ package org.as3commons.collections.framework {
 		 * @param key The key to test.
 		 * @return <code>true</code> if the key is contained.
 		 */
+		[Bindable("collectionChanged")]
 		function hasKey(key : *) : Boolean;
 
 		/**
@@ -90,6 +91,7 @@ package org.as3commons.collections.framework {
 		 * @param key The key.
 		 * @return The item if the key is contained, else <code>undefined</code>.
 		 */
+		[Bindable("collectionChanged")]
 		function itemFor(key : *) : *;
 
 		/**
@@ -99,6 +101,7 @@ package org.as3commons.collections.framework {
 		 * 
 		 * @return An array of the keys of the map.
 		 */
+		[Bindable("collectionChanged")]
 		function keysToArray() : Array;
 
 		/**
